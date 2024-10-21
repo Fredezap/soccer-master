@@ -7,7 +7,6 @@ const Contact = () => {
   const { contact } = useHeroDetails()
   return (
     <>
-      <MobileMenu />
       <Hero title={contact.title} content={contact.content} />
       <ContactForm />
     </>

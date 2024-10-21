@@ -15,6 +15,7 @@ import { Fancybox } from '@fancyapps/ui'
 import './styles/fancybox.css'
 import Header from './components/common/Header.jsx'
 import Footer from './components/common/Footer.jsx'
+import MobileMenu from './components/common/mobile-menu/MobileMenu.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -27,16 +28,17 @@ function App() {
 
   return (
     <div className="site-wrap">
+      <MobileMenu />
       <Header />
       <Router>
         <Routes>
           <Route path={ROUTES.BLOG} element={<BlogPage />} />
           <Route path={ROUTES.CONTACT} element={<Contact />} />
-          <Route path={ROUTES.MAIN} element={<Main />} />
+          {/* <Route path={ROUTES.MAIN} element={<Main />} /> */}
           <Route path={ROUTES.HOME} element={<Home />} />
           <Route path={ROUTES.MATCHES} element={<Matches />} />
           <Route path={ROUTES.PLAYERS} element={<Players />} />
-          <Route path={ROUTES.SINGLE} element={<Single />} />
+          {/* <Route path={ROUTES.SINGLE} element={<Single />} /> */}
         </Routes>
       </Router>
       <Footer />

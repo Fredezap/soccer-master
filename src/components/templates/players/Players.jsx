@@ -9,7 +9,6 @@ const Players = () => {
 
   return (
     <>
-      <MobileMenu />
       <Hero title={players.title} content={players.content} />
       <Videos />
       <Blog />

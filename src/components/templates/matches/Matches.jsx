@@ -11,7 +11,6 @@ const Matches = () => {
 
   return (
     <>
-      <MobileMenu />
       <Hero title={matches.title} content={matches.content} />
       <TeamScore />
       <MatchesGrid />
