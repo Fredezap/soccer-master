@@ -7,7 +7,6 @@ const BlogPage = () => {
   const { blog } = useHeroDetails()
   return (
     <>
-      <MobileMenu />
       <Hero title={blog.title} content={blog.content} />
       <BlogGrid />
 

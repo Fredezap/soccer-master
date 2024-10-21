@@ -16,6 +16,7 @@ import './styles/fancybox.css'
 import Header from './components/common/Header.jsx'
 import Footer from './components/common/Footer.jsx'
 import useCurrentRouteStore from './store/slices/useCurrentRouteStore.js'
+import MobileMenu from './components/common/mobile-menu/MobileMenu.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -55,6 +56,7 @@ function AppContent() {
 function App() {
   return (
     <div className="site-wrap">
+      <MobileMenu />
       <Header />
       <Router>
         <AppContent />

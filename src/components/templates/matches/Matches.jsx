@@ -1,8 +1,7 @@
-import Blog from '../../Blog'
-import MobileMenu from '../../common/mobile-menu/MobileMenu'
+import Blog from '../../common/Blog'
 import Hero from '../../common/hero/Hero'
-import TeamScore from '../../TeamScore'
-import Videos from '../../Videos'
+import TeamScore from '../../common/TeamScore'
+import Videos from '../../common/Videos'
 import MatchesGrid from './MatchesGrid'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 
@@ -11,7 +10,6 @@ const Matches = () => {
 
   return (
     <>
-      <MobileMenu />
       <Hero title={matches.title} content={matches.content} />
       <TeamScore />
       <MatchesGrid />
