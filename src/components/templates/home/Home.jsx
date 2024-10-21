@@ -1,8 +1,8 @@
-import TeamScore from '../../TeamScore'
-import News from '../../News'
-import NextMatchAndTable from '../../NextMatchAndTable'
-import Videos from '../../Videos'
-import Blog from '../../Blog'
+import TeamScore from '../../common/TeamScore'
+import News from './News'
+import NextMatchAndTable from './NextMatchAndTable'
+import Videos from '../../common/Videos'
+import Blog from '../../common/Blog'
 import HeroHome from './HeroHome'
 
 const Home = () => {
