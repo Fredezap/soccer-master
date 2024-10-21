@@ -1,15 +1,13 @@
-import Blog from '../../Blog'
+import Blog from '../../common/Blog'
 import Hero from '../../common/hero/Hero'
 import useHeroDetails from '../../common/hero/useHeroDetails'
-import MobileMenu from '../../common/mobile-menu/MobileMenu'
-import Videos from '../../Videos'
+import Videos from '../../common/Videos'
 
 const Players = () => {
   const { players } = useHeroDetails()
 
   return (
     <>
-      <MobileMenu />
       <Hero title={players.title} content={players.content} />
       <Videos />
       <Blog />
