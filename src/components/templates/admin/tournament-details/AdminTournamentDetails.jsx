@@ -1,0 +1,21 @@
+import Hero from '../../../common/hero/Hero'
+import useHeroDetails from '../../../common/hero/useHeroDetails'
+import TournamentDetailsForm from './TournamentDetailsForm'
+
+const AdminTournamentDetails = () => {
+  const { adminTournamentDetails } = useHeroDetails()
+
+  return (
+    <div>
+      <Hero title={adminTournamentDetails.title} content={adminTournamentDetails.content} />
+      <div>
+        <div className="admin-tournament-date">
+          <p>SET THE TOURNAMENT DETAILS HERE</p>
+          <TournamentDetailsForm />
+        </div>
+      </div>
+    </div>
+  )
+}
+
+export default AdminTournamentDetails

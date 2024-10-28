@@ -19,7 +19,17 @@ const useHeroDetails = () => {
     content: 'Aca va el contenido descriptivo para esta pagina de CONTACT'
   }
 
-  return { players, matches, blog, contact }
+  const adminMain = {
+    title: 'Admin',
+    content: 'Aca va el contenido para ADMIN'
+  }
+
+  const adminTournamentDetails = {
+    title: 'Admin tournament Details',
+    content: 'Aca va el contenido para ADMIN tournament Details'
+  }
+
+  return { players, matches, blog, contact, adminMain, adminTournamentDetails }
 }
 
 export default useHeroDetails
