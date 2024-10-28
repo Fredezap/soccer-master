@@ -4,8 +4,8 @@ const Hero = ({ title, content }) => {
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-5 mx-auto text-center">
-            <h1 className="text-white">{title}</h1>
-            <p>{content}</p>
+            <h1 className="text-white">{title || null}</h1>
+            <p>{content || null}</p>
           </div>
         </div>
       </div>

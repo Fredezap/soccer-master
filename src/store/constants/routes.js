@@ -5,7 +5,11 @@ const ROUTES = {
   HOME: '/',
   MATCHES: '/matches',
   PLAYERS: '/players',
-  SINGLE: '/single'
+  SINGLE: '/single',
+  ADMIN: {
+    MAIN: '/admin',
+    TOURNAMENT_DETAILS: '/admin/tournament-details'
+  }
 }
 
 export default ROUTES

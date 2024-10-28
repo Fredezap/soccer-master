@@ -1,0 +1,7 @@
+const TOURNAMENT_DETAILS = {
+  MIN_NAME_LENGTH: 2,
+  MAX_NAME_LENGTH: 50,
+  MIN_DATE_VALUE: new Date()
+}
+
+export default TOURNAMENT_DETAILS
