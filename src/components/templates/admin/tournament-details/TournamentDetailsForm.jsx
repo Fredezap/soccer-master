@@ -7,20 +7,43 @@ import handleSubmitFormAdmin from '../handleSubmitFormAdmin.js'
 import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFormStore.js'
 import { useEffect, useState } from 'react'
 import handleGetData from '../handleGetData.js'
+import formatDate from '../../../common/formatDate.js'
 
 const TournamentDetailsForm = () => {
   const { addMessage } = useMessageStore()
   const { initialValues, registerSchema, formFields } = useLoginFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [tournamentDetails, setTournamentDetails] = useState(null)
+  const [editTournamentDetails, setEditTournamentDetails] = useState(false)
+  let httpMethod
 
-  const handleSubmitForm = async(values) => {
-    console.log('submitting form', submittingForm)
-    const successResponse = 'Tournament details has been setted'
+  const handleSubmitFormCreate = async(values) => {
+    console.log('submitting form create', submittingForm)
+    const successResponse = 'Tournament details has been set'
     const url = '/admin/tournament-details/create'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm })
+    httpMethod = 'post'
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     console.log('response.data', response.data)
-    if (response.success) { setTournamentDetails(response.data.tournamentDetails) }
+    if (response.success) {
+      setTournamentDetails(response.data.tournamentDetails)
+    }
+  }
+
+  const handleSubmitFormEdit = async(values) => {
+    // todo: add endpoint to patch the data
+    console.log('submitting form edit', submittingForm)
+    const successResponse = 'Tournament details has been set'
+    const url = '/admin/tournament-details/update'
+    httpMethod = 'patch'
+    console.log('ACA EN TOURNAMENT DETAILS: ', tournamentDetails.tournamentDetailsId)
+    // todo: chequear este envio de datos, el id no esta llegando
+    values = { ...values, tournamentDetailsId: tournamentDetails.tournamentDetailsId }
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    console.log('response.data', response.data)
+    if (response.success) {
+      setTournamentDetails(response.data.tournamentDetails)
+      setEditTournamentDetails(false)
+    }
   }
 
   const getTournamentDetails = async() => {
@@ -33,29 +56,65 @@ const TournamentDetailsForm = () => {
   useEffect(() => {
     getTournamentDetails()
   }, [])
-  console.log('tournamentDatails', tournamentDetails)
-  // console.log('tournamentDatails', tournamentDatails.date)
-  // todo: si hay tournamentDetails Mostrar los datos, con un boton de editar.
-  // todo: Al hacer click, traer el formulario, o hacer los campos modificables, inputs.
-  // todo: Agregar el endopint para hacer el update y trabajarlo en el back
+  // tournamentDetails = null
   return (
     <div className="form-main">
-      {tournamentDetails && (<div>
-        <p style={{ color: 'white' }}>{tournamentDetails.date}</p>
-        <p>{tournamentDetails.name}</p>
-      </div>)}
-      <Formik initialValues = { initialValues } validationSchema = { registerSchema } onSubmit={handleSubmitForm}>
-        {({ errors, touched }) => (
-          <Form className="form">
-            <TournamentDetailsFormMap formFields={formFields} errors={errors} touched={touched} />
-            <div className="form-button">
-              <Button type="submit" variant="primary" disabled={submittingForm}>
-                  Confirm
-              </Button>
-            </div>
-          </Form>
+      {tournamentDetails && !editTournamentDetails
+        ? (
+          <div className="tournament-details">
+            <p>
+              <span style={{ fontWeight: 'bold' }}>
+                Date:
+              </span>
+              <span style={{ color: 'white' }}>
+                {formatDate(tournamentDetails.date).slashDate}
+              </span>
+            </p>
+            <p>
+              <span style={{ fontWeight: 'bold' }}>
+                Name:
+              </span>
+              <span style={{ color: 'white' }}>
+                {tournamentDetails.name ? tournamentDetails.name : 'No name seted'}
+              </span>
+            </p>
+            <Button onClick={() => setEditTournamentDetails(true)} variant="secondary">
+              Edit
+            </Button>
+          </div>
+        )
+        : (
+          <Formik
+            initialValues={initialValues}
+            validationSchema={registerSchema}
+            onSubmit={!editTournamentDetails ? handleSubmitFormCreate : handleSubmitFormEdit}>
+            {({ errors, touched, setFieldValue }) => (
+              <Form className="form">
+                <TournamentDetailsFormMap formFields={formFields} errors={errors} touched={touched} values={tournamentDetails} setFieldValue={setFieldValue}/>
+                <div className="form-button">
+                  {editTournamentDetails
+                    ? (
+                      <div>
+                        <Button type="submit" variant="primary" disabled={submittingForm}>
+                          Confirm
+                        </Button>
+                        <Button onClick={() => setEditTournamentDetails(false)} variant="secondary" disabled={submittingForm}>
+                          Cancel
+                        </Button>
+                      </div>
+                    )
+                    : (
+                      <div>
+                        <Button type="submit" variant="primary" disabled={submittingForm}>
+                          Confirm
+                        </Button>
+                      </div>
+                    )}
+                </div>
+              </Form>
+            )}
+          </Formik>
         )}
-      </Formik>
     </div>
   )
 }

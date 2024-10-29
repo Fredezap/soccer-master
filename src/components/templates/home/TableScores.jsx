@@ -17,7 +17,7 @@ const TableScores = () => {
 
   // todo: ver si tables scores es un array y mostrarlos en pantalla
   return (
-    tableScores && (
+    !tableScores && (
       <div className="col-lg-6">
         <div className="widget-next-match">
           <table className="table custom-table">

@@ -18,7 +18,7 @@ const Videos = () => {
 
   // todo: ver si tables scores es un array y mostrarlos en pantalla
   return (
-    videos && (
+    !videos && (
       <div className="site-section">
         <div className="container">
           <div className="row">

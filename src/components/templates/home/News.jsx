@@ -17,7 +17,7 @@ const News = () => {
 
   // todo: ver si news es un array y mostrarlos en pantalla
   return (
-    lastNews && (
+    !lastNews && (
       <div className="latest-news">
         <div className="container">
           <div className="row">
