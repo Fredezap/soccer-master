@@ -17,7 +17,7 @@ const Blog = () => {
 
   // todo: ver si tables scores es un array y mostrarlos en pantalla
   return (
-    posts && (
+    !posts && (
       <div className="container site-section">
         <div className="row">
           <div className="col-6 title-section">
