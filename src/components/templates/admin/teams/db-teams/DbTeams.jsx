@@ -2,7 +2,7 @@ import React from 'react'
 import TeamPlayers from './TeamPlayers'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 
-const DbTeams = ({ dbTeams, deleteTeam, setShowAddTeam, showAddTeam }) => {
+const DbTeams = ({ dbTeams, setShowAddTeam, getTeams }) => {
   const { team, setTeam } = useTeamStore()
 
   const handleTeamClick = (selectedTeam) => {
@@ -44,7 +44,7 @@ const DbTeams = ({ dbTeams, deleteTeam, setShowAddTeam, showAddTeam }) => {
                   </td>
                 </tr>
                 {dbTeam.teamId === team.teamId && (
-                  <TeamPlayers dbTeam={dbTeam} deleteTeam={deleteTeam} />
+                  <TeamPlayers dbTeam={dbTeam} getTeams={getTeams} />
                 )}
               </React.Fragment>
             ))}

@@ -4,10 +4,14 @@ import { useNavigate } from 'react-router-dom'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 import { MdDeleteForever } from 'react-icons/md'
 import { CiEdit } from 'react-icons/ci'
+import DeleteTeamModal from '../modals/DeleteTeamModal'
+import { useState } from 'react'
 
-const TeamPlayers = ({ dbTeam, deleteTeam }) => {
+const TeamPlayers = ({ dbTeam, getTeams }) => {
   const navigate = useNavigate()
   const { setTeam } = useTeamStore()
+  const [showDeleteTeamModal, setShowDeleteTeamModal] = useState(false)
+  const [teamId, setTeamId] = useState(null)
 
   const handleEditTeam = () => {
     setTeam({
@@ -16,6 +20,12 @@ const TeamPlayers = ({ dbTeam, deleteTeam }) => {
       players: dbTeam.Players
     })
     navigate(ROUTES.ADMIN.TEAMS.UPDATE)
+  }
+
+  const handleDeleteTeam = ({ teamId }) => {
+    console.log('en team players handle delete')
+    setTeamId({ teamId })
+    setShowDeleteTeamModal(true)
   }
 
   return (
@@ -36,7 +46,7 @@ const TeamPlayers = ({ dbTeam, deleteTeam }) => {
       <tr className="team-buttons-container">
         <td>
           <div className="buttons-box">
-            <div className="delete-icon-team" onClick={() => deleteTeam({ teamId: dbTeam.teamId })}>
+            <div className="delete-icon-team" onClick={() => handleDeleteTeam({ teamId: dbTeam.teamId })}>
               <MdDeleteForever />
             </div>
             <div className="edit-icon-team" onClick={() => handleEditTeam(dbTeam)}>
@@ -45,6 +55,12 @@ const TeamPlayers = ({ dbTeam, deleteTeam }) => {
           </div>
         </td>
       </tr>
+      <DeleteTeamModal
+        showDeleteTeamModal={showDeleteTeamModal}
+        setShowDeleteTeamModal={setShowDeleteTeamModal}
+        teamId={teamId}
+        getTeams={getTeams}
+      />
     </>
   )
 }

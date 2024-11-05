@@ -35,14 +35,6 @@ const AdminTeams = () => {
     }
   }
 
-  const deleteTeam = async(values) => {
-    const successResponse = 'Team has been deleted'
-    const url = '/admin/teams/delete'
-    const httpMethod = 'post'
-    await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    getTeams()
-  }
-
   useEffect(() => {
     getTeams()
   }, [])
@@ -68,7 +60,7 @@ const AdminTeams = () => {
               ? (<p>No teams added yet</p>)
               : (
                 <div className="db-teams-table">
-                  <DbTeams dbTeams={dbTeams} deleteTeam={deleteTeam} setShowAddTeam={setShowAddTeam} showAddTeam={showAddTeam} />
+                  <DbTeams dbTeams={dbTeams} setShowAddTeam={setShowAddTeam} getTeams={getTeams} />
                 </div>
               )
           )}
