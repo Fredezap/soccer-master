@@ -29,7 +29,17 @@ const useHeroDetails = () => {
     content: 'Aca va el contenido para ADMIN tournament Details'
   }
 
-  return { players, matches, blog, contact, adminMain, adminTournamentDetails }
+  const adminTeams = {
+    title: 'Admin Teams',
+    content: 'Aca va el contenido para ADMIN teams'
+  }
+
+  const adminTeamsUpdate = {
+    title: 'Admin Teams update',
+    content: 'Aca va el contenido para ADMIN teams UPDATE'
+  }
+
+  return { players, matches, blog, contact, adminMain, adminTournamentDetails, adminTeams, adminTeamsUpdate }
 }
 
 export default useHeroDetails

@@ -9,7 +9,7 @@ const AdminTournamentDetails = () => {
     <div>
       <Hero title={adminTournamentDetails.title} content={adminTournamentDetails.content} />
       <div>
-        <div className="admin-tournament-date">
+        <div className="admin-tournament-set-conent">
           <p>SET THE TOURNAMENT DETAILS HERE</p>
           <TournamentDetailsForm />
         </div>

@@ -22,7 +22,6 @@ const checkPath = ({ currentPath, setCurrent, navigate }) => {
   }
 
   if (currentPath.includes('/admin')) {
-    console.log('ES RUTA DE ADMIN')
     // todo: chequear credenciales
   }
   setCurrent(currentPath)
