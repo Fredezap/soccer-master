@@ -21,6 +21,8 @@ import AdminMain from '../src/components/templates/admin/AdminMain.jsx'
 import MessageManager from '../src/components/common/message-manager/MessageManager.jsx'
 import checkPath from './checkPath.js'
 import AdminTournamentDetails from '../src/components/templates/admin/tournament-details/AdminTournamentDetails.jsx'
+import AdminTeams from '../src/components/templates/admin/teams/main/AdminTeams.jsx'
+import AdminTeamsUpdate from '../src/components/templates/admin/teams/update/AdminTeamsUpdate.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -49,6 +51,8 @@ function AppContent() {
         <Route path={ROUTES.SINGLE} element={<Single />} />
         <Route path={ROUTES.ADMIN.MAIN} element={<AdminMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS} element={<AdminTournamentDetails />} />
+        <Route path={ROUTES.ADMIN.TEAMS.MAIN} element={<AdminTeams />} />
+        <Route path={ROUTES.ADMIN.TEAMS.UPDATE} element={<AdminTeamsUpdate />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </>

@@ -6,9 +6,7 @@ const handleSubmitFormAdmin = async({ values, url, addMessage, successResponse, 
   const adminCredentials = window.localStorage.getItem('adminCredentials')
   values = { ...values, adminCredentials }
   let response = { success: false }
-  console.log('httpMethod: ', httpMethod)
   if (httpMethod === 'post') {
-    console.log('entro en post')
     response = await postService({ url, values, addMessage, successResponse })
   }
   if (httpMethod === 'patch') {

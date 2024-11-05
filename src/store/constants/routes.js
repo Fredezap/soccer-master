@@ -8,7 +8,11 @@ const ROUTES = {
   SINGLE: '/single',
   ADMIN: {
     MAIN: '/admin',
-    TOURNAMENT_DETAILS: '/admin/tournament-details'
+    TOURNAMENT_DETAILS: '/admin/tournament-details',
+    TEAMS: {
+      MAIN: '/admin/teams',
+      UPDATE: '/admin/teams/update'
+    }
   }
 }
 

@@ -1,11 +1,8 @@
 import PropTypes from 'prop-types'
 import Label from '../../../common/forms-parts/Label'
 import { ErrorMessage, Field } from 'formik'
-import formatDate from '../../../common/formatDate'
 
 export const TournamentDetailsFormMap = ({ formFields, errors, touched, values, setFieldValue }) => {
-  console.log('values: ', values)
-
   return (
     <div className="form-columns">
       {formFields.map((data, index) => (

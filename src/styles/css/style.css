@@ -1131,7 +1131,7 @@ h1, h2, h3, h4, h5,
 }
 
 /* Admin styles */
-.admin-tournament-date{
+.admin-tournament-options{
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1139,11 +1139,32 @@ h1, h2, h3, h4, h5,
   padding: 30px;
 }
 
-.admin-tournament-date button {
+.admin-tournament-options button {
   min-width: 30%;
 }
 
-.admin-tournament-date button .button-details {
+.admin-tournament-options button .button-details {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-width: 30%;
+}
+
+.admin-tournament-set-conent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+}
+
+.admin-tournament-set-conent button {
+  min-width: 30%;
+}
+
+.admin-tournament-set-conent .button-details {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -1281,11 +1302,27 @@ color: green;
   width: 70%;
 }
 
+.admin-form {
+  min-width: 100%;
+}
+
 .form-button > div {
   display: flex;
   justify-content: space-evenly;
   width: 100%;
   margin: 50px 0 20px 0;
+}
+
+.admin-form .form-columns .form-group .input-button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.admin-form .form-columns .form-group .input-button button {
+  width: 40%;
 }
 /* End of Forms Styles */
 
@@ -1299,5 +1336,236 @@ color: green;
   margin: 30px 0;
 }
 /* End of Tournament details Styles */
+
+/* Admin teams Styles */
+.admin-teams {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 100px;
+  margin: 50px 0;
+  width: 100%;
+}
+
+.admin-teams-set-conent {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  width: 40%;
+}
+
+.team-setted {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40%;
+  text-align: left;
+  padding: 50px;
+  border: solid 1px white;
+  border-radius: 3px;
+}
+
+.team-setted h4 {
+  color: #f6d743;
+  font-weight: 500;
+}
+
+.team-setted-details {
+  margin: 20px 0;
+  width: 100%;
+}
+
+.team-setted-details .player-added-box {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 30px;
+}
+
+.delete-icon {
+  font-size: 30px;
+  color: rgb(239, 69, 69);
+  border-radius: 50px;
+  padding: 3px;
+  cursor: pointer;
+}
+
+.delete-icon:hover {
+  color: rgb(255, 0, 0);
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.delete-icon-team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  background-color: rgb(239, 69, 69);
+  color: white;
+  border-radius: 50px;
+  cursor: pointer;
+  padding: 15px;
+}
+
+.delete-icon-team:hover {
+  background-color: rgb(255, 0, 0);
+  transition: 0.3s;
+}
+
+.edit-icon-team {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  border-radius: 50px;
+  padding: 15px;
+  cursor: pointer;
+  font-size: 30px;
+  background-color: rgb(21, 112, 40);
+}
+
+.edit-icon-team:hover {
+  background-color: rgb(12, 82, 26);
+  transition: 0.3s;
+}
+
+.team-setted-details > h5 {
+  margin: 50px 0 10px 0;
+}
+
+.team-setted-details p span {
+  margin: 5px;
+}
+
+.confirm-team-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+  height: 60px;
+}
+
+.admin-teams-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 100px 0;
+}
+
+.admin-teams-main .show-buttons {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+  margin-top: 20px;
+  width: 100%;
+}
+
+.admin-teams-main .show-buttons button {
+  width: 50%;
+  height: 50px;
+}
+
+.show-buttons .db-teams-table {
+  display: flex;
+  justify-content: center;
+  width: 70%;
+}
+
+.teams {
+  text-align: center;
+}
+
+.team-name-row {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+}
+
+.team-name-row td button {
+  width: 1% !important;
+}
+
+.selected {
+  background-color: #464646;
+}
+
+.team-buttons-container {
+  background-color: #464646;
+}
+
+.team-buttons-container td {
+  padding: 20px 0;
+}
+
+.buttons-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.team-name-row:hover {
+  background-color: #464646;
+}
+
+.team-player-row td {
+  background-color:rgb(54, 93, 109);
+  color: whitesmoke;
+  border: none !important;
+  padding: 10px 20px;
+}
+
+.team-player-row td strong {
+  font-weight: bold !important;
+  margin-right: 10px;
+}
+
+.no-team-selected {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+  color: rgb(217, 217, 22);
+}
+/* End of Admin teams Styles */
+
+/* Modal Styles */
+.custom-modal{
+  color: white;
+  margin-top: 50px;
+  height: 90vh;
+}
+
+.custom-modal .modal-content {
+  background-color: rgb(33, 37, 41);
+}
+
+.modal-succes-body {
+  color: #B3C7D6FF;
+  margin: 20px 5px;
+}
+
+.modal-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 30px;
+}
+
+.modal-box  button {
+  width: 50%;
+}
+
+/* End of Modal Styles */
 
 /* End of New Styles added */

@@ -10,8 +10,6 @@ const Header = () => {
     return activateClass
   }
 
-  console.log(current === '/' ? 'en home' : 'en otro lado')
-
   return (
     <header className="site-navbar py-4" role="banner">
       <div className="container">

@@ -18,28 +18,21 @@ const TournamentDetailsForm = () => {
   let httpMethod
 
   const handleSubmitFormCreate = async(values) => {
-    console.log('submitting form create', submittingForm)
     const successResponse = 'Tournament details has been set'
     const url = '/admin/tournament-details/create'
     httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    console.log('response.data', response.data)
     if (response.success) {
       setTournamentDetails(response.data.tournamentDetails)
     }
   }
 
   const handleSubmitFormEdit = async(values) => {
-    // todo: add endpoint to patch the data
-    console.log('submitting form edit', submittingForm)
     const successResponse = 'Tournament details has been set'
     const url = '/admin/tournament-details/update'
     httpMethod = 'patch'
-    console.log('ACA EN TOURNAMENT DETAILS: ', tournamentDetails.tournamentDetailsId)
-    // todo: chequear este envio de datos, el id no esta llegando
     values = { ...values, tournamentDetailsId: tournamentDetails.tournamentDetailsId }
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    console.log('response.data', response.data)
     if (response.success) {
       setTournamentDetails(response.data.tournamentDetails)
       setEditTournamentDetails(false)
@@ -49,14 +42,13 @@ const TournamentDetailsForm = () => {
   const getTournamentDetails = async() => {
     const url = '/admin/tournament-details/get-details'
     const response = await handleGetData({ url, addMessage })
-    console.log('response.data', response.data.tournamentDetails)
     if (response.success) { setTournamentDetails(response.data.tournamentDetails) }
   }
 
   useEffect(() => {
     getTournamentDetails()
   }, [])
-  // tournamentDetails = null
+
   return (
     <div className="form-main">
       {tournamentDetails && !editTournamentDetails
@@ -89,7 +81,7 @@ const TournamentDetailsForm = () => {
             validationSchema={registerSchema}
             onSubmit={!editTournamentDetails ? handleSubmitFormCreate : handleSubmitFormEdit}>
             {({ errors, touched, setFieldValue }) => (
-              <Form className="form">
+              <Form className="admin-form">
                 <TournamentDetailsFormMap formFields={formFields} errors={errors} touched={touched} values={tournamentDetails} setFieldValue={setFieldValue}/>
                 <div className="form-button">
                   {editTournamentDetails

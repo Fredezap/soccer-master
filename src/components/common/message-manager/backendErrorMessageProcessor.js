@@ -3,7 +3,6 @@ function capitalizeFirstLetter(str) {
 }
 
 export const backendErrorMessageProcessor = (err) => {
-  console.log('err: ', err)
   const errors = err || []
   const genericError = 'An unexpected error ocurred'
 
@@ -22,7 +21,6 @@ export const backendErrorMessageProcessor = (err) => {
 
     return joinedErrors
   } catch (error) {
-    console.log('ERROR EN PROCESSOR: ', error)
     return genericError
   }
 }
