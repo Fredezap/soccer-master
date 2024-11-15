@@ -1,0 +1,131 @@
+import { useEffect, useState } from 'react'
+import Hero from '../../../../common/hero/Hero'
+import useHeroDetails from '../../../../common/hero/useHeroDetails'
+import handleGetData from '../../handleGetData'
+import { useMessageStore } from '../../../../../store/slices/useMessageStore'
+import StagesMain from '../stages/main/StagesMain'
+import { Button } from 'react-bootstrap'
+import BracketComponent from '../matches/brackets/BracketComponent'
+import MatchesMain from '../matches/main/MatchesMain'
+import SetGroupsMain from '../set-groups/SetGroupsMain'
+
+const FixtureMain = () => {
+  const { adminFixture } = useHeroDetails()
+  const [stages, setStages] = useState([])
+  const [showStages, setShowStages] = useState(false)
+  const [showMatches, setShowMatches] = useState(false)
+  const [showGroups, setShowGroups] = useState(false)
+  const { addMessage } = useMessageStore()
+
+  const getStages = async() => {
+    const url = '/admin/fixture/stages/get-all'
+    const response = await handleGetData({ url, addMessage })
+    console.log(response)
+    if (response.success) { setStages(response.data.dbStages) }
+  }
+
+  useEffect(() => {
+    getStages()
+  }, [])
+
+  const matches = [
+    {
+      stageId: 7,
+      team1: 'Team A',
+      team2: 'Team B',
+      team1Score: 2,
+      team2Score: 1,
+      result: 'team1' // Winner
+    },
+    {
+      stageId: 6,
+      team1: 'Team C',
+      team2: 'Team D',
+      team1Score: 3,
+      team2Score: 3,
+      result: 'draw' // Tie result
+    },
+    {
+      stageId: 6,
+      team1: 'Team C',
+      team2: 'Team D',
+      team1Score: 3,
+      team2Score: 3,
+      result: 'draw' // Tie result
+    },
+    {
+      stageId: 5,
+      team1: 'Team C',
+      team2: 'Team D',
+      team1Score: 3,
+      team2Score: 3,
+      result: 'draw' // Tie result
+    },
+    {
+      stageId: 5,
+      team1: 'Team C',
+      team2: 'Team D',
+      team1Score: 3,
+      team2Score: 3,
+      result: 'draw' // Tie result
+    },
+    {
+      stageId: 5,
+      team1: 'Team C',
+      team2: 'Team D',
+      team1Score: 3,
+      team2Score: 3,
+      result: 'draw' // Tie result
+    },
+    {
+      stageId: 5,
+      team1: 'Team C',
+      team2: 'Team D',
+      team1Score: 3,
+      team2Score: 3,
+      result: 'draw' // Tie result
+    }
+    // Add more matches...
+  ]
+
+  return (
+    <div>
+      <Hero title={adminFixture.title} content={adminFixture.content} />
+      <div className="admin-all-mains">
+        <div className="admin-settings-info">
+          <h5 className="title">How does the website work?</h5>
+          <p>As an admin, here’s how to set up the tournament step-by-step:</p>
+
+          <h5>1. Define the Tournament Stages</h5>
+          <p>Start by setting up the stages of the tournament, such as "Group Stage," "Quarterfinals," "Semifinals," and "Final."</p>
+
+          <h5>2. Name the Groups</h5>
+          <p>If the tournament includes group stages, create the group names (e.g., "Group A," "Group B") to organize teams accordingly.</p>
+
+          <h5>3. Assign Teams to Groups</h5>
+          <p>Next, choose the teams that will belong to each group, arranging them based on your tournament structure.</p>
+
+          <h5>4. Schedule Matches</h5>
+          <p>Finally, set up the matches by defining the date, time, and location for each. If you already know which teams will face each other, you can also specify the matchups at this stage.</p>
+
+          <p>Following these steps will create a well-organized tournament structure, allowing for a clear schedule and easy team management.</p>
+        </div>
+
+        <Button onClick={() => setShowStages(!showStages)} variant="outline-success">
+          {showStages ? 'Hide stages' : 'Show stages'}
+        </Button>
+        {showStages && <StagesMain stages={stages} getStages={getStages} />}
+        <Button onClick={() => setShowMatches(!showMatches)} variant="outline-success">
+          {showMatches ? 'Hide matches' : 'Show matches'}
+        </Button>
+        {showMatches && <MatchesMain stages={stages} matches={matches} />}
+        <Button onClick={() => setShowGroups(!showGroups)} variant="outline-success">
+          {showGroups ? 'Hide groups' : 'Show groups'}
+        </Button>
+        {showGroups && <SetGroupsMain />}
+      </div>
+    </div>
+  )
+}
+
+export default FixtureMain

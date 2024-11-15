@@ -37,18 +37,21 @@
   position: relative;
   width: auto;
   margin: $modal-dialog-margin;
-  // allow clicks to pass through for custom click handling to close modal
   pointer-events: none;
 
   // When fading in the modal, animate it to slide down
   .modal.fade & {
     @include transition($modal-transition);
-    transform: translate(0, -25%);
+    & {
+      transform: translate(0, -25%);
+    }
   }
+  
   .modal.show & {
     transform: translate(0, 0);
   }
 }
+
 
 .modal-dialog-centered {
   display: flex;

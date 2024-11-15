@@ -34,6 +34,24 @@ const DeleteTeamModal = ({ showDeleteTeamModal, setShowDeleteTeamModal, teamId, 
       <Modal.Body className="modal-succes-body">
         <div className="modal-box">
           <p>Are you sure that you want to delete this team?</p>
+          <div>
+            <strong style={{ fontWeight: 'bold' }}>Attention Admin:</strong>
+            <p>
+              Please be cautious when deleting a team.
+            </p>
+            <p>
+              <strong style={{ color: 'red', fontWeight: 'bold' }}>
+              Deleting a team will permanently delete all related records
+              </strong>
+              , including players, related matches, and any other data linked to that team.
+              This action cannot be undone, and all associated information will be lost.
+            </p>
+            <p>
+              Before proceeding with the deletion, ensure that you no longer need the related
+              records or that they are backed up if necessary. Deleting a stage may impact
+              ongoing processes, historical data, and any references that other parts of the system rely on.
+            </p>
+          </div>
           <Button disabled={submittingForm} variant="outline-danger" onClick={() => deleteTeam(teamId)}>Delete</Button>
         </div>
       </Modal.Body>

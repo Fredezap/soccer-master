@@ -14,26 +14,21 @@ const AdminMain = () => {
   return (
     <div>
       <Hero title={adminMain.title} content={adminMain.content} />
-      <div>
+      <div className="admin-all-mains">
         <div className="admin-tournament-options">
-          <p>TOURNAMENT DETAILS</p>
-          <Button onClick={() => navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)}>
-            <span className="button-details"><AiOutlineCalendar />Set tournament details</span>
+          <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)}>
+            <span className="button-details"><AiOutlineCalendar />Tournament details</span>
           </Button>
         </div>
-      </div>
-      <div>
         <div className="admin-tournament-options">
-          <p>TEAMS</p>
-          <Button onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}>
-            <span className="button-details"><IoFootball />Set teams</span>
+          <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}>
+            <span className="button-details"><IoFootball />Teams</span>
           </Button>
         </div>
-      </div>
-      <div>
         <div className="admin-tournament-options">
-          <p>MATCHES</p>
-          <p>Agregar otro boton que me lleve a establecer los grupos y partidos, ver como hacer eso</p>
+          <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.FIXTURE.MAIN)}>
+            <span className="button-details"><IoFootball />Fixture</span>
+          </Button>
         </div>
       </div>
     </div>
