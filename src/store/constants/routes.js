@@ -12,6 +12,9 @@ const ROUTES = {
     TEAMS: {
       MAIN: '/admin/teams',
       UPDATE: '/admin/teams/update'
+    },
+    FIXTURE: {
+      MAIN: '/admin/fixture'
     }
   }
 }

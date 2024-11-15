@@ -13,11 +13,11 @@ const AddedTeamDetails = ({ handleConfirmTeam }) => {
   }
 
   return (
-    <div className="team-setted">
+    <div className="team-set">
       <h4>Team details</h4>
-      <div className="team-setted-details">
+      <div className="team-set-details">
         <h5>Name</h5>
-        {team?.name ? <p>{team?.name}</p> : <p>Team name not setted yet</p>}
+        {team?.name ? <p>{team?.name}</p> : <p>Team name no set yet</p>}
         <h5>Players</h5>
         {team?.players?.length === 0
           ? <p>No players set yet</p>

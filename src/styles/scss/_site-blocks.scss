@@ -1,3 +1,5 @@
+@use "sass:color";
+
 .hero {
 	
 	background-size: cover;
@@ -79,7 +81,7 @@
 }
 
 .team-vs {
-	background-color: darken(#222831, 10%);
+	background-color: color.adjust(#222831, $lightness: -10%);
 	overflow: hidden;
 	border-radius: 10px;
 	margin-top: -90px;
@@ -392,7 +394,7 @@
 	padding: 70px 0;
 	font-size: 14px;
 	color: rgba($white, .5);
-	background: darken(#222831, 4%);
+	background: color.adjust(#222831, $lightness: -4%);
 	.widget {
 		h3 {
 			color: $white;
@@ -461,7 +463,7 @@
 	background: rgba($white, .05)!important;
 }
 .bg-dark {
-	background: darken(#222831, 4%)!important;
+	background: color.adjust(#222831, $lightness: -4%);
 }
 
 .custom-media {
@@ -616,7 +618,7 @@
 				border-radius: 4px;
 				&:hover {
 					color: $black;
-					background: lighten($black, 89%);
+					background: color.adjust($black, $lightness: 89%);
 				}
 			}
 		}

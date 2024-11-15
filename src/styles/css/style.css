@@ -1131,16 +1131,44 @@ h1, h2, h3, h4, h5,
 }
 
 /* Admin styles */
-.admin-tournament-options{
+.admin-all-mains{
+  min-height: 500px;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  padding: 30px;
+  padding: 50px;
+}
+
+.admin-settings-info {
+  border: white solid 1px;
+  padding: 40px;
+  border-radius: 3px;
+  margin-bottom: 50px;
+}
+
+.admin-settings-info .title {
+  font-weight: 600;
+  text-align: center;
+  padding: 10px 0 30px 0;
+}
+
+.admin-all-mains button {
+  margin: 30px;
+  width: 30%;
+}
+
+.admin-tournament-options{
+  padding: 20px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .admin-tournament-options button {
-  min-width: 30%;
+  width: 50%;
 }
 
 .admin-tournament-options button .button-details {
@@ -1280,6 +1308,15 @@ color: green;
   width: 100%;
 }
 
+.order-input{
+  width: 30%;
+}
+
+.order-info {
+  text-align: justify;
+  margin-bottom: 30px;
+}
+
 .input:hover {
   background-color: rgb(230, 230, 230);
 }
@@ -1311,6 +1348,30 @@ color: green;
   justify-content: space-evenly;
   width: 100%;
   margin: 50px 0 20px 0;
+}
+
+.stages-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.stages-form button {
+  margin-top: 20px;
+}
+
+.form-columns-stages{
+  width: 100%;
+}
+
+.form-columns-stages .form-group .radio-options{
+  margin-right: 30px;
+}
+
+.form-columns-stages .form-group .radio-options input {
+  margin-right: 5px;
 }
 
 .admin-form .form-columns .form-group .input-button {
@@ -1357,7 +1418,7 @@ color: green;
   width: 40%;
 }
 
-.team-setted {
+.team-set {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1369,21 +1430,29 @@ color: green;
   border-radius: 3px;
 }
 
-.team-setted h4 {
+.team-set h4 {
   color: #f6d743;
   font-weight: 500;
 }
 
-.team-setted-details {
+.team-set-details {
   margin: 20px 0;
   width: 100%;
 }
 
-.team-setted-details .player-added-box {
+.team-set-details .player-added-box {
   display: flex;
   flex-direction: row;
   align-items: center;
   gap: 30px;
+}
+
+.edit-icon {
+  font-size: 30px;
+  color: rgb(21, 112, 40);
+  border-radius: 50px;
+  padding: 3px;
+  cursor: pointer;
 }
 
 .delete-icon {
@@ -1395,6 +1464,19 @@ color: green;
 }
 
 .delete-icon:hover {
+  color: rgb(255, 0, 0);
+  transform: scale(1.1);
+  transition: 0.3s;
+}
+
+.delete-icon-stage {
+  font-size: 20px;
+  margin-top: -5px;
+  color: rgb(239, 69, 69);
+  cursor: pointer;
+}
+
+.delete-icon-stage:hover {
   color: rgb(255, 0, 0);
   transform: scale(1.1);
   transition: 0.3s;
@@ -1435,11 +1517,11 @@ color: green;
   transition: 0.3s;
 }
 
-.team-setted-details > h5 {
+.team-set-details > h5 {
   margin: 50px 0 10px 0;
 }
 
-.team-setted-details p span {
+.team-set-details p span {
   margin: 5px;
 }
 
@@ -1511,6 +1593,25 @@ color: green;
   flex-direction: row;
   justify-content: space-evenly;
   align-items: center;
+  gap: 50px;
+}
+
+.buttons-box .delete-icon-team p {
+  margin: 0;
+  margin-left: 10px;
+}
+
+.edit-group-name {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.buttons-box .edit-icon-team p {
+  margin: 0;
+  margin-left: 10px;
 }
 
 .team-name-row:hover {
@@ -1537,6 +1638,272 @@ color: green;
   color: rgb(217, 217, 22);
 }
 /* End of Admin teams Styles */
+
+/* Admin stages Styles */
+.stages-main {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  border-bottom: white solid 1px;
+  border-top: white solid 1px;
+  padding: 70px 0;
+}
+
+.stages-main > div {
+  flex: 1;
+  padding: 0 100px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.stages-data {
+  margin-top: -280px;
+}
+
+.stages-main h5 {
+  text-align: center;
+}
+
+.stages-info {
+  text-align: center;
+  margin: 30px 0;
+}
+/* End of Admin stages Styles */
+
+/* Admin matches Styles */
+.matches-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  border-bottom: white solid 1px;
+  border-top: white solid 1px;
+  padding: 70px 120px;
+}
+
+.brackets h2 {
+  margin-bottom: 20px;
+}
+
+.brackets-component {
+  text-align: center;
+}
+
+.group-component{
+  margin-top: 100px;
+}
+
+.gULjcf {
+  /* todo: VER ESTO SEGUN CANTIDAD DE STAGES */
+  flex: 2 2 0% !important;
+}
+/* End of Admin matches Styles */
+
+/* Admin setting groups Styles */
+.setting-groups-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  gap: 20px;
+  width: 100%;
+  padding: 50px 0;
+  border-bottom: white solid 1px;
+  border-top: white solid 1px;
+}
+
+.set-group-form-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding-bottom: 50px;
+  border-bottom: white solid 1px;
+  margin-bottom: 50px;
+  min-height: 300px;
+  width: 100%;
+}
+
+.setting-groups-main select {
+ margin-top: 30px;
+}
+
+.custom-group-input {
+  width: 20%;
+}
+
+.group-selected-stage {
+  width: 100%;
+}
+
+.group-selected-stage button {
+  width: 10%;
+}
+
+.group-selected-stage p {
+  margin: 10px;
+}
+
+.group-selected-stage p {
+  margin: 10px;
+}
+
+.group-selected-stage .label-box {
+  margin: 50px 0 5px 0;
+}
+
+.setting-groups {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.setting-groups .group-teams {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 100px;
+  padding: 50px 100px 0 50px;
+  width: 100%;
+
+}
+
+.setting-groups .group-teams .group-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 50px;
+  padding: 50px;
+  width: 100%;
+  border: rgba(255, 255, 255, 0.619) solid 1px;
+  border-radius: 4px;
+}
+
+.setting-groups .group-teams .group-info .group-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: start;
+  gap: 50px;
+  width: 100%;
+}
+
+.setting-groups .group-teams .group-info .group-box * div {
+  width: 100%;
+}
+
+.group-box .group .group-title {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  background-color: rgb(197, 146, 4);
+  padding: 20px 0;
+  margin-bottom: 30px;
+}
+
+.setting-groups .group-teams .group-info .group {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 0 30px 0;
+  width: 100%;
+  box-shadow: 1px 1px 10px rgb(199, 150, 16);
+  border-radius: 4px;
+}
+
+.group-teams-box {
+  padding: 0 30px;
+}
+
+.setting-groups .group-teams .group-info .teams-set {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  padding: 5px 0;
+}
+
+.teams-set .team-name {
+  display: flex;
+  flex-direction: row;
+  text-align: left;
+  padding-left: 10px;
+  width: 100%;
+}
+
+.teams-set .team-name p {
+  width: 100%;
+}
+
+.teams-set .team-name div {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+
+.setting-groups .group-teams .group-info h6 {
+  width: 100%;
+  color: #000;
+  font-weight: bold;
+}
+
+.setting-groups button {
+  margin: 20px 0 0 0;
+}
+
+.checkbox-update-teams .button-update {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.team-groups-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.team-groups-form .form-check {
+  width: 30%;
+}
+
+.checkbox-update-teams {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.no-teams-to-show {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.no-teams-to-show p {
+  color: yellow;
+  margin: 0;
+}
+
+.no-teams-to-show button {
+  margin-top: 10px;
+}
+/* End of Admin setting groups Styles */
 
 /* Modal Styles */
 .custom-modal{
