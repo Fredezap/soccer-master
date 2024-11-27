@@ -8,7 +8,6 @@ const DeleteMatchModal = ({ showDeleteMatchModal, setShowDeleteMatchModal, match
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
 
   const deleteMatch = async(values) => {
-    console.log(values)
     const successResponse = 'Team has been deleted'
     const url = '/admin/fixture/matches/delete'
     const httpMethod = 'post'

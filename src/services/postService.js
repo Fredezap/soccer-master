@@ -4,6 +4,7 @@ import { apiInstance } from './apiInstance'
 const postService = async({ url, values, addMessage, successResponse }) => {
   const makeAnHttpsPost = async(url, values) => {
     let error
+
     try {
       const jsonValues = JSON.stringify(values)
       const response = await apiInstance.post(url, jsonValues, {
@@ -11,6 +12,7 @@ const postService = async({ url, values, addMessage, successResponse }) => {
           'Content-Type': 'application/json'
         }
       })
+
       if (response.status >= 200 && response.status <= 300) {
         return { success: true, data: response?.data ? response.data : null }
       } else {
@@ -22,7 +24,9 @@ const postService = async({ url, values, addMessage, successResponse }) => {
       return { success: false, error }
     }
   }
+
   const postResponse = await makeAnHttpsPost(url, values)
+
   if (postResponse.success) {
     if (successResponse) {
       addMessage(({ type: 'success', content: successResponse }))

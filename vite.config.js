@@ -6,5 +6,12 @@ export default defineConfig({
   plugins: [
     react(),
     eslint()
-  ]
+  ],
+  build: {
+    terserOptions: {
+      compress: {
+        drop_console: false
+      }
+    }
+  }
 })

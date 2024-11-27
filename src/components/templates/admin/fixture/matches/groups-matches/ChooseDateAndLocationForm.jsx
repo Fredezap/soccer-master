@@ -11,7 +11,6 @@ const ChooseDateAndLocationForm = ({ locationAndDateformData, setLocationAndDate
 
   const validateField = (name, value) => {
     let error = ''
-    console.log(name, value)
     if (name === 'date') {
       const today = new Date()
       const inputDate = new Date(value)
