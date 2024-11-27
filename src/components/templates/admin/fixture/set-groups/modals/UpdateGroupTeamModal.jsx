@@ -36,17 +36,17 @@ const UpdateGroupTeamModal = ({
     if (selectedTeamIds.length > 0) setNoneTeamSelectedError(false)
   }, [selectedTeamIds])
 
-  console.log('selectedGroup', selectedGroup)
   const updateTeamGroups = async() => {
     const values = { groupId: selectedGroup.groupId, stageId: selectedGroup.stageId, selectedTeamIds }
     const selectedTeamsError = 'You must select at least one team'
-    // console.log(values.selectedTeamIds.length)
+
     if (values.selectedTeamIds.length === 0) return setNoneTeamSelectedError(selectedTeamsError)
     const successResponse = 'Group has been updated'
     const url = '/admin/fixture/groups/update'
     const httpMethod = 'patch'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     setShowUpdateGroupTeamModal(false)
+
     if (response?.success) {
       getData()
       setSelectedTeamIds([])

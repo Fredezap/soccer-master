@@ -23,7 +23,6 @@ const TeamPlayers = ({ dbTeam, getTeams }) => {
   }
 
   const handleDeleteTeam = ({ teamId }) => {
-    console.log('en team players handle delete')
     setTeamId({ teamId })
     setShowDeleteTeamModal(true)
   }

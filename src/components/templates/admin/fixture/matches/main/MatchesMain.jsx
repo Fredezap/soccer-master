@@ -1,12 +1,16 @@
 import { useEffect, useState } from 'react'
-import BracketComponent from '../brackets/BracketComponent'
-import GroupsComponent from '../groups/groupsComponent'
+import BracketKnokoutMatches from '../brackets-matches/BracketKnokoutMatches'
+import GroupsMatches from '../groups-matches/GroupsMatches'
 import handleGetData from '../../../handleGetData'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
+import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
+import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
 
-const MatchesMain = ({ stages, matches }) => {
+const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
-  const [groups, setGroups] = useState([])
+  // const [groups, setGroups] = useState([])
+  const [dbGroups, setDbGroups] = useState([])
+  const { setSubmittingForm } = useSubmittingFormStore()
 
   // const groups = [
   //   { id: 1, name: 'GROUP A', teams: [{ name: 'team 1' }, { name: 'team 2' }] },
@@ -23,11 +27,14 @@ const MatchesMain = ({ stages, matches }) => {
   // todo: despues tengo que ver de dejar actualizar estos datos, por si se equivoca o por si ya llego la fase final
   // todo y necesita setearlos
 
-  const getGroups = async() => {
+  const getGroups = async(values) => {
     const url = '/admin/fixture/groups/get-all'
-    const response = await handleGetData({ url, addMessage })
-    console.log('response de grupos: ', response)
-    if (response.success) { setGroups(response.data.TeamGroup) }
+    const httpMethod = 'post'
+    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+
+    if (response?.success) {
+      setDbGroups(response.data.dbGroups)
+    }
   }
 
   useEffect(() => {
@@ -36,8 +43,8 @@ const MatchesMain = ({ stages, matches }) => {
 
   return (
     <div className="matches-main">
-      <BracketComponent stages={stages} matches={matches} />
-      <GroupsComponent groups={groups}/>
+      <BracketKnokoutMatches />
+      <GroupsMatches getStages={getStages} dbGroups={dbGroups} getGroups={getGroups} />
     </div>
   )
 }

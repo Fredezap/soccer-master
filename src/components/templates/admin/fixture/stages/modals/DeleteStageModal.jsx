@@ -6,9 +6,8 @@ import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 const DeleteStageModal = ({ showDeleteStageModal, setShowDeleteStageModal, stageId, getStages }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
-  console.log('en modal delete', stageId)
+
   const deleteStage = async(values) => {
-    console.log(values)
     const successResponse = 'Stage has been deleted'
     const url = '/admin/fixture/stages/delete'
     const httpMethod = 'post'

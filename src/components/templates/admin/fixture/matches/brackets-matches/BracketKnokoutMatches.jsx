@@ -1,9 +1,11 @@
 import { Bracket } from 'react-brackets'
+import { useStagesStore } from '../../../../../../store/slices/useStagesStore'
 
-const BracketComponent = ({ stages, matches }) => {
+const BracketKnokoutMatches = () => {
+  const { stages, setStages } = useStagesStore()
+  const matches = [] // todo: modificar esto
   const formatBracketData = (stages, matches) => {
     return stages.map(stage => {
-      // console.log('type: ', stage.type)
       if (stage.type === 'group') return {}
 
       const stageMatches = matches?.filter(match => match.stageId === stage.stageId)
@@ -36,4 +38,4 @@ const BracketComponent = ({ stages, matches }) => {
   )
 }
 
-export default BracketComponent
+export default BracketKnokoutMatches

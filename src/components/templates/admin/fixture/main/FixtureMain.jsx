@@ -5,13 +5,13 @@ import handleGetData from '../../handleGetData'
 import { useMessageStore } from '../../../../../store/slices/useMessageStore'
 import StagesMain from '../stages/main/StagesMain'
 import { Button } from 'react-bootstrap'
-import BracketComponent from '../matches/brackets/BracketComponent'
 import MatchesMain from '../matches/main/MatchesMain'
 import SetGroupsMain from '../set-groups/SetGroupsMain'
+import { useStagesStore } from '../../../../../store/slices/useStagesStore'
 
 const FixtureMain = () => {
   const { adminFixture } = useHeroDetails()
-  const [stages, setStages] = useState([])
+  const { stages, setStages } = useStagesStore()
   const [showStages, setShowStages] = useState(false)
   const [showMatches, setShowMatches] = useState(false)
   const [showGroups, setShowGroups] = useState(false)
@@ -20,73 +20,12 @@ const FixtureMain = () => {
   const getStages = async() => {
     const url = '/admin/fixture/stages/get-all'
     const response = await handleGetData({ url, addMessage })
-    console.log(response)
     if (response.success) { setStages(response.data.dbStages) }
   }
 
   useEffect(() => {
     getStages()
   }, [])
-
-  const matches = [
-    {
-      stageId: 7,
-      team1: 'Team A',
-      team2: 'Team B',
-      team1Score: 2,
-      team2Score: 1,
-      result: 'team1' // Winner
-    },
-    {
-      stageId: 6,
-      team1: 'Team C',
-      team2: 'Team D',
-      team1Score: 3,
-      team2Score: 3,
-      result: 'draw' // Tie result
-    },
-    {
-      stageId: 6,
-      team1: 'Team C',
-      team2: 'Team D',
-      team1Score: 3,
-      team2Score: 3,
-      result: 'draw' // Tie result
-    },
-    {
-      stageId: 5,
-      team1: 'Team C',
-      team2: 'Team D',
-      team1Score: 3,
-      team2Score: 3,
-      result: 'draw' // Tie result
-    },
-    {
-      stageId: 5,
-      team1: 'Team C',
-      team2: 'Team D',
-      team1Score: 3,
-      team2Score: 3,
-      result: 'draw' // Tie result
-    },
-    {
-      stageId: 5,
-      team1: 'Team C',
-      team2: 'Team D',
-      team1Score: 3,
-      team2Score: 3,
-      result: 'draw' // Tie result
-    },
-    {
-      stageId: 5,
-      team1: 'Team C',
-      team2: 'Team D',
-      team1Score: 3,
-      team2Score: 3,
-      result: 'draw' // Tie result
-    }
-    // Add more matches...
-  ]
 
   return (
     <div>
@@ -118,7 +57,7 @@ const FixtureMain = () => {
         <Button onClick={() => setShowMatches(!showMatches)} variant="outline-success">
           {showMatches ? 'Hide matches' : 'Show matches'}
         </Button>
-        {showMatches && <MatchesMain stages={stages} matches={matches} />}
+        {showMatches && <MatchesMain getStages={getStages} />}
         <Button onClick={() => setShowGroups(!showGroups)} variant="outline-success">
           {showGroups ? 'Hide groups' : 'Show groups'}
         </Button>
