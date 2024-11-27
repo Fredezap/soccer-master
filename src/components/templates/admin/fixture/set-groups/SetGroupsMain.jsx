@@ -20,8 +20,6 @@ const SetGroupsMain = () => {
   const [selectedGroup, setSelectedGroup] = useState(null)
 
   const checkAndSetAvailableTeams = (stageId) => {
-    console.log('dbGroups[stageId]:', dbGroups[stageId])
-
     const allocatedTeamIds = dbGroups[stageId].groups
       .flatMap(group =>
         group.Teams.map(team => team.teamId)
@@ -47,7 +45,7 @@ const SetGroupsMain = () => {
     const url = '/admin/fixture/groups/get-all'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    console.log(response)
+
     if (response?.success) {
       setDbGroups(response.data.dbGroups)
     }
@@ -84,8 +82,6 @@ const SetGroupsMain = () => {
     checkAndSetAvailableTeams(group.stageId)
     setShowUpdateGroupTeamModal(true)
   }
-  console.log('dbGroups: ', dbGroups)
-  console.log('dbStages: ', dbStages)
 
   return (
     <div className="setting-groups-main">

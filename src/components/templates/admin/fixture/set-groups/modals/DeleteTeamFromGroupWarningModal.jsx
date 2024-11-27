@@ -15,7 +15,6 @@ const DeleteTeamFromGroupWarningModal = ({
 
   const handleDeleteTeamFromGroup = async({ teamId, groupId }) => {
     const values = { teamId, groupId }
-    console.log(values)
     const successResponse = 'Team has been deleted from the group'
     const url = '/admin/fixture/groups/delete-team-group'
     const httpMethod = 'post'
