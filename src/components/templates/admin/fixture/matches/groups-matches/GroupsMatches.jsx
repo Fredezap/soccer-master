@@ -11,7 +11,7 @@ import handleTeamChange from './handleTeamChenge.js'
 import MatchesByDate from './MatchesByDate.jsx'
 
 const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
-  const { stages } = useStagesStore() // Usamos directamente stages del store
+  const { stages } = useStagesStore()
   const [showGroupMatchesDetail, setShowGroupMatchesDetail] = useState(false)
   const [selectedGroupStage, setSelectedGroupStage] = useState(false)
   const [selectedGroup, setSelectedGroup] = useState(null)

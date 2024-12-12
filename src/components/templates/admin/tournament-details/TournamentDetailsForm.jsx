@@ -2,7 +2,7 @@ import { Formik, Form } from 'formik'
 import { TournamentDetailsFormMap } from './TournamentDetailsFormMap.jsx'
 import { useMessageStore } from '../../../../store/slices/useMessageStore.js'
 import { Button } from 'react-bootstrap'
-import useLoginFormData from './TournamentDetailsFormData.js'
+import TournamentDetailsFormData from './TournamentDetailsFormData.js'
 import handleSubmitFormAdmin from '../handleSubmitFormAdmin.js'
 import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFormStore.js'
 import { useEffect, useState } from 'react'
@@ -11,7 +11,7 @@ import formatDate from '../../../common/formatDate.js'
 
 const TournamentDetailsForm = () => {
   const { addMessage } = useMessageStore()
-  const { initialValues, registerSchema, formFields } = useLoginFormData()
+  const { initialValues, registerSchema, formFields } = TournamentDetailsFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [tournamentDetails, setTournamentDetails] = useState(null)
   const [editTournamentDetails, setEditTournamentDetails] = useState(false)

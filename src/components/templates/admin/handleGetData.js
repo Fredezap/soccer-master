@@ -1,8 +1,7 @@
 import postService from '../../../services/postService'
 
 const handleGetData = async({ url, addMessage }) => {
-  const adminCredentials = window.localStorage.getItem('adminCredentials')
-  const values = { adminCredentials }
+  const values = globalThis.localStorage.getItem('user')
   return await postService({ url, values, addMessage })
 }
 
