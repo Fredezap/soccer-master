@@ -1385,6 +1385,37 @@ color: green;
 .admin-form .form-columns .form-group .input-button button {
   width: 40%;
 }
+
+.show-password-box {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+}
+
+.show-password-box svg {
+  cursor: pointer;
+  color: beige;
+  font-size: 25px;
+}
+
+.show-password-box button {
+  text-align: center;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.auth-form > div {
+  width: 100%;
+}
+
 /* End of Forms Styles */
 
 /* Tournament details Styles */
@@ -1697,8 +1728,80 @@ color: green;
   margin-bottom: 20px;
 }
 
+.brackets-container {
+  position: relative;
+}
+
 .brackets-component {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
   text-align: center;
+}
+
+.brackets-component .group-box {
+  margin-top: 100px;
+}
+
+.brackets-component .group-box .confirm-button {
+  margin-top: 50px;
+}
+
+.brackets-component * {
+  width: 100%;
+}
+
+.brackets-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 50px;
+}
+
+.brackets-box button {
+  margin-top: 80px;
+}
+
+.knockout-matches-list-edit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  margin-bottom: 100px;
+}
+
+.knockout-matches-list-edit h6 {
+  color: #e3e3e3;
+}
+
+.knockout-matches-list-edit .round {
+  border: solid 1px #c97b2d;
+  border-radius: 5px;
+  padding: 20px;
+}
+
+.knockout-matches-list-edit .round h6 {
+  margin-bottom: 20px;
+}
+
+.match-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  padding: 5px;
+}
+
+.match-item p {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  margin: 0;
 }
 
 .group-component {
@@ -1735,6 +1838,40 @@ color: green;
   justify-content: center;
   align-items: center;
   gap: 40px;
+}
+
+.knockout-team-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+}
+
+.knockout-team-status .define-status {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
+}
+
+.knockout-team-status .define-status button {
+  margin: 10px;
+  min-width: 100%;
+}
+
+.teams-are-unknown {
+  margin-top: 50px;
+}
+
+.teams-are-unknown h5 {
+  font-size: large;
+  color: #ccc;
+}
+
+.teams-are-unknown form {
+  margin-top: 15px;
 }
 
 .select-team-vs p {
@@ -1775,6 +1912,23 @@ color: green;
   width: 100%;
 }
 
+.no-teams-found {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  margin-top: 10px;
+  border: solid 1px rgb(175, 114, 0);
+  border-radius: 5px;
+  padding: 25px 100px;
+  color: rgb(232, 232, 232);
+}
+
+.no-teams-found p {
+  margin: 0;
+}
+
 .confirm-button {
   display: flex;
   flex-direction: column;
@@ -1795,26 +1949,25 @@ color: green;
   width: 100%;
 }
 
-.match-table-row td {
-  padding-top: 2px;
-  padding-bottom: 2px;
-  vertical-align: middle;
+.form-input-box {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+  width: 100%;
 }
 
-.match-date-and-location > div {
-  display: flex;
-  flex-direction: row;
+.grid-colums {
+  display: grid;
+  grid-template-columns: 150px auto;
   align-items: center;
   gap: 20px;
   width: 100%;
 }
 
-.match-date-and-location input {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 20px;
-  width: 60%;
+.match-table-row td {
+  padding-top: 2px;
+  padding-bottom: 2px;
+  vertical-align: middle;
 }
 
 #date {
@@ -1900,6 +2053,9 @@ color: green;
 }
 /* End of Admin matches Styles */
 
+
+
+
 /* Admin setting groups Styles */
 .setting-groups-main {
   display: flex;
@@ -1919,9 +2075,8 @@ color: green;
   justify-content: center;
   align-items: center;
   padding-bottom: 50px;
-  border-bottom: white solid 1px;
   margin-bottom: 50px;
-  min-height: 300px;
+  min-height: 200px;
   width: 100%;
 }
 
@@ -1951,6 +2106,27 @@ color: green;
 
 .group-selected-stage .label-box {
   margin: 50px 0 5px 0;
+}
+
+.setting-groups h4 {
+  padding: 20px 150px;
+  border-radius: 6px;
+  background-color: #ccc;
+  color: black;
+}
+
+.knockout-matches-select {
+  display: flex;
+  flex-direction:  column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 30px;
+  gap: 10px;
+  width: 100%;
+}
+
+.knockout-matches-select button {
+  margin-top: 30px;
 }
 
 .setting-groups {

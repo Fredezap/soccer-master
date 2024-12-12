@@ -54,14 +54,14 @@ const FixtureMain = () => {
           {showStages ? 'Hide stages' : 'Show stages'}
         </Button>
         {showStages && <StagesMain stages={stages} getStages={getStages} />}
-        <Button onClick={() => setShowMatches(!showMatches)} variant="outline-success">
-          {showMatches ? 'Hide matches' : 'Show matches'}
-        </Button>
-        {showMatches && <MatchesMain getStages={getStages} />}
         <Button onClick={() => setShowGroups(!showGroups)} variant="outline-success">
           {showGroups ? 'Hide groups' : 'Show groups'}
         </Button>
         {showGroups && <SetGroupsMain />}
+        <Button onClick={() => setShowMatches(!showMatches)} variant="outline-success">
+          {showMatches ? 'Hide matches' : 'Show matches'}
+        </Button>
+        {showMatches && <MatchesMain getStages={getStages} />}
       </div>
     </div>
   )

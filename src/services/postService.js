@@ -6,13 +6,11 @@ const postService = async({ url, values, addMessage, successResponse }) => {
     let error
 
     try {
-      const jsonValues = JSON.stringify(values)
-      const response = await apiInstance.post(url, jsonValues, {
+      const response = await apiInstance.post(url, values, {
         headers: {
           'Content-Type': 'application/json'
         }
       })
-
       if (response.status >= 200 && response.status <= 300) {
         return { success: true, data: response?.data ? response.data : null }
       } else {
@@ -26,7 +24,6 @@ const postService = async({ url, values, addMessage, successResponse }) => {
   }
 
   const postResponse = await makeAnHttpsPost(url, values)
-
   if (postResponse.success) {
     if (successResponse) {
       addMessage(({ type: 'success', content: successResponse }))

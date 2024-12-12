@@ -19,11 +19,13 @@ import useCurrentRouteStore from '../src/store/slices/useCurrentRouteStore.js'
 import MobileMenu from '../src/components/common/mobile-menu/MobileMenu.jsx'
 import AdminMain from '../src/components/templates/admin/AdminMain.jsx'
 import MessageManager from '../src/components/common/message-manager/MessageManager.jsx'
-import checkPath from './checkPath.js'
+import { useCheckPath } from './useCheckPath.js'
 import AdminTournamentDetails from '../src/components/templates/admin/tournament-details/AdminTournamentDetails.jsx'
 import AdminTeams from '../src/components/templates/admin/teams/main/AdminTeams.jsx'
 import AdminTeamsUpdate from '../src/components/templates/admin/teams/update/AdminTeamsUpdate.jsx'
 import FixtureMain from '../src/components/templates/admin/fixture/main/FixtureMain.jsx'
+import LoginForm from '../src/components/templates/users/login/LoginForm.jsx'
+import RegisterForm from '../src/components/templates/users/register/RegisterForm.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -32,9 +34,9 @@ function AppContent() {
   const currentPath = location.pathname
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
+  useCheckPath({ currentPath, setCurrent, navigate })
 
   useEffect(() => {
-    checkPath({ currentPath, setCurrent, navigate })
     main()
     Fancybox.bind('[data-fancybox]')
     return siteSticky()
@@ -55,6 +57,8 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.TEAMS.MAIN} element={<AdminTeams />} />
         <Route path={ROUTES.ADMIN.TEAMS.UPDATE} element={<AdminTeamsUpdate />} />
         <Route path={ROUTES.ADMIN.FIXTURE.MAIN} element={<FixtureMain />} />
+        <Route path={ROUTES.LOGIN} element={<LoginForm />} />
+        <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </>

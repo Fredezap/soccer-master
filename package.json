@@ -8,8 +8,8 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "serve-prod": "serve -s dist -p 3100",
-    "serve-test": "serve -s dist -p 4100"
+    "serve-prod": "serve -s dist -p 4100",
+    "serve-test": "serve -s dist -p 4200"
   },
   "dependencies": {
     "@fancyapps/fancybox": "^3.5.7",

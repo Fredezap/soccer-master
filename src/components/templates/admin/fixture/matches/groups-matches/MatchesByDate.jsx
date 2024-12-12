@@ -1,6 +1,7 @@
 import { MdDeleteForever } from 'react-icons/md'
 import DeleteMatchModal from './modals/DeleteMatchModal'
 import { useState } from 'react'
+import formatTime from '../../../../../common/formatTime'
 
 const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, getStages }) => {
   const [showDeleteMatchModal, setShowDeleteMatchModal] = useState(false)
@@ -40,7 +41,7 @@ const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, getSta
                           <tr className="match-table-row" key={match.matchId || index}>
                             <td><strong className="text-white">{index + 1}</strong></td>
                             <td>{match.LocalTeam.Groups.find(group => group.stageId === stageGroups.stageId)?.name || 'No Group'}</td>
-                            <td><strong className="text-white">{match.time}</strong></td>
+                            <td><strong className="text-white">{formatTime(match.time)}</strong></td>
                             <td><strong className="text-white">{match.LocalTeam.name}</strong></td>
                             <td><strong className="text-white">VS</strong></td>
                             <td><strong className="text-white">{match.VisitorTeam.name}</strong></td>

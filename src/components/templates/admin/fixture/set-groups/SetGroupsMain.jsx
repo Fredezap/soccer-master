@@ -42,7 +42,7 @@ const SetGroupsMain = () => {
   }
 
   const getGroups = async(values) => {
-    const url = '/admin/fixture/groups/get-all'
+    const url = '/admin/fixture/groups/get-all-groups'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
 

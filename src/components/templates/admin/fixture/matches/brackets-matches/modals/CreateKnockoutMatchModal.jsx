@@ -3,54 +3,67 @@ import { useMessageStore } from '../../../../../../../store/slices/useMessageSto
 import { useSubmittingFormStore } from '../../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../../handleSubmitFormAdmin'
 
-const CreateMatchModal = ({
-  selectedGroup,
-  getGroups,
+const CreateKnockoutMatchModal = ({
+  TEAM_STATUS,
+  teamStatus,
+  getMatches,
+  selectedStage,
   localTeam,
   visitorTeam,
-  showCreateMatchModal,
-  setShowCreateMatchModal,
+  showCreateKnockoutMatchModal,
+  setShowCreateKnockoutMatchModal,
   customError,
   setCustomError,
   locationAndDateformData,
-  getStages
+  getKnockoutStages,
+  localTeamPlaceholder,
+  visitorTeamPlaceholder
 }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
 
   const handleCreateMatch = async() => {
     const values = {
-      groupId: selectedGroup?.groupId,
+      stageId: selectedStage?.stageId,
       localTeamId: localTeam?.teamId,
       visitorTeamId: visitorTeam?.teamId,
+      localTeamPlaceholder,
+      visitorTeamPlaceholder,
       date: locationAndDateformData?.date,
       time: locationAndDateformData.time,
-      location: locationAndDateformData?.location,
-      stageId: selectedGroup?.Stage?.stageId
+      location: locationAndDateformData?.location
     }
-
+    console.log(values)
     const successResponse = 'Match has been created'
-    const url = '/admin/fixture/matches/create-group-match'
+    let url
+    if (teamStatus === TEAM_STATUS.KNOWN) {
+      url = '/admin/fixture/matches/create-knockout-match-known-teams'
+    } else if (teamStatus === TEAM_STATUS.UNKNOWN) {
+      url = '/admin/fixture/matches/create-knockout-match-unknown-teams'
+    } else {
+      return
+    }
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    setShowCreateMatchModal(false)
+    console.log(response)
     if (response?.success) {
-      getGroups()
-      getStages()
+      setShowCreateKnockoutMatchModal(false)
+      getKnockoutStages()
+      getMatches()
+      setCustomError(null)
     }
-    setCustomError(null)
   }
 
   const handleCloseModal = () => {
     setCustomError(null)
-    setShowCreateMatchModal(false)
+    setShowCreateKnockoutMatchModal(false)
   }
 
   return (
     <Modal
       className="custom-modal"
       size="l"
-      show={showCreateMatchModal}
+      show={showCreateKnockoutMatchModal}
       onHide={() => handleCloseModal()}
     >
       <Modal.Header closeButton>
@@ -61,12 +74,12 @@ const CreateMatchModal = ({
 
       <Modal.Body className="modal-succes-body">
         <div className="modal-box">
-          <h5 style={{ marginBottom: '-20px' }}>{selectedGroup?.name}</h5>
+          <h5 style={{ marginBottom: '-20px' }}>{selectedStage?.name}</h5>
           <p>Are you sure you want to create this match?</p>
           <div className="team-vs-team">
-            <p>{localTeam?.name}</p>
+            <p>{localTeam?.name ? localTeam.name : localTeamPlaceholder || null}</p>
             <p style={{ fontWeight: 'bold' }}>VS</p>
-            <p>{visitorTeam?.name}</p>
+            <p>{visitorTeam?.name ? visitorTeam.name : visitorTeamPlaceholder || null}</p>
           </div>
           {customError && (
             <h5 className="form-message error-message same-team-match-error">{customError}</h5>
@@ -90,4 +103,4 @@ const CreateMatchModal = ({
   )
 }
 
-export default CreateMatchModal
+export default CreateKnockoutMatchModal

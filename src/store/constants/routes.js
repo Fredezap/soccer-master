@@ -6,6 +6,8 @@ const ROUTES = {
   MATCHES: '/matches',
   PLAYERS: '/players',
   SINGLE: '/single',
+  LOGIN: '/login',
+  REGISTER: '/register',
   ADMIN: {
     MAIN: '/admin',
     TOURNAMENT_DETAILS: '/admin/tournament-details',
