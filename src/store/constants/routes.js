@@ -10,6 +10,7 @@ const ROUTES = {
   REGISTER: '/register',
   ADMIN: {
     MAIN: '/admin',
+    TOURNAMENT_DETAILS_MAIN: '/admin/tournament-details-main',
     TOURNAMENT_DETAILS: '/admin/tournament-details',
     TEAMS: {
       MAIN: '/admin/teams',
