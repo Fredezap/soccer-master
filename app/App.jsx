@@ -26,6 +26,7 @@ import AdminTeamsUpdate from '../src/components/templates/admin/teams/update/Adm
 import FixtureMain from '../src/components/templates/admin/fixture/main/FixtureMain.jsx'
 import LoginForm from '../src/components/templates/users/login/LoginForm.jsx'
 import RegisterForm from '../src/components/templates/users/register/RegisterForm.jsx'
+import TournamentDetailsMain from '../src/components/templates/admin/tournament-details/TournamentDetailsMain.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -53,6 +54,7 @@ function AppContent() {
         <Route path={ROUTES.PLAYERS} element={<Players />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />
         <Route path={ROUTES.ADMIN.MAIN} element={<AdminMain />} />
+        <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN} element={<TournamentDetailsMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS} element={<AdminTournamentDetails />} />
         <Route path={ROUTES.ADMIN.TEAMS.MAIN} element={<AdminTeams />} />
         <Route path={ROUTES.ADMIN.TEAMS.UPDATE} element={<AdminTeamsUpdate />} />

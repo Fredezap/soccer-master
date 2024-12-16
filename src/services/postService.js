@@ -4,7 +4,7 @@ import { apiInstance } from './apiInstance'
 const postService = async({ url, values, addMessage, successResponse }) => {
   const makeAnHttpsPost = async(url, values) => {
     let error
-
+    console.log('URL: ', url)
     try {
       const response = await apiInstance.post(url, values, {
         headers: {
@@ -24,6 +24,7 @@ const postService = async({ url, values, addMessage, successResponse }) => {
   }
 
   const postResponse = await makeAnHttpsPost(url, values)
+  console.log('postResponse: ', postResponse)
   if (postResponse.success) {
     if (successResponse) {
       addMessage(({ type: 'success', content: successResponse }))
