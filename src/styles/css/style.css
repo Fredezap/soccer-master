@@ -1416,6 +1416,16 @@ color: green;
   width: 100%;
 }
 
+.auth-form button {
+  background-color: rgb(48, 48, 173);
+  border: 1px solid beige;
+  margin-top: 50px;
+  margin-bottom: 20px;
+}
+
+.auth-form a {
+  color: beige;
+}
 /* End of Forms Styles */
 
 /* Tournament details Styles */

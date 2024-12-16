@@ -50,9 +50,10 @@ const LoginForm = () => {
                 showPassword={showPassword}
                 setShowPassword={setShowPassword}
               />
-              <Button variant="primary" type="submit" disabled={submittingForm}>
+              <Button type="submit" disabled={submittingForm}>
                 Login
               </Button>
+              <a href={ROUTES.REGISTER}>Register</a>
               {submittingForm && <p>{messages.submitting}</p>}
             </Form>
           )}

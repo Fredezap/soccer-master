@@ -48,9 +48,10 @@ const RegisterForm = () => {
                 errors={errors}
                 touched={touched}
               />
-              <Button variant="success" type="submit" disabled={submittingForm}>
+              <Button type="submit" disabled={submittingForm}>
               Register
               </Button>
+              <a href={ROUTES.LOGIN}>Login</a>
               {submittingForm && <p>{messages.submitting}</p>}
             </Form>
           )}
