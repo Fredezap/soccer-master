@@ -13,10 +13,10 @@ const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, getSta
   }
 
   return (
-    <div className="group-box">
+    <div className="">
       {selectedGroupStage && (
         <div>
-          <div className="col-lg-12">
+          <div className="col-md-12">
             <div>
               {selectedGroupStage.Matches?.length === 0
                 ? <p style={{ textAlign: 'center' }}>No matches set for this group stage yet</p>

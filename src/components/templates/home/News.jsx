@@ -2,20 +2,7 @@ import { useState } from 'react'
 
 const News = () => {
   const [lastNews, setLastNews] = useState(null)
-  // const getLastNews = () => {
-  //   const news = axios.get("api/get-news")
 
-  // check what data return and if not null set it
-  //   if (news) {
-  //     setLastNews(news)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getLastNews()
-  // }, [])
-
-  // todo: ver si news es un array y mostrarlos en pantalla
   return (
     !lastNews && (
       <div className="latest-news">

@@ -1,7 +1,6 @@
 const Main = () => {
   return (
     <div>
-      {/* Logo */}
       <a href="https://colorlib.com/wp/templates/">
         <img
           src="https://colorlib.com/wp/wp-content/uploads/sites/2/colorlib-push-logo.png"
@@ -10,7 +9,6 @@ const Main = () => {
         />
       </a>
 
-      {/* Texto principal */}
       <h1 style={{ textAlign: 'center' }}>Thank you for using our template!</h1>
       <p style={{ textAlign: 'center' }}>
         For more awesome templates please visit{' '}
@@ -19,7 +17,6 @@ const Main = () => {
         </strong>.
       </p>
 
-      {/* Mensaje de copyright */}
       <br />
       <p style={{ textAlign: 'center', color: 'red' }}>
         <strong>Copyright information for the template can&apos;t be altered/removed unless you purchase a license.</strong>

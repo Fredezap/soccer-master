@@ -22,14 +22,24 @@ const AddKnockoutMatchesFormMain = ({
   const [teamStatus, setTeamStatus] = useState(TEAM_STATUS.UNDEFINED)
   const [localTeam, setLocalTeam] = useState(null)
   const [visitorTeam, setVisitorTeam] = useState(null)
-  const [localTeamPlaceholder, setLocalTeamPlaceholder] = useState(null)
-  const [visitorTeamPlaceholder, setVisitorTeamPlaceholder] = useState(null)
+  const [localTeamPlaceholder, setLocalTeamPlaceholder] = useState('')
+  const [visitorTeamPlaceholder, setVisitorTeamPlaceholder] = useState('')
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
   const [showDeleteKnockoutMatchModal, setShowDeleteKnockoutMatchModal] = useState(false)
   const [showCreateKnockoutMatchModal, setShowCreateKnockoutMatchModal] = useState(false)
 
+  const resetFormValues = () => {
+    setLocalTeam(null)
+    setVisitorTeam(null)
+    setLocalTeamPlaceholder('')
+    setVisitorTeamPlaceholder('')
+    setLocationAndDateformData({ date: '', time: '', location: '' })
+  }
+
   const handleStageChange = (stage) => {
     setSelectedStage(stage)
+    resetFormValues()
+    setTeamStatus(TEAM_STATUS.UNDEFINED)
   }
 
   const handleShowConfirmModal = () => {

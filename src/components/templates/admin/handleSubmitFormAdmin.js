@@ -24,7 +24,6 @@ const handleSubmitFormAdmin = async({ values, url, addMessage, successResponse, 
     response = await patchService({ url, values, addMessage, successResponse })
   }
   setSubmittingForm(false)
-  console.log('RESPONSE EN HANDLE INTERMEDIO: ', response)
   return response
 }
 

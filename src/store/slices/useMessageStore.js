@@ -15,11 +15,11 @@ export const useMessageStore = create((set) => ({
       messages: [message]
     }))
 
-    // timeoutId = setTimeout(() => {
-    //   set(() => ({
-    //     messages: []
-    //   }))
-    // }, 15000)
+    timeoutId = setTimeout(() => {
+      set(() => ({
+        messages: []
+      }))
+    }, 15000)
   }
 
 }))

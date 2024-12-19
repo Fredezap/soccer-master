@@ -87,13 +87,15 @@ const SetGroupsMain = () => {
     <div className="setting-groups-main">
       <SetGroupFormMain selectedStage={selectedStage} dbStages={dbStages} setSelectedStage={setSelectedStage} getData={getData} />
       <GroupsAndTeams handleAddTeamToGroup={handleAddTeamToGroup} dbGroups={dbGroups} getData={getData} />
-      <UpdateGroupTeamModal
-        showUpdateGroupTeamModal={showUpdateGroupTeamModal}
-        setShowUpdateGroupTeamModal={setShowUpdateGroupTeamModal}
-        availableTeams={availableTeams}
-        selectedGroup={selectedGroup}
-        getData={getData}
-      />
+      {showUpdateGroupTeamModal && (
+        <UpdateGroupTeamModal
+          showUpdateGroupTeamModal={showUpdateGroupTeamModal}
+          setShowUpdateGroupTeamModal={setShowUpdateGroupTeamModal}
+          availableTeams={availableTeams}
+          selectedGroup={selectedGroup}
+          getData={getData}
+        />
+      )}
     </div>
   )
 }

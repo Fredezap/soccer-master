@@ -7,7 +7,7 @@ const Contact = () => {
   const { contact } = useHeroDetails()
   return (
     <>
-      <Hero title={contact.title} content={contact.content} />
+      <Hero title={contact.title} />
       <ContactForm />
     </>
   )

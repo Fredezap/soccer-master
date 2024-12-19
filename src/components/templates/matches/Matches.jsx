@@ -10,7 +10,7 @@ const Matches = () => {
 
   return (
     <>
-      <Hero title={matches.title} content={matches.content} />
+      <Hero title={matches.title} />
       <TeamScore />
       <MatchesGrid />
       <Videos />

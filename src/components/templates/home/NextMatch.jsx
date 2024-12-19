@@ -2,20 +2,7 @@ import { useState } from 'react'
 
 const NextMatch = () => {
   const [nextMatch, setNextMatch] = useState(null)
-  // const getNextMatch = () => {
-  //   const nextMatchFounded = axios.get("api/get-next-match")
 
-  // check what data return and if not null set it
-  //   if (nextMatchFounded) {
-  //     setNextMatch(nextMatchFounded)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getNextMatch()
-  // }, [])
-
-  // todo: ver si next match es un array y mostrarlos en pantalla
   return (
     !nextMatch && (
       <div className="col-lg-6">

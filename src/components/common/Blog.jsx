@@ -2,20 +2,7 @@ import { useState } from 'react'
 
 const Blog = () => {
   const [posts, setPosts] = useState(null)
-  // const getPosts = () => {
-  //   const postsFounded = axios.get("api/get-posts")
 
-  // check what data return and if not null set it
-  //   if (postsFounded) {
-  //     setPosts(postsFounded)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getPosts()
-  // }, [])
-
-  // todo: ver si tables scores es un array y mostrarlos en pantalla
   return (
     !posts && (
       <div className="container site-section">

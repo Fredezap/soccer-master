@@ -17,7 +17,7 @@ const DeleteKnockoutMatchModal = ({
     const values = {
       matchId: match.matchId
     }
-    console.log('values en delete', values)
+
     const successResponse = 'Team has been deleted'
     const url = '/admin/fixture/matches/delete'
     const httpMethod = 'post'

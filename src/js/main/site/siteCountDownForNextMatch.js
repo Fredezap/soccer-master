@@ -23,13 +23,12 @@ const siteCountDownForNextMatch = function(time) {
       const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24)
       const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
 
-      // Update the inner values of each element
       $('#countdown-weeks').text(Math.floor(days / 7))
       $('#countdown-days').text(days % 7)
       $('#countdown-hours').text(hours)
       $('#countdown-minutes').text(minutes)
       $('#countdown-seconds').text(seconds)
-    }, 1000) // Update every second
+    }, 1000)
   })
 }
 

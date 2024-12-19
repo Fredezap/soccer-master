@@ -3,13 +3,16 @@ import { useMessageStore } from '../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
+import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 
 const CreateTeamModal = ({ showCreateTeamModal, setShowCreateTeamModal, setDbTeams }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { team, setTeam } = useTeamStore()
+  const { currentTournament } = useTournamentsDetails()
 
-  const createTeam = async(values) => {
+  const createTeam = async(formValues) => {
+    const values = { ...formValues, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Team has been created'
     const url = '/admin/teams/create'
     const httpMethod = 'post'

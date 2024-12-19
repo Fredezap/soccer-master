@@ -2,20 +2,7 @@ import { useState } from 'react'
 
 const TeamScore = () => {
   const [lastMatch, setLastMatch] = useState(null)
-  // const getLastMatch = () => {
-  //   const lastMatchFounded = axios.get("api/get-last-match")
 
-  // check what data return and if not null set it
-  //   if (lastMatchFounded) {
-  //     setLastMatch(lastMatchFounded)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getLastMatch()
-  // }, [])
-
-  // todo: ver como llegan los datos del match y mostrarlos en pantalla
   return (
     <div className="container">
       <div className="row">

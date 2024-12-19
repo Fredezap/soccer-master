@@ -4,7 +4,6 @@ const TeamsAreKnownForm = ({ match, dbTeams, setLocalTeam, setVisitorTeam }) => 
   const [localTeamValue, setLocalTeamValue] = useState('')
   const [visitorTeamValue, setVisitorTeamValue] = useState('')
 
-  // Set initial values based on match data
   useEffect(() => {
     if (match?.localTeam) {
       const localTeamId = match.localTeam.teamId.toString()
@@ -21,17 +20,16 @@ const TeamsAreKnownForm = ({ match, dbTeams, setLocalTeam, setVisitorTeam }) => 
     }
   }, [match, dbTeams, setVisitorTeam])
 
-  // Handle team selection changes
   const handleTeamChange = ({ teamType, event }) => {
     const teamId = event.target.value
     const selectedTeam = dbTeams.find((t) => t.teamId === parseInt(teamId)) || null
 
     if (teamType === 'local') {
       setLocalTeam(selectedTeam)
-      setLocalTeamValue(teamId) // Update the displayed value in the select
+      setLocalTeamValue(teamId)
     } else if (teamType === 'visitor') {
       setVisitorTeam(selectedTeam)
-      setVisitorTeamValue(teamId) // Update the displayed value in the select
+      setVisitorTeamValue(teamId)
     }
   }
 

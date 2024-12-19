@@ -10,6 +10,7 @@ import DbTeams from '../db-teams/DbTeams.jsx'
 import useHandleConfirmTeam from '../hooks/useHandleConfirmTeam.jsx'
 import FormsAndSetTeam from '../common/FormsAndSetTeam.jsx'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore.js'
+import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails.js'
 
 const AdminTeams = () => {
   const { adminTeams } = useHeroDetails()
@@ -21,17 +22,19 @@ const AdminTeams = () => {
   const { addMessage } = useMessageStore()
   const { confirmTeam } = useHandleConfirmTeam()
   const { setTeam } = useTeamStore()
+  const { currentTournament } = useTournamentsDetails()
 
   const handleConfirmTeam = () => {
     confirmTeam(showCreateTeamModal, setShowCreateTeamModal)
   }
 
-  const getTeams = async(values) => {
-    const url = '/admin/teams/get-all'
+  const getTeams = async() => {
+    const values = { tournamentId: currentTournament.tournamentId }
+    const url = '/admin/teams/get-by-tournament'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
     if (response?.success) {
-      setDbTeams(response.data.dbTeams)
+      setDbTeams(response.data?.tournament?.Teams)
     }
   }
 
@@ -50,7 +53,7 @@ const AdminTeams = () => {
 
   return (
     <div>
-      <Hero title={adminTeams.title} content={adminTeams.content} />
+      <Hero title={adminTeams.title} />
       <div className="admin-teams-main">
         <p>SET THE TEAMS HERE</p>
         <div className="show-buttons">
@@ -69,12 +72,14 @@ const AdminTeams = () => {
             <FormsAndSetTeam handleConfirmTeam={handleConfirmTeam}/>
           )}
         </div>
-        <CreateTeamModal
-          showCreateTeamModal={showCreateTeamModal}
-          setShowCreateTeamModal={setShowCreateTeamModal}
-          dbTeams={dbTeams}
-          setDbTeams={setDbTeams}
-        />
+        {showCreateTeamModal && (
+          <CreateTeamModal
+            showCreateTeamModal={showCreateTeamModal}
+            setShowCreateTeamModal={setShowCreateTeamModal}
+            dbTeams={dbTeams}
+            setDbTeams={setDbTeams}
+          />
+        )}
       </div>
     </div>
   )

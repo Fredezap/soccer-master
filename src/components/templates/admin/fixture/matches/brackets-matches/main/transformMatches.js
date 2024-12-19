@@ -22,7 +22,9 @@ const transformMatches = (dbMatches) => {
     })
   }
 
-  return result
+  const sortedMatches = result.sort((a, b) => a.matchId - b.matchId)
+
+  return sortedMatches
 }
 
 export default transformMatches

@@ -57,10 +57,10 @@ const DeleteTeamFromGroupWarningModal = ({
             ongoing processes, historical data, and any references that other parts of the system rely on.
             </p>
           </div>
+          <Button disabled={submittingForm} variant="outline-danger" onClick={() => handleDeleteTeamFromGroup({ teamId, groupId })}>
+          Delete
+          </Button>
         </div>
-        <Button disabled={submittingForm} variant="outline-danger" onClick={() => handleDeleteTeamFromGroup({ teamId, groupId })}>
-        Delete
-        </Button>
       </Modal.Body>
       <Modal.Footer>
         <Button onClick={() => setShowDeleteTeamFromGroupModal(false)} variant="secondary">

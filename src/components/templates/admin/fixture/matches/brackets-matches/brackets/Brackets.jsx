@@ -1,6 +1,6 @@
 /* eslint-disable multiline-ternary */
 import { useState } from 'react'
-import { Bracket } from 'react-brackets'
+import { Bracket, Seed, SeedItem, SeedTeam } from 'react-brackets'
 import { Button } from 'react-bootstrap'
 import EditKnockoutMatchModal from '../modals/EditKnockoutMatchModal'
 import DeleteKnockoutMatchModal from '../modals/DeleteKnockoutMatchModal'
@@ -16,7 +16,6 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
 
   const onSetTeams = (match, type) => {
     setMatch(match.match)
-    console.log(type)
     if (type === 'edit') setShowModalEdit(true)
     if (type === 'delete') setShowModalDelete(true)
   }
@@ -40,6 +39,32 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
     )
   }
 
+  const CustomSeed = ({ seed, breakpoint, roundIndex }) => {
+    const { matchNumber, date, teams } = seed.seed
+
+    return (
+      <Seed mobileBreakpoint={breakpoint} style={{ fontSize: 12 }}>
+        <SeedItem>
+          <div>
+            <div style={{ fontWeight: 'bold', color: 'white', marginBottom: '0px', backgroundColor: 'gray' }}>
+              Match {matchNumber}
+            </div>
+            <SeedTeam>
+              {teams[0]?.name || 'NO TEAM'}
+            </SeedTeam>
+            <SeedTeam>
+              {teams[1]?.name || 'NO TEAM'}
+            </SeedTeam>
+          </div>
+        </SeedItem>
+        <div style={{ marginTop: '5px', fontSize: '10px', textAlign: 'center' }}>
+          {date}
+        </div>
+        {roundIndex !== 0 && <div></div>}
+      </Seed>
+    )
+  }
+
   return (
     <div className="brackets-container">
       {Array.isArray(rounds) && rounds.length > 0
@@ -50,22 +75,27 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
                 <p>No matches set for any knockout stage yet</p>
               )
               : (
-                <Bracket rounds={rounds} />
+                <div>
+                  <Bracket
+                    rounds={rounds}
+                    renderSeedComponent={(seed) => <CustomSeed seed={seed} />}
+                  />
+                  <div>
+                    <Button
+                      onClick={() => setShowListMatches(!showListMatches)}
+                      variant="outline-success"
+                    >
+                      Manage knockout matches
+                    </Button>
+                  </div>
+                  {showListMatches && (
+                    <div className="knockout-matches-list-edit">
+                      <h6>Select a match</h6>
+                      {rounds.map(renderMatchesList)}
+                    </div>
+                  )}
+                </div>
               )}
-            <div>
-              <Button
-                onClick={() => setShowListMatches(!showListMatches)}
-                variant="outline-success"
-              >
-              Manage knockout matches
-              </Button>
-            </div>
-            {showListMatches && (
-              <div className="knockout-matches-list-edit">
-                <h6>Select a match</h6>
-                {rounds.map(renderMatchesList)}
-              </div>
-            )}
           </div>
         ) : (
           <p>No bracket data available</p>

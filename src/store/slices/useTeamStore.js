@@ -32,7 +32,6 @@ export const useTeamStore = create((set, get) => ({
 
     if (currentPlayers.some(player => player.name === newPlayer.name)) {
       // TODO: Display a modal indicating the player is already in the list
-      console.warn('El jugador ya está en la lista')
       return
     }
 

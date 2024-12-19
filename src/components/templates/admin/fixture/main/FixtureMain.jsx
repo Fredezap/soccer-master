@@ -8,6 +8,7 @@ import { Button } from 'react-bootstrap'
 import MatchesMain from '../matches/main/MatchesMain'
 import SetGroupsMain from '../set-groups/SetGroupsMain'
 import { useStagesStore } from '../../../../../store/slices/useStagesStore'
+import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 
 const FixtureMain = () => {
   const { adminFixture } = useHeroDetails()
@@ -16,10 +17,13 @@ const FixtureMain = () => {
   const [showMatches, setShowMatches] = useState(false)
   const [showGroups, setShowGroups] = useState(false)
   const { addMessage } = useMessageStore()
+  const { currentTournament } = useTournamentsDetails()
 
   const getStages = async() => {
-    const url = '/admin/fixture/stages/get-all'
-    const response = await handleGetData({ url, addMessage })
+    const paramValues = { tournamentId: currentTournament.tournamentId }
+    const url = '/admin/fixture/stages/get-all-by-tournament'
+    const response = await handleGetData({ paramValues, url, addMessage })
+
     if (response.success) { setStages(response.data.dbStages) }
   }
 
@@ -29,7 +33,7 @@ const FixtureMain = () => {
 
   return (
     <div>
-      <Hero title={adminFixture.title} content={adminFixture.content} />
+      <Hero title={adminFixture.title} />
       <div className="admin-all-mains">
         <div className="admin-settings-info">
           <h5 className="title">How does the website work?</h5>
