@@ -4,6 +4,6 @@ export const useStagesStore = create((set, get) => ({
   stages: [],
 
   setStages: (stages) => {
-    set({ stages }) // Wrap 'stages' in an object
+    set({ stages })
   }
 }))

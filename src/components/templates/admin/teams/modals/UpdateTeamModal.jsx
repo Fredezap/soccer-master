@@ -5,14 +5,17 @@ import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../../store/constants/routes'
+import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 
 const UpdateTeamModal = ({ showUpdateTeamModal, setShowUpdateTeamModal }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { team } = useTeamStore()
   const navigate = useNavigate()
+  const { currentTournament } = useTournamentsDetails()
 
-  const updateTeam = async(values) => {
+  const updateTeam = async(formValues) => {
+    const values = { ...formValues, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Team has been updated'
     const url = '/admin/teams/update'
     const httpMethod = 'patch'

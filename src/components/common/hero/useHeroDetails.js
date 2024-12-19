@@ -1,47 +1,38 @@
 const useHeroDetails = () => {
   const players = {
-    title: 'Players',
-    content: 'Aca va el contenido descriptivo para esta pagina de PLAYERS'
+    title: 'Players'
   }
 
   const matches = {
-    title: 'Matches',
-    content: 'Aca va el contenido descriptivo para esta pagina de MATCHES'
+    title: 'Matches'
   }
 
   const blog = {
-    title: 'Blog Posts',
-    content: 'Aca va el contenido descriptivo para esta pagina de BLOG'
+    title: 'Blog Posts'
   }
 
   const contact = {
-    title: 'Contact',
-    content: 'Aca va el contenido descriptivo para esta pagina de CONTACT'
+    title: 'Contact'
   }
 
   const adminMain = {
-    title: 'Admin',
-    content: 'Aca va el contenido para ADMIN'
+    title: 'Admin'
   }
 
   const adminTournamentDetails = {
-    title: 'Admin tournament Details',
-    content: 'Aca va el contenido para ADMIN tournament Details'
+    title: 'Admin tournament Details'
   }
 
   const adminTeams = {
-    title: 'Admin Teams',
-    content: 'Aca va el contenido para ADMIN teams'
+    title: 'Admin Teams'
   }
 
   const adminTeamsUpdate = {
-    title: 'Admin Teams update',
-    content: 'Aca va el contenido para ADMIN teams UPDATE'
+    title: 'Admin Teams update'
   }
 
   const adminFixture = {
-    title: 'Admin Fixture',
-    content: 'Aca va el contenido para ADMIN FIXTURE'
+    title: 'Admin Fixture'
   }
 
   return { players, matches, blog, contact, adminMain, adminTournamentDetails, adminTeams, adminTeamsUpdate, adminFixture }

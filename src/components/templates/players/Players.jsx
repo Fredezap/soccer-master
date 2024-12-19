@@ -8,7 +8,7 @@ const Players = () => {
 
   return (
     <>
-      <Hero title={players.title} content={players.content} />
+      <Hero title={players.title} />
       <Videos />
       <Blog />
     </>

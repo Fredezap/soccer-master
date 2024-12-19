@@ -3,20 +3,7 @@ import { FaArrowRight, FaArrowLeft, FaPlay } from 'react-icons/fa'
 
 const Videos = () => {
   const [videos, setVideos] = useState(null)
-  // const getVideos = () => {
-  //   const videosFounded = axios.get("api/get-videos")
 
-  // check what data return and if not null set it
-  //   if (videosFounded) {
-  //     setVideos(videosFounded)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getVideos()
-  // }, [])
-
-  // todo: ver si tables scores es un array y mostrarlos en pantalla
   return (
     !videos && (
       <div className="site-section">

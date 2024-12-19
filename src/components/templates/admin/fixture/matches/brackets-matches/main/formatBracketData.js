@@ -1,14 +1,15 @@
-import formatDate from '../../../../../../common/formatDate'
-
 const formatBracketData = (stages, matches) => {
+  let matchCounter = 1
   return Object.values(stages).map((stage) => {
     if (stage.type === 'group') return {}
+
     const stageMatches = matches?.filter((match) => match.stage.stageId === stage.stageId)
 
     return {
       title: stage.name,
       seeds: stageMatches.map((match) => ({
         id: match.matchId,
+        matchNumber: matchCounter++,
         date: `${match.date} at ${match.time} - ${match.location}`,
         match: {
           ...match

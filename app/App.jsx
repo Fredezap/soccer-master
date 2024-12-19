@@ -43,6 +43,12 @@ function AppContent() {
     return siteSticky()
   }, [])
 
+  // TODO: VER PARTE USUARIOS. Ir mostrando datos y demas
+  // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
+  // TODO: DESPUES. Ver de sacar el boton admin, si no esta logueado
+  // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
+  // TODO: DESPUES. Ver si se pueden meter mas validaciones a los partidos de eliminacion
+
   return (
     <>
       <Routes>

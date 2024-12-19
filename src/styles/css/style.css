@@ -1140,6 +1140,91 @@ h1, h2, h3, h4, h5,
   padding: 50px;
 }
 
+.admin-all-mains .tournaments-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.admin-all-mains .list-group {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap; 
+  justify-content: center;
+  gap: 20px;
+  width: 90%;
+}
+
+.admin-all-mains .list-group-item {
+  display: flex;
+  background-color: rgb(221, 173, 128);
+  align-items: center;
+  justify-content: flex-start;
+  flex: 0 1 calc(33.333% - 20px);
+  gap: 10px;
+  padding: 15px;
+  cursor: pointer;
+  text-align: center;
+  transition: 0.4s;
+}
+
+.admin-all-mains .list-group-item:hover {
+  transform: scale(1.02);
+  background-color: rgb(207, 147, 91);
+}
+
+.admin-all-mains .list-group-item .icon-container {
+  flex: 0 0 20%;
+}
+
+.admin-all-mains .list-group-item .text-container {
+  flex: 0 0 80%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: left;
+}
+
+.admin-all-mains .list-group-item h5 {
+  color: #222;
+  margin: 0;
+  font-weight: bold;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.admin-all-mains .list-group-item p {
+  margin: 5px 0 0;
+  font-size: 0.9em;
+  color: #444;
+}
+
+
+.create-tournament-link {
+  margin-top: 20px;
+  text-align: center;
+  cursor: pointer;
+  color: #555;
+  font-weight: bold;
+  transition: color 0.3s;
+}
+
+.create-tournament-link:hover {
+  color: #ff9a36;
+}
+
+.create-tournament-link {
+  margin-top: 30px;
+  color: #ff8c19;
+  cursor: pointer;
+}
+
+.admin-all-mains .tournaments-list button {
+  margin: 10px 0;
+}
+
 .admin-settings-info {
   border: white solid 1px;
   padding: 40px;
@@ -1154,8 +1239,8 @@ h1, h2, h3, h4, h5,
 }
 
 .admin-all-mains button {
-  margin: 30px;
-  width: 30%;
+  margin: 30px 0;
+  min-width: 30%;
 }
 
 .admin-tournament-options{
@@ -1954,8 +2039,24 @@ color: green;
 .match-date-and-location {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  width: 100%;
+}
+
+.match-date-and-location > div {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  width: 100%;
+}
+
+.match-date-and-location > div > input {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 70%;
+}
+
+.match-date-and-location > div > label {
   width: 100%;
 }
 
@@ -2312,7 +2413,7 @@ color: green;
   gap: 30px;
 }
 
-.modal-box  button {
+.modal-box button {
   width: 50%;
 }
 

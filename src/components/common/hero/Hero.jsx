@@ -1,11 +1,15 @@
-const Hero = ({ title, content }) => {
+import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
+
+const Hero = ({ title }) => {
+  const { currentTournament } = useTournamentsDetails()
+
   return (
     <div className="hero overlay" style={{ backgroundImage: 'url(\'images/bg_3.jpg\')' }}>
       <div className="container">
         <div className="row align-items-center">
-          <div className="col-lg-5 mx-auto text-center">
+          <div className="col-lg mx-auto text-center">
             <h1 className="text-white">{title || null}</h1>
-            <p>{content || null}</p>
+            <h2 style={{ marginTop: '50px' }}>{currentTournament?.name}</h2>
           </div>
         </div>
       </div>

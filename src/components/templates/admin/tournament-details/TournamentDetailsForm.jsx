@@ -8,14 +8,15 @@ import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFo
 import { useEffect, useState } from 'react'
 import handleGetData from '../handleGetData.js'
 import formatDate from '../../../common/formatDate.js'
+import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails.js'
 
 const TournamentDetailsForm = () => {
   const { addMessage } = useMessageStore()
   const { initialValues, registerSchema, formFields } = TournamentDetailsFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
-  const [tournamentDetails, setTournamentDetails] = useState(null)
   const [editTournamentDetails, setEditTournamentDetails] = useState(false)
   let httpMethod
+  const { currentTournament, tournaments, updateCurrentTournament } = useTournamentsDetails()
 
   const handleSubmitFormCreate = async(values) => {
     const successResponse = 'Tournament details has been set'
@@ -23,35 +24,25 @@ const TournamentDetailsForm = () => {
     httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
-      setTournamentDetails(response.data.tournamentDetails)
+      updateCurrentTournament(response.data?.tournamentDetails)
     }
   }
 
   const handleSubmitFormEdit = async(values) => {
-    const successResponse = 'Tournament details has been set'
+    const successResponse = 'Tournament details has been edited'
     const url = '/admin/tournament-details/update'
     httpMethod = 'patch'
-    values = { ...values, tournamentDetailsId: tournamentDetails.tournamentDetailsId }
+    values = { ...values, tournamentId: currentTournament.tournamentId }
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
-      setTournamentDetails(response.data.tournamentDetails)
+      updateCurrentTournament(response.data.tournamentDetails)
       setEditTournamentDetails(false)
     }
   }
 
-  const getTournamentDetails = async() => {
-    const url = '/admin/tournament-details/get-details'
-    const response = await handleGetData({ url, addMessage })
-    if (response.success) { setTournamentDetails(response.data.tournamentDetails) }
-  }
-
-  useEffect(() => {
-    getTournamentDetails()
-  }, [])
-
   return (
     <div className="form-main">
-      {tournamentDetails && !editTournamentDetails
+      {Object.entries(currentTournament).length > 0 && !editTournamentDetails
         ? (
           <div className="tournament-details">
             <p>
@@ -59,7 +50,7 @@ const TournamentDetailsForm = () => {
                 Date:
               </span>
               <span style={{ color: 'white' }}>
-                {formatDate(tournamentDetails.date).slashDate}
+                {currentTournament.date ? formatDate(currentTournament.date).slashDate : 'No date found'}
               </span>
             </p>
             <p>
@@ -67,7 +58,7 @@ const TournamentDetailsForm = () => {
                 Name:
               </span>
               <span style={{ color: 'white' }}>
-                {tournamentDetails.name ? tournamentDetails.name : 'No name seted'}
+                {currentTournament.name ? currentTournament.name : 'No name found'}
               </span>
             </p>
             <Button onClick={() => setEditTournamentDetails(true)} variant="secondary">
@@ -82,13 +73,19 @@ const TournamentDetailsForm = () => {
             onSubmit={!editTournamentDetails ? handleSubmitFormCreate : handleSubmitFormEdit}>
             {({ errors, touched, setFieldValue }) => (
               <Form className="admin-form">
-                <TournamentDetailsFormMap formFields={formFields} errors={errors} touched={touched} values={tournamentDetails} setFieldValue={setFieldValue}/>
+                <TournamentDetailsFormMap
+                  formFields={formFields}
+                  errors={errors}
+                  touched={touched}
+                  values={currentTournament}
+                  setFieldValue={setFieldValue}
+                />
                 <div className="form-button">
                   {editTournamentDetails
                     ? (
                       <div>
                         <Button type="submit" variant="primary" disabled={submittingForm}>
-                          Confirm
+                          Edit tournament details
                         </Button>
                         <Button onClick={() => setEditTournamentDetails(false)} variant="secondary" disabled={submittingForm}>
                           Cancel
@@ -98,7 +95,7 @@ const TournamentDetailsForm = () => {
                     : (
                       <div>
                         <Button type="submit" variant="primary" disabled={submittingForm}>
-                          Confirm
+                          {Object.entries(currentTournament).length === 0 ? ('Create tournament') : ('Set tournament details')}
                         </Button>
                       </div>
                     )}

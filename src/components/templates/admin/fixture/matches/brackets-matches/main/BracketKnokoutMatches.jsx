@@ -17,7 +17,6 @@ const BracketKnokoutMatches = ({
 
   useEffect(() => {
     const updatedFormattedMatches = transformMatches(dbMatches)
-
     const updatedRounds = formatBracketData(dbKnockoutStages, updatedFormattedMatches)
     setRounds(updatedRounds)
   }, [dbMatches, dbKnockoutStages])

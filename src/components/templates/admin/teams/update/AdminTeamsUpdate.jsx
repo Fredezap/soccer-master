@@ -18,7 +18,7 @@ const AdminTeamsUpdate = () => {
 
   return (
     <div>
-      <Hero title={adminTeamsUpdate.title} content={adminTeamsUpdate.content} />
+      <Hero title={adminTeamsUpdate.title} />
       {team.teamId !== null
         ? (
           <FormsAndSetTeam handleConfirmTeam={handleConfirmTeam}/>

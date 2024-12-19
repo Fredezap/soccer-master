@@ -33,7 +33,7 @@ const CreateKnockoutMatchModal = ({
       time: locationAndDateformData.time,
       location: locationAndDateformData?.location
     }
-    console.log(values)
+
     const successResponse = 'Match has been created'
     let url
     if (teamStatus === TEAM_STATUS.KNOWN) {
@@ -45,7 +45,7 @@ const CreateKnockoutMatchModal = ({
     }
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    console.log(response)
+
     if (response?.success) {
       setShowCreateKnockoutMatchModal(false)
       getKnockoutStages()

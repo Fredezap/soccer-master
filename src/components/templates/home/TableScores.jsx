@@ -2,20 +2,7 @@ import { useState } from 'react'
 
 const TableScores = () => {
   const [tableScores, setTableScores] = useState(null)
-  // const getTableScores = () => {
-  //   const tableScoresData = axios.get("api/get-table-scors")
 
-  // check what data return and if not null set it
-  //   if (tableScoresData) {
-  //     setTableScores(tableScoresData)
-  //   }
-  // }
-
-  // useEffect(() => {
-  //   getTableScores()
-  // }, [])
-
-  // todo: ver si tables scores es un array y mostrarlos en pantalla
   return (
     !tableScores && (
       <div className="col-lg-6">

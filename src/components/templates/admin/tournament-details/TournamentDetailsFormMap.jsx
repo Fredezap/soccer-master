@@ -38,19 +38,4 @@ TournamentDetailsFormMap.propTypes = {
   ).isRequired,
   errors: PropTypes.object.isRequired,
   touched: PropTypes.object.isRequired
-  // values: PropTypes.object.isRequired,
-  // setFieldValue: PropTypes.func.isRequired
 }
-
-// TODO: TRY TO SHOW CURRENT VALUES AND LET USER TO UPDATE THEM. I HAD SOME BUGS WITH IT
-// value={
-//   values
-//     ? data.id === 'date'
-//       ? formatDate(values.date).dashDate
-//       : values[data.id] || ''
-//     : ''
-// }
-// onChange={(e) => {
-//   const value = e.target.value
-//   setFieldValue(data.id, value) // Establecer el campo correcto con el nuevo valor
-// }}

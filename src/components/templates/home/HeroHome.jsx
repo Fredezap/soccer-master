@@ -4,24 +4,6 @@ import siteCountDownForTournament from '../../../js/main/site/siteCountDownForTo
 const HeroHome = () => {
   const [tournamentTimeHasFinished, setTournamentTimeHasFinished] = useState(false)
 
-  // const getTournamentStartingTime = () => {
-  //   // todo: Get the time from db and check it to set the states
-  //   const tournamentStartingTime = axios.get("api/tournament-time")
-
-  //   const now = new Date()
-  //   const remaining = tournamentStartingTime - now
-  //   if (remaining <= 0) {
-  //     setTournamentTimeHasFinished(true)
-  //     return
-  //   }
-
-  //   siteCountDownForTournament()
-  // }
-
-  // useEffect(() => {
-  //   getTournamentStartingTime()
-  // }, [])
-
   return (
     <div className="hero overlay" style={{ backgroundImage: 'url(\'images/bg_3.jpg\')' }}>
       <div className="container">

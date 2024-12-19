@@ -5,16 +5,19 @@ import { Button, Form } from 'react-bootstrap'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
+import { useTournamentsDetails } from '../../../../../../store/slices/useTournamentsDetails'
 
 const AddStagesForm = ({ getStages }) => {
   const { initialValues, registerSchema, formFields } = addStagesFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
+  const { currentTournament } = useTournamentsDetails()
 
-  const handleSubmitFormCreate = async(values, { resetForm }) => {
+  const handleSubmitFormCreate = async(formValues, { resetForm }) => {
     const successResponse = 'Stage has been created successfully'
     const url = '/admin/fixture/stages/create'
     const httpMethod = 'post'
+    const values = { ...formValues, tournamentId: currentTournament?.tournamentId }
     const response = await handleSubmitFormAdmin({
       values,
       url,
@@ -25,7 +28,7 @@ const AddStagesForm = ({ getStages }) => {
     })
     if (response.success) {
       getStages()
-      resetForm() // Vaciar el formulario
+      resetForm()
     }
   }
 

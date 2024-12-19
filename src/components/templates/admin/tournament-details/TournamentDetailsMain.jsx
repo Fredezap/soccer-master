@@ -22,7 +22,7 @@ const TournamentDetailsMain = () => {
         )
         : (
           <div>
-            <Hero title={adminTournamentDetails.title} content={adminTournamentDetails.content} />
+            <Hero title={adminTournamentDetails.title} />
             <div className="admin-all-mains">
               <div className="admin-tournament-options">
                 <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)}>

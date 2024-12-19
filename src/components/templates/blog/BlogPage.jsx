@@ -7,7 +7,7 @@ const BlogPage = () => {
   const { blog } = useHeroDetails()
   return (
     <>
-      <Hero title={blog.title} content={blog.content} />
+      <Hero title={blog.title} />
       <BlogGrid />
 
     </>

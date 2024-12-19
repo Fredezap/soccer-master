@@ -7,7 +7,7 @@ const AdminTournamentDetails = () => {
 
   return (
     <div>
-      <Hero title={adminTournamentDetails.title} content={adminTournamentDetails.content} />
+      <Hero title={adminTournamentDetails.title} />
       <div>
         <div className="admin-tournament-set-conent">
           <p>SET THE TOURNAMENT DETAILS HERE</p>

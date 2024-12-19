@@ -28,10 +28,6 @@ const UpdateGroupTeamModal = ({
     )
   }
 
-  // todo: poder eliminar equipos del grupo.
-  // todo: ver como manejar lo de agregar equipos con nombre ficticio hasta que se setee un equipo.
-  // todo: agregar un apartado para agregar grupos, que no quede todo en el mismo lugar
-
   useEffect(() => {
     if (selectedTeamIds.length > 0) setNoneTeamSelectedError(false)
   }, [selectedTeamIds])
