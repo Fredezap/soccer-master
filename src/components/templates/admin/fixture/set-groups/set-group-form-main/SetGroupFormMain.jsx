@@ -1,10 +1,10 @@
 import CreateGroupForm from '../forms/CreateGroupForm'
 
-const SetGroupFormMain = ({ selectedStage, dbStages, setSelectedStage, getData }) => {
+const SetGroupFormMain = ({ selectedStage, groupStages, setSelectedStage, getData }) => {
   return (
     <div className="set-group-form-main">
       <h2>Setting groups</h2>
-      {dbStages.length > 1
+      {groupStages.length > 0
         ? (
           <select
             onChange={(e) => {
@@ -18,7 +18,7 @@ const SetGroupFormMain = ({ selectedStage, dbStages, setSelectedStage, getData }
             }}
           >
             <option value="">Seleccione una fase</option>
-            {dbStages.map((stage) => (
+            {groupStages.map((stage) => (
               <option
                 key={stage.stageId}
                 value={JSON.stringify({ stageId: stage.stageId, name: stage.name })}

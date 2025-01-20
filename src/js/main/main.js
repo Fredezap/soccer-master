@@ -8,9 +8,9 @@ import siteCountDownForNextMatch from './site/siteCountDownForNextMatch'
 import '../../styles/css/index'
 import '../../styles/scss/index'
 
-const main = function() {
+const main = function(currentTournament) {
   siteCarousel()
-  siteCountDownForNextMatch()
+  siteCountDownForNextMatch(currentTournament)
   siteDatePicker()
   siteMenuClone()
   siteScroll()

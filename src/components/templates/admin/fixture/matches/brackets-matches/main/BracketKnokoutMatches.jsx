@@ -5,11 +5,9 @@ import formatBracketData from './formatBracketData'
 import transformMatches from './transformMatches'
 
 const BracketKnokoutMatches = ({
-  getTeams,
   dbTeams,
   getMatches,
   dbMatches,
-  dbGroups,
   dbKnockoutStages,
   getKnockoutStages
 }) => {
@@ -26,7 +24,7 @@ const BracketKnokoutMatches = ({
       <h2>Tournament Bracket</h2>
       {Object.values(dbKnockoutStages)?.length === 0
         ? (
-          <p style={{ marginTop: '20px' }}>Please add knockout stages before adding matches</p>
+          <p>Please add knockout stages before adding matches</p>
         )
         : (
           <>

@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 import Hero from '../../common/hero/Hero'
-import { Button, Card, Row, Col, ListGroup } from 'react-bootstrap'
+import { ListGroup } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../store/constants/routes'
 import handleSubmitFormAdmin from './handleSubmitFormAdmin'
@@ -13,19 +13,8 @@ import formatDate from '../../common/formatDate'
 
 const AdminMain = () => {
   const { adminMain } = useHeroDetails()
-  const { addMessage } = useMessageStore()
-  const { setSubmittingForm } = useSubmittingFormStore()
-  const { currentTournament, tournaments, setTournaments, setCurrentTournament } = useTournamentsDetails()
+  const { tournaments, setCurrentTournament } = useTournamentsDetails()
   const navigate = useNavigate()
-
-  const getTournaments = async() => {
-    const url = 'admin/tournament-details/get-all'
-    const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
-    if (response?.success) {
-      setTournaments(response.data?.allTournaments)
-    }
-  }
 
   const handleTournamentSelected = (tournament) => {
     setCurrentTournament(tournament)
@@ -36,9 +25,6 @@ const AdminMain = () => {
     setCurrentTournament({})
     navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)
   }
-  useEffect(() => {
-    getTournaments()
-  }, [])
 
   return (
     <div>
@@ -52,7 +38,6 @@ const AdminMain = () => {
             </div>
           )
           : (
-
             <div className="tournaments-list">
               <ListGroup>
                 {tournaments.map((tournament) => (
@@ -75,7 +60,6 @@ const AdminMain = () => {
                 <p>Create tournament</p>
               </div>
             </div>
-
           )}
       </div>
     </div>

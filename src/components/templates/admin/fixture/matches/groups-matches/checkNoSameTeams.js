@@ -5,7 +5,7 @@ const checkNoSameTeams = ({ localTeam, visitorTeam, setCustomError }) => {
     return
   }
 
-  if (localTeam === visitorTeam) {
+  if (localTeam.teamId === visitorTeam.teamId) {
     setCustomError(sameTeamError)
     return
   }

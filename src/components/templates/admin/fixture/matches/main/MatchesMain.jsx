@@ -5,6 +5,10 @@ import handleGetData from '../../../handleGetData'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
+import { useTournamentsDetails } from '../../../../../../store/slices/useTournamentsDetails'
+import ROUTES from '../../../../../../store/constants/routes'
+import { useNavigate } from 'react-router-dom'
+import { Button } from 'react-bootstrap'
 
 const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
@@ -13,19 +17,22 @@ const MatchesMain = ({ getStages }) => {
   const { setSubmittingForm } = useSubmittingFormStore()
   const [dbMatches, setDbMatches] = useState([])
   const [dbTeams, setDbTeams] = useState([])
+  const { currentTournament } = useTournamentsDetails()
 
-  const getGroups = async(values) => {
-    const url = '/admin/fixture/groups/get-all-groups'
+  const getGroups = async() => {
+    const url = '/admin/fixture/groups/get-all-groups-by-tournament'
     const httpMethod = 'post'
+    const values = { tournamentId: currentTournament.tournamentId }
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
     if (response?.success) {
       setDbGroups(response.data.dbGroups)
     }
   }
-
-  const getKnockoutStages = async(values) => {
-    const url = '/admin/fixture/stages/get-all-knockout-stages'
+  // TODO: MOSTRAR RESULTADOS EN LAS BRACKETS. VER RESULTADOS Y MODIFICACIONES EN FASE GRUPOS
+  const getKnockoutStages = async() => {
+    const url = '/admin/fixture/stages/get-all-knockout-stages-by-tournament'
     const httpMethod = 'post'
+    const values = { tournamentId: currentTournament.tournamentId }
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
     if (response?.success) {
       setDbKnockoutStages(response.data.dbKnockoutStages)
@@ -36,10 +43,13 @@ const MatchesMain = ({ getStages }) => {
     const url = '/admin/fixture/matches/get-all'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+    console.log('MATCHES: ', response)
     if (response?.success) {
       setDbMatches(response.data.dbMatches)
     }
   }
+
+  const navigate = useNavigate()
 
   const getTeams = async(values) => {
     const url = '/admin/teams/get-all'
@@ -65,6 +75,13 @@ const MatchesMain = ({ getStages }) => {
           <div className="no-teams-found">
             <p>No teams found</p>
             <p>Please add teams before adding a match</p>
+            <Button
+              variant="outline-info"
+              style={{ color: 'skyblue' }}
+              onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}
+            >
+              Add team
+            </Button>
           </div>
         )
         : (

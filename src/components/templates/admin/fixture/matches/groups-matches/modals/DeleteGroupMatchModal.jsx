@@ -3,7 +3,7 @@ import { useMessageStore } from '../../../../../../../store/slices/useMessageSto
 import { useSubmittingFormStore } from '../../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../../handleSubmitFormAdmin'
 
-const DeleteMatchModal = ({ showDeleteMatchModal, setShowDeleteMatchModal, matchId, getStages }) => {
+const DeleteGroupMatchModal = ({ showDeleteGroupMatchModal, setShowDeleteGroupMatchModal, match, getStages }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
 
@@ -13,7 +13,7 @@ const DeleteMatchModal = ({ showDeleteMatchModal, setShowDeleteMatchModal, match
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
-      setShowDeleteMatchModal(false)
+      setShowDeleteGroupMatchModal(false)
       getStages()
     }
   }
@@ -22,8 +22,8 @@ const DeleteMatchModal = ({ showDeleteMatchModal, setShowDeleteMatchModal, match
     <Modal
       className="custom-modal"
       size="l"
-      show={showDeleteMatchModal}
-      onHide={() => setShowDeleteMatchModal(false)}
+      show={showDeleteGroupMatchModal}
+      onHide={() => setShowDeleteGroupMatchModal(false)}
     >
       <Modal.Header>
         <Modal.Title>
@@ -51,12 +51,12 @@ const DeleteMatchModal = ({ showDeleteMatchModal, setShowDeleteMatchModal, match
               ongoing processes, historical data, and any references that other parts of the system rely on.
             </p>
           </div>
-          <Button disabled={submittingForm} variant="outline-danger" onClick={() => deleteMatch({ matchId })}>Delete</Button>
+          <Button disabled={submittingForm} variant="outline-danger" onClick={() => deleteMatch({ matchId: match.matchId })}>Delete</Button>
         </div>
       </Modal.Body>
 
       <Modal.Footer>
-        <Button onClick={() => setShowDeleteMatchModal(false)} variant="secondary">
+        <Button onClick={() => setShowDeleteGroupMatchModal(false)} variant="secondary">
           Cancel
         </Button>
       </Modal.Footer>
@@ -64,4 +64,4 @@ const DeleteMatchModal = ({ showDeleteMatchModal, setShowDeleteMatchModal, match
   )
 }
 
-export default DeleteMatchModal
+export default DeleteGroupMatchModal

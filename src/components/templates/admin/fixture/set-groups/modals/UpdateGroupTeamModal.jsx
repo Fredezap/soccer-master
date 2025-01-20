@@ -65,10 +65,6 @@ const UpdateGroupTeamModal = ({
       <Modal.Body className="modal-succes-body">
         <div className="modal-box">
           <h5 style={{ marginBottom: '-20px' }}>{selectedGroup?.name}</h5>
-          <p>Choose the teams you want to add to this group</p>
-          <p>Please note that the teams already assigned to other groups or to the current
-          group in the same stage will not appear in the list below.</p>
-
           <Form className="team-groups-form">
             {availableTeams?.length === 0
               ? (
@@ -78,30 +74,39 @@ const UpdateGroupTeamModal = ({
                   <Button variant="outline-warning" onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}>Add teams</Button>
                 </div>
               )
-              : (
-                <div className="checkbox-update-teams">
-                  {availableTeams?.map(team => (
-                    <Form.Check
-                      className="form-check"
-                      type="checkbox"
-                      key={team.teamId}
-                      label={team.name}
-                      checked={selectedTeamIds.includes(team?.teamId)}
-                      onChange={() => handleCheckboxChange(team?.teamId)}
-                    />
-                  ))}
-                  <div className="button-update">
-                    <Button
-                      disabled={submittingForm}
-                      variant="outline-info"
-                      onClick={updateTeamGroups}
-                    >
-                      Update
-                    </Button>
-                    {noneTeamSelectedError && (<p className="form-message error-message">{noneTeamSelectedError}</p>)}
+              : availableTeams === undefined
+                ? (
+                  <div>
+                    <p style={{ color: 'red' }}>An error ocurred getting the teams</p>
                   </div>
-                </div>
-              )
+                )
+                : (
+                  <div className="checkbox-update-teams">
+                    <p>Choose the teams you want to add to this group</p>
+                    <p>Please note that the teams already assigned to other groups or to the current
+                    group in the same stage will not appear in the list below.</p>
+                    {availableTeams?.map(team => (
+                      <Form.Check
+                        className="form-check"
+                        type="checkbox"
+                        key={team.teamId}
+                        label={team.name}
+                        checked={selectedTeamIds.includes(team?.teamId)}
+                        onChange={() => handleCheckboxChange(team?.teamId)}
+                      />
+                    ))}
+                    <div className="button-update">
+                      <Button
+                        disabled={submittingForm}
+                        variant="outline-info"
+                        onClick={updateTeamGroups}
+                      >
+                      Update
+                      </Button>
+                      {noneTeamSelectedError && (<p className="form-message error-message">{noneTeamSelectedError}</p>)}
+                    </div>
+                  </div>
+                )
             }
           </Form>
         </div>

@@ -3,7 +3,7 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
     const { name, value } = e.target
     setMatchResult({
       ...matchResult,
-      [name]: value
+      [name]: parseInt(value) || value
     })
   }
 
@@ -15,7 +15,7 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
           type="number"
           id="localTeamScore"
           name="localTeamScore"
-          value={matchResult.localTeamScore}
+          value={matchResult?.localTeamScore}
           onChange={handleInputChange}
         />
       </div>
@@ -26,7 +26,29 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
           type="number"
           id="visitorTeamScore"
           name="visitorTeamScore"
-          value={matchResult.visitorTeamScore}
+          value={matchResult?.visitorTeamScore}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className="grid-colums-lg">
+        <label htmlFor="localTeamPenaltyScore">Visitor team penalty score:</label>
+        <input
+          type="number"
+          id="localTeamPenaltyScore"
+          name="localTeamPenaltyScore"
+          value={matchResult?.localTeamPenaltyScore}
+          onChange={handleInputChange}
+        />
+      </div>
+
+      <div className="grid-colums-lg">
+        <label htmlFor="visitorTeamPenaltyScore">Visitor team penalty score:</label>
+        <input
+          type="number"
+          id="visitorTeamPenaltyScore"
+          name="visitorTeamPenaltyScore"
+          value={matchResult?.visitorTeamPenaltyScore}
           onChange={handleInputChange}
         />
       </div>

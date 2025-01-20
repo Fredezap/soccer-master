@@ -639,7 +639,7 @@ h1, h2, h3, h4, h5,
       font-size: 2rem;
       display: block; }
 
-#date-countdown2 {
+/* #date-countdown2 {
   margin-bottom: 20px; }
   #date-countdown2 .countdown-block {
     display: inline-block;
@@ -654,7 +654,19 @@ h1, h2, h3, h4, h5,
     #date-countdown2 .countdown-block .label {
       line-height: 1.2;
       font-size: 1rem;
-      display: block; }
+      display: block; } */
+
+#date-countdown2 {
+  display: flex;
+  justify-content: center;
+  font-weight: bold;
+  margin-bottom: 50px;
+}
+
+.tournament-time {
+  margin-bottom: 0;
+  margin-top: 100px;
+}
 
 .more {
   text-transform: uppercase;
@@ -1140,7 +1152,7 @@ h1, h2, h3, h4, h5,
   padding: 50px;
 }
 
-.admin-all-mains .tournaments-list {
+.tournaments-list {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -1174,11 +1186,11 @@ h1, h2, h3, h4, h5,
   background-color: rgb(207, 147, 91);
 }
 
-.admin-all-mains .list-group-item .icon-container {
+.icon-container {
   flex: 0 0 20%;
 }
 
-.admin-all-mains .list-group-item .text-container {
+.text-container {
   flex: 0 0 80%;
   display: flex;
   flex-direction: column;
@@ -1701,6 +1713,12 @@ color: green;
   text-align: center;
 }
 
+.actions-icons {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .team-name-row {
   border-top: 1px solid rgba(255, 255, 255, 0.1);
   cursor: pointer;
@@ -1817,6 +1835,28 @@ color: green;
   border-bottom: white solid 1px;
   border-top: white solid 1px;
   padding: 70px 120px;
+  width: 100%;
+}
+
+.matches-main .group-box .group-matches-details {
+  width: 100%;
+}
+
+.matches-main .group-box .group-matches-details table {
+  width: 100%;
+  table-layout: fixed;
+  border-collapse: collapse;
+}
+
+.matches-main .group-box .group-matches-details th,
+.matches-main .group-box .group-matches-details td {
+  text-align: center;
+  vertical-align: middle;
+  padding: 8px;
+}
+
+.matches-main .group-box .group-matches-details tbody tr:hover {
+  background-color: #363434;
 }
 
 .brackets h2 {
@@ -1858,6 +1898,24 @@ color: green;
 
 .brackets-box button {
   margin-top: 80px;
+}
+
+.seed-team {
+  margin-left: auto;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  padding: 0 10px;
+}
+.seed-team span:first-child {
+  text-align: left;
+  flex-grow: 1;
+}
+.seed-team span:last-child {
+  text-align: right;
+  min-width: 40px;
 }
 
 .knockout-matches-list-edit {
@@ -2070,6 +2128,14 @@ color: green;
 .grid-colums {
   display: grid;
   grid-template-columns: 150px auto;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.grid-colums-lg {
+  display: grid;
+  grid-template-columns: 210px auto;
   align-items: center;
   gap: 20px;
   width: 100%;
@@ -2411,6 +2477,7 @@ color: green;
   justify-content: center;
   align-items: center;
   gap: 30px;
+  width: 100%;
 }
 
 .modal-box button {
@@ -2418,5 +2485,65 @@ color: green;
 }
 
 /* End of Modal Styles */
+
+/* Mail no tournament Styles */
+.no-tournament-main * {
+  color: rgb(255, 187, 0) !important;
+}
+
+.no-tournament-main {
+  text-align: center;
+}
+
+.custom-hero {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  max-height: 50px;
+  opacity: 0.8;
+}
+
+.no-tournament-selected {
+    padding: 50px;
+}
+
+.no-tournament-selected .list-group {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap; 
+    justify-content: center;
+    gap: 20px;
+    width: 90%;
+  }
+
+.no-tournament-selected .main-title {
+    margin-bottom: 50px;
+    color: rgb(209, 182, 50)
+  }
+  
+.no-tournament-selected .list-group-item {
+    display: flex;
+    background-color: rgb(221, 173, 128);
+    align-items: center;
+    justify-content: flex-start;
+    gap: 10px;
+    padding: 30px;
+    cursor: pointer;
+    text-align: center;
+    transition: 0.4s;
+  }
+
+  .no-tournament-selected .list-group-item h5 {
+    color: rgb(50, 20, 3);
+    font-weight: 600;
+  }
+  
+  .no-tournament-selected .list-group-item:hover {
+    transform: scale(1.02);
+    background-color: rgb(207, 147, 91);
+  }
+
+/* End of Mail no tournament Styles */
 
 /* End of New Styles added */

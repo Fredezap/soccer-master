@@ -24,8 +24,8 @@ export const useCheckPath = ({ currentPath, setCurrent, navigate }) => {
     flattenRoutes(ROUTES)
 
     if (!routeValues.includes(currentPath)) {
-      setCurrent(ROUTES.HOME)
-      navigate(ROUTES.HOME)
+      setCurrent(ROUTES.MAIN)
+      navigate(ROUTES.MAIN)
       return
     }
 

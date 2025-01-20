@@ -1,3 +1,7 @@
+import checkDateIsPast from '../brackets-matches/add-matches/errors/checkDateIsPast'
+import checkDateNotExist from '../brackets-matches/add-matches/errors/checkDateNotExist'
+import checkDateNotValid from '../brackets-matches/add-matches/errors/checkDateNotValid'
+
 const handleAddMatchErrors = ({
   setCustomError,
   selectedGroup,
@@ -12,6 +16,8 @@ const handleAddMatchErrors = ({
   const selectATimeError = 'Please select a time'
   const selectALocationError = 'Please select a location'
   const matchAlreadyExist = 'Match with these teams already exists. Do you want to add this match anyway?'
+  const invalidDateFormaterror = 'Invalid date format'
+  const dateIsPastError = 'Date cannot be in the past'
 
   if (selectedGroup === null) {
     setCustomError(selectAGroupError)
@@ -23,8 +29,20 @@ const handleAddMatchErrors = ({
     return true
   }
 
-  if (locationAndDateformData.date === '') {
+  const today = new Date()
+  const date = new Date(locationAndDateformData.date)
+  if (checkDateNotExist(locationAndDateformData.date)) {
     setCustomError(selectADateError)
+    return true
+  }
+
+  if (checkDateNotValid(date)) {
+    setCustomError(invalidDateFormaterror)
+    return true
+  }
+
+  if (checkDateIsPast(date, today)) {
+    setCustomError(dateIsPastError)
     return true
   }
 
@@ -40,7 +58,7 @@ const handleAddMatchErrors = ({
 
   const checkIfMatchExist = selectedGroupStage?.Matches?.some(match =>
     (match.localTeamId === localTeam.teamId && match.visitorTeamId === visitorTeam.teamId) ||
-      (match.localTeamId === visitorTeam.teamId && match.visitorTeamId === localTeam.teamId)
+    (match.localTeamId === visitorTeam.teamId && match.visitorTeamId === localTeam.teamId)
   )
 
   if (checkIfMatchExist) {

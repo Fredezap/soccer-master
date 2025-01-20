@@ -15,7 +15,7 @@ const Header = () => {
       <div className="container">
         <div className="d-flex align-items-center">
           <div className="site-logo">
-            <a href={ROUTES.HOME}>
+            <a href={ROUTES.MAIN}>
               <img src="images/logo.png" alt="Logo" />
             </a>
           </div>

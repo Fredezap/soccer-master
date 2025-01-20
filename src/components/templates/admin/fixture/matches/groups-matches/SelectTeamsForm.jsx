@@ -1,22 +1,47 @@
+import { useEffect, useState } from 'react'
+
 const SelectTeamsForm = ({
   selectedGroup,
   dbGroups,
   showGroupMatchesDetail,
   handleGroupChange,
-  teamChange
+  teamChange,
+  localTeam,
+  visitorTeam
 }) => {
+  const [localTeamValue, setLocalTeamValue] = useState('')
+  const [visitorTeamValue, setVisitorTeamValue] = useState('')
+  console.log('SELECTED: ', selectedGroup)
+  useEffect(() => {
+    if (localTeam) {
+      setLocalTeamValue(localTeam.teamId.toString())
+    }
+    if (visitorTeam) {
+      setVisitorTeamValue(visitorTeam.teamId.toString())
+    }
+  }, [localTeam, visitorTeam])
+
   return (
     <div className="group-match">
-      <select className="group-select" onChange={handleGroupChange}>
-        <option value="">Select a group</option>
+      <select
+        className="group-select"
+        value={selectedGroup || ''}
+        onChange={handleGroupChange}
+      >
+        <option value="" disabled>Select a group</option>
         {dbGroups[showGroupMatchesDetail]?.groups?.map(group => (
-          <option key={group.groupId} value={group.groupId}>{group.name}</option>
+          <option key={group.groupId} value={group.groupId}>
+            {group.name}
+          </option>
         ))}
       </select>
+
       {selectedGroup && (
         <div className="select-team-vs">
+          {/* Selección del equipo local */}
           <select
             className="group-select"
+            value={localTeamValue || ''}
             onChange={(event) => teamChange({ teamType: 'local', event })}
           >
             <option value="">Select a team</option>
@@ -24,9 +49,13 @@ const SelectTeamsForm = ({
               <option key={team.teamId} value={team.teamId}>{team.name}</option>
             ))}
           </select>
+
           <p>VS</p>
+
+          {/* Selección del equipo visitante */}
           <select
             className="group-select"
+            value={visitorTeamValue || ''}
             onChange={(event) => teamChange({ teamType: 'visitor', event })}
           >
             <option value="">Select a team</option>

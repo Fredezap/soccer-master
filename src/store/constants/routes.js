@@ -1,8 +1,8 @@
 const ROUTES = {
   BLOG: '/blog',
   CONTACT: '/contact',
-  MAIN: '/main',
-  HOME: '/',
+  MAIN: '/',
+  HOME: '/home',
   MATCHES: '/matches',
   PLAYERS: '/players',
   SINGLE: '/single',
