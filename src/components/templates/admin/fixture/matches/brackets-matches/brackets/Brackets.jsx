@@ -40,8 +40,7 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
   }
 
   const CustomSeed = ({ seed, breakpoint, roundIndex }) => {
-    const { matchNumber, date, teams } = seed.seed
-
+    const { matchNumber, date, teams, match } = seed.seed
     return (
       <Seed mobileBreakpoint={breakpoint} style={{ fontSize: 12 }}>
         <SeedItem>
@@ -49,11 +48,29 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
             <div style={{ fontWeight: 'bold', color: 'white', marginBottom: '0px', backgroundColor: 'gray' }}>
               Match {matchNumber}
             </div>
-            <SeedTeam>
-              {teams[0]?.name || 'NO TEAM'}
+            <SeedTeam className="seed-team">
+              <span>{teams[0]?.name || 'NO TEAM'}</span>
+              <span>
+                {match.localTeamScore ? match.localTeamScore : match.localTeamScore === 0 ? '0' : '(-)'}
+                {' '}
+                {match.localTeamPenaltyScore !== null && match.localTeamPenaltyScore !== undefined
+                  ? `(${match.localTeamPenaltyScore})`
+                  : match.localTeamPenaltyScore === 0
+                    ? '(0)'
+                    : null}
+              </span>
             </SeedTeam>
-            <SeedTeam>
-              {teams[1]?.name || 'NO TEAM'}
+            <SeedTeam className="seed-team">
+              <span>{teams[1]?.name || 'NO TEAM'}</span>
+              <span>
+                {match.visitorTeamScore ? match.visitorTeamScore : match.visitorTeamScore === 0 ? '0' : '(-)'}
+                {' '}
+                {match.visitorTeamPenaltyScore !== null && match.visitorTeamPenaltyScore !== undefined
+                  ? `(${match.visitorTeamPenaltyScore})`
+                  : match.visitorTeamPenaltyScore === 0
+                    ? '(0)'
+                    : null}
+              </span>
             </SeedTeam>
           </div>
         </SeedItem>

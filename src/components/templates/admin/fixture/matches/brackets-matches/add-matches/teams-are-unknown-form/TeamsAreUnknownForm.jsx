@@ -11,7 +11,7 @@ const TeamsAreUnknownForm = ({
         <input
           name="localTeam"
           type="text"
-          placeholder="e.g. Winner match A"
+          placeholder="e.g. Winner match 1"
           value={localTeamPlaceholder}
           onChange={(e) => setLocalTeamPlaceholder(e.target.value)}
         />
@@ -19,7 +19,7 @@ const TeamsAreUnknownForm = ({
         <input
           name="visitorTeam"
           type="text"
-          placeholder="e.g. Winner match B"
+          placeholder="e.g. Winner match 2"
           value={visitorTeamPlaceholder}
           onChange={(e) => setVisitorTeamPlaceholder(e.target.value)}
         />

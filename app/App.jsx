@@ -4,7 +4,7 @@ import ROUTES from '../src/store/constants/routes.js'
 import Single from '../src/components/templates/Single.jsx'
 import Players from '../src/components/templates/players/Players.jsx'
 import Matches from '../src/components/templates/matches/Matches.jsx'
-import Main from '../src/components/templates/Main.jsx'
+import Main from '../src/components/templates/main/Main.jsx'
 import Contact from '../src/components/templates/contact/Contact.jsx'
 import BlogPage from '../src/components/templates/blog/BlogPage.jsx'
 import main from '../src/js/main/main.js'
@@ -27,6 +27,11 @@ import FixtureMain from '../src/components/templates/admin/fixture/main/FixtureM
 import LoginForm from '../src/components/templates/users/login/LoginForm.jsx'
 import RegisterForm from '../src/components/templates/users/register/RegisterForm.jsx'
 import TournamentDetailsMain from '../src/components/templates/admin/tournament-details/TournamentDetailsMain.jsx'
+import { useTournamentsDetails } from '../src/store/slices/useTournamentsDetails.js'
+import formatDate from '../src/components/common/formatDate.js'
+import { useMessageStore } from '../src/store/slices/useMessageStore.js'
+import { useSubmittingFormStore } from '../src/store/slices/useSubmittingFormStore.js'
+import handleSubmitFormAdmin from '../src/components/templates/admin/handleSubmitFormAdmin.js'
 window.jQuery = $
 window.$ = $
 
@@ -36,18 +41,36 @@ function AppContent() {
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
   useCheckPath({ currentPath, setCurrent, navigate })
-
-  useEffect(() => {
-    main()
-    Fancybox.bind('[data-fancybox]')
-    return siteSticky()
-  }, [])
+  const { currentTournament, tournaments, setTournaments, setCurrentTournament } = useTournamentsDetails()
 
   // TODO: VER PARTE USUARIOS. Ir mostrando datos y demas
   // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
   // TODO: DESPUES. Ver de sacar el boton admin, si no esta logueado
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
   // TODO: DESPUES. Ver si se pueden meter mas validaciones a los partidos de eliminacion
+
+  const { addMessage } = useMessageStore()
+  const { setSubmittingForm } = useSubmittingFormStore()
+
+  useEffect(() => {
+    getTournaments()
+  }, [])
+
+  const getTournaments = async() => {
+    const url = 'admin/tournament-details/get-all'
+    const httpMethod = 'post'
+    const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
+    if (response?.success) {
+      setTournaments(response.data?.allTournaments)
+    }
+  }
+
+  useEffect(() => {
+    if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN)
+    main(currentTournament)
+    Fancybox.bind('[data-fancybox]')
+    return siteSticky()
+  }, [currentTournament])
 
   return (
     <>
@@ -74,11 +97,12 @@ function AppContent() {
 }
 
 function App() {
+  const { currentTournament } = useTournamentsDetails()
   return (
     <div className="site-wrap">
       <MessageManager />
       <MobileMenu />
-      <Header />
+      {Object.entries(currentTournament).length !== 0 && (<Header />)}
       <Router
         future={{
           v7_startTransition: true,

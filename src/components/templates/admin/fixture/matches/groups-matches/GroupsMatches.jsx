@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import SelectTeamsForm from './SelectTeamsForm'
-import ChooseDateAndLocationForm from './ChooseDateAndLocationForm'
 import CreateMatchModal from './modals/CreateMatchModal'
 import { useStagesStore } from '../../../../../../store/slices/useStagesStore.js'
 import groupMatchesByDate from './groupMatchesByDate.js'
@@ -9,6 +7,10 @@ import checkNoSameTeams from './checkNoSameTeams.js'
 import handleAddMatchErrors from './handleAddMatchErrors.js'
 import handleTeamChange from './handleTeamChenge.js'
 import MatchesByDate from './MatchesByDate.jsx'
+import AddGroupMatchesForm from './AddGroupMatchesForm.jsx'
+import DeleteGroupMatchModal from './modals/DeleteGroupMatchModal.jsx'
+import EditGroupMatchModal from './modals/EditGroupMatchModal.jsx'
+import formatDate from '../../../../../common/formatDate.js'
 
 const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const { stages } = useStagesStore()
@@ -22,6 +24,10 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
   const [showCreateMatchModal, setShowCreateMatchModal] = useState(false)
   const groupedMatches = groupMatchesByDate(selectedGroupStage?.Matches || [])
+  const [showDeleteGroupMatchModal, setShowDeleteGroupMatchModal] = useState(false)
+  const [showEditGroupMatchModal, setShowEditGroupMatchModal] = useState(false)
+  const [match, setMatch] = useState(null)
+  const [formAction, setFormAction] = useState(null)
 
   const handleShowGroupMatchesDetail = (stageGroups) => {
     setShowSelectGroup(false)
@@ -53,12 +59,14 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setSelectedGroup(null)
     setLocalTeam(null)
     setVisitorTeam(null)
+    setLocationAndDateformData({ date: '', time: '', location: '' })
+    setFormAction('create')
     setShowSelectGroup(!showSelectGroup)
   }
 
   useEffect(() => {
     checkNoSameTeams({ localTeam, visitorTeam, setCustomError })
-  }, [localTeam, visitorTeam])
+  }, [localTeam, visitorTeam, locationAndDateformData.date, locationAndDateformData.time, locationAndDateformData.location])
 
   useEffect(() => {
     if (selectedGroupStage) {
@@ -69,7 +77,8 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     }
   }, [stages])
 
-  const handleShowCreateMatchModal = () => {
+  const handleConfirmGroupMatch = async(action) => {
+    console.log(action)
     const checkErrors = handleAddMatchErrors({
       setCustomError,
       selectedGroup,
@@ -78,8 +87,28 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
       locationAndDateformData,
       selectedGroupStage
     })
+
     if (checkErrors) return
-    setShowCreateMatchModal(true)
+
+    if (action === 'edit') {
+      console.log('LLEGO A EDIT')
+
+      // if (!matchId) {
+      //   setCustomError('Match not found')
+      //   return
+      // }
+
+      // const values = { matchId }
+      // const successResponse = 'Team has been deleted'
+      // const url = '/admin/fixture/matches/delete'
+      // const httpMethod = 'post'
+      // const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+      // if (response.success) {
+      //   setShowEditGroupMatchModal(false)
+      //   getStages()
+      // }
+    }
+    if (action === 'create') console.log('LLEGO A CREATE')
   }
 
   const teamChange = ({ event, teamType }) => {
@@ -94,13 +123,63 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
       setCustomError
     })
   }
+  // todo: mejorar visual formulario edicion. Ver de hacer lo mismo que con el de knockout
+  // todo: Cheuquear la edicion, creacion y eliminacion de partidos de fase de grupos
+  // todo: probar tambien si no hay conflicto con los de knockout
+  // todo: ver que ningun dato se cruce con otro torneo
+  const handleShowModal = (match, action) => {
+    setCustomError(null)
+    console.log(match)
+    setMatch(match)
+    if (action === 'delete') setShowDeleteGroupMatchModal(true)
+    if (action === 'edit') {
+      const getMatchGroup = (match) => {
+        if (!match || !match.LocalTeam || !match.VisitorTeam) return null
+
+        const localGroups = match.LocalTeam.Groups || []
+        const visitorGroups = match.VisitorTeam.Groups || []
+
+        // Filtrar grupos que coincidan con el stageId del partido
+        const stageId = match.stageId
+
+        const localStageGroups = localGroups.filter(group => group.stageId === stageId)
+        const visitorStageGroups = visitorGroups.filter(group => group.stageId === stageId)
+
+        // Encontrar un grupo común entre LocalTeam y VisitorTeam
+        const commonGroup = localStageGroups.find(localGroup =>
+          visitorStageGroups.some(visitorGroup => visitorGroup.groupId === localGroup.groupId)
+        )
+
+        return commonGroup || null // Devuelve el grupo común o null si no existe
+      }
+      const foundedGroup = getMatchGroup(match)
+      const groupId = foundedGroup.groupId
+      const group = dbGroups[showGroupMatchesDetail]?.groups?.find(
+        (g) => g.groupId === parseInt(groupId)
+      )
+      console.log(group)
+      setSelectedGroup(group || null)
+
+      const handleGroupChange = (event) => {
+
+      }
+
+      setShowSelectGroup(false)
+      setLocalTeam(match?.LocalTeam || null)
+      setVisitorTeam(match?.VisitorTeam || null)
+      const date = formatDate(match?.date).dashDate
+      setLocationAndDateformData({ date: date || null, time: match?.time || null, location: match?.location || null })
+      setFormAction(action)
+      setShowEditGroupMatchModal(true)
+    }
+  }
 
   return (
     <div style={{ marginTop: '50px' }}>
+      <h4 style={{ textAlign: 'center' }}>GROUPS</h4>
       {stages?.filter((stage) => stage.type === 'group')?.length > 0
         ? (
           <div className="group-component">
-            <h4>GROUPS</h4>
             <div className="group-matches">
               {stages
                 .filter((stage) => stage.type === 'group')
@@ -120,7 +199,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                               selectedGroupStage={selectedGroupStage}
                               groupedMatches={groupedMatches}
                               getStages={getStages}
-                              getGroups={getGroups}
+                              handleShowModal={handleShowModal}
                             />
                             <Button
                               onClick={() => handleShowSelectGroup()}
@@ -136,42 +215,19 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                                   <p>Please add groups before adding matches</p>
                                 )
                                 : (
-                                  <div>
-                                    <SelectTeamsForm
-                                      selectedGroup={selectedGroup}
-                                      dbGroups={dbGroups}
-                                      showGroupMatchesDetail={
-                                        showGroupMatchesDetail
-                                      }
-                                      handleGroupChange={handleGroupChange}
-                                      teamChange={teamChange}
-                                    />
-                                    <ChooseDateAndLocationForm
-                                      locationAndDateformData={
-                                        locationAndDateformData
-                                      }
-                                      setLocationAndDateformData={
-                                        setLocationAndDateformData
-                                      }
-                                      setCustomError={setCustomError}
-                                    />
-                                    <div className="confirm-button">
-                                      <Button
-                                        disabled={customError}
-                                        onClick={() =>
-                                          handleShowCreateMatchModal()
-                                        }
-                                        variant="outline-success"
-                                      >
-                                      Confirm
-                                      </Button>
-                                      {customError && (
-                                        <p className="form-message error-message">
-                                          {customError}
-                                        </p>
-                                      )}
-                                    </div>
-                                  </div>
+                                  <AddGroupMatchesForm
+                                    selectedGroup={selectedGroup}
+                                    dbGroups={dbGroups}
+                                    showGroupMatchesDetail={showGroupMatchesDetail}
+                                    handleGroupChange={handleGroupChange}
+                                    teamChange={teamChange}
+                                    locationAndDateformData={locationAndDateformData}
+                                    setLocationAndDateformData={setLocationAndDateformData}
+                                    setCustomError={setCustomError}
+                                    customError={customError}
+                                    handleConfirmGroupMatch={handleConfirmGroupMatch}
+                                    formAction={formAction}
+                                  />
                                 ))}
                             </div>
                           </div>
@@ -184,7 +240,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           </div>
         )
         : (
-          <p>No group stages added yet</p>
+          <p style={{ textAlign: 'center' }}>Please add group stages before adding matches</p>
         )}
       {showCreateMatchModal && (
         <CreateMatchModal
@@ -199,6 +255,33 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           setCustomError={setCustomError}
           locationAndDateformData={locationAndDateformData}
           getStages={getStages}
+        />
+      )}
+      {showDeleteGroupMatchModal && (
+        <DeleteGroupMatchModal
+          showDeleteGroupMatchModal={showDeleteGroupMatchModal}
+          setShowDeleteGroupMatchModal={setShowDeleteGroupMatchModal}
+          match={match}
+          getStages={getStages}
+        />
+      )}
+      {showEditGroupMatchModal && (
+        <EditGroupMatchModal
+          showEditGroupMatchModal={showEditGroupMatchModal}
+          setShowEditGroupMatchModal={setShowEditGroupMatchModal}
+          selectedGroup={selectedGroup}
+          dbGroups={dbGroups}
+          showGroupMatchesDetail={showGroupMatchesDetail}
+          handleGroupChange={handleGroupChange}
+          teamChange={teamChange}
+          locationAndDateformData={locationAndDateformData}
+          setLocationAndDateformData={setLocationAndDateformData}
+          setCustomError={setCustomError}
+          customError={customError}
+          handleConfirmGroupMatch={handleConfirmGroupMatch}
+          formAction={formAction}
+          localTeam={localTeam}
+          visitorTeam={visitorTeam}
         />
       )}
     </div>

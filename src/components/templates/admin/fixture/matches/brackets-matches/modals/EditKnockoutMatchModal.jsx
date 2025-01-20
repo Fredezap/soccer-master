@@ -27,20 +27,30 @@ const EditKnockoutMatchModal = ({
   const [visitorTeam, setVisitorTeam] = useState(null)
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
   const [visitorTeamPlaceholder, setVisitorTeamPlaceholder] = useState(null)
-  const [matchResult, setMatchResult] = useState({ localTeamScore: null, visitorTeamScore: null })
+  const [matchResult, setMatchResult] = useState({
+    localTeamScore: null,
+    visitorTeamScore: null,
+    localTeamPenaltyScore: null,
+    visitorTeamPenaltyScore: null
+  })
   const TEAM_STATUS = { UNDEFINED: 'undefined', KNOWN: 'known', UNKNOWN: 'unknown' }
   const [teamStatus, setTeamStatus] = useState(TEAM_STATUS.UNDEFINED)
 
   useEffect(() => {
     setCustomError(null)
   }, [localTeam, visitorTeam])
-
+  console.log(match)
   useEffect(() => {
     setTeamStatus(match?.localTeam !== null && match.visitorTeam !== null ? TEAM_STATUS.KNOWN : TEAM_STATUS.UNKNOWN)
     setLocalTeam(match?.localTeam || null)
     setVisitorTeam(match?.visitorTeam || null)
     setLocationAndDateformData({ date: formatDate(match?.date).dashDate || '', time: match?.time || '', location: match?.location || '' })
-    setMatchResult({ localTeamScore: match?.localTeamScore, visitorTeamScore: match?.visitorTeamScore })
+    setMatchResult({
+      localTeamScore: match?.localTeamScore,
+      visitorTeamScore: match?.visitorTeamScore,
+      localTeamPenaltyScore: match?.localTeamPenaltyScore,
+      visitorTeamPenaltyScore: match?.visitorTeamPenaltyScore
+    })
     setLocalTeamPlaceholder(match?.localTeamPlaceholder)
     setVisitorTeamPlaceholder(match?.visitorTeamPlaceholder)
     setSelectedStage(match?.stage?.stageId)
@@ -64,14 +74,16 @@ const EditKnockoutMatchModal = ({
 
     const values = {
       matchId: match?.matchId,
-      date: locationAndDateformData.date,
-      time: locationAndDateformData.time,
       stageId: selectedStage,
-      location: locationAndDateformData.location,
+      date: locationAndDateformData?.date,
+      time: locationAndDateformData?.time,
+      location: locationAndDateformData?.location,
       localTeamId: localTeam?.teamId,
       visitorTeamId: visitorTeam?.teamId,
-      localTeamScore: matchResult.localTeamScore,
-      visitorTeamScore: matchResult.visitorTeamScore
+      localTeamScore: matchResult?.localTeamScore,
+      visitorTeamScore: matchResult?.visitorTeamScore,
+      localTeamPenaltyScore: matchResult?.localTeamPenaltyScore,
+      visitorTeamPenaltyScore: matchResult?.visitorTeamPenaltyScore
     }
 
     let url
@@ -95,7 +107,7 @@ const EditKnockoutMatchModal = ({
   return (
     <Modal
       className="custom-modal"
-      size="l"
+      size="xl"
       show={showModalEdit}
       onHide={() => setShowModalEdit(false)}
     >
