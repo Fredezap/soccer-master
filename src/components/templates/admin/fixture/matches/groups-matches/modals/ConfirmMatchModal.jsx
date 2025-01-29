@@ -3,22 +3,24 @@ import { useMessageStore } from '../../../../../../../store/slices/useMessageSto
 import { useSubmittingFormStore } from '../../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../../handleSubmitFormAdmin'
 
-const CreateMatchModal = ({
+const ConfirmMatchModal = ({
   selectedGroup,
   getGroups,
   localTeam,
   visitorTeam,
-  showCreateMatchModal,
-  setShowCreateMatchModal,
+  showConfirmMatchModal,
+  setShowConfirmMatchModal,
   customError,
   setCustomError,
   locationAndDateformData,
-  getStages
+  getStages,
+  formAction,
+  match,
+  matchResult
 }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
-
-  const handleCreateMatch = async() => {
+  const handleConfirmMatch = async() => {
     const values = {
       groupId: selectedGroup?.groupId,
       localTeamId: localTeam?.teamId,
@@ -26,43 +28,63 @@ const CreateMatchModal = ({
       date: locationAndDateformData?.date,
       time: locationAndDateformData.time,
       location: locationAndDateformData?.location,
-      stageId: selectedGroup?.Stage?.stageId
+      stageId: selectedGroup?.Stage?.stageId,
+      localTeamScore: matchResult.localTeamScore,
+      visitorTeamScore: matchResult.visitorTeamScore,
+      localTeamPenaltyScore: matchResult.localTeamPenaltyScore,
+      visitorTeamPenaltyScore: matchResult.visitorTeamPenaltyScore,
+      matchId: match.matchId
     }
 
-    const successResponse = 'Match has been created'
-    const url = '/admin/fixture/matches/create-group-match'
-    const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    setShowCreateMatchModal(false)
-    if (response?.success) {
-      getGroups()
-      getStages()
+    if (formAction === 'create') {
+      const successResponse = 'Match has been created'
+      const url = '/admin/fixture/matches/create-group-match'
+      const httpMethod = 'post'
+      const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+      setShowConfirmMatchModal(false)
+      if (response?.success) {
+        getGroups()
+        getStages()
+      }
+      setCustomError(null)
     }
-    setCustomError(null)
+
+    if (formAction === 'edit') {
+      const successResponse = 'Match has been edited'
+      const url = '/admin/fixture/matches/edit-group-match'
+      const httpMethod = 'post'
+      const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+      setShowConfirmMatchModal(false)
+      if (response?.success) {
+        getGroups()
+        getStages()
+      }
+      setCustomError(null)
+    }
   }
 
   const handleCloseModal = () => {
     setCustomError(null)
-    setShowCreateMatchModal(false)
+    setShowConfirmMatchModal(false)
   }
 
   return (
     <Modal
       className="custom-modal"
       size="l"
-      show={showCreateMatchModal}
+      show={showConfirmMatchModal}
       onHide={() => handleCloseModal()}
     >
       <Modal.Header closeButton>
         <Modal.Title>
-          <h2>Create match</h2>
+          <h2>Confirm match</h2>
         </Modal.Title>
       </Modal.Header>
 
       <Modal.Body className="modal-succes-body">
         <div className="modal-box">
           <h5 style={{ marginBottom: '-20px' }}>{selectedGroup?.name}</h5>
-          <p>Are you sure you want to create this match?</p>
+          <p>Are you sure you want to {formAction} this match?</p>
           <div className="team-vs-team">
             <p>{localTeam?.name}</p>
             <p style={{ fontWeight: 'bold' }}>VS</p>
@@ -74,9 +96,9 @@ const CreateMatchModal = ({
           <Button
             disabled={submittingForm}
             variant="outline-info"
-            onClick={handleCreateMatch}
+            onClick={handleConfirmMatch}
           >
-            Create match
+            {formAction} match
           </Button>
         </div>
       </Modal.Body>
@@ -90,4 +112,4 @@ const CreateMatchModal = ({
   )
 }
 
-export default CreateMatchModal
+export default ConfirmMatchModal

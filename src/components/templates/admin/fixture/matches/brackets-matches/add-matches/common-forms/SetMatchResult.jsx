@@ -3,7 +3,7 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
     const { name, value } = e.target
     setMatchResult({
       ...matchResult,
-      [name]: parseInt(value) || value
+      [name]: parseInt(value) || null
     })
   }
 

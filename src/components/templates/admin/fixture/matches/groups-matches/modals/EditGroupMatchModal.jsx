@@ -16,7 +16,9 @@ const EditGroupMatchModal = ({
   handleConfirmGroupMatch,
   formAction,
   localTeam,
-  visitorTeam
+  visitorTeam,
+  matchResult,
+  setMatchResult
 }) => {
   return (
     <Modal
@@ -47,6 +49,8 @@ const EditGroupMatchModal = ({
             formAction={formAction}
             localTeam={localTeam}
             visitorTeam={visitorTeam}
+            matchResult={matchResult}
+            setMatchResult={setMatchResult}
           />
         </div>
       </Modal.Body>

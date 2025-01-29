@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import BracketKnokoutMatches from '../brackets-matches/main/BracketKnokoutMatches'
 import GroupsMatches from '../groups-matches/GroupsMatches'
-import handleGetData from '../../../handleGetData'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
@@ -43,7 +42,6 @@ const MatchesMain = ({ getStages }) => {
     const url = '/admin/fixture/matches/get-all'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    console.log('MATCHES: ', response)
     if (response?.success) {
       setDbMatches(response.data.dbMatches)
     }
@@ -51,12 +49,13 @@ const MatchesMain = ({ getStages }) => {
 
   const navigate = useNavigate()
 
-  const getTeams = async(values) => {
-    const url = '/admin/teams/get-all'
+  const getTeams = async() => {
+    const values = { tournamentId: currentTournament.tournamentId }
+    const url = '/admin/teams/get-by-tournament'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
     if (response?.success) {
-      setDbTeams(response.data.dbTeams)
+      setDbTeams(response.data?.tournament?.Teams)
     }
   }
 

@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
-import CreateMatchModal from './modals/CreateMatchModal'
 import { useStagesStore } from '../../../../../../store/slices/useStagesStore.js'
 import groupMatchesByDate from './groupMatchesByDate.js'
 import checkNoSameTeams from './checkNoSameTeams.js'
@@ -11,6 +10,7 @@ import AddGroupMatchesForm from './AddGroupMatchesForm.jsx'
 import DeleteGroupMatchModal from './modals/DeleteGroupMatchModal.jsx'
 import EditGroupMatchModal from './modals/EditGroupMatchModal.jsx'
 import formatDate from '../../../../../common/formatDate.js'
+import ConfirmMatchModal from './modals/ConfirmMatchModal.jsx'
 
 const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const { stages } = useStagesStore()
@@ -22,12 +22,18 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const [showSelectGroup, setShowSelectGroup] = useState(false)
   const [customError, setCustomError] = useState(null)
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
-  const [showCreateMatchModal, setShowCreateMatchModal] = useState(false)
+  const [showConfirmMatchModal, setShowConfirmMatchModal] = useState(false)
   const groupedMatches = groupMatchesByDate(selectedGroupStage?.Matches || [])
   const [showDeleteGroupMatchModal, setShowDeleteGroupMatchModal] = useState(false)
   const [showEditGroupMatchModal, setShowEditGroupMatchModal] = useState(false)
   const [match, setMatch] = useState(null)
   const [formAction, setFormAction] = useState(null)
+  const [matchResult, setMatchResult] = useState({
+    localTeamScore: null,
+    visitorTeamScore: null,
+    localTeamPenaltyScore: null,
+    visitorTeamPenaltyScore: null
+  })
 
   const handleShowGroupMatchesDetail = (stageGroups) => {
     setShowSelectGroup(false)
@@ -55,18 +61,18 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setVisitorTeam(null)
   }
 
-  const handleShowSelectGroup = () => {
+  const handleShowSelectGroup = (action) => {
     setSelectedGroup(null)
     setLocalTeam(null)
     setVisitorTeam(null)
     setLocationAndDateformData({ date: '', time: '', location: '' })
-    setFormAction('create')
+    setFormAction(action)
     setShowSelectGroup(!showSelectGroup)
   }
 
   useEffect(() => {
     checkNoSameTeams({ localTeam, visitorTeam, setCustomError })
-  }, [localTeam, visitorTeam, locationAndDateformData.date, locationAndDateformData.time, locationAndDateformData.location])
+  }, [localTeam, visitorTeam])
 
   useEffect(() => {
     if (selectedGroupStage) {
@@ -77,8 +83,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     }
   }, [stages])
 
-  const handleConfirmGroupMatch = async(action) => {
-    console.log(action)
+  const handleConfirmGroupMatch = async(formAction) => {
     const checkErrors = handleAddMatchErrors({
       setCustomError,
       selectedGroup,
@@ -90,25 +95,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
 
     if (checkErrors) return
 
-    if (action === 'edit') {
-      console.log('LLEGO A EDIT')
-
-      // if (!matchId) {
-      //   setCustomError('Match not found')
-      //   return
-      // }
-
-      // const values = { matchId }
-      // const successResponse = 'Team has been deleted'
-      // const url = '/admin/fixture/matches/delete'
-      // const httpMethod = 'post'
-      // const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-      // if (response.success) {
-      //   setShowEditGroupMatchModal(false)
-      //   getStages()
-      // }
-    }
-    if (action === 'create') console.log('LLEGO A CREATE')
+    setShowConfirmMatchModal(true)
   }
 
   const teamChange = ({ event, teamType }) => {
@@ -123,13 +110,9 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
       setCustomError
     })
   }
-  // todo: mejorar visual formulario edicion. Ver de hacer lo mismo que con el de knockout
-  // todo: Cheuquear la edicion, creacion y eliminacion de partidos de fase de grupos
-  // todo: probar tambien si no hay conflicto con los de knockout
-  // todo: ver que ningun dato se cruce con otro torneo
+
   const handleShowModal = (match, action) => {
     setCustomError(null)
-    console.log(match)
     setMatch(match)
     if (action === 'delete') setShowDeleteGroupMatchModal(true)
     if (action === 'edit') {
@@ -152,18 +135,14 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
 
         return commonGroup || null // Devuelve el grupo común o null si no existe
       }
+
       const foundedGroup = getMatchGroup(match)
-      const groupId = foundedGroup.groupId
+      const groupId = foundedGroup?.groupId
       const group = dbGroups[showGroupMatchesDetail]?.groups?.find(
         (g) => g.groupId === parseInt(groupId)
       )
-      console.log(group)
+
       setSelectedGroup(group || null)
-
-      const handleGroupChange = (event) => {
-
-      }
-
       setShowSelectGroup(false)
       setLocalTeam(match?.LocalTeam || null)
       setVisitorTeam(match?.VisitorTeam || null)
@@ -172,6 +151,13 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
       setFormAction(action)
       setShowEditGroupMatchModal(true)
     }
+
+    setMatchResult({
+      localTeamScore: match?.localTeamScore,
+      visitorTeamScore: match?.visitorTeamScore,
+      localTeamPenaltyScore: match?.localTeamPenaltyScore,
+      visitorTeamPenaltyScore: match?.visitorTeamPenaltyScore
+    })
   }
 
   return (
@@ -202,7 +188,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                               handleShowModal={handleShowModal}
                             />
                             <Button
-                              onClick={() => handleShowSelectGroup()}
+                              onClick={() => handleShowSelectGroup('create')}
                               variant="outline-warning"
                             >
                             Add match
@@ -227,6 +213,8 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                                     customError={customError}
                                     handleConfirmGroupMatch={handleConfirmGroupMatch}
                                     formAction={formAction}
+                                    localTeam={localTeam}
+                                    visitorTeam={visitorTeam}
                                   />
                                 ))}
                             </div>
@@ -242,19 +230,22 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
         : (
           <p style={{ textAlign: 'center' }}>Please add group stages before adding matches</p>
         )}
-      {showCreateMatchModal && (
-        <CreateMatchModal
+      {setShowConfirmMatchModal && (
+        <ConfirmMatchModal
           selectedGroup={selectedGroup}
           getGroups={getGroups}
           localTeam={localTeam}
           visitorTeam={visitorTeam}
-          showCreateMatchModal={showCreateMatchModal}
-          setShowCreateMatchModal={setShowCreateMatchModal}
+          showConfirmMatchModal={showConfirmMatchModal}
+          setShowConfirmMatchModal={setShowConfirmMatchModal}
           handleAddMatchErrors={handleAddMatchErrors}
           customError={customError}
           setCustomError={setCustomError}
           locationAndDateformData={locationAndDateformData}
           getStages={getStages}
+          formAction={formAction}
+          match={match}
+          matchResult={matchResult}
         />
       )}
       {showDeleteGroupMatchModal && (
@@ -282,6 +273,8 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           formAction={formAction}
           localTeam={localTeam}
           visitorTeam={visitorTeam}
+          matchResult={matchResult}
+          setMatchResult={setMatchResult}
         />
       )}
     </div>
