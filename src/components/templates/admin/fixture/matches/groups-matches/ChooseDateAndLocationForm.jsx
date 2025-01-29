@@ -44,7 +44,6 @@ const ChooseDateAndLocationForm = ({ locationAndDateformData, setLocationAndDate
         error = 'Location must be at least 3 characters long'
       }
     }
-
     setCustomError(error)
   }
 

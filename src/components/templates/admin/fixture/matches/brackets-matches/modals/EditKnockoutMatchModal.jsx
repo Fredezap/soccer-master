@@ -39,7 +39,7 @@ const EditKnockoutMatchModal = ({
   useEffect(() => {
     setCustomError(null)
   }, [localTeam, visitorTeam])
-  console.log(match)
+
   useEffect(() => {
     setTeamStatus(match?.localTeam !== null && match.visitorTeam !== null ? TEAM_STATUS.KNOWN : TEAM_STATUS.UNKNOWN)
     setLocalTeam(match?.localTeam || null)

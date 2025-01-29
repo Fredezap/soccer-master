@@ -15,6 +15,7 @@ const handleAddMatchErrors = ({
   const selectADateError = 'Please select a date'
   const selectATimeError = 'Please select a time'
   const selectALocationError = 'Please select a location'
+  const invalidLocationLength = 'Location must be at least 3 characters long'
   const matchAlreadyExist = 'Match with these teams already exists. Do you want to add this match anyway?'
   const invalidDateFormaterror = 'Invalid date format'
   const dateIsPastError = 'Date cannot be in the past'
@@ -53,6 +54,11 @@ const handleAddMatchErrors = ({
 
   if (locationAndDateformData.location === '') {
     setCustomError(selectALocationError)
+    return true
+  }
+
+  if (locationAndDateformData.location.length < 3) {
+    setCustomError(invalidLocationLength)
     return true
   }
 

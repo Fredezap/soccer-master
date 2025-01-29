@@ -1,6 +1,7 @@
 import { Button } from 'react-bootstrap'
 import ChooseDateAndLocationForm from './ChooseDateAndLocationForm'
 import SelectTeamsForm from './SelectTeamsForm'
+import SetMatchResult from '../brackets-matches/add-matches/common-forms/SetMatchResult'
 
 const AddGroupMatchesForm = ({
   selectedGroup,
@@ -15,7 +16,9 @@ const AddGroupMatchesForm = ({
   handleConfirmGroupMatch,
   formAction,
   localTeam,
-  visitorTeam
+  visitorTeam,
+  matchResult,
+  setMatchResult
 }) => {
   return (
     <div>
@@ -29,14 +32,16 @@ const AddGroupMatchesForm = ({
         visitorTeam={visitorTeam}
       />
       <ChooseDateAndLocationForm
-        locationAndDateformData={
-          locationAndDateformData
-        }
-        setLocationAndDateformData={
-          setLocationAndDateformData
-        }
+        locationAndDateformData={locationAndDateformData}
+        setLocationAndDateformData={setLocationAndDateformData}
         setCustomError={setCustomError}
       />
+      {formAction === 'edit' && (
+        <SetMatchResult
+          matchResult={matchResult}
+          setMatchResult={setMatchResult}
+        />
+      )}
       <div className="confirm-button">
         <Button
           disabled={customError}
