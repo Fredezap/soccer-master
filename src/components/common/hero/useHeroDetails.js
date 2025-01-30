@@ -1,6 +1,6 @@
 const useHeroDetails = () => {
   const players = {
-    title: 'Players'
+    title: 'Teams'
   }
 
   const matches = {

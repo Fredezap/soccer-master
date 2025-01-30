@@ -13,8 +13,8 @@ const Matches = () => {
       <Hero title={matches.title} />
       <TeamScore />
       <MatchesGrid />
-      <Videos />
-      <Blog />
+      {/* <Videos /> */}
+      {/* <Blog /> */}
     </>
   )
 }

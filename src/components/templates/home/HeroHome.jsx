@@ -20,8 +20,8 @@ const HeroHome = () => {
             </div>
             <h5 id="date-countdown2"></h5>
             <p>
-              <a href="#" className="btn btn-primary py-3 px-4 mr-3">Book Ticket</a>
-              <a href="#" className="more light">Learn More</a>
+              {/* <a href="#" className="btn btn-primary py-3 px-4 mr-3">Book Ticket</a> */}
+              {/* <a href="#" className="more light">Learn More</a> */}
             </p>
           </div>
         </div>

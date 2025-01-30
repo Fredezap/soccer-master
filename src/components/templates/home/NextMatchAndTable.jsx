@@ -1,4 +1,4 @@
-import NextMatch from './NextMatch'
+import NextMatch from '../matches/NextMatch'
 import TableScores from './TableScores'
 
 const NextMatchAndTable = () => {

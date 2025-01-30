@@ -10,10 +10,10 @@ const Home = () => {
     <>
       <HeroHome />
       <TeamScore />
-      <News />
+      {/* <News /> */}
       <NextMatchAndTable />
-      <Videos />
-      <Blog />
+      {/* <Videos /> */}
+      {/* <Blog /> */}
     </>
   )
 }

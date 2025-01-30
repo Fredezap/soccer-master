@@ -2,7 +2,7 @@ import { Route, BrowserRouter as Router, Routes, useLocation, Navigate, useNavig
 import Home from '../src/components/templates/home/Home.jsx'
 import ROUTES from '../src/store/constants/routes.js'
 import Single from '../src/components/templates/Single.jsx'
-import Players from '../src/components/templates/players/Players.jsx'
+import Teams from '../src/components/templates/teams/Teams.jsx'
 import Matches from '../src/components/templates/matches/Matches.jsx'
 import Main from '../src/components/templates/main/Main.jsx'
 import Contact from '../src/components/templates/contact/Contact.jsx'
@@ -28,10 +28,11 @@ import LoginForm from '../src/components/templates/users/login/LoginForm.jsx'
 import RegisterForm from '../src/components/templates/users/register/RegisterForm.jsx'
 import TournamentDetailsMain from '../src/components/templates/admin/tournament-details/TournamentDetailsMain.jsx'
 import { useTournamentsDetails } from '../src/store/slices/useTournamentsDetails.js'
-import formatDate from '../src/components/common/formatDate.js'
 import { useMessageStore } from '../src/store/slices/useMessageStore.js'
 import { useSubmittingFormStore } from '../src/store/slices/useSubmittingFormStore.js'
 import handleSubmitFormAdmin from '../src/components/templates/admin/handleSubmitFormAdmin.js'
+import orderAllMatchesByDate from '../src/components/templates/matches/orderAllMatchesByDate.jsx'
+import { useOrderedMatches } from '../src/store/slices/useOrderedMatches.js'
 window.jQuery = $
 window.$ = $
 
@@ -41,13 +42,12 @@ function AppContent() {
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
   useCheckPath({ currentPath, setCurrent, navigate })
-  const { currentTournament, tournaments, setTournaments, setCurrentTournament } = useTournamentsDetails()
+  const { currentTournament, setTournaments } = useTournamentsDetails()
+  const { setMatchesByDate } = useOrderedMatches()
+  const { orderMatchesByDate } = orderAllMatchesByDate()
 
-  // TODO: VER PARTE USUARIOS. Ir mostrando datos y demas
   // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
-  // TODO: DESPUES. Ver de sacar el boton admin, si no esta logueado
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
-  // TODO: DESPUES. Ver si se pueden meter mas validaciones a los partidos de eliminacion
 
   const { addMessage } = useMessageStore()
   const { setSubmittingForm } = useSubmittingFormStore()
@@ -57,7 +57,7 @@ function AppContent() {
   }, [])
 
   const getTournaments = async() => {
-    const url = 'admin/tournament-details/get-all'
+    const url = '/tournaments/get-all'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
     if (response?.success) {
@@ -72,6 +72,28 @@ function AppContent() {
     return siteSticky()
   }, [currentTournament])
 
+  const orderMatchesAndSet = () => {
+    const orderedMatches = orderMatchesByDate()
+    setMatchesByDate(orderedMatches)
+  }
+
+  useEffect(() => {
+    orderMatchesAndSet() // Ejecutar al cargar
+
+    const interval = setInterval(orderMatchesAndSet, 5 * 60 * 1000) // Repetir cada 5 minutos
+
+    return () => clearInterval(interval) // Limpiar al desmontar
+  }, [currentTournament])
+
+  // todo: Pasar a seccion home, la parte de next match. Como lo voy a manejar a eso? Si no hay partidos u horarios?
+  // todo: El contador no anda. Mostrar datos del partido si los hubiera
+  // todo: Luego mostar tabla, quiza grupos en vez de una sola tabla.
+  // todo: Luego ver de mostrar las brackets en caso de que hayan datos.
+  // todo: A todo esto, deberia hacer un fetch de los datos de db cada unos 15 min? aprox?
+  // todo: Luego creo que pasar a matches y players seria la posta
+  // todo: seguir con contacto? creo que deiv queria dejar algo de eso. Inclusive si quieren agregar videos deberia mandarlos ahi.
+  // todo: Por ultimo las news, los videos, el blog y footer, ver que se hace con eso
+
   return (
     <>
       <Routes>
@@ -80,7 +102,7 @@ function AppContent() {
         <Route path={ROUTES.MAIN} element={<Main />} />
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.MATCHES} element={<Matches />} />
-        <Route path={ROUTES.PLAYERS} element={<Players />} />
+        <Route path={ROUTES.TEAMS} element={<Teams />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />
         <Route path={ROUTES.ADMIN.MAIN} element={<AdminMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN} element={<TournamentDetailsMain />} />
