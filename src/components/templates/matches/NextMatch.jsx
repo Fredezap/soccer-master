@@ -17,7 +17,7 @@ const NextMatch = () => {
     if (currentPath === '/home') return smallSizeClass
     return largeSizeClass
   }
-  console.log('M', matchesByDate)
+
   return (
     <div className={getNextMatchClass()}>
       <div className="widget-next-match">

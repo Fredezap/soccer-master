@@ -82,7 +82,6 @@ function AppContent() {
 
   const orderMatchesAndSet = () => {
     const orderedMatches = orderMatchesByDate()
-    console.log('ORDERD:', orderedMatches)
     setMatchesByDate(orderedMatches)
   }
 
