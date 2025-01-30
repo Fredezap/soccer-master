@@ -16,7 +16,7 @@ const TournamentList = () => {
 
   return (
     <div>
-      {tournaments.length < 0
+      {tournaments.length > 0
         ? (
           <div className="no-tournament-selected">
             <ListGroup>
