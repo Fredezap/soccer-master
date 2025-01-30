@@ -33,7 +33,7 @@ const ConfirmMatchModal = ({
       visitorTeamScore: matchResult.visitorTeamScore,
       localTeamPenaltyScore: matchResult.localTeamPenaltyScore,
       visitorTeamPenaltyScore: matchResult.visitorTeamPenaltyScore,
-      matchId: match.matchId
+      matchId: match?.matchId || null
     }
 
     if (formAction === 'create') {

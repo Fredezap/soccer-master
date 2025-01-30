@@ -10,6 +10,7 @@ const TournamentList = () => {
   const navigate = useNavigate()
 
   const handleSelectTournament = (tournament) => {
+    console.log('TORNEO: ', tournament)
     setCurrentTournament(tournament)
     navigate(ROUTES.HOME)
   }

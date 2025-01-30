@@ -83,7 +83,7 @@ const SetGroupsMain = () => {
   }
 
   return (
-    <div className="setting-groups-main">
+    <div className="bg-dark setting-groups-main">
       <SetGroupFormMain selectedStage={selectedStage} groupStages={groupStages} setSelectedStage={setSelectedStage} getData={getData} />
       <GroupsAndTeams handleAddTeamToGroup={handleAddTeamToGroup} dbGroups={dbGroups} getData={getData} />
       {showUpdateGroupTeamModal && (

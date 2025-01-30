@@ -937,7 +937,7 @@ h1, h2, h3, h4, h5,
   padding: 70px 0;
   font-size: 14px;
   color: rgba(255, 255, 255, 0.5);
-  background: #1a1e25; }
+}
   .footer-section .widget h3 {
     color: #fff;
     font-size: 18px;
@@ -2523,8 +2523,9 @@ color: green;
   }
   
 .no-tournament-selected .list-group-item {
+  color: rgb(255, 255, 255);
     display: flex;
-    background-color: rgb(221, 173, 128);
+    background-color: rgb(163, 160, 157);
     align-items: center;
     justify-content: flex-start;
     gap: 10px;
@@ -2535,13 +2536,13 @@ color: green;
   }
 
   .no-tournament-selected .list-group-item h5 {
-    color: rgb(50, 20, 3);
+    color: rgb(255, 255, 255);
     font-weight: 600;
   }
   
   .no-tournament-selected .list-group-item:hover {
     transform: scale(1.02);
-    background-color: rgb(207, 147, 91);
+    background-color: rgb(255, 255, 255);
   }
 
 /* End of Mail no tournament Styles */

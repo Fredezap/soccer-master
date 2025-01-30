@@ -10,6 +10,8 @@ const Header = () => {
     return activateClass
   }
 
+  const adminUser = globalThis.localStorage.getItem('user')
+
   return (
     <header className="site-navbar py-4" role="banner">
       <div className="container">
@@ -24,10 +26,16 @@ const Header = () => {
               <ul className="site-menu main-menu js-clone-nav mr-auto d-none d-lg-block">
                 <li className={getClass(ROUTES.HOME)}><a href={ROUTES.HOME} className="nav-link">Home</a></li>
                 <li className={getClass(ROUTES.MATCHES)}><a href={ROUTES.MATCHES} className="nav-link">Matches</a></li>
-                <li className={getClass(ROUTES.PLAYERS)}><a href={ROUTES.PLAYERS} className="nav-link">Players</a></li>
-                <li className={getClass(ROUTES.BLOG)}><a href={ROUTES.BLOG} className="nav-link">Blog</a></li>
+                <li className={getClass(ROUTES.TEAMS)}><a href={ROUTES.TEAMS} className="nav-link">Teams</a></li>
+                {/* <li className={getClass(ROUTES.BLOG)}><a href={ROUTES.BLOG} className="nav-link">Blog</a></li> */}
                 <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Contact</a></li>
-                <li className={getClass(ROUTES.ADMIN.MAIN)}><a href={ROUTES.ADMIN.MAIN} className="nav-link">Admin</a></li>
+                {adminUser &&
+                  (<li className={getClass(ROUTES.ADMIN.MAIN)}>
+                    <a href={ROUTES.ADMIN.MAIN} className="nav-link">
+                    Admin
+                    </a>
+                  </li>
+                  )}
               </ul>
             </nav>
 
