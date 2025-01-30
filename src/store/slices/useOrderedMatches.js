@@ -4,6 +4,7 @@ export const useOrderedMatches = create((set, get) => ({
   matchesByDate: [],
 
   setMatchesByDate: (matches) => {
-    set({ matches })
+    console.log('MATCHES: ', matches)
+    set({ matchesByDate: matches })
   }
 }))

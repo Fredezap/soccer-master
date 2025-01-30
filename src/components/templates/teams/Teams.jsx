@@ -9,7 +9,9 @@ const Teams = () => {
   return (
     <>
       <Hero title={players.title} />
-      <div className="bg-dark">agregar equipos con sus jugadores</div>
+      <div className="no-info-founded bg-dark">
+        <span>No teams founded</span>
+      </div>
       {/* <Videos /> */}
       {/* <Blog /> */}
     </>

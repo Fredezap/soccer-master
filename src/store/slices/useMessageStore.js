@@ -5,8 +5,10 @@ let timeoutId
 export const useMessageStore = create((set) => ({
 
   messages: [],
+  showMessager: false,
 
   addMessage: (message) => {
+    console.log('MESSAGES: ', message)
     if (timeoutId) {
       clearTimeout(timeoutId)
     }
@@ -19,7 +21,10 @@ export const useMessageStore = create((set) => ({
       set(() => ({
         messages: []
       }))
-    }, 15000)
-  }
+    }, 27000)
+  },
 
+  setShowMessager: (state) => {
+    set(() => ({ showMessager: state }))
+  }
 }))

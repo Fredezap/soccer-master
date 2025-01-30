@@ -19,7 +19,10 @@ const TableScores = () => {
               </tr>
             </thead>
             <tbody>
-              <tr>
+              <tr className="no-info-founded">
+                <td colSpan="6">No info founded</td>
+              </tr>
+              {/* <tr>
                 <td>1</td>
                 <td><strong className="text-white">Football League</strong></td>
                 <td>22</td>
@@ -82,7 +85,7 @@ const TableScores = () => {
                 <td>3</td>
                 <td>2</td>
                 <td>140</td>
-              </tr>
+              </tr> */}
             </tbody>
           </table>
         </div>

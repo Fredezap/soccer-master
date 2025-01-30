@@ -1381,14 +1381,13 @@ color: green;
 
 /* Icons */
 .error-icon {
-  margin-top: -50px;
   color: red;
-  font-size: 60px;
+  font-size: 30px;
 }
 
 .success-icon {
   color: green;
-  font-size: 22px;
+  font-size: 30px;
 }
 /* End of Icons */
 
@@ -1836,6 +1835,11 @@ color: green;
   border-top: white solid 1px;
   padding: 70px 120px;
   width: 100%;
+}
+
+.no-info-founded {
+  padding: 10px;
+  text-align: center;
 }
 
 .matches-main .group-box .group-matches-details {

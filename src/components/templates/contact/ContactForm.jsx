@@ -26,7 +26,7 @@ const ContactForm = () => {
             <ul className="list-unstyled">
               <li className="mb-2">
                 <strong className="text-white d-block">Address</strong>
-                  AGREGAR LA DIRE DEL CLUB. <br /> Basel, Switzerland
+                  Erlenmattstrasse 110 4058 Basel, Switzerland
               </li>
               <li className="mb-2">
                 <strong className="text-white d-block">Email</strong>

@@ -17,14 +17,14 @@ const NextMatch = () => {
     if (currentPath === '/home') return smallSizeClass
     return largeSizeClass
   }
-
+  console.log('M', matchesByDate)
   return (
     <div className={getNextMatchClass()}>
       <div className="widget-next-match">
         <div className="widget-title">
           <h3>Next Match</h3>
         </div>
-        {matchesByDate
+        {matchesByDate.length !== 0
           ? (
             <div>
               <div className="widget-body mb-3">
@@ -56,7 +56,7 @@ const NextMatch = () => {
             </div>
           )
           : (
-            <div>
+            <div className="no-match-info-founded">
               <span>No match info founded</span>
             </div>
           )}
