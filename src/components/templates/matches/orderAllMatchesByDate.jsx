@@ -5,6 +5,7 @@ import formatTime from '../../common/formatTime'
 const orderAllMatchesByDate = () => {
   const { currentTournament } = useTournamentsDetails()
   const orderMatchesByDate = () => {
+    console.log('current t: ', currentTournament)
     if (!currentTournament || !currentTournament.Stages) return
 
     const now = new Date()
@@ -26,7 +27,7 @@ const orderAllMatchesByDate = () => {
       })
       .filter(match => match.fullDateTime > now) // Filtrar los futuros
       .sort((a, b) => a.fullDateTime - b.fullDateTime) // Ordenar por fecha y hora
-
+    console.log('MATCHES: ', upcomingMatches)
     return (upcomingMatches || null)
   }
   return { orderMatchesByDate }

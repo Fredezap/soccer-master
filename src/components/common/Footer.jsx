@@ -1,3 +1,5 @@
+import ROUTES from '../../store/constants/routes'
+
 const Footer = () => {
   return (
     <footer className="footer-section">
@@ -7,9 +9,9 @@ const Footer = () => {
             <div className="widget mb-3">
               <h3>Social</h3>
               <ul className="row list-unstyled links">
-                <li className="col-lg-4"><a href="#">Contact</a></li>
-                <li className="col-lg-4"><a href="#">Web page</a></li>
-                <li className="col-lg-4"><a href="#">Instagram</a></li>
+                <li className="col-lg-4"><a href={ROUTES.CONTACT}>Contact</a></li>
+                <li className="col-lg-4"><a href="https://www.futsalolympiquebasel.ch/">Web page</a></li>
+                <li className="col-lg-4"><a href="https://www.instagram.com/futsalolympiquebasel_offiziell/?hl=es-la">Instagram</a></li>
               </ul>
             </div>
           </div>

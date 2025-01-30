@@ -10,7 +10,7 @@ import BlogPage from '../src/components/templates/blog/BlogPage.jsx'
 import main from '../src/js/main/main.js'
 import $ from 'jquery'
 import siteSticky from '../src/js/js-refactorized/siteSticky.js'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { Fancybox } from '@fancyapps/ui'
 import '../src/styles/fancybox.css'
 import Header from '../src/components/common/Header.jsx'
@@ -33,6 +33,8 @@ import { useSubmittingFormStore } from '../src/store/slices/useSubmittingFormSto
 import handleSubmitFormAdmin from '../src/components/templates/admin/handleSubmitFormAdmin.js'
 import orderAllMatchesByDate from '../src/components/templates/matches/orderAllMatchesByDate.jsx'
 import { useOrderedMatches } from '../src/store/slices/useOrderedMatches.js'
+import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
+import checkPathsNeedsMessager from '../src/components/common/message-manager/checkPathsNeedsMessager.js'
 window.jQuery = $
 window.$ = $
 
@@ -41,16 +43,21 @@ function AppContent() {
   const currentPath = location.pathname
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
-  useCheckPath({ currentPath, setCurrent, navigate })
+
   const { currentTournament, setTournaments } = useTournamentsDetails()
   const { setMatchesByDate } = useOrderedMatches()
   const { orderMatchesByDate } = orderAllMatchesByDate()
+  const { addMessage, setShowMessager } = useMessageStore()
+  const { setSubmittingForm } = useSubmittingFormStore()
+  useCheckPath({ currentPath, setCurrent, navigate })
+
+  useEffect(() => {
+    const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)
+    setShowMessager(checkIfNeedsMessager)
+  }, [currentPath])
 
   // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
-
-  const { addMessage } = useMessageStore()
-  const { setSubmittingForm } = useSubmittingFormStore()
 
   useEffect(() => {
     getTournaments()
@@ -66,7 +73,8 @@ function AppContent() {
   }
 
   useEffect(() => {
-    if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN)
+    if (checkPathsNoNeedTournament(currentPath)) return // check if path no need a tournament data to avoid navigate main (next line)
+    if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN) // if needs a tournament but it does not have info, navigate to main
     main(currentTournament)
     Fancybox.bind('[data-fancybox]')
     return siteSticky()
@@ -74,6 +82,7 @@ function AppContent() {
 
   const orderMatchesAndSet = () => {
     const orderedMatches = orderMatchesByDate()
+    console.log('ORDERD:', orderedMatches)
     setMatchesByDate(orderedMatches)
   }
 
@@ -120,9 +129,10 @@ function AppContent() {
 
 function App() {
   const { currentTournament } = useTournamentsDetails()
+  const { showMessager } = useMessageStore()
   return (
     <div className="site-wrap">
-      <MessageManager />
+      {showMessager && (<MessageManager />)}
       <MobileMenu />
       {Object.entries(currentTournament).length !== 0 && (<Header />)}
       <Router
