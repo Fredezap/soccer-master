@@ -8,7 +8,6 @@ export const useMessageStore = create((set) => ({
   showMessager: false,
 
   addMessage: (message) => {
-    console.log('MESSAGES: ', message)
     if (timeoutId) {
       clearTimeout(timeoutId)
     }

@@ -56,11 +56,11 @@ const AdminMain = () => {
                   </ListGroup.Item>
                 ))}
               </ListGroup>
-              <div onClick={handleCreateTournament} className="create-tournament-link">
-                <p>Create tournament</p>
-              </div>
             </div>
           )}
+      </div>
+      <div onClick={handleCreateTournament} className="create-tournament-link">
+        <p>Create tournament</p>
       </div>
     </div>
   )
