@@ -87,9 +87,7 @@ function AppContent() {
 
   useEffect(() => {
     orderMatchesAndSet() // Ejecutar al cargar
-
     const interval = setInterval(orderMatchesAndSet, 5 * 60 * 1000) // Repetir cada 5 minutos
-
     return () => clearInterval(interval) // Limpiar al desmontar
   }, [currentTournament])
 

@@ -5,7 +5,7 @@ const HeroHomeNoTournament = () => {
         <div>
           <div className="no-tournament-main">
             <h1>Welcome to Futsal For Her</h1>
-            <h2>Basel football</h2>
+            <h2>Basel futsal</h2>
           </div>
         </div>
       </div>

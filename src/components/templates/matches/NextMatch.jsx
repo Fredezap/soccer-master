@@ -1,15 +1,13 @@
 import { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
-import formatDate from '../../common/formatDate'
-import formatTime from '../../common/formatTime'
 import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
+import MatchExtraInfo from './MatchExtraInfo'
 
 const NextMatch = () => {
   const location = useLocation()
   const currentPath = location.pathname
-  const { currentTournament } = useTournamentsDetails()
   const { matchesByDate } = useOrderedMatches()
+  const [nextMatch, setNextMatch] = useState([])
 
   const getNextMatchClass = () => {
     const smallSizeClass = 'col-lg-6'
@@ -18,13 +16,17 @@ const NextMatch = () => {
     return largeSizeClass
   }
 
+  useEffect(() => {
+    setNextMatch(matchesByDate[0])
+  }, [matchesByDate])
+
   return (
     <div className={getNextMatchClass()}>
       <div className="widget-next-match">
         <div className="widget-title">
           <h3>Next Match</h3>
         </div>
-        {matchesByDate.length !== 0
+        {nextMatch.length !== 0
           ? (
             <div>
               <div className="widget-body mb-3">
@@ -32,31 +34,24 @@ const NextMatch = () => {
                   <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
                     <div className="team-1 text-center">
                       <img src="images/logo_1.png" alt="Team 1"></img>
-                      <h3>{matchesByDate[0]?.LocalTeam?.name || 'Team 1'}</h3>
+                      <h3>{nextMatch?.LocalTeam?.name || 'Team 1'}</h3>
                     </div>
                     <div>
                       <span className="vs"><span>VS</span></span>
                     </div>
                     <div className="team-2 text-center">
                       <img src="images/logo_2.png" alt="Team 2"></img>
-                      <h3>{matchesByDate[0]?.VisitorTeam?.name || 'Team 2'}</h3>
+                      <h3>{nextMatch?.VisitorTeam?.name || 'Team 2'}</h3>
                     </div>
                   </div>
                 </div>
               </div>
 
-              <div className="text-center widget-vs-contents mb-4">
-                <h4>{currentTournament.name || 'Tournament Name'}</h4>
-                <p className="mb-5">
-                  <span className="d-block">{matchesByDate[0]?.date}</span>
-                  <span className="d-block">{matchesByDate[0]?.time} HS</span>
-                  <strong className="text-primary">{matchesByDate[0]?.location || 'Unknown Venue'}</strong>
-                </p>
-              </div>
+              <MatchExtraInfo match={nextMatch} />
             </div>
           )
           : (
-            <div className="no-match-info-founded">
+            <div className="no-info-founded">
               <span>No match info founded</span>
             </div>
           )}
