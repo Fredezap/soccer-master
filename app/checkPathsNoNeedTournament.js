@@ -5,7 +5,8 @@ const checkPathsNoNeedTournament = (currentPath) => {
     currentPath.includes('/admin') ||
     currentPath === (ROUTES.MAIN) ||
     currentPath === (ROUTES.LOGIN) ||
-    currentPath === (ROUTES.REGISTER)
+    currentPath === (ROUTES.REGISTER) ||
+    currentPath === (ROUTES.CONTACT)
   ) return true
   return false
 }
