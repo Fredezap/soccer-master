@@ -1141,6 +1141,7 @@ h1, h2, h3, h4, h5,
 .js-custom-prev-v2 {
   margin-right: 5px;
 }
+/* End of New Styles added */
 
 /* Admin styles */
 .admin-all-mains{
@@ -2551,4 +2552,22 @@ color: green;
 
 /* End of Mail no tournament Styles */
 
-/* End of New Styles added */
+/* Table Scores Styles */
+
+.groups-score-data {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+
+.group-title {
+  padding: 10px 0;
+  text-align: center;
+  font-size: 17px;
+  color: #fff;
+  background-color: #9888883a;
+}
+
+/* Table Scores Styles Styles */

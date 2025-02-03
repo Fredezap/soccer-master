@@ -9,52 +9,47 @@ const NextMatch = () => {
   const { matchesByDate } = useOrderedMatches()
   const [nextMatch, setNextMatch] = useState([])
 
-  const getNextMatchClass = () => {
-    const smallSizeClass = 'col-lg-6'
-    const largeSizeClass = 'col-lg-12'
-    if (currentPath === '/home') return smallSizeClass
-    return largeSizeClass
-  }
-
   useEffect(() => {
     setNextMatch(matchesByDate[0])
   }, [matchesByDate])
 
   return (
-    <div className={getNextMatchClass()}>
-      <div className="widget-next-match">
-        <div className="widget-title">
-          <h3>Next Match</h3>
-        </div>
-        {nextMatch.length !== 0
-          ? (
-            <div>
-              <div className="widget-body mb-3">
-                <div className="widget-vs">
-                  <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
-                    <div className="team-1 text-center">
-                      <img src="images/logo_1.png" alt="Team 1"></img>
-                      <h3>{nextMatch?.LocalTeam?.name || 'Team 1'}</h3>
-                    </div>
-                    <div>
-                      <span className="vs"><span>VS</span></span>
-                    </div>
-                    <div className="team-2 text-center">
-                      <img src="images/logo_2.png" alt="Team 2"></img>
-                      <h3>{nextMatch?.VisitorTeam?.name || 'Team 2'}</h3>
+    <div className="row mb-5">
+      <div className="col-lg-12">
+        <div className="widget-next-match">
+          <div className="widget-title">
+            <h3>Next Match</h3>
+          </div>
+          {nextMatch.length !== 0
+            ? (
+              <div>
+                <div className="widget-body mb-3">
+                  <div className="widget-vs">
+                    <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
+                      <div className="team-1 text-center">
+                        <img src="images/logo_1.png" alt="Team 1"></img>
+                        <h3>{nextMatch?.LocalTeam?.name || 'Team 1'}</h3>
+                      </div>
+                      <div>
+                        <span className="vs"><span>VS</span></span>
+                      </div>
+                      <div className="team-2 text-center">
+                        <img src="images/logo_2.png" alt="Team 2"></img>
+                        <h3>{nextMatch?.VisitorTeam?.name || 'Team 2'}</h3>
+                      </div>
                     </div>
                   </div>
                 </div>
-              </div>
 
-              <MatchExtraInfo match={nextMatch} />
-            </div>
-          )
-          : (
-            <div className="no-info-founded">
-              <span>No match info founded</span>
-            </div>
-          )}
+                <MatchExtraInfo match={nextMatch} />
+              </div>
+            )
+            : (
+              <div className="no-info-founded">
+                <span>No match info founded</span>
+              </div>
+            )}
+        </div>
       </div>
     </div>
   )

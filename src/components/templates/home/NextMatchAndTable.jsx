@@ -5,10 +5,8 @@ const NextMatchAndTable = () => {
   return (
     <div className="site-section bg-dark">
       <div className="container">
-        <div className="row">
-          <NextMatch />
-          <TableScores />
-        </div>
+        <NextMatch />
+        <TableScores />
       </div>
     </div>
   )
