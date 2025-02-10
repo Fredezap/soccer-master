@@ -3,7 +3,7 @@ import AddStagesForm from '../form/AddStagesForm'
 
 const StagesMain = ({ stages, getStages }) => {
   return (
-    <div className="stages-main">
+    <div className="stages-main bg-dark">
       <AddStagesForm getStages={getStages}/>
       <StagesData stages={stages} getStages={getStages} />
     </div>

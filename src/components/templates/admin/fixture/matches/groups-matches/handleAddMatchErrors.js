@@ -8,7 +8,8 @@ const handleAddMatchErrors = ({
   localTeam,
   visitorTeam,
   locationAndDateformData,
-  selectedGroupStage
+  selectedGroupStage,
+  formAction
 }) => {
   const selectAGroupError = 'Please select a group'
   const selectATeamError = 'Please select both teams to maka a match'
@@ -43,6 +44,7 @@ const handleAddMatchErrors = ({
   }
 
   if (checkDateIsPast(date, today)) {
+    if (formAction === 'edit') return false
     setCustomError(dateIsPastError)
     return true
   }

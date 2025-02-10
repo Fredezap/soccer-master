@@ -67,7 +67,8 @@ const EditKnockoutMatchModal = ({
       rounds,
       setCustomError,
       localTeamPlaceholder,
-      visitorTeamPlaceholder
+      visitorTeamPlaceholder,
+      action: 'edit'
     })
     if (checkErrors) return
     setCustomError(null)
@@ -137,10 +138,12 @@ const EditKnockoutMatchModal = ({
             locationAndDateformData={locationAndDateformData}
             setLocationAndDateformData={setLocationAndDateformData}
           />
-          <SetMatchResult
-            matchResult={matchResult}
-            setMatchResult={setMatchResult}
-          />
+          {localTeam !== null && visitorTeam !== null && (
+            <SetMatchResult
+              matchResult={matchResult}
+              setMatchResult={setMatchResult}
+            />
+          )}
           {customError && (
             <p
               style={{ margin: '0', marginBottom: '-20px' }}

@@ -35,6 +35,7 @@ import orderAllMatchesByDate from '../src/components/templates/matches/orderAllM
 import { useOrderedMatches } from '../src/store/slices/useOrderedMatches.js'
 import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
 import checkPathsNeedsMessager from '../src/components/common/message-manager/checkPathsNeedsMessager.js'
+import getTournaments from '../src/components/common/getters/GetTournaments.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -44,11 +45,11 @@ function AppContent() {
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
 
-  const { currentTournament, setTournaments } = useTournamentsDetails()
+  const { currentTournament, setCurrentTournament, tournaments } = useTournamentsDetails()
   const { setMatchesByDate } = useOrderedMatches()
   const { orderMatchesByDate } = orderAllMatchesByDate()
-  const { addMessage, setShowMessager } = useMessageStore()
-  const { setSubmittingForm } = useSubmittingFormStore()
+  const { setShowMessager } = useMessageStore()
+  const { fetchTournaments } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
   useEffect(() => {
@@ -60,17 +61,19 @@ function AppContent() {
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
 
   useEffect(() => {
-    getTournaments()
+    fetchTournaments()
   }, [])
 
-  const getTournaments = async() => {
-    const url = '/tournaments/get-all'
-    const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
-    if (response?.success) {
-      setTournaments(response.data?.allTournaments)
+  useEffect(() => {
+    if (!currentTournament || Object.entries(currentTournament).length === 0) return
+
+    const tournamentId = currentTournament.tournamentId
+    const foundedTournament = tournaments.find(tournament => tournament.tournamentId === tournamentId)
+
+    if (tournamentId && foundedTournament) {
+      setCurrentTournament(foundedTournament)
     }
-  }
+  }, [currentTournament, tournaments])
 
   useEffect(() => {
     if (checkPathsNoNeedTournament(currentPath)) return // check if path no need a tournament data to avoid navigate main (next line)
@@ -131,7 +134,7 @@ function App() {
     <div className="site-wrap">
       {showMessager && (<MessageManager />)}
       <MobileMenu />
-      {Object.entries(currentTournament).length !== 0 && (<Header />)}
+      {currentTournament && Object.entries(currentTournament).length !== 0 && (<Header />)}
       <Router
         future={{
           v7_startTransition: true,

@@ -1,5 +1,5 @@
 import { Button } from 'react-bootstrap'
-import ChooseDateAndLocationForm from './ChooseDateAndLocationForm'
+import ChooseDateAndLocationForm from '../../../../../templates/admin/fixture/matches/brackets-matches/add-matches/common-forms/ChooseDateAndLocationForm'
 import SelectTeamsForm from './SelectTeamsForm'
 import SetMatchResult from '../brackets-matches/add-matches/common-forms/SetMatchResult'
 
@@ -17,36 +17,36 @@ const AddGroupMatchesForm = ({
   formAction,
   localTeam,
   visitorTeam,
-  matchResult,
-  setMatchResult
+  match
 }) => {
+  // todo: PASO 3
+  // todo: chequear los valores de score para cuando se edita el knockout match. Ver bien ese endpoint
+  // todo: si no hay local team score y visitor, no pueden haber penales, y si solo 1 de ellos esta definido, tampoco
+
   return (
     <div>
-      <SelectTeamsForm
-        selectedGroup={selectedGroup}
-        dbGroups={dbGroups}
-        showGroupMatchesDetail={showGroupMatchesDetail}
-        handleGroupChange={handleGroupChange}
-        teamChange={teamChange}
-        localTeam={localTeam}
-        visitorTeam={visitorTeam}
-      />
-      <ChooseDateAndLocationForm
-        locationAndDateformData={locationAndDateformData}
-        setLocationAndDateformData={setLocationAndDateformData}
-        setCustomError={setCustomError}
-      />
-      {formAction === 'edit' && (
-        <SetMatchResult
-          matchResult={matchResult}
-          setMatchResult={setMatchResult}
+      {!match?.localTeamScore && !match?.visitorTeamScore && (
+        <SelectTeamsForm
+          selectedGroup={selectedGroup}
+          dbGroups={dbGroups}
+          showGroupMatchesDetail={showGroupMatchesDetail}
+          handleGroupChange={handleGroupChange}
+          teamChange={teamChange}
+          localTeam={localTeam}
+          visitorTeam={visitorTeam}
         />
       )}
+      <ChooseDateAndLocationForm
+        formAction={formAction}
+        setCustomError={setCustomError}
+        locationAndDateformData={locationAndDateformData}
+        setLocationAndDateformData={setLocationAndDateformData}
+      />
       <div className="confirm-button">
         <Button
           disabled={customError}
           variant="outline-success"
-          onClick={() => handleConfirmGroupMatch(formAction)}
+          onClick={() => handleConfirmGroupMatch()}
         >
           {formAction}
         </Button>

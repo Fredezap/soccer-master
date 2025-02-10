@@ -6,7 +6,6 @@ import ConfirmButton from './ConfirmButton'
 import TeamsAreUnknownForm from '../teams-are-unknown-form/TeamsAreUnknownForm'
 import useKnockoutMatchErrorManager from '../errors/useKnockoutMatchErrorManager'
 import ChooseDateAndLocationForm from './ChooseDateAndLocationForm'
-import DeleteKnockoutMatchModal from '../../modals/DeleteKnockoutMatchModal'
 import CreateKnockoutMatchModal from '../../modals/CreateKnockoutMatchModal'
 
 const AddKnockoutMatchesFormMain = ({
@@ -93,6 +92,7 @@ const AddKnockoutMatchesFormMain = ({
                 {teamStatus !== TEAM_STATUS.UNDEFINED && (
                   <div>
                     <ChooseDateAndLocationForm
+                      setCustomError={setCustomError}
                       locationAndDateformData={locationAndDateformData}
                       setLocationAndDateformData={setLocationAndDateformData}
                     />

@@ -4,10 +4,9 @@ import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetai
 const TableScores = () => {
   const { currentTournament } = useTournamentsDetails()
   const [groupStages, setGroupStages] = useState([])
-  console.log('groupStages', groupStages)
 
   useEffect(() => {
-    const filteredGroupStages = currentTournament.Stages.filter(stage => stage.type === 'group')
+    const filteredGroupStages = currentTournament?.Stages.filter(stage => stage.type === 'group')
     setGroupStages(filteredGroupStages)
   }, [currentTournament])
 
@@ -28,6 +27,7 @@ const TableScores = () => {
                       <tr>
                         <th>P</th>
                         <th>Team</th>
+                        <th>GP</th>
                         <th>W</th>
                         <th>D</th>
                         <th>L</th>
@@ -41,10 +41,11 @@ const TableScores = () => {
                             <tr key={team?.teamId || index}>
                               <td>{index + 1}</td>
                               <td><strong className="text-white">{team.name}</strong></td>
-                              <td>22</td>
-                              <td>3</td>
-                              <td>2</td>
-                              <td>140</td>
+                              <td>{team.TeamGroup.WON + team.TeamGroup.DRAWN + team.TeamGroup.LOST}</td>
+                              <td>{team.TeamGroup.WON}</td>
+                              <td>{team.TeamGroup.DRAWN}</td>
+                              <td>{team.TeamGroup.LOST}</td>
+                              <td>{team.TeamGroup.totalTeamPoints}</td>
                             </tr>
                           )))
                         : (
