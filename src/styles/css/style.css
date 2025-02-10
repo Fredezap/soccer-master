@@ -1238,6 +1238,20 @@ h1, h2, h3, h4, h5,
   margin: 10px 0;
 }
 
+.admin-fixture-buttons {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+padding: 30px 0;
+border-radius: 5px;
+width: 100%;
+}
+
+.admin-fixture-buttons button {
+  width: auto;
+}
+
 .admin-settings-info {
   border: white solid 1px;
   padding: 40px;
@@ -1965,9 +1979,8 @@ color: green;
 .group-component {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin-top: 100px;
+  width: 100%;
 }
 
 .group-component h4 {
@@ -1979,7 +1992,6 @@ color: green;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  gap: 20px;
 }
 
 .group-box {
@@ -2185,10 +2197,6 @@ color: green;
   gap: 40px;
 }
 
-.confirm-button p {
-  margin: 0;
-}
-
 .group-select {
   display: flex;
   flex-direction: column;
@@ -2200,8 +2208,7 @@ color: green;
 .matches-info {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  width: 100%;
 }
 
 .matches-info h6 {
@@ -2209,7 +2216,24 @@ color: green;
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  box-shadow: 2px 2px 10px rgb(86, 85, 85);
+  box-shadow: 2px 2px 10px rgb(132, 131, 131);
+  color: white;
+  padding: 20px 0px;
+  min-width: 500px;
+  cursor: pointer;
+  margin-bottom: 50px;
+}
+
+.matches-info h6:hover {
+  background-color: #2c2b2b3f;
+}
+
+.show-table-scores {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 2px 2px 10px rgb(132, 131, 131);
   color: white;
   padding: 20px 0px;
   min-width: 500px;
@@ -2317,6 +2341,37 @@ color: green;
   justify-content: center;
   align-items: center;
   width: 100%;
+}
+
+.set-group-stage-points {
+  color: red !important;
+  cursor: pointer;
+}
+
+.stage-points {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-bottom: 50px;
+  border: 1px solid whitesmoke;
+  padding: 5px;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.stage-points:hover {
+  background-color: rgb(46, 46, 46);
+  transition: 0.3s ease;
+}
+
+.stage-points span {
+  color: whitesmoke;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+  gap:5px;
 }
 
 .setting-groups .group-teams {
@@ -2486,7 +2541,7 @@ color: green;
 }
 
 .modal-box button {
-  width: 50%;
+  min-width: 50%;
 }
 
 /* End of Modal Styles */
@@ -2560,7 +2615,6 @@ color: green;
   flex-direction: column;
   gap: 30px;
 }
-
 
 .group-title {
   padding: 10px 0;

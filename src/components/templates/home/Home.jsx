@@ -9,7 +9,7 @@ const Home = () => {
   return (
     <>
       <HeroHome />
-      <TeamScore />
+      {/* <TeamScore /> */}
       {/* <News /> */}
       <NextMatchAndTable />
       {/* <Videos /> */}

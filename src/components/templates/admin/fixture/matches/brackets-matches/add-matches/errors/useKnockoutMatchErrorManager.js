@@ -21,7 +21,8 @@ const useKnockoutMatchErrorManager = ({
   rounds,
   setCustomError,
   localTeamPlaceholder,
-  visitorTeamPlaceholder
+  visitorTeamPlaceholder,
+  action
 }) => {
   const maxLengthNameError = 'Name must be at most 50 characters long'
   const placeholderNameIsRequiered = 'Placeholder name is required'
@@ -87,6 +88,7 @@ const useKnockoutMatchErrorManager = ({
   }
 
   if (checkDateIsPast(date, today)) {
+    if (action === 'edit') return false
     setCustomError(dateIsPastError)
     return true
   }

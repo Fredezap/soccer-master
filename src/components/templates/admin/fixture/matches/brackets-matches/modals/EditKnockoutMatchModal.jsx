@@ -67,7 +67,8 @@ const EditKnockoutMatchModal = ({
       rounds,
       setCustomError,
       localTeamPlaceholder,
-      visitorTeamPlaceholder
+      visitorTeamPlaceholder,
+      action: 'edit'
     })
     if (checkErrors) return
     setCustomError(null)

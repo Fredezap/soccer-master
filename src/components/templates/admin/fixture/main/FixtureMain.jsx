@@ -20,7 +20,7 @@ const FixtureMain = () => {
   const { currentTournament } = useTournamentsDetails()
 
   const getStages = async() => {
-    const paramValues = { tournamentId: currentTournament.tournamentId }
+    const paramValues = { tournamentId: currentTournament?.tournamentId }
     const url = '/admin/fixture/stages/get-all-by-tournament'
     const response = await handleGetData({ paramValues, url, addMessage })
 
@@ -54,18 +54,20 @@ const FixtureMain = () => {
           <p>Following these steps will create a well-organized tournament structure, allowing for a clear schedule and easy team management.</p>
         </div>
 
-        <Button onClick={() => setShowStages(!showStages)} variant="outline-success">
-          {showStages ? 'Hide stages' : 'Show stages'}
-        </Button>
-        {showStages && <StagesMain stages={stages} getStages={getStages} />}
-        <Button onClick={() => setShowGroups(!showGroups)} variant="outline-success">
-          {showGroups ? 'Hide groups' : 'Show groups'}
-        </Button>
-        {showGroups && <SetGroupsMain />}
-        <Button onClick={() => setShowMatches(!showMatches)} variant="outline-success">
-          {showMatches ? 'Hide matches' : 'Show matches'}
-        </Button>
-        {showMatches && <MatchesMain getStages={getStages} />}
+        <div className="admin-fixture-buttons bg-dark">
+          <Button onClick={() => setShowStages(!showStages)} variant="outline-success">
+            {showStages ? 'Hide stages' : 'Show stages'}
+          </Button>
+          {showStages && <StagesMain stages={stages} getStages={getStages} />}
+          <Button onClick={() => setShowGroups(!showGroups)} variant="outline-success">
+            {showGroups ? 'Hide groups' : 'Show groups'}
+          </Button>
+          {showGroups && <SetGroupsMain />}
+          <Button onClick={() => setShowMatches(!showMatches)} variant="outline-success">
+            {showMatches ? 'Hide matches' : 'Show matches'}
+          </Button>
+          {showMatches && <MatchesMain getStages={getStages} />}
+        </div>
       </div>
     </div>
   )

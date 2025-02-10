@@ -8,6 +8,7 @@ import { useTournamentsDetails } from '../../../../../../store/slices/useTournam
 import ROUTES from '../../../../../../store/constants/routes'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import TableScores from '../../../../home/TableScores'
 
 const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
@@ -17,6 +18,7 @@ const MatchesMain = ({ getStages }) => {
   const [dbMatches, setDbMatches] = useState([])
   const [dbTeams, setDbTeams] = useState([])
   const { currentTournament } = useTournamentsDetails()
+  const [loading, setloading] = useState(false)
 
   const getGroups = async() => {
     const url = '/admin/fixture/groups/get-all-groups-by-tournament'
@@ -50,6 +52,7 @@ const MatchesMain = ({ getStages }) => {
   const navigate = useNavigate()
 
   const getTeams = async() => {
+    setloading(true)
     const values = { tournamentId: currentTournament.tournamentId }
     const url = '/admin/teams/get-by-tournament'
     const httpMethod = 'post'
@@ -57,6 +60,7 @@ const MatchesMain = ({ getStages }) => {
     if (response?.success) {
       setDbTeams(response.data?.tournament?.Teams)
     }
+    setloading(false)
   }
 
   useEffect(() => {
@@ -67,41 +71,46 @@ const MatchesMain = ({ getStages }) => {
   }, [])
 
   return (
-    <div className="matches-main">
-
-      {!dbTeams || dbTeams.length === 0
+    <div className="matches-main bg-dark">
+      {loading
         ? (
-          <div className="no-teams-found">
-            <p>No teams found</p>
-            <p>Please add teams before adding a match</p>
-            <Button
-              variant="outline-info"
-              style={{ color: 'skyblue' }}
-              onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}
-            >
-              Add team
-            </Button>
+          <div>
+            <p>Loading data...</p>
           </div>
         )
         : (
-          <div>
-            <BracketKnokoutMatches
-              getTeams={getTeams}
-              dbTeams={dbTeams}
-              dbMatches={dbMatches}
-              getMatches={getMatches}
-              getKnockoutStages={getKnockoutStages}
-              dbKnockoutStages={dbKnockoutStages}
-            />
-            <GroupsMatches
-              getStages={getStages}
-              dbGroups={dbGroups}
-              getGroups={getGroups}
-            />
-          </div>
-        )
-
-      }
+          !dbTeams || dbTeams.length === 0
+            ? (
+              <div className="no-teams-found">
+                <p>No teams found</p>
+                <p>Please add teams before adding a match</p>
+                <Button
+                  variant="outline-info"
+                  style={{ color: 'skyblue' }}
+                  onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}
+                >
+              Add team
+                </Button>
+              </div>
+            )
+            : (
+              <div>
+                <BracketKnokoutMatches
+                  getTeams={getTeams}
+                  dbTeams={dbTeams}
+                  dbMatches={dbMatches}
+                  getMatches={getMatches}
+                  getKnockoutStages={getKnockoutStages}
+                  dbKnockoutStages={dbKnockoutStages}
+                />
+                <GroupsMatches
+                  getStages={getStages}
+                  dbGroups={dbGroups}
+                  getGroups={getGroups}
+                />
+              </div>
+            )
+        )}
     </div>
   )
 }
