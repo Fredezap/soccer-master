@@ -313,6 +313,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           visitorTeam={visitorTeam}
           showConfirmMatchModal={showConfirmMatchModal}
           setShowConfirmMatchModal={setShowConfirmMatchModal}
+          setShowEditGroupMatchModal={setShowEditGroupMatchModal}
           customError={customError}
           setCustomError={setCustomError}
           locationAndDateformData={locationAndDateformData}
@@ -347,6 +348,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           formAction={formAction}
           localTeam={localTeam}
           visitorTeam={visitorTeam}
+          match={match}
         />
       )}
       {showSetScoreGroupMatchModal && (

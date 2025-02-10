@@ -33,35 +33,41 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
         />
       </div>
 
-      <div className="grid-colums-lg">
-        <label htmlFor="localTeamPenaltyScore">Local team penalty score:</label>
-        <input
-          type="number"
-          id="localTeamPenaltyScore"
-          name="localTeamPenaltyScore"
-          value={matchResult?.localTeamPenaltyScore === 0
-            ? 0
-            : matchResult?.localTeamPenaltyScore
-              ? matchResult?.localTeamPenaltyScore
-              : ''}
-          onChange={handleInputChange}
-        />
-      </div>
+      {(matchResult?.localTeamScore && matchResult?.visitorTeamScore) &&
+        (matchResult?.localTeamScore === matchResult?.visitorTeamScore) &&
+        (
+          <div>
+            <div className="grid-colums-lg">
+              <label htmlFor="localTeamPenaltyScore">Local team penalty score:</label>
+              <input
+                type="number"
+                id="localTeamPenaltyScore"
+                name="localTeamPenaltyScore"
+                value={matchResult?.localTeamPenaltyScore === 0
+                  ? 0
+                  : matchResult?.localTeamPenaltyScore
+                    ? matchResult?.localTeamPenaltyScore
+                    : ''}
+                onChange={handleInputChange}
+              />
+            </div>
 
-      <div className="grid-colums-lg">
-        <label htmlFor="visitorTeamPenaltyScore">Visitor team penalty score:</label>
-        <input
-          type="number"
-          id="visitorTeamPenaltyScore"
-          name="visitorTeamPenaltyScore"
-          value={matchResult?.visitorTeamPenaltyScore === 0
-            ? 0
-            : matchResult?.visitorTeamPenaltyScore
-              ? matchResult?.visitorTeamPenaltyScore
-              : ''}
-          onChange={handleInputChange}
-        />
-      </div>
+            <div className="grid-colums-lg">
+              <label htmlFor="visitorTeamPenaltyScore">Visitor team penalty score:</label>
+              <input
+                type="number"
+                id="visitorTeamPenaltyScore"
+                name="visitorTeamPenaltyScore"
+                value={matchResult?.visitorTeamPenaltyScore === 0
+                  ? 0
+                  : matchResult?.visitorTeamPenaltyScore
+                    ? matchResult?.visitorTeamPenaltyScore
+                    : ''}
+                onChange={handleInputChange}
+              />
+            </div>
+          </div>
+        )}
     </div>
   )
 }

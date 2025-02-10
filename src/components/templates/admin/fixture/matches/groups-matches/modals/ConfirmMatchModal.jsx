@@ -10,6 +10,7 @@ const ConfirmMatchModal = ({
   visitorTeam,
   showConfirmMatchModal,
   setShowConfirmMatchModal,
+  setShowEditGroupMatchModal,
   customError,
   setCustomError,
   locationAndDateformData,
@@ -55,6 +56,7 @@ const ConfirmMatchModal = ({
       const httpMethod = 'post'
       const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
       setShowConfirmMatchModal(false)
+      setShowEditGroupMatchModal(false)
       if (response?.success) {
         getGroups()
         getStages()
