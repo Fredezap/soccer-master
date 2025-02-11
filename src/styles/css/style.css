@@ -1853,8 +1853,16 @@ color: green;
 }
 
 .no-info-founded {
-  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+  padding: 50px;
   text-align: center;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.05);
+  color: white;
 }
 
 .matches-main .group-box .group-matches-details {
@@ -2259,7 +2267,41 @@ color: green;
 }
 /* End of Admin matches Styles */
 
+/* User Teams Styles */
+.teams-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+  padding: 50px;
+}
 
+.teams-main p {
+  margin-top: 15px;
+}
+
+.team-list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 15px;
+  padding: 0;
+  list-style: none;
+  width: 100%;
+}
+
+.team-list li {
+  width: 100%;
+  padding: 5px 10px;
+}
+
+.team-list span {
+  margin-left: 5px;
+}
+
+/* End Of User Teams Styles */
 
 
 /* Admin setting groups Styles */

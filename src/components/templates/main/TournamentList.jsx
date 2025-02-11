@@ -39,7 +39,7 @@ const TournamentList = () => {
           </div>
         )
         : (
-          <div style={{ padding: '200px' }} className="no-info-founded bg-dark">
+          <div className="no-info-founded bg-dark">
             <span style={{ fontWeight: 'bold', color: 'whitesmoke' }}>Tournament details will be available soon</span>
           </div>
         )}
