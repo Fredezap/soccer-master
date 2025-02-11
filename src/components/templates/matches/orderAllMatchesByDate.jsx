@@ -1,35 +1,49 @@
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
+import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
 import formatDate from '../../common/formatDate'
 import formatTime from '../../common/formatTime'
 
 const orderAllMatchesByDate = () => {
   const { currentTournament } = useTournamentsDetails()
-  const orderMatchesByDate = () => {
+  const { setAllMatchesByDate, setNextMatch, setUpcomingMatches, setFinishedMatches } = useOrderedMatches()
+
+  const setAndOrderMatchesByDate = () => {
     if (!currentTournament || !currentTournament.Stages) return
 
-    const now = new Date()
+    // Obtener la fecha y hora local del sistema
+    const nowLocal = new Date()
+    const nowTime = nowLocal.getTime() // Timestamp en milisegundos para comparación
 
     const allMatches = currentTournament.Stages.flatMap(stage => stage.Matches || [])
-
-    const upcomingMatches = allMatches
       .map(match => {
-      // Extraer solo la parte de la fecha (YYYY-MM-DD) sin la hora ni la Z
-        const datePart = match.date.split('T')[0]
+        const datePart = match.date.split('T')[0] // Obtener solo la fecha sin la hora
+        const fullDateTimeString = `${datePart}T${match.time}` // Mantener el formato recibido
+        const fullDateTime = new Date(fullDateTimeString) // Crear objeto Date
+        const matchTime = fullDateTime.getTime() // Timestamp en milisegundos
 
-        // Crear un string válido de fecha y hora en formato ISO
-        const fullDateTimeString = `${datePart}T${match.time}Z`
-
-        // Convertirlo a un objeto Date
-        const fullDateTime = new Date(fullDateTimeString)
-
-        return { ...match, date: formatDate(datePart).slashDate, time: formatTime(match.time), fullDateTime }
+        return {
+          ...match,
+          date: formatDate(datePart).slashDate,
+          time: formatTime(match.time),
+          fullDateTime,
+          matchTime
+        }
       })
-      .filter(match => match.fullDateTime > now) // Filtrar los futuros
-      .sort((a, b) => a.fullDateTime - b.fullDateTime) // Ordenar por fecha y hora
+      .sort((a, b) => a.matchTime - b.matchTime)
 
-    return (upcomingMatches || null)
+    const finishedMatches = allMatches.filter(match => match.matchTime < nowTime)
+    const allUpcomingMatches = allMatches.filter(match => match.matchTime >= nowTime)
+    const upcomingMatches = allUpcomingMatches.splice(1)
+    const nextMatch = allUpcomingMatches.length > 0 ? allUpcomingMatches[0] : null
+
+    // Actualizar el estado global
+    setAllMatchesByDate(allMatches)
+    setFinishedMatches(finishedMatches)
+    setUpcomingMatches(upcomingMatches)
+    setNextMatch(nextMatch)
   }
-  return { orderMatchesByDate }
+
+  return { setAndOrderMatchesByDate }
 }
 
 export default orderAllMatchesByDate

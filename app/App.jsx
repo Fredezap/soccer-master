@@ -10,7 +10,7 @@ import BlogPage from '../src/components/templates/blog/BlogPage.jsx'
 import main from '../src/js/main/main.js'
 import $ from 'jquery'
 import siteSticky from '../src/js/js-refactorized/siteSticky.js'
-import { useEffect, useState } from 'react'
+import { useEffect } from 'react'
 import { Fancybox } from '@fancyapps/ui'
 import '../src/styles/fancybox.css'
 import Header from '../src/components/common/Header.jsx'
@@ -29,8 +29,6 @@ import RegisterForm from '../src/components/templates/users/register/RegisterFor
 import TournamentDetailsMain from '../src/components/templates/admin/tournament-details/TournamentDetailsMain.jsx'
 import { useTournamentsDetails } from '../src/store/slices/useTournamentsDetails.js'
 import { useMessageStore } from '../src/store/slices/useMessageStore.js'
-import { useSubmittingFormStore } from '../src/store/slices/useSubmittingFormStore.js'
-import handleSubmitFormAdmin from '../src/components/templates/admin/handleSubmitFormAdmin.js'
 import orderAllMatchesByDate from '../src/components/templates/matches/orderAllMatchesByDate.jsx'
 import { useOrderedMatches } from '../src/store/slices/useOrderedMatches.js'
 import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
@@ -46,8 +44,7 @@ function AppContent() {
   const { setCurrent } = useCurrentRouteStore()
 
   const { currentTournament, setCurrentTournament, tournaments } = useTournamentsDetails()
-  const { setMatchesByDate } = useOrderedMatches()
-  const { orderMatchesByDate } = orderAllMatchesByDate()
+  const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
   const { fetchTournaments } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
@@ -60,6 +57,11 @@ function AppContent() {
   // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
 
+  // todo: ver el countdown del partido
+  // todo: mostrar los teams en TEAMS + PLAYERS
+  // todo: Agregar en formularios de cuando se agrega el equipo, que se pueda subir la imagen, logo del team
+  // todo: Ver lo de agregar videos
+  // todo: Ver si hago envio de emails (email ya hay o hago uno nuevo)
   useEffect(() => {
     fetchTournaments()
   }, [])
@@ -79,23 +81,16 @@ function AppContent() {
     if (checkPathsNoNeedTournament(currentPath)) return // check if path no need a tournament data to avoid navigate main (next line)
     if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN) // if needs a tournament but it does not have info, navigate to main
     main(currentTournament)
+    setAndOrderMatchesByDate()
+    const interval = setInterval(setAndOrderMatchesByDate, 5 * 60 * 1000)
     Fancybox.bind('[data-fancybox]')
-    return siteSticky()
+    const clean = () => {
+      clearInterval(interval)
+      siteSticky()
+    }
+    return clean()
   }, [currentTournament])
 
-  const orderMatchesAndSet = () => {
-    const orderedMatches = orderMatchesByDate()
-    setMatchesByDate(orderedMatches)
-  }
-
-  useEffect(() => {
-    orderMatchesAndSet() // Ejecutar al cargar
-    const interval = setInterval(orderMatchesAndSet, 5 * 60 * 1000) // Repetir cada 5 minutos
-    return () => clearInterval(interval) // Limpiar al desmontar
-  }, [currentTournament])
-
-  // todo: Pasar a seccion home, la parte de next match. Como lo voy a manejar a eso? Si no hay partidos u horarios?
-  // todo: El contador no anda. Mostrar datos del partido si los hubiera
   // todo: Luego mostar tabla, quiza grupos en vez de una sola tabla.
   // todo: Luego ver de mostrar las brackets en caso de que hayan datos.
   // todo: A todo esto, deberia hacer un fetch de los datos de db cada unos 15 min? aprox?
