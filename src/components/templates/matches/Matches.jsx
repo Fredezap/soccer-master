@@ -11,7 +11,7 @@ const Matches = () => {
   return (
     <>
       <Hero title={matches.title} />
-      <TeamScore />
+      {/* <TeamScore /> */}
       <MatchesGrid />
       {/* <Videos /> */}
       {/* <Blog /> */}

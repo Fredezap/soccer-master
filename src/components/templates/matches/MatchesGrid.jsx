@@ -1,3 +1,4 @@
+import FinishedMatches from './FinishedMatches'
 import NextMatch from './NextMatch'
 import UpcomingMatches from './UpcomingMatches'
 
@@ -7,6 +8,7 @@ const MatchesGrid = () => {
       <div className="container">
         <NextMatch />
         <UpcomingMatches />
+        <FinishedMatches />
       </div>
     </div>
   )

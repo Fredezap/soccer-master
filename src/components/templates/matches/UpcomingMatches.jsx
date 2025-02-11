@@ -1,17 +1,11 @@
-import { useEffect, useState } from 'react'
 import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
 import MatchExtraInfo from './MatchExtraInfo'
 
 const UpcomingMatches = () => {
-  const { matchesByDate } = useOrderedMatches()
-  const [upcomingMatches, setUpcomingMatches] = useState([])
-
-  useEffect(() => {
-    setUpcomingMatches([...matchesByDate.slice(1)])
-  }, [matchesByDate])
+  const { upcomingMatches } = useOrderedMatches()
 
   return (
-    <div className="row bg-light p-4 rounded">
+    <div style={{ marginTop: '60px' }} className="row bg-light p-4 rounded">
       <div className="col-12 title-section">
         <h2 className="heading">Upcoming Matches</h2>
       </div>

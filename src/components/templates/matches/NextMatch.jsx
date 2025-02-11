@@ -1,17 +1,8 @@
-import { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
 import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
 import MatchExtraInfo from './MatchExtraInfo'
 
 const NextMatch = () => {
-  const location = useLocation()
-  const currentPath = location.pathname
-  const { matchesByDate } = useOrderedMatches()
-  const [nextMatch, setNextMatch] = useState([])
-
-  useEffect(() => {
-    setNextMatch(matchesByDate[0])
-  }, [matchesByDate])
+  const { nextMatch } = useOrderedMatches()
 
   return (
     <div className="row mb-5">
