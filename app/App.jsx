@@ -58,10 +58,10 @@ function AppContent() {
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
 
   // todo: ver el countdown del partido
-  // todo: mostrar los teams en TEAMS + PLAYERS
   // todo: Agregar en formularios de cuando se agrega el equipo, que se pueda subir la imagen, logo del team
   // todo: Ver lo de agregar videos
   // todo: Ver si hago envio de emails (email ya hay o hago uno nuevo)
+
   useEffect(() => {
     fetchTournaments()
   }, [])
