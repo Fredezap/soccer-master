@@ -1,18 +1,33 @@
 import { backendErrorMessageProcessor } from '../components/common/message-manager/backendErrorMessageProcessor'
 import { apiInstance } from './apiInstance'
 
-const patchService = async({ url, values, addMessage, authorizationValues, successResponse }) => {
-  const makeAnHttpsPatch = async(url, values) => {
+const postServiceForImg = async({ url, values, addMessage, authorizationValues, successResponse }) => {
+  const makeAnHttpsPost = async(url, values) => {
     let error
+    const formData = new FormData()
+
+    for (const [key, value] of Object.entries(values)) {
+      if (key === 'logo' && value.file instanceof File) {
+        formData.append('file', value.file)
+      } else if (Array.isArray(value)) {
+        formData.append(key, JSON.stringify(value))
+      } else if (key !== null && key !== undefined) {
+        if (value !== null && value !== undefined) {
+          formData.append(key, value.toString())
+        } else {
+          formData.append(key, value)
+        }
+      }
+    }
+
+    const { token = undefined, role = undefined } = authorizationValues || {}
 
     try {
-      const { token = undefined, role = undefined } = authorizationValues || {}
-      const jsonValues = JSON.stringify(values)
-      const response = await apiInstance.patch(url, jsonValues, {
+      const response = await apiInstance.post(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           role,
-          'Content-Type': 'application/json'
+          'Content-Type': 'multipart/form-data'
         }
       })
 
@@ -28,8 +43,7 @@ const patchService = async({ url, values, addMessage, authorizationValues, succe
     }
   }
 
-  const postResponse = await makeAnHttpsPatch(url, values)
-
+  const postResponse = await makeAnHttpsPost(url, values)
   if (postResponse.success) {
     if (successResponse) {
       addMessage(({ type: 'success', content: successResponse }))
@@ -39,6 +53,7 @@ const patchService = async({ url, values, addMessage, authorizationValues, succe
 
   const proccesedErrors = backendErrorMessageProcessor(postResponse.error)
   addMessage({ type: 'error', content: proccesedErrors })
+  return postResponse
 }
 
-export default patchService
+export default postServiceForImg

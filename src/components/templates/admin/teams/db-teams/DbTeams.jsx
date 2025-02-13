@@ -2,6 +2,10 @@ import React from 'react'
 import TeamPlayers from './TeamPlayers'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 
+const BASE_URL = import.meta.env.MODE === 'development'
+  ? import.meta.env.VITE_IMG_DEV_BASE_URL
+  : import.meta.env.VITE_IMG_PROD_BASE_URL
+
 const DbTeams = ({ dbTeams, setShowAddTeam, getTeams }) => {
   const { team, setTeam } = useTeamStore()
 
@@ -42,7 +46,26 @@ const DbTeams = ({ dbTeams, setShowAddTeam, getTeams }) => {
                   <td>
                     <strong className="text-white">{dbTeam.name}</strong>
                   </td>
+
                 </tr>
+                {/* {dbTeam.logoUrl && dbTeam.logoUrl.trim()}
+                {typeof dbTeam.logoUrl} */}
+                {dbTeam.teamId === team.teamId && (
+                  dbTeam.logoUrl && dbTeam.logoUrl.trim()
+                    ? (
+                      <tr className="team-logo-form team-list">
+                        <td style={{ borderBottom: 'none' }} colSpan="2">
+                          <img src={`${BASE_URL}${dbTeam.logoUrl.trim()}?t=${Date.now()}`} alt="Image" />
+                        </td>
+                      </tr>
+                    )
+                    : (
+                      <tr>
+                        <td colSpan="2">No logo added yet</td>
+                      </tr>
+                    )
+                )}
+
                 {dbTeam.teamId === team.teamId && (
                   <TeamPlayers dbTeam={dbTeam} getTeams={getTeams} />
                 )}

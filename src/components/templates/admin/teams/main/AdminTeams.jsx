@@ -46,7 +46,12 @@ const AdminTeams = () => {
     setTeam({
       teamId: null,
       name: '',
-      players: []
+      players: [],
+      logo: {
+        reader: null,
+        url: null,
+        file: null
+      }
     })
     setShowAddTeam(!showAddTeam)
   }

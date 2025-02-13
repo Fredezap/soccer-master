@@ -3,13 +3,13 @@ import MatchExtraInfo from './MatchExtraInfo'
 
 const FinishedMatches = () => {
   const { finishedMatches } = useOrderedMatches()
-  console.log('finishedMatches: ', finishedMatches)
+
   return (
     <div style={{ marginTop: '60px' }} className="row bg-light p-4 rounded">
       <div className="col-12 title-section">
         <h2 className="heading">Finished Matches</h2>
       </div>
-      {finishedMatches.length === 0
+      {finishedMatches.length !== 0
         ? (
           finishedMatches.map((match, index) => (
             <div key={match.matchId || index} className="col-lg-6 mb-4">
