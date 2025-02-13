@@ -12,10 +12,17 @@ const CreateTeamModal = ({ showCreateTeamModal, setShowCreateTeamModal, setDbTea
   const { currentTournament } = useTournamentsDetails()
 
   const createTeam = async(formValues) => {
-    const values = { ...formValues, tournamentId: currentTournament.tournamentId }
+    const { file = null } = formValues?.logo || { file: null }
+
+    const cleanedFormValues = {
+      ...formValues,
+      // Excluimos reader y url para evitar PayloadTooLargeError: request entity too large
+      logo: { file }
+    }
+    const values = { ...cleanedFormValues, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Team has been created'
     const url = '/admin/teams/create'
-    const httpMethod = 'post'
+    const httpMethod = 'postForImg'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
 
     if (response.success) {

@@ -1,12 +1,17 @@
 import { backendErrorMessageProcessor } from '../components/common/message-manager/backendErrorMessageProcessor'
 import { apiInstance } from './apiInstance'
 
-const postService = async({ url, values, addMessage, successResponse }) => {
+const postService = async({ url, values, authorizationValues, addMessage, successResponse }) => {
   const makeAnHttpsPost = async(url, values) => {
     let error
+
     try {
+      const { token = undefined, role = undefined } = authorizationValues || {}
+
       const response = await apiInstance.post(url, values, {
         headers: {
+          Authorization: `Bearer ${token}`,
+          role,
           'Content-Type': 'application/json'
         }
       })

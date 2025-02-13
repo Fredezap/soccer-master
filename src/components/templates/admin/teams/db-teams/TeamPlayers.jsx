@@ -17,7 +17,12 @@ const TeamPlayers = ({ dbTeam, getTeams }) => {
     setTeam({
       teamId: dbTeam.teamId,
       name: dbTeam.name,
-      players: dbTeam.Players
+      players: dbTeam.Players,
+      logo: {
+        reader: null,
+        url: dbTeam.logoUrl,
+        file: null
+      }
     })
     navigate(ROUTES.ADMIN.TEAMS.UPDATE)
   }

@@ -4,12 +4,24 @@ export const useTeamStore = create((set, get) => ({
   team: {
     teamId: null,
     name: '',
-    players: []
+    players: [],
+    logo: {
+      reader: null,
+      url: null,
+      file: null
+    }
   },
 
   setTeam: (newTeam) => {
     set({ team: newTeam })
   },
+
+  setTeamLogo: (newLogoInfo) => set((state) => ({
+    team: {
+      ...state.team,
+      logo: { ...state.team.logo, ...newLogoInfo }
+    }
+  })),
 
   deletePlayer: (playerIndex) => {
     set(state => {
