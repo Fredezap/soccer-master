@@ -2,9 +2,6 @@ import $ from 'jquery'
 import '../../js-refactorized/jquery.countdown.min'
 
 const siteCountDownForTournament = function(time) {
-  // TODO: check time format received.
-  // TODO: then change endDate for time
-
   window.jQuery(function() {
     const endDate = new Date('2024-10-19T00:00:00')
 

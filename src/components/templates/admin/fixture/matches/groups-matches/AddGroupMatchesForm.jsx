@@ -19,10 +19,6 @@ const AddGroupMatchesForm = ({
   visitorTeam,
   match
 }) => {
-  // todo: PASO 3
-  // todo: chequear los valores de score para cuando se edita el knockout match. Ver bien ese endpoint
-  // todo: si no hay local team score y visitor, no pueden haber penales, y si solo 1 de ellos esta definido, tampoco
-
   return (
     <div>
       {!match?.localTeamScore && !match?.visitorTeamScore && (

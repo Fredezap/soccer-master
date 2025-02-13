@@ -1,8 +1,13 @@
 import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
+import logoGetter from '../../common/logo-getter/logoGetter'
 import MatchExtraInfo from './MatchExtraInfo'
 
 const FinishedMatches = () => {
   const { finishedMatches } = useOrderedMatches()
+
+  const getLogo = (team, isLocalTeam) => {
+    return logoGetter(team, isLocalTeam)
+  }
 
   return (
     <div style={{ marginTop: '60px' }} className="row bg-light p-4 rounded">
@@ -17,8 +22,10 @@ const FinishedMatches = () => {
                 <div className="widget-body">
                   <div className="widget-vs">
                     <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
-                      <div className="team-1 text-center">
-                        <img src="images/logo_1.png" alt="Image"></img>
+                      <div className="team-1 text-center match-data">
+                        <div className="img-box">
+                          <img src={getLogo(match?.LocalTeam, true)} alt="Image"></img>
+                        </div>
                         <h3>
                           {match?.LocalTeam?.name
                             ? match?.LocalTeam?.name
@@ -36,11 +43,13 @@ const FinishedMatches = () => {
                       <div>
                         <span className="vs"><span>VS</span></span>
                       </div>
-                      <div className="team-2 text-center">
-                        <img src="images/logo_2.png" alt="Image"></img>
+                      <div className="team-2 text-center match-data">
+                        <div className="img-box">
+                          <img src={getLogo(match?.visitorTeam, false)} alt="Image"></img>
+                        </div>
                         <h3>
-                          {match?.LocalTeam?.name
-                            ? match?.LocalTeam?.name
+                          {match?.visitorTeam?.name
+                            ? match?.visitorTeam?.name
                             : match?.visitorTeamPlaceholder
                               ? match.visitorTeamPlaceholder
                               : 'Team 2'}

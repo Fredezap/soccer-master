@@ -2287,7 +2287,6 @@ color: green;
 }
 
 .gULjcf {
-  /* todo: VER ESTO SEGUN CANTIDAD DE STAGES */
   flex: 2 2 0% !important;
 }
 /* End of Admin matches Styles */
@@ -2324,6 +2323,19 @@ color: green;
 .team-list li {
   width: 100%;
   padding: 5px 10px;
+}
+
+.match-data .img-box img {
+  max-width: 110px;
+  height: auto;
+}
+
+.match-data .img-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 110px;
 }
 
 .team-list span {

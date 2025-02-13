@@ -57,10 +57,24 @@ function AppContent() {
   // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
 
-  // todo: ver el countdown del partido
-  // todo: Agregar en formularios de cuando se agrega el equipo, que se pueda subir la imagen, logo del team
   // todo: Ver lo de agregar videos
   // todo: Ver si hago envio de emails (email ya hay o hago uno nuevo)
+  // todo: Luego ver de mostrar las brackets en caso de que hayan datos.
+  // todo: Por ultimo las news, los videos, el blog y footer, ver que se hace con eso
+
+  // TODO: siteCountDownForTournament => check time format received.
+  // TODO: then change endDate for time
+  // todo: ver el countdown del partido
+  // todo: no se porque aparece en el home y no en matches, si el componente
+  // todo: que se esta reenderizando es el mismo
+
+  // <div id="date-countdown2" className="pb-1">
+  // <span className="countdown-block"><span className="label" id="countdown-weeks">0</span> weeks </span>
+  // <span className="countdown-block"><span className="label" id="countdown-days">0</span> days </span>
+  // <span className="countdown-block"><span className="label" id="countdown-hours">0</span> hr </span>
+  // <span className="countdown-block"><span className="label" id="countdown-minutes">0</span> min </span>
+  // <span className="countdown-block"><span className="label" id="countdown-seconds">0</span> sec</span>
+  // </div>
 
   useEffect(() => {
     fetchTournaments()
@@ -90,13 +104,6 @@ function AppContent() {
     }
     return clean()
   }, [currentTournament])
-
-  // todo: Luego mostar tabla, quiza grupos en vez de una sola tabla.
-  // todo: Luego ver de mostrar las brackets en caso de que hayan datos.
-  // todo: A todo esto, deberia hacer un fetch de los datos de db cada unos 15 min? aprox?
-  // todo: Luego creo que pasar a matches y players seria la posta
-  // todo: seguir con contacto? creo que deiv queria dejar algo de eso. Inclusive si quieren agregar videos deberia mandarlos ahi.
-  // todo: Por ultimo las news, los videos, el blog y footer, ver que se hace con eso
 
   return (
     <>
