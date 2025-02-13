@@ -4,10 +4,7 @@ import Blog from '../../common/Blog'
 import Hero from '../../common/hero/Hero'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 import Videos from '../../common/Videos'
-
-const BASE_URL = import.meta.env.MODE === 'development'
-  ? import.meta.env.VITE_IMG_DEV_BASE_URL
-  : import.meta.env.VITE_IMG_PROD_BASE_URL
+import logoGetter from '../../common/logo-getter/logoGetter'
 
 const Teams = () => {
   const { players } = useHeroDetails()
@@ -20,14 +17,9 @@ const Teams = () => {
   }, [currentTournament])
 
   const getLogo = (teamId) => {
-    const defaultSrc = 'images/logo_1.png'
     const team = teams.find(team => team.teamId === teamId)
-
-    if (!team || !team.logoUrl) {
-      return defaultSrc
-    }
-
-    return `${BASE_URL}${team.logoUrl?.trim()}?t=${Date.now()}`
+    const isLocalTeam = teamId % 2 === 0
+    return logoGetter(team, isLocalTeam)
   }
 
   return (

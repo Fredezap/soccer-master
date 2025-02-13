@@ -43,7 +43,6 @@ export const useTeamStore = create((set, get) => ({
     const currentPlayers = get().team.players
 
     if (currentPlayers.some(player => player.name === newPlayer.name)) {
-      // TODO: Display a modal indicating the player is already in the list
       return
     }
 

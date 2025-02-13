@@ -94,11 +94,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     }
   }, [stages])
 
-  // todo: si tengo tiempo deberia en el edit, hacer 2 formularios apartes, uno para editar equipos y otro para editar resultados
-  // todo: si el partido ya tiene resultado, ver si da dejar la opcion de poder camiar equipos, ya que quiza generaria
-  // todo: incongruencia de datos o hay que manejarlo muy bien
-  // todo: Modificar resultados no hay problema, porque ya deberia estar seteado el partido
-
   useEffect(() => {
     setCustomError(null)
   }, [matchResult])
@@ -222,11 +217,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
       setShowSetScoreGroupMatchModal(true)
     }
   }
-
-  // todo: salir a nueva rama y luego
-  // todo: Ahora que ya estan seteados los puntos por stage, deberia intentar ver de agregar un resultado a un partido,
-  // todo: y a partir del partido, manejar los puntos, sumarlos y demas en el backend
-  // TODO: TENGO QUE TENER TABLA DE PARTIDOS C/ FECHA, RESULTADOS DE LOS PARTIDOS (SERIA LA MISMA?). TABLA PUNTOS
 
   return (
     <div style={{ marginTop: '50px' }}>

@@ -8,7 +8,6 @@ import { useTournamentsDetails } from '../../../../../../store/slices/useTournam
 import ROUTES from '../../../../../../store/constants/routes'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
-import TableScores from '../../../../home/TableScores'
 
 const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
@@ -19,55 +18,67 @@ const MatchesMain = ({ getStages }) => {
   const [dbTeams, setDbTeams] = useState([])
   const { currentTournament } = useTournamentsDetails()
   const [loading, setloading] = useState(false)
+  const navigate = useNavigate()
 
   const getGroups = async() => {
-    const url = '/admin/fixture/groups/get-all-groups-by-tournament'
-    const httpMethod = 'post'
-    const values = { tournamentId: currentTournament.tournamentId }
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    if (response?.success) {
-      setDbGroups(response.data.dbGroups)
-    }
+    try {
+      const url = '/admin/fixture/groups/get-all-groups-by-tournament'
+      const httpMethod = 'post'
+      const values = { tournamentId: currentTournament.tournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbGroups(response.data.dbGroups)
+      }
+    } catch (error) {}
   }
-  // TODO: MOSTRAR RESULTADOS EN LAS BRACKETS. VER RESULTADOS Y MODIFICACIONES EN FASE GRUPOS
+
   const getKnockoutStages = async() => {
-    const url = '/admin/fixture/stages/get-all-knockout-stages-by-tournament'
-    const httpMethod = 'post'
-    const values = { tournamentId: currentTournament.tournamentId }
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    if (response?.success) {
-      setDbKnockoutStages(response.data.dbKnockoutStages)
-    }
+    try {
+      const url = '/admin/fixture/stages/get-all-knockout-stages-by-tournament'
+      const httpMethod = 'post'
+      const values = { tournamentId: currentTournament.tournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbKnockoutStages(response.data.dbKnockoutStages)
+      }
+    } catch (error) {}
   }
 
   const getMatches = async(values) => {
-    const url = '/admin/fixture/matches/get-all'
-    const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    if (response?.success) {
-      setDbMatches(response.data.dbMatches)
-    }
+    try {
+      const url = '/admin/fixture/matches/get-all'
+      const httpMethod = 'post'
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbMatches(response.data.dbMatches)
+      }
+    } catch (error) {}
   }
 
-  const navigate = useNavigate()
-
   const getTeams = async() => {
-    setloading(true)
-    const values = { tournamentId: currentTournament.tournamentId }
-    const url = '/admin/teams/get-by-tournament'
-    const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    if (response?.success) {
-      setDbTeams(response.data?.tournament?.Teams)
-    }
-    setloading(false)
+    try {
+      setloading(true)
+      const values = { tournamentId: currentTournament.tournamentId }
+      const url = '/admin/teams/get-by-tournament'
+      const httpMethod = 'post'
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbTeams(response.data?.tournament?.Teams)
+      }
+    } catch (error) {}
   }
 
   useEffect(() => {
-    getGroups()
-    getKnockoutStages()
-    getMatches()
-    getTeams()
+    const fetchData = async() => {
+      setloading(true)
+      await getGroups()
+      await getKnockoutStages()
+      await getMatches()
+      await getTeams()
+      setloading(false)
+    }
+
+    fetchData()
   }, [])
 
   return (

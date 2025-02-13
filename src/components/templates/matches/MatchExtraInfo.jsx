@@ -2,9 +2,11 @@ import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetai
 
 const MatchExtraInfo = ({ match }) => {
   const { currentTournament } = useTournamentsDetails()
+  const foundStage = currentTournament.Stages.find(stage => stage.stageId === match.stageId)
+
   return (
     <div className="text-center widget-vs-contents mb-4">
-      <h4>{currentTournament.name || 'Tournament Name'}</h4>
+      <h4>{foundStage.name || ''}</h4>
       <p className="mb-5">
         <span className="d-block">{match?.date}</span>
         <span className="d-block">{match?.time} HS</span>

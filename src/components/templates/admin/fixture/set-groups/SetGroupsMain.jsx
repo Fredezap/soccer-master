@@ -36,36 +36,48 @@ const SetGroupsMain = () => {
   }
 
   const getTeams = async() => {
-    const url = '/admin/teams/get-by-tournament'
-    const httpMethod = 'post'
-    const values = { tournamentId: currentTournament.tournamentId }
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    if (response?.success) {
-      setDbTeams(response.data?.tournament?.Teams)
-    }
+    try {
+      const url = '/admin/teams/get-by-tournament'
+      const httpMethod = 'post'
+      const values = { tournamentId: currentTournament.tournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbTeams(response.data?.tournament?.Teams)
+      }
+    } catch (error) {}
   }
 
   const getGroups = async() => {
-    const url = '/admin/fixture/groups/get-all-groups-by-tournament'
-    const httpMethod = 'post'
-    const values = { tournamentId: currentTournament.tournamentId }
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-    if (response?.success) {
-      setDbGroups(response.data.dbGroups)
-    }
+    try {
+      const url = '/admin/fixture/groups/get-all-groups-by-tournament'
+      const httpMethod = 'post'
+      const values = { tournamentId: currentTournament.tournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbGroups(response.data.dbGroups)
+      }
+    } catch (error) {}
   }
 
   const getStages = async() => {
-    const paramValues = { tournamentId: currentTournament.tournamentId }
-    const url = '/admin/fixture/stages/get-all-by-tournament'
-    const response = await handleGetData({ paramValues, url, addMessage })
-    if (response.success) { setStages(response.data.dbStages) }
+    try {
+      const paramValues = { tournamentId: currentTournament.tournamentId }
+      const url = '/admin/fixture/stages/get-all-by-tournament'
+      const response = await handleGetData({ paramValues, url, addMessage })
+      if (response.success) {
+        setStages(response.data.dbStages)
+      }
+    } catch (error) {}
   }
 
-  const getData = () => {
-    getTeams()
-    getGroups()
-    getStages()
+  const getData = async() => {
+    if (!currentTournament?.tournamentId) {
+      return
+    }
+
+    await getTeams()
+    await getGroups()
+    await getStages()
   }
 
   useEffect(() => {

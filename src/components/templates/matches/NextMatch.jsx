@@ -1,8 +1,13 @@
 import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
+import logoGetter from '../../common/logo-getter/logoGetter'
 import MatchExtraInfo from './MatchExtraInfo'
 
 const NextMatch = () => {
   const { nextMatch } = useOrderedMatches()
+
+  const getLogo = (team, isLocalTeam) => {
+    return logoGetter(team, isLocalTeam)
+  }
 
   return (
     <div className="row mb-5">
@@ -17,15 +22,19 @@ const NextMatch = () => {
                 <div className="widget-body mb-3">
                   <div className="widget-vs">
                     <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
-                      <div className="team-1 text-center">
-                        <img src="images/logo_1.png" alt="Team 1"></img>
+                      <div className="team-2 text-center match-data">
+                        <div className="img-box">
+                          <img src={getLogo(nextMatch?.LocalTeam, true)} alt="Team 1"></img>
+                        </div>
                         <h3>{nextMatch?.LocalTeam?.name || 'Team 1'}</h3>
                       </div>
                       <div>
                         <span className="vs"><span>VS</span></span>
                       </div>
-                      <div className="team-2 text-center">
-                        <img src="images/logo_2.png" alt="Team 2"></img>
+                      <div className="team-2 text-center match-data">
+                        <div className="img-box">
+                          <img src={getLogo(nextMatch?.VisitorTeam, false)} alt="Team 2"></img>
+                        </div>
                         <h3>{nextMatch?.VisitorTeam?.name || 'Team 2'}</h3>
                       </div>
                     </div>
@@ -47,15 +56,3 @@ const NextMatch = () => {
 }
 
 export default NextMatch
-
-// todo: agregar esto de abajo y hacerlo funcionar si me sobra tiempo
-// todo: no se porque aparece en el home y no en matches, si el componente
-// todo: que se esta reenderizando es el mismo
-
-// <div id="date-countdown2" className="pb-1">
-// <span className="countdown-block"><span className="label" id="countdown-weeks">0</span> weeks </span>
-// <span className="countdown-block"><span className="label" id="countdown-days">0</span> days </span>
-// <span className="countdown-block"><span className="label" id="countdown-hours">0</span> hr </span>
-// <span className="countdown-block"><span className="label" id="countdown-minutes">0</span> min </span>
-// <span className="countdown-block"><span className="label" id="countdown-seconds">0</span> sec</span>
-// </div>
