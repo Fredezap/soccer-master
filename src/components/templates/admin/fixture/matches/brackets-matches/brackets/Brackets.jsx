@@ -4,7 +4,6 @@ import { Bracket, Seed, SeedItem, SeedTeam } from 'react-brackets'
 import { Button } from 'react-bootstrap'
 import EditKnockoutMatchModal from '../modals/EditKnockoutMatchModal'
 import DeleteKnockoutMatchModal from '../modals/DeleteKnockoutMatchModal'
-import { string } from 'yup'
 import { CiEdit } from 'react-icons/ci'
 import { MdDeleteForever } from 'react-icons/md'
 

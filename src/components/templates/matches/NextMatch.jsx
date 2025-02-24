@@ -1,22 +1,48 @@
+import { useEffect } from 'react'
 import { useOrderedMatches } from '../../../store/slices/useOrderedMatches'
 import logoGetter from '../../common/logo-getter/logoGetter'
 import MatchExtraInfo from './MatchExtraInfo'
+import siteCountDownForNextMatch from '../../../js/main/site/siteCountDownForNextMatch'
+import { useNextMatchRemainingTime } from '../../../store/slices/useNextMatchRemainingTime'
+import getTournaments from '../../common/getters/GetTournaments'
 
-const NextMatch = () => {
+const NextMatch = ({ backgroundStyle }) => {
   const { nextMatch } = useOrderedMatches()
+  const { remaining, setRemainingTime } = useNextMatchRemainingTime()
+  const { fetchTournaments } = getTournaments()
 
   const getLogo = (team, isLocalTeam) => {
     return logoGetter(team, isLocalTeam)
   }
 
+  const handleCountdownFinish = (status) => {
+    if (status !== remaining) {
+      setRemainingTime(status)
+    }
+  }
+
+  const { countdown } = siteCountDownForNextMatch(handleCountdownFinish)
+
+  useEffect(() => {
+    if (!remaining) {
+      fetchTournaments()
+    }
+  }, [remaining])
+
+  useEffect(() => {
+    if (nextMatch?.date) {
+      countdown(nextMatch)
+    }
+  }, [nextMatch])
+
   return (
     <div className="row mb-5">
       <div className="col-lg-12">
-        <div className="widget-next-match">
+        <div className={`widget-next-match ${backgroundStyle}`}>
           <div className="widget-title">
             <h3>Next Match</h3>
           </div>
-          {nextMatch.length !== 0
+          {nextMatch && nextMatch.length !== 0
             ? (
               <div>
                 <div className="widget-body mb-3">
@@ -41,12 +67,12 @@ const NextMatch = () => {
                   </div>
                 </div>
 
-                <MatchExtraInfo match={nextMatch} />
+                <MatchExtraInfo match={nextMatch} isNextMatch={true} />
               </div>
             )
             : (
               <div className="no-info-founded">
-                <span>No match info founded</span>
+                <span>No match found</span>
               </div>
             )}
         </div>

@@ -14,7 +14,7 @@ const UpcomingMatches = () => {
       <div className="col-12 title-section">
         <h2 className="heading">Upcoming Matches</h2>
       </div>
-      {upcomingMatches.length !== 0
+      {upcomingMatches !== null && upcomingMatches.length !== 0
         ? (
           upcomingMatches.map((match, index) => (
             <div key={match.matchId || index} className="col-lg-6 mb-4">

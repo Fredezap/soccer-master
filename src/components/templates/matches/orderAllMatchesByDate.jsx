@@ -10,9 +10,8 @@ const orderAllMatchesByDate = () => {
   const setAndOrderMatchesByDate = () => {
     if (!currentTournament || !currentTournament.Stages) return
 
-    // Obtener la fecha y hora local del sistema
     const nowLocal = new Date()
-    const nowTime = nowLocal.getTime() // Timestamp en milisegundos para comparación
+    const nowTime = nowLocal.getTime()
 
     const allMatches = currentTournament.Stages.flatMap(stage => stage.Matches || [])
       .map(match => {
