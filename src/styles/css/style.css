@@ -639,8 +639,9 @@ h1, h2, h3, h4, h5,
       font-size: 2rem;
       display: block; }
 
-/* #date-countdown2 {
-  margin-bottom: 20px; }
+#date-countdown2 {
+  margin-bottom: 20px;
+  margin-top: 5px; }
   #date-countdown2 .countdown-block {
     display: inline-block;
     font-size: 12px;
@@ -654,14 +655,7 @@ h1, h2, h3, h4, h5,
     #date-countdown2 .countdown-block .label {
       line-height: 1.2;
       font-size: 1rem;
-      display: block; } */
-
-#date-countdown2 {
-  display: flex;
-  justify-content: center;
-  font-weight: bold;
-  margin-bottom: 50px;
-}
+      display: block; }
 
 .tournament-time {
   margin-bottom: 0;
@@ -1924,8 +1918,13 @@ color: green;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  max-width: 100%;
   text-align: center;
+  padding: 100px;
+}
+
+.bracket {
+  max-width: 100%;
 }
 
 .brackets-component .group-box {
@@ -1944,9 +1943,11 @@ color: green;
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
   gap: 10px;
   margin-top: 50px;
 }
+
 
 .brackets-box button {
   margin-top: 80px;
@@ -2702,6 +2703,32 @@ color: green;
   flex-direction: column;
   gap: 30px;
 }
+
+.team-score-logo {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.team-score-logo div {
+  min-width: 40px;
+  width: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.team-score-logo img {
+  width: 100%;
+  max-width: 40px;
+}
+
+.team-score-logo strong {
+  flex-grow: 1;
+  white-space: nowrap;
+}
+
 
 .group-title {
   padding: 10px 0;

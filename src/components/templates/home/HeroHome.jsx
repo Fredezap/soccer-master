@@ -19,10 +19,10 @@ const HeroHome = () => {
               <span className="countdown-block"><span className="label" id="countdown-seconds"></span> sec</span>
             </div>
             <h5 id="date-countdown2"></h5>
-            <p>
-              {/* <a href="#" className="btn btn-primary py-3 px-4 mr-3">Book Ticket</a> */}
-              {/* <a href="#" className="more light">Learn More</a> */}
-            </p>
+            {/* <p> */}
+            {/* <a href="#" className="btn btn-primary py-3 px-4 mr-3">Book Ticket</a> */}
+            {/* <a href="#" className="more light">Learn More</a> */}
+            {/* </p> */}
           </div>
         </div>
       </div>

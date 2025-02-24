@@ -16,7 +16,7 @@ import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin.js'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore.js'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore.js'
 import getTournaments from '../../../../../common/getters/GetTournaments.jsx'
-import TableScores from '../../../../home/TableScores.jsx'
+import TableScores from '../../../../home/table-scores/TableScores'
 
 const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const { stages } = useStagesStore()

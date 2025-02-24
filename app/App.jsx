@@ -48,7 +48,7 @@ function AppContent() {
   const { setShowMessager } = useMessageStore()
   const { fetchTournaments } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
-
+  console.log('currentPath: ', currentPath)
   useEffect(() => {
     const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)
     setShowMessager(checkIfNeedsMessager)
@@ -59,51 +59,23 @@ function AppContent() {
 
   // todo: Ver lo de agregar videos
   // todo: Ver si hago envio de emails (email ya hay o hago uno nuevo)
-  // todo: Luego ver de mostrar las brackets en caso de que hayan datos.
   // todo: Por ultimo las news, los videos, el blog y footer, ver que se hace con eso
-
-  // TODO: siteCountDownForTournament => check time format received.
-  // TODO: then change endDate for time
-  // todo: ver el countdown del partido
-  // todo: no se porque aparece en el home y no en matches, si el componente
-  // todo: que se esta reenderizando es el mismo
-
-  // <div id="date-countdown2" className="pb-1">
-  // <span className="countdown-block"><span className="label" id="countdown-weeks">0</span> weeks </span>
-  // <span className="countdown-block"><span className="label" id="countdown-days">0</span> days </span>
-  // <span className="countdown-block"><span className="label" id="countdown-hours">0</span> hr </span>
-  // <span className="countdown-block"><span className="label" id="countdown-minutes">0</span> min </span>
-  // <span className="countdown-block"><span className="label" id="countdown-seconds">0</span> sec</span>
-  // </div>
 
   useEffect(() => {
     fetchTournaments()
   }, [])
 
   useEffect(() => {
-    if (!currentTournament || Object.entries(currentTournament).length === 0) return
+    if (!currentPath || currentPath === '/') return
 
-    const tournamentId = currentTournament.tournamentId
-    const foundedTournament = tournaments.find(tournament => tournament.tournamentId === tournamentId)
+    if (checkPathsNoNeedTournament(currentPath)) return
+    if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN)
 
-    if (tournamentId && foundedTournament) {
-      setCurrentTournament(foundedTournament)
-    }
-  }, [currentTournament, tournaments])
-
-  useEffect(() => {
-    if (checkPathsNoNeedTournament(currentPath)) return // check if path no need a tournament data to avoid navigate main (next line)
-    if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN) // if needs a tournament but it does not have info, navigate to main
     main(currentTournament)
     setAndOrderMatchesByDate()
-    const interval = setInterval(setAndOrderMatchesByDate, 5 * 60 * 1000)
-    Fancybox.bind('[data-fancybox]')
-    const clean = () => {
-      clearInterval(interval)
-      siteSticky()
-    }
-    return clean()
-  }, [currentTournament])
+
+    return siteSticky()
+  }, [currentPath, currentTournament])
 
   return (
     <>

@@ -10,7 +10,7 @@ import '../../styles/scss/index'
 
 const main = function(currentTournament) {
   siteCarousel()
-  siteCountDownForNextMatch(currentTournament)
+  siteCountDownForTournament(currentTournament)
   siteDatePicker()
   siteMenuClone()
   siteScroll()

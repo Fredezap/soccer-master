@@ -9,14 +9,16 @@ const FinishedMatches = () => {
     return logoGetter(team, isLocalTeam)
   }
 
+  const reversedFinishedMatches = [...finishedMatches].reverse()
+
   return (
     <div style={{ marginTop: '60px' }} className="row bg-light p-4 rounded">
       <div className="col-12 title-section">
         <h2 className="heading">Finished Matches</h2>
       </div>
-      {finishedMatches.length !== 0
+      {reversedFinishedMatches !== null && reversedFinishedMatches.length !== 0
         ? (
-          finishedMatches.map((match, index) => (
+          reversedFinishedMatches.map((match, index) => (
             <div key={match.matchId || index} className="col-lg-6 mb-4">
               <div className="bg-light p-4 rounded">
                 <div className="widget-body">
