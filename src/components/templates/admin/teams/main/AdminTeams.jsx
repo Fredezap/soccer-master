@@ -59,7 +59,7 @@ const AdminTeams = () => {
   return (
     <div>
       <Hero title={adminTeams.title} />
-      <div className="admin-teams-main">
+      <div className="bg-light admin-teams-main">
         <p>SET THE TEAMS HERE</p>
         <div className="show-buttons">
           <Button onClick={() => setShowDbTeams(!showDbTeams)} variant="outline-info">{showDbTeams ? 'Hide teams' : 'show teams'}</Button>

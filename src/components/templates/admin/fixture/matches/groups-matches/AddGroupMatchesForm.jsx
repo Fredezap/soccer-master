@@ -32,26 +32,30 @@ const AddGroupMatchesForm = ({
           visitorTeam={visitorTeam}
         />
       )}
-      <ChooseDateAndLocationForm
-        formAction={formAction}
-        setCustomError={setCustomError}
-        locationAndDateformData={locationAndDateformData}
-        setLocationAndDateformData={setLocationAndDateformData}
-      />
-      <div className="confirm-button">
-        <Button
-          disabled={customError}
-          variant="outline-success"
-          onClick={() => handleConfirmGroupMatch()}
-        >
-          {formAction}
-        </Button>
-        {customError && (
-          <p className="form-message error-message">
-            {customError}
-          </p>
-        )}
-      </div>
+      {selectedGroup && selectedGroup.Teams.length > 0 && (
+        <div>
+          <ChooseDateAndLocationForm
+            formAction={formAction}
+            setCustomError={setCustomError}
+            locationAndDateformData={locationAndDateformData}
+            setLocationAndDateformData={setLocationAndDateformData}
+          />
+          <div className="confirm-button">
+            <Button
+              disabled={customError}
+              variant="outline-success"
+              onClick={() => handleConfirmGroupMatch()}
+            >
+              {formAction}
+            </Button>
+            {customError && (
+              <p className="form-message error-message">
+                {customError}
+              </p>
+            )}
+          </div>
+        </div>
+      )}
     </div>
   )
 }

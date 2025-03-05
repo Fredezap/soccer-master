@@ -29,7 +29,7 @@ const AdminMain = () => {
   return (
     <div>
       <Hero title={adminMain.title} />
-      <div className="admin-all-mains">
+      <div className="admin-all-mains bg-light">
         <h2>Tournaments</h2>
         {tournaments.length === 0
           ? (
@@ -58,9 +58,9 @@ const AdminMain = () => {
               </ListGroup>
             </div>
           )}
-      </div>
-      <div onClick={handleCreateTournament} className="create-tournament-link">
-        <p>Create tournament</p>
+        <div onClick={handleCreateTournament} className="create-tournament-link">
+          <p>Create tournament</p>
+        </div>
       </div>
     </div>
   )

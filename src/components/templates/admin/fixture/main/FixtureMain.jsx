@@ -34,7 +34,7 @@ const FixtureMain = () => {
   return (
     <div>
       <Hero title={adminFixture.title} />
-      <div className="admin-all-mains">
+      <div className="bg-light admin-fixture">
         <div className="admin-settings-info">
           <h5 className="title">How does the website work?</h5>
           <p>As an admin, here’s how to set up the tournament step-by-step:</p>
@@ -54,7 +54,7 @@ const FixtureMain = () => {
           <p>Following these steps will create a well-organized tournament structure, allowing for a clear schedule and easy team management.</p>
         </div>
 
-        <div className="admin-fixture-buttons bg-dark">
+        <div className="admin-fixture-buttons">
           <Button onClick={() => setShowStages(!showStages)} variant="outline-success">
             {showStages ? 'Hide stages' : 'Show stages'}
           </Button>

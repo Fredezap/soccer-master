@@ -1,4 +1,3 @@
-import { data } from 'jquery'
 import { useMessageStore } from '../../../store/slices/useMessageStore.js'
 import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore.js'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'

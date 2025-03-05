@@ -1,10 +1,11 @@
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
+import bgImage from '../../../../src/images/bg_3.jpg'
 
 const Hero = ({ title }) => {
   const { currentTournament } = useTournamentsDetails()
 
   return (
-    <div className="hero overlay" style={{ backgroundImage: 'url(\'images/bg_3.jpg\')' }}>
+    <div className="hero overlay" style={{ backgroundImage: `url(${bgImage})` }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg mx-auto text-center">

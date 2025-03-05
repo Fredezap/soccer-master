@@ -5,9 +5,9 @@ const MatchExtraInfo = ({ match, isNextMatch }) => {
   const foundStage = currentTournament?.Stages?.find(stage => stage.stageId === match?.stageId)
 
   return (
-    <div className="text-center widget-vs-contents mb-4">
+    <div className="text-center widget-vs-contents">
       <h4>{foundStage?.name || ''}</h4>
-      <p className="mb-5">
+      <p className="mb-4">
         <span className="d-block">{match?.date}</span>
         <span className="d-block">{match?.time} HS</span>
         <strong className="text-primary">{match?.location || 'Unknown Venue'}</strong>

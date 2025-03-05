@@ -11,7 +11,7 @@ const siteCountDownForTournament = function(currentTournament) {
 
   $('#date-countdown').show().find('.label').text('--')
   $('#date-countdown2').hide().html('')
-  // console.log(currentTournament.date)
+
   if (!currentTournament?.date) {
     $('#date-countdown').hide()
     $('#date-countdown2').show().html('No upcoming tournament!')

@@ -26,11 +26,15 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
         {round.seeds.map((seed) => (
           <div key={seed.id}>
             <div className="match-item">
-              <p>{seed?.teams[0]?.name}</p>
-              <p>VS</p>
-              <p>{seed?.teams[1]?.name}</p>
-              <CiEdit onClick={() => onSetTeams(seed, 'edit')} className="edit-icon"/>
-              <MdDeleteForever onClick={() => onSetTeams(seed, 'delete')} className="delete-icon" />
+              <div className="item-teams">
+                <p>{seed?.teams[0]?.name}</p>
+                <p>VS</p>
+                <p>{seed?.teams[1]?.name}</p>
+              </div>
+              <div className="item-buttons">
+                <CiEdit onClick={() => onSetTeams(seed, 'edit')} className="edit-icon"/>
+                <MdDeleteForever onClick={() => onSetTeams(seed, 'delete')} className="delete-icon" />
+              </div>
             </div>
           </div>
         ))}
@@ -91,10 +95,11 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
                 <p>No matches set for any knockout stage yet</p>
               )
               : (
-                <div>
+                <div className="bracket">
                   <Bracket
                     rounds={rounds}
-                    renderSeedComponent={(seed) => <CustomSeed seed={seed} />}
+                    renderSeedComponent={(seed) => <CustomSeed seed={seed} breakpoint={992} />
+                    }
                   />
                   <div>
                     <Button

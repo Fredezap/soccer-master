@@ -47,7 +47,7 @@ const NextMatch = ({ backgroundStyle }) => {
               <div>
                 <div className="widget-body mb-3">
                   <div className="widget-vs">
-                    <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
+                    <div className="next-match-teams">
                       <div className="team-2 text-center match-data">
                         <div className="img-box">
                           <img src={getLogo(nextMatch?.LocalTeam, true)} alt="Team 1"></img>

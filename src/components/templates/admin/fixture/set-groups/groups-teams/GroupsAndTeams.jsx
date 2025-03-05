@@ -46,7 +46,7 @@ const GroupsAndTeams = ({ dbGroups, handleAddTeamToGroup, getData }) => {
                   </div>
                 )
                 : (
-                  <div>
+                  <div className="stage-points-box">
                     <div className="stage-points" onClick={() => handleSetPointsPerMatch(stageGroups.Stage.stageId)}>
                       <span>
                         <FaCheckCircle color="green" size={20} />

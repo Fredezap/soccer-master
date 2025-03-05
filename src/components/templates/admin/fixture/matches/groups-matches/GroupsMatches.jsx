@@ -219,9 +219,9 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   }
 
   return (
-    <div style={{ marginTop: '50px' }}>
-      <hr style={{ borderColor: 'white', marginBottom: '50px' }}></hr>
-      <h4 style={{ textAlign: 'center' }}>GROUPS</h4>
+    <div className="groups-matches-main">
+      <hr></hr>
+      <h4>Group matches</h4>
       {stages?.filter((stage) => stage.type === 'group')?.length > 0
         ? (
           <div className="group-component">
@@ -233,10 +233,10 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                     <h6
                       onClick={() => handleShowGroupMatchesDetail(stageGroups)}
                     >
-                      {stageGroups.name}
+                      {stageGroups.name}AA
                     </h6>
                     {showGroupMatchesDetail === stageGroups.stageId && (
-                      <div className="group-box">
+                      <div>
                         {selectedGroupStage && (
                           <div>
                             <MatchesByDate
@@ -284,11 +284,14 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                   </div>
                 ))}
             </div>
+            <h4 style={{ marginTop: '100px' }}>
+              All groups table scores
+            </h4>
             <h6 className="show-table-scores" onClick={() => setShowScoreTable(!showScoreTable)}>
-              All groups scores
+              {!showScoreTable ? 'Show scores' : 'Hide scores'}
             </h6>
             {showScoreTable && (
-              <TableScores />
+              <TableScores backgroundStyle="bg-light" />
             )}
           </div>
         )

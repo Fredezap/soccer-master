@@ -8,6 +8,7 @@ import GroupsAndTeams from './groups-teams/GroupsAndTeams'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 import { useStagesStore } from '../../../../../store/slices/useStagesStore'
 import handleGetData from '../../handleGetData'
+import getTournaments from '../../../../common/getters/GetTournaments'
 
 const SetGroupsMain = () => {
   const [dbTeams, setDbTeams] = useState([])
@@ -21,6 +22,7 @@ const SetGroupsMain = () => {
   const [availableTeams, setAvailableTeams] = useState([])
   const [selectedGroup, setSelectedGroup] = useState(null)
   const { currentTournament } = useTournamentsDetails()
+  const { fetchTournaments } = getTournaments()
 
   const checkAndSetAvailableTeams = (stageId) => {
     const allocatedTeamIds = dbGroups[stageId]?.groups
@@ -78,6 +80,7 @@ const SetGroupsMain = () => {
     await getTeams()
     await getGroups()
     await getStages()
+    await fetchTournaments()
   }
 
   useEffect(() => {
