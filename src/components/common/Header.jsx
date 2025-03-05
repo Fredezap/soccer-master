@@ -1,5 +1,6 @@
 import ROUTES from '../../store/constants/routes.js'
 import useCurrentRouteStore from '../../store/slices/useCurrentRouteStore.js'
+import Logo from '../../images/logo.png'
 
 const Header = () => {
   const { current } = useCurrentRouteStore()
@@ -18,7 +19,7 @@ const Header = () => {
         <div className="d-flex align-items-center">
           <div className="site-logo">
             <a href={ROUTES.MAIN}>
-              <img src="images/logo.png" alt="Logo" />
+              <img src={Logo} alt="Logo" />
             </a>
           </div>
           <div className="ml-auto">

@@ -11,7 +11,7 @@ const SetGroupMatchResult = ({ matchResult, setMatchResult }) => {
 
   return (
     <div className="form-input-box">
-      <div className="grid-colums">
+      <div className="grid-colums set-score">
         <label htmlFor="localTeamScore">Local team score:</label>
         <input
           type="number"

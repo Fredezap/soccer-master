@@ -2,8 +2,10 @@
 import { Bracket, Seed, SeedItem, SeedTeam } from 'react-brackets'
 
 const BracketsForUsers = ({ rounds }) => {
-  const CustomSeed = ({ seed, breakpoint, roundIndex }) => {
+  const CustomSeed = ({ seed, breakpoint }) => {
     const { matchNumber, date, teams, match } = seed.seed
+    if (!seed && !seed.id) return (<div></div>)
+
     return (
       <Seed mobileBreakpoint={breakpoint} style={{ fontSize: 12 }}>
         <SeedItem>
@@ -40,7 +42,6 @@ const BracketsForUsers = ({ rounds }) => {
         <div style={{ marginTop: '5px', fontSize: '10px', textAlign: 'center' }}>
           {date}
         </div>
-        {roundIndex !== 0 && <div></div>}
       </Seed>
     )
   }
@@ -50,7 +51,7 @@ const BracketsForUsers = ({ rounds }) => {
       {Array.isArray(rounds) && rounds.length > 0
         ? (
           <div className="brackets-box">
-            {rounds.every((round) => round.seeds.length === 0)
+            {rounds.every((round, index) => round.seeds.length === 0)
               ? (
                 <p>No matches set for any knockout stage yet</p>
               )
@@ -58,7 +59,7 @@ const BracketsForUsers = ({ rounds }) => {
                 <div className="bracket">
                   <Bracket
                     rounds={rounds}
-                    renderSeedComponent={(seed) => <CustomSeed seed={seed} />}
+                    renderSeedComponent={(seed) => <CustomSeed seed={seed} breakpoint={992} />}
                   />
                 </div>
               )}

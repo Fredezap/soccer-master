@@ -46,34 +46,43 @@ const SelectTeamsForm = ({
           </option>
         ))}
       </select>
-
       {selectedGroup && (
-        <div className="select-team-vs">
-          <select
-            className="group-select"
-            value={localTeamValue}
-            onChange={(event) => teamChange({ teamType: 'local', event })}
-          >
-            <option value="">Select a team</option>
-            {selectedGroup.Teams?.map(team => (
-              <option key={team.teamId} value={team.teamId}>{team.name}</option>
-            ))}
-          </select>
+        selectedGroup.Teams.length > 1
+          ? (
+            <div className="select-team-vs">
+              <select
+                className="group-select"
+                value={localTeamValue}
+                onChange={(event) => teamChange({ teamType: 'local', event })}
+              >
+                <option value="">Select a team</option>
+                {selectedGroup.Teams?.map(team => (
+                  <option key={team.teamId} value={team.teamId}>{team.name}</option>
+                ))}
+              </select>
 
-          <p>VS</p>
+              <p>VS</p>
 
-          <select
-            className="group-select"
-            value={visitorTeamValue}
-            onChange={(event) => teamChange({ teamType: 'visitor', event })}
-          >
-            <option value="">Select a team</option>
-            {selectedGroup.Teams?.map(team => (
-              <option key={team.teamId} value={team.teamId}>{team.name}</option>
-            ))}
-          </select>
-        </div>
-      )}
+              <select
+                className="group-select"
+                value={visitorTeamValue}
+                onChange={(event) => teamChange({ teamType: 'visitor', event })}
+              >
+                <option value="">Select a team</option>
+                {selectedGroup.Teams?.map(team => (
+                  <option key={team.teamId} value={team.teamId}>{team.name}</option>
+                ))}
+              </select>
+            </div>
+
+          )
+          : (
+            <div>
+              <p style={{ color: 'yellow' }}>
+              Please go back to groups section and add at least 2 teams to the group before proceeding
+              </p>
+            </div>
+          ))}
     </div>
   )
 }

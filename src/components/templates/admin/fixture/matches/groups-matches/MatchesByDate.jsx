@@ -3,7 +3,7 @@ import formatTime from '../../../../../common/formatTime'
 import { CiEdit } from 'react-icons/ci'
 import { IoFootballOutline } from 'react-icons/io5'
 
-const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handleShowModal }) => {
+const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handleShowModal, backgroundStyle }) => {
   return (
     <div className="group-matches-details">
       {selectedGroupStage && (
@@ -13,58 +13,58 @@ const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handle
             : Object.entries(groupedMatches)
               .sort(([dateA], [dateB]) => new Date(dateA) - new Date(dateB)) // Ordena por fecha
               .map(([date, matches]) => (
-                <div className="widget-next-match matches matches-by-date" key={date}>
-                  <h4 className="text-white">{date}</h4>
-                  <table className="table custom-table teams">
-                    <thead>
-                      <tr>
-                        <th>Match</th>
-                        <th>Group</th>
-                        <th>Time</th>
-                        <th>Local Team</th>
-                        <th></th>
-                        <th>Visitor Team</th>
-                        <th>Location</th>
-                        <th className="actions-column">Actions</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      {matches.map((match, index) => (
-                        <tr className="match-table-row" key={match.matchId || index}>
-                          <td><strong className="text-white">{index + 1}</strong></td>
-                          <td>{match.LocalTeam.Groups.find(group => group.stageId === stageGroups.stageId)?.name || 'No Group'}</td>
-                          <td><strong className="text-white">{formatTime(match.time)}</strong></td>
-                          <td>
-                            <strong className="text-white">{match.LocalTeam.name}</strong>
-                            {' '}
-                            <strong className="text-white">
-                              {match.localTeamScore !== null && match.localTeamScore !== undefined
-                                ? `(${match.localTeamScore})`
-                                : '(-)'}
-                            </strong>
-                          </td>
-                          <td><strong className="text-white">VS</strong></td>
-                          <td>
-                            <strong className="text-white">{match.VisitorTeam.name}</strong>
-                            {' '}
-                            <strong className="text-white">
-                              {match.visitorTeamScore !== null && match.visitorTeamScore !== undefined
-                                ? `(${match.visitorTeamScore})`
-                                : '(-)'}
-                            </strong>
-                          </td>
-                          <td><strong className="text-white">{match.location}</strong></td>
-                          <td className="actions-column">
-                            <div className="actions-icons">
-                              <MdDeleteForever onClick={() => handleShowModal(match, 'delete')} className="delete-icon" />
-                              <CiEdit onClick={() => handleShowModal(match, 'edit')} className="edit-icon" />
-                              <IoFootballOutline onClick={() => handleShowModal(match, 'set-score')} style={{ fontSize: '20px' }}/>
-                            </div>
-                          </td>
-                        </tr>
-                      ))}
-                    </tbody>
-                  </table>
+                <div key={date} className={`p-4 rounded ${backgroundStyle}`}>
+                  <div className="col-12 title-section">
+                    <h3 className="heading">{date}</h3>
+                  </div>
+                  <div className="groups-score-data">
+                    <div className="bg-light rounded table-container">
+                      <div className="group-wrapper">
+                        <div className="table-responsive">
+                          <table className="table custom-table teams">
+                            <thead>
+                              <tr>
+                                <th>Match</th>
+                                <th>Group</th>
+                                <th>Time</th>
+                                <th>Local Team</th>
+                                <th></th>
+                                <th>Visitor Team</th>
+                                <th>Location</th>
+                                <th className="actions-column">Actions</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              {matches.map((match, index) => (
+                                <tr className="match-table-row" key={match.matchId || index}>
+                                  <td><strong className="text-white">{index + 1}</strong></td>
+                                  <td>{match.LocalTeam.Groups.find(group => group.stageId === stageGroups.stageId)?.name || 'No Group'}</td>
+                                  <td><strong className="text-white">{formatTime(match.time)}</strong></td>
+                                  <td className="team-score-logo">
+                                    <strong className="text-white">{match.LocalTeam.name}</strong>
+                                    <strong className="text-white">{match.localTeamScore !== null ? `(${match.localTeamScore})` : '(-)'}</strong>
+                                  </td>
+                                  <td><strong className="text-white">VS</strong></td>
+                                  <td className="team-score-logo">
+                                    <strong className="text-white">{match.VisitorTeam.name}</strong>
+                                    <strong className="text-white">{match.visitorTeamScore !== null ? `(${match.visitorTeamScore})` : '(-)'}</strong>
+                                  </td>
+                                  <td><strong className="text-white">{match.location}</strong></td>
+                                  <td className="actions-column">
+                                    <div className="actions-icons">
+                                      <MdDeleteForever onClick={() => handleShowModal(match, 'delete')} className="delete-icon" />
+                                      <CiEdit onClick={() => handleShowModal(match, 'edit')} className="edit-icon" />
+                                      <IoFootballOutline onClick={() => handleShowModal(match, 'set-score')} style={{ fontSize: '20px' }}/>
+                                    </div>
+                                  </td>
+                                </tr>
+                              ))}
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               ))}
         </div>

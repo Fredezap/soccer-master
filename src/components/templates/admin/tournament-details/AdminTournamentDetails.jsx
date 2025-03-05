@@ -9,7 +9,7 @@ const AdminTournamentDetails = () => {
     <div>
       <Hero title={adminTournamentDetails.title} />
       <div>
-        <div className="admin-tournament-set-conent">
+        <div className="bg-light admin-tournament-set-conent">
           <p>SET THE TOURNAMENT DETAILS HERE</p>
           <TournamentDetailsForm />
         </div>

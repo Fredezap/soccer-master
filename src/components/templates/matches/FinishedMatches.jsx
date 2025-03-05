@@ -21,10 +21,10 @@ const FinishedMatches = () => {
           reversedFinishedMatches.map((match, index) => (
             <div key={match.matchId || index} className="col-lg-6 mb-4">
               <div className="bg-light p-4 rounded">
-                <div className="widget-body">
+                <div className="widget-body mb-3">
                   <div className="widget-vs">
-                    <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
-                      <div className="team-1 text-center match-data">
+                    <div className="next-match-teams">
+                      <div className="team-2 text-center match-data">
                         <div className="img-box">
                           <img src={getLogo(match?.LocalTeam, true)} alt="Image"></img>
                         </div>

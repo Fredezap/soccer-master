@@ -48,13 +48,21 @@ function AppContent() {
   const { setShowMessager } = useMessageStore()
   const { fetchTournaments } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
-  console.log('currentPath: ', currentPath)
+
   useEffect(() => {
+    // Check if show messages (just if path is Admin)
     const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)
     setShowMessager(checkIfNeedsMessager)
+
+    // Always when path change, scroll to top
+    const currentScroll = window.scrollY
+    if (currentScroll === 0) return
+    window.scrollTo({ top: currentScroll, behavior: 'instant' })
+    setTimeout(() => {
+      window.scrollTo({ top: 0, behavior: 'smooth' })
+    }, 10)
   }, [currentPath])
 
-  // TODO: DESPUES. Ver de sacar el partido seleccionado de Admin main
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
 
   // todo: Ver lo de agregar videos
@@ -63,6 +71,7 @@ function AppContent() {
 
   useEffect(() => {
     fetchTournaments()
+    console.log('ENTRO EN EFFECT')
   }, [])
 
   useEffect(() => {

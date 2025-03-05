@@ -1,6 +1,8 @@
+import bgImage from '../../../../src/images/bg_3.jpg'
+
 const HeroHomeNoTournament = () => {
   return (
-    <div className="hero custom-hero" style={{ backgroundImage: 'url(\'images/bg_3.jpg\')' }}>
+    <div className="hero custom-hero" style={{ backgroundImage: `url(${bgImage})` }}>
       <div className="container">
         <div>
           <div className="no-tournament-main">

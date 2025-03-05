@@ -23,7 +23,7 @@ const TournamentDetailsMain = () => {
         : (
           <div>
             <Hero title={adminTournamentDetails.title} />
-            <div className="admin-all-mains">
+            <div className="admin-all-mains bg-light">
               <div className="admin-tournament-options">
                 <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)}>
                   <span className="button-details"><AiOutlineCalendar />Tournament details</span>

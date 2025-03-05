@@ -68,7 +68,7 @@ const SetStagePointsModal = ({ showSetStagePointsModal, setShowSetStagePointsMod
             - 0 points for a loss.
         </p>
         <div className="form-input-box">
-          <div className="grid-colums">
+          <div className="grid-colums set-points">
             <label htmlFor="wonPoints">Won points:</label>
             <input
               type="number"
@@ -79,7 +79,7 @@ const SetStagePointsModal = ({ showSetStagePointsModal, setShowSetStagePointsMod
             />
           </div>
 
-          <div className="grid-colums">
+          <div className="grid-colums set-points">
             <label htmlFor="drawnPoints">Drawn points:</label>
             <input
               type="number"
@@ -90,7 +90,7 @@ const SetStagePointsModal = ({ showSetStagePointsModal, setShowSetStagePointsMod
             />
           </div>
 
-          <div className="grid-colums">
+          <div className="grid-colums set-points">
             <label htmlFor="lostPoints">Lost points:</label>
             <input
               type="number"

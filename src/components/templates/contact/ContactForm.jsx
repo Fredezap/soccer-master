@@ -23,7 +23,7 @@ const ContactForm = () => {
             </form>
           </div> */}
           <div className="col-lg-12 ml-auto">
-            <ul className="list-unstyled">
+            <ul className="list-unstyled contact-details">
               <li className="mb-2">
                 <strong className="text-white d-block">Address</strong>
                   Erlenmattstrasse 110 4058 Basel, Switzerland
