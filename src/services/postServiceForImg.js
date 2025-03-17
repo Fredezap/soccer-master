@@ -7,7 +7,10 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
     const formData = new FormData()
 
     for (const [key, value] of Object.entries(values)) {
+      console.log('KEY:', key)
+      console.log('value:', value)
       if (key === 'logo' && value.file instanceof File) {
+        console.log('ES LOGO, EL VALUE: ', value.file)
         formData.append('file', value.file)
       } else if (Array.isArray(value)) {
         formData.append(key, JSON.stringify(value))
@@ -21,7 +24,7 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
     }
 
     const { token = undefined, role = undefined } = authorizationValues || {}
-
+    console.log('formData', formData)
     try {
       const response = await apiInstance.post(url, formData, {
         headers: {

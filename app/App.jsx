@@ -34,6 +34,7 @@ import { useOrderedMatches } from '../src/store/slices/useOrderedMatches.js'
 import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
 import checkPathsNeedsMessager from '../src/components/common/message-manager/checkPathsNeedsMessager.js'
 import getTournaments from '../src/components/common/getters/GetTournaments.jsx'
+import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -54,13 +55,15 @@ function AppContent() {
     const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)
     setShowMessager(checkIfNeedsMessager)
 
-    // Always when path change, scroll to top
-    const currentScroll = window.scrollY
-    if (currentScroll === 0) return
-    window.scrollTo({ top: currentScroll, behavior: 'instant' })
-    setTimeout(() => {
-      window.scrollTo({ top: 0, behavior: 'smooth' })
-    }, 10)
+    // Scroll to top when path is Home
+    if (currentPath === ROUTES.HOME) {
+      const currentScroll = window.scrollY
+      if (currentScroll === 0) return
+      window.scrollTo({ top: currentScroll, behavior: 'instant' })
+      setTimeout(() => {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      }, 10)
+    }
   }, [currentPath])
 
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
@@ -102,6 +105,7 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.TEAMS.MAIN} element={<AdminTeams />} />
         <Route path={ROUTES.ADMIN.TEAMS.UPDATE} element={<AdminTeamsUpdate />} />
         <Route path={ROUTES.ADMIN.FIXTURE.MAIN} element={<FixtureMain />} />
+        <Route path={ROUTES.ADMIN.VIDEOS} element={<AdminVideos />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />

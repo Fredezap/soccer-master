@@ -1523,6 +1523,13 @@ color: green;
   width: 40%;
 }
 
+.set-video .video-button {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .show-password-box {
   display: flex;
   flex-direction: row;
@@ -1587,6 +1594,15 @@ color: green;
 .img-uploader-box p, label {
   color: white;
   margin: 0;
+}
+
+.img-uploader-box {
+  cursor: pointer;
+}
+
+.video-image-loaded {
+  display: flex;
+  gap: 20px;
 }
 
 .team-logo-form {
@@ -2487,6 +2503,9 @@ color: green;
   .brackets-component {
     padding: 50px 10px;
   }
+  .video-item {
+    padding: 10px !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -2633,6 +2652,71 @@ color: green;
 
 /* End Of User Teams Styles */
 
+/* Admin Videos Styles */
+
+.videos-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 40%;
+  gap: 20px;
+  padding: 50px;
+}
+
+.video-item {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  padding: 15px 20px;
+  background-color: rgb(45, 48, 40);
+}
+
+.video-title {
+  width: 100%;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 20px;
+}
+
+.admin-show-videos {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.video-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 20px 0 0;
+}
+
+.video-content .image-content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.video-image {
+  width: 100%; /* Esto hará que la imagen ocupe el 100% del ancho de su contenedor */
+  max-width: 200px; /* Limita el tamaño máximo del ancho */
+  max-height: 150px; /* Limita la altura máxima */
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
+}
+
+/* .video-delete-icon {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center; */
+/* } */
+/* End Of Admin Videos Styles */
 
 /* Admin setting groups Styles */
 .setting-groups-main {

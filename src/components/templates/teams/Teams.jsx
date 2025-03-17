@@ -72,7 +72,7 @@ const Teams = () => {
                 <span>No teams founded</span>
               </div>
             )}
-          {/* <Videos /> */}
+          <Videos />
           {/* <Blog /> */}
         </div>
       </div>
