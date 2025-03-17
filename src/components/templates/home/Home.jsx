@@ -75,7 +75,7 @@ const Home = () => {
         dbMatches={dbMatches}
         dbKnockoutStages={dbKnockoutStages}
       />
-      {/* <Videos /> */}
+      <Videos />
       {/* <Blog /> */}
     </>
   )

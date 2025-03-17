@@ -12,6 +12,7 @@ const ROUTES = {
     MAIN: '/admin',
     TOURNAMENT_DETAILS_MAIN: '/admin/tournament-details-main',
     TOURNAMENT_DETAILS: '/admin/tournament-details',
+    VIDEOS: '/admin/videos',
     TEAMS: {
       MAIN: '/admin/teams',
       UPDATE: '/admin/teams/update'

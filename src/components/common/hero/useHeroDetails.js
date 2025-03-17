@@ -35,7 +35,22 @@ const useHeroDetails = () => {
     title: 'Admin Fixture'
   }
 
-  return { players, matches, blog, contact, adminMain, adminTournamentDetails, adminTeams, adminTeamsUpdate, adminFixture }
+  const adminVideos = {
+    title: 'Admin Videos'
+  }
+
+  return {
+    players,
+    matches,
+    blog,
+    contact,
+    adminMain,
+    adminTournamentDetails,
+    adminTeams,
+    adminTeamsUpdate,
+    adminFixture,
+    adminVideos
+  }
 }
 
 export default useHeroDetails

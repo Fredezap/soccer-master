@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { FaArrowRight, FaArrowLeft, FaPlay } from 'react-icons/fa'
+import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails'
 
 const Videos = () => {
   const [videos, setVideos] = useState(null)
-
+  const { currentTournament } = useTournamentsDetails()
+  console.log('currentTournament: ', currentTournament)
   return (
-    !videos && (
+    videos && (
       <div className="site-section">
         <div className="container">
           <div className="row">
