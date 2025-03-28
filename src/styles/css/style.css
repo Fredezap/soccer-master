@@ -1602,6 +1602,9 @@ color: green;
 
 .video-image-loaded {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   gap: 20px;
 }
 
@@ -2709,14 +2712,16 @@ color: green;
   max-height: 150px; /* Limita la altura máxima */
   object-fit: cover; /* Asegura que la imagen cubra el espacio sin distorsionarse */
 }
-
-/* .video-delete-icon {
-  flex: 1;
-  display: flex;
-  justify-content: center;
-  align-items: center; */
-/* } */
 /* End Of Admin Videos Styles */
+
+
+/* User Videos Styles */
+
+.user-videos {
+  height: 350px;
+  object-fit:cover;
+}
+/* End Of User Videos Styles */
 
 /* Admin setting groups Styles */
 .setting-groups-main {

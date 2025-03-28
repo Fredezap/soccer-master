@@ -7,6 +7,9 @@ import siteCountDownForTournament from './site/siteCountDownForTournament'
 import siteCountDownForNextMatch from './site/siteCountDownForNextMatch'
 import '../../styles/css/index'
 import '../../styles/scss/index'
+import $ from 'jquery'
+import 'jquery.mb.ytplayer'
+import { Fancybox } from '@fancyapps/ui'
 
 const main = function(currentTournament) {
   siteCarousel()
@@ -15,10 +18,6 @@ const main = function(currentTournament) {
   siteMenuClone()
   siteScroll()
   siteStellar()
-
-  // $(function() {
-  //   $('#bgndVideo').YTPlayer()
-  // })
 }
 
 export default main
