@@ -19,7 +19,7 @@ const CreateVideoForm = () => {
   const { currentTournament } = useTournamentsDetails()
   const { setVideos } = useVideoStore()
   const [preview, setPreview] = useState(null)
-
+  console.log('file: ', file)
   const HandleImageError = () => {
     if (file === null) {
       setCustomError('Video image is requiered')

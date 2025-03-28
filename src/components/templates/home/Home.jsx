@@ -41,7 +41,7 @@ const Home = () => {
       }
     } catch (error) {}
   }
-
+  // TODO: DEIVID CAT
   const getTeams = async() => {
     try {
       const values = { tournamentId: currentTournament.tournamentId }
