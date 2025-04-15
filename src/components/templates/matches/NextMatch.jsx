@@ -9,7 +9,7 @@ import getTournaments from '../../common/getters/GetTournaments'
 const NextMatch = ({ backgroundStyle }) => {
   const { nextMatch } = useOrderedMatches()
   const { remaining, setRemainingTime } = useNextMatchRemainingTime()
-  const { fetchTournaments } = getTournaments()
+  const { fetchTournamentDetails } = getTournaments()
 
   const getLogo = (team, isLocalTeam) => {
     return logoGetter(team, isLocalTeam)
@@ -25,7 +25,7 @@ const NextMatch = ({ backgroundStyle }) => {
 
   useEffect(() => {
     if (!remaining) {
-      fetchTournaments()
+      fetchTournamentDetails()
     }
   }, [remaining])
 

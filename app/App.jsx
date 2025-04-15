@@ -35,6 +35,7 @@ import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
 import checkPathsNeedsMessager from '../src/components/common/message-manager/checkPathsNeedsMessager.js'
 import getTournaments from '../src/components/common/getters/GetTournaments.jsx'
 import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.jsx'
+import EmailSenderMain from '../src/components/templates/admin/email-sender/EmailSenderMain.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -44,10 +45,10 @@ function AppContent() {
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
 
-  const { currentTournament, setCurrentTournament, tournaments } = useTournamentsDetails()
+  const { currentTournament } = useTournamentsDetails()
   const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
-  const { fetchTournaments } = getTournaments()
+  const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
   useEffect(() => {
@@ -67,25 +68,20 @@ function AppContent() {
   }, [currentPath])
 
   // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
-
-  // todo: Ver lo de agregar videos
-  // todo: Ver si hago envio de emails (email ya hay o hago uno nuevo)
-  // todo: Por ultimo las news, los videos, el blog y footer, ver que se hace con eso
+  // todo: Por ultimo las news, el blog
+  // todo: probar todo en todas las paginas nuevamente, porque se cambio la estructura de consulta de db y de front tmb
 
   useEffect(() => {
-    fetchTournaments()
-    console.log('ENTRO EN EFFECT')
+    fetchAllTournaments()
+    if (currentTournament) fetchTournamentDetails({ paramTournament: currentTournament })
   }, [])
 
   useEffect(() => {
     if (!currentPath || currentPath === '/') return
-
     if (checkPathsNoNeedTournament(currentPath)) return
     if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN)
-
     main(currentTournament)
     setAndOrderMatchesByDate()
-
     return siteSticky()
   }, [currentPath, currentTournament])
 
@@ -106,6 +102,7 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.TEAMS.UPDATE} element={<AdminTeamsUpdate />} />
         <Route path={ROUTES.ADMIN.FIXTURE.MAIN} element={<FixtureMain />} />
         <Route path={ROUTES.ADMIN.VIDEOS} element={<AdminVideos />} />
+        <Route path={ROUTES.ADMIN.EMAIL_SENDER} element={<EmailSenderMain />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />

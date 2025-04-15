@@ -4,14 +4,23 @@ import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetai
 import formatDate from '../../common/formatDate'
 import { ListGroup } from 'react-bootstrap'
 import { FaTrophy } from 'react-icons/fa'
+import { useMessageStore } from '../../../store/slices/useMessageStore'
+import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore'
+import getTournaments from '../../common/getters/GetTournaments'
 
 const TournamentList = () => {
   const { tournaments, setCurrentTournament } = useTournamentsDetails()
+  const { addMessage } = useMessageStore()
+  const { fetchTournamentDetails } = getTournaments()
   const navigate = useNavigate()
 
-  const handleSelectTournament = (tournament) => {
-    setCurrentTournament(tournament)
-    navigate(ROUTES.HOME)
+  const handleSelectTournament = async(paramTournament) => {
+    const response = await fetchTournamentDetails({ paramTournament })
+    if (response?.success) navigate(ROUTES.HOME)
+    else {
+      addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
+      navigate(ROUTES.MAIN)
+    }
   }
 
   return (

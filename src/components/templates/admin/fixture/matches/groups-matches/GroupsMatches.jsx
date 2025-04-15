@@ -38,7 +38,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const [formAction, setFormAction] = useState(null)
   const { addMessage } = useMessageStore()
   const { setSubmittingForm } = useSubmittingFormStore()
-  const { fetchTournaments } = getTournaments()
+  const { fetchTournamentDetails } = getTournaments()
   const [matchResult, setMatchResult] = useState({
     localTeamScore: null,
     visitorTeamScore: null,
@@ -114,6 +114,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setShowConfirmMatchModal(true)
   }
 
+  const c = 0
   const handleConfirmScore = async() => {
     const localTeamResult = matchResult.localTeamScore
     const visitorTeamResult = matchResult.visitorTeamScore
@@ -142,11 +143,13 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     setShowConfirmMatchModal(false)
+
     if (response?.success) {
       getGroups()
       getStages()
-      fetchTournaments()
+      await fetchTournamentDetails()
     }
+
     setCustomError(null)
     setShowSetScoreGroupMatchModal(false)
   }

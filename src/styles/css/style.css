@@ -1973,7 +1973,7 @@ color: green;
 }
 
 .bracket {
-  max-width: 100%;
+  max-width: 85%;
 }
 
 .brackets-component .group-box {
@@ -2369,6 +2369,43 @@ color: green;
 }
 
 /* End of Admin matches Styles */
+
+/* Admin Email sender Styles */
+.add-email-item {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  justify-content: center;
+  gap: 20px;
+  background-color: #a6adb429;
+}
+
+.add-email-item input {
+  height: 100%;
+}
+
+.email-sender-box {
+  gap: 20px;
+}
+
+.new-emails-card {
+  background-color: rgb(178, 211, 151);
+}
+
+.removed-emails-card {
+  background-color: rgb(215, 41, 41);
+}
+
+.new-emails-card .list-group-item {
+  background-color: rgb(178, 211, 151);
+  color: #000;
+}
+
+.removed-emails-card .list-group-item {
+  background-color: rgb(215, 41, 41);
+  color: #000;
+}
+/* End of Admin Email sender Styles */
 
 /* User Teams Styles */
 .teams-main {

@@ -39,6 +39,10 @@ const useHeroDetails = () => {
     title: 'Admin Videos'
   }
 
+  const adminEmailSender = {
+    title: 'Admin email sender'
+  }
+
   return {
     players,
     matches,
@@ -49,7 +53,8 @@ const useHeroDetails = () => {
     adminTeams,
     adminTeamsUpdate,
     adminFixture,
-    adminVideos
+    adminVideos,
+    adminEmailSender
   }
 }
 

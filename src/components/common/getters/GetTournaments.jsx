@@ -4,30 +4,53 @@ import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetai
 import handleSubmitFormAdmin from '../../templates/admin/handleSubmitFormAdmin.js'
 
 const getTournaments = () => {
-  const { setTournaments, currentTournament, setCurrentTournament } = useTournamentsDetails()
+  const { currentTournament, setTournaments, setCurrentTournament } = useTournamentsDetails()
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
 
-  const fetchTournaments = async() => {
+  const fetchAllTournaments = async() => {
     const url = '/tournaments/get-all'
     const httpMethod = 'post'
 
     try {
       const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
-
       if (response?.success) {
         const allTournaments = response.data?.allTournaments
         setTournaments(allTournaments)
-
-        if (currentTournament && currentTournament.tournamentId) {
-          const foundTournament = allTournaments.find(tournament => tournament.tournamentId === currentTournament.tournamentId)
-          setCurrentTournament(foundTournament || currentTournament)
-        }
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error(error)
+    }
   }
 
-  return { fetchTournaments }
+  const fetchTournamentDetails = async({ paramTournament } = {}) => {
+    try {
+      const url = '/tournaments/get-details'
+      const httpMethod = 'post'
+      const chequedTournamentId = paramTournament?.tournamentId || currentTournament?.tournamentId
+
+      if (!chequedTournamentId) {
+        addMessage({ type: 'error', message: 'Tournament details not found' })
+        return { success: false }
+      }
+
+      const values = { tournamentId: chequedTournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, addMessage, setSubmittingForm, httpMethod })
+
+      if (response?.success) {
+        const tournamentDetails = response.data?.tournamentDetails
+        if (tournamentDetails) setCurrentTournament(tournamentDetails)
+        return { success: true }
+      }
+
+      return { success: false }
+    } catch (error) {
+      console.error(error)
+      return { success: false }
+    }
+  }
+
+  return { fetchAllTournaments, fetchTournamentDetails }
 }
 
 export default getTournaments

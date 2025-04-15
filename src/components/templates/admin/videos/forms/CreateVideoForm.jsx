@@ -19,7 +19,6 @@ const CreateVideoForm = () => {
   const { currentTournament } = useTournamentsDetails()
   const { setVideos } = useVideoStore()
   const [preview, setPreview] = useState(null)
-  console.log('file: ', file)
   const HandleImageError = () => {
     if (file === null) {
       setCustomError('Video image is requiered')
@@ -29,7 +28,6 @@ const CreateVideoForm = () => {
 
   const createVideo = async(values, { resetForm }) => {
     values = { ...values, tournamentId: currentTournament.tournamentId, logo: file }
-    console.log('Form submitted:', values)
 
     if (file === null) {
       setCustomError('Video image is requiered')
@@ -45,7 +43,6 @@ const CreateVideoForm = () => {
       resetForm()
       setFile(null)
       setPreview(null)
-      console.log(response.data)
       setVideos(response.data?.dbVideos || null)
     }
   }
