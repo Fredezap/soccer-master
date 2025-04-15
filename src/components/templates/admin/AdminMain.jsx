@@ -1,24 +1,25 @@
-import { useEffect } from 'react'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 import Hero from '../../common/hero/Hero'
 import { ListGroup } from 'react-bootstrap'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../store/constants/routes'
-import handleSubmitFormAdmin from './handleSubmitFormAdmin'
-import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore'
-import { useMessageStore } from '../../../store/slices/useMessageStore'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
 import { FaTrophy } from 'react-icons/fa'
 import formatDate from '../../common/formatDate'
+import { useMessageStore } from '../../../store/slices/useMessageStore'
+import getTournaments from '../../common/getters/GetTournaments'
 
 const AdminMain = () => {
   const { adminMain } = useHeroDetails()
   const { tournaments, setCurrentTournament } = useTournamentsDetails()
   const navigate = useNavigate()
+  const { addMessage } = useMessageStore()
+  const { fetchTournamentDetails } = getTournaments()
 
-  const handleTournamentSelected = (tournament) => {
-    setCurrentTournament(tournament)
-    navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
+  const handleTournamentSelected = async(paramTournament) => {
+    const response = await fetchTournamentDetails({ paramTournament })
+    if (response?.success) navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
+    else addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
   }
 
   const handleCreateTournament = () => {

@@ -10,8 +10,8 @@ const TableScores = ({ backgroundStyle }) => {
   const [groupStages, setGroupStages] = useState([])
 
   useEffect(() => {
-    const filteredGroupStages = currentTournament?.Stages.filter(stage => stage.type === 'group')
-    setGroupStages(filteredGroupStages)
+    const filteredGroupStages = currentTournament?.Stages?.filter(stage => stage.type === 'group')
+    if (filteredGroupStages) setGroupStages(filteredGroupStages)
   }, [currentTournament])
 
   return (

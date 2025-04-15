@@ -24,9 +24,7 @@ const AdminVideos = () => {
 
   const deleteVideo = async(videoId) => {
     if (!videoId) return
-    console.log(currentTournament)
     const values = { videoId, tournamentId: currentTournament.tournamentId }
-    console.log('values:', values)
     const successResponse = 'Video has been deleted'
     const url = '/admin/video/delete'
     const httpMethod = 'post'

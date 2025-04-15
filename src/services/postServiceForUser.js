@@ -1,35 +1,16 @@
 import { backendErrorMessageProcessor } from '../components/common/message-manager/backendErrorMessageProcessor'
 import { apiInstance } from './apiInstance'
 
-const postServiceForImg = async({ url, values, addMessage, authorizationValues, successResponse }) => {
+const postServiceForUser = async({ url, values, addMessage, successResponse }) => {
   const makeAnHttpsPost = async(url, values) => {
     let error
-    const formData = new FormData()
 
-    for (const [key, value] of Object.entries(values)) {
-      if (key === 'logo' && value.file instanceof File) {
-        formData.append('file', value.file)
-      } else if (Array.isArray(value)) {
-        formData.append(key, JSON.stringify(value))
-      } else if (key !== null && key !== undefined) {
-        if (value !== null && value !== undefined) {
-          formData.append(key, value.toString())
-        } else {
-          formData.append(key, value)
-        }
-      }
-    }
-
-    const { token = undefined, role = undefined } = authorizationValues || {}
     try {
-      const response = await apiInstance.post(url, formData, {
+      const response = await apiInstance.post(url, values, {
         headers: {
-          Authorization: `Bearer ${token}`,
-          role,
-          'Content-Type': 'multipart/form-data'
+          'Content-Type': 'application/json'
         }
       })
-
       if (response.status >= 200 && response.status <= 300) {
         return { success: true, data: response?.data ? response.data : null }
       } else {
@@ -55,4 +36,4 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
   return postResponse
 }
 
-export default postServiceForImg
+export default postServiceForUser

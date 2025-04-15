@@ -9,7 +9,7 @@ import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDe
 
 const TournamentDetailsMain = () => {
   const { adminTournamentDetails } = useHeroDetails()
-  const { tournaments, currentTournament, setTournaments, setCurrentTournament } = useTournamentsDetails()
+  const { currentTournament } = useTournamentsDetails()
   const navigate = useNavigate()
 
   return (
@@ -42,6 +42,11 @@ const TournamentDetailsMain = () => {
               <div className="admin-tournament-options">
                 <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.VIDEOS)}>
                   <span className="button-details"><IoFootball />Videos</span>
+                </Button>
+              </div>
+              <div className="admin-tournament-options">
+                <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.EMAIL_SENDER)}>
+                  <span className="button-details"><IoFootball />Email sender</span>
                 </Button>
               </div>
             </div>

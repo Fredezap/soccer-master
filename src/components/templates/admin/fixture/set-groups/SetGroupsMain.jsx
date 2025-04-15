@@ -22,7 +22,7 @@ const SetGroupsMain = () => {
   const [availableTeams, setAvailableTeams] = useState([])
   const [selectedGroup, setSelectedGroup] = useState(null)
   const { currentTournament } = useTournamentsDetails()
-  const { fetchTournaments } = getTournaments()
+  const { fetchTournamentDetails } = getTournaments()
 
   const checkAndSetAvailableTeams = (stageId) => {
     const allocatedTeamIds = dbGroups[stageId]?.groups
@@ -80,7 +80,7 @@ const SetGroupsMain = () => {
     await getTeams()
     await getGroups()
     await getStages()
-    await fetchTournaments()
+    await fetchTournamentDetails()
   }
 
   useEffect(() => {
