@@ -23,10 +23,25 @@ function SideMenu() {
         <FaBars size={24} />
       </Button>
 
-      <Offcanvas show={showSideMenu} onHide={handleClose} placement="start">
-        <Offcanvas.Header closeButton>
-          <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.MAIN)}>Back to admin</Button>
+      <Offcanvas
+        show={showSideMenu}
+        onHide={handleClose}
+        placement="start"
+        backdrop
+        className="offcanvas-start"
+      >
+        <Offcanvas.Header>
+          <Button
+            variant="outline-success"
+            onClick={() => navigate(ROUTES.ADMIN.MAIN)}
+          >
+    Back to admin
+          </Button>
+          <button className="custom-close-btn" onClick={handleClose}>
+    &times;
+          </button>
         </Offcanvas.Header>
+
         <Offcanvas.Body>
           <div className="tournament-options bg-lights">
             <h4>

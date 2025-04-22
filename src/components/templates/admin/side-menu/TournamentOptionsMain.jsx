@@ -23,10 +23,16 @@ const TournamentOptionsMain = () => {
       {showTournamentOptions && (
         Object.keys(currentTournament).length
           ? (
-            <div>
-              <p>
-                {currentTournament.name ? `Current tournament: ${currentTournament.name}` : 'Tournament name not found'}
-              </p>
+            <div className="options-main-box">
+              <div>
+                <span style={{ fontWeight: 'bold' }}>
+              Current tournament:
+                </span>
+                <p>
+                  {currentTournament.name ? `${currentTournament.name}` : 'Tournament name not found'}
+                </p>
+
+              </div>
               <div>
 
               </div>
