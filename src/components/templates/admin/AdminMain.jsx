@@ -8,6 +8,7 @@ import { FaTrophy } from 'react-icons/fa'
 import formatDate from '../../common/formatDate'
 import { useMessageStore } from '../../../store/slices/useMessageStore'
 import getTournaments from '../../common/getters/GetTournaments'
+import SideMenu from './side-menu/SideMenu'
 
 const AdminMain = () => {
   const { adminMain } = useHeroDetails()
@@ -29,6 +30,7 @@ const AdminMain = () => {
 
   return (
     <div>
+      <SideMenu />
       <Hero title={adminMain.title} />
       <div className="admin-all-mains bg-light">
         <h2>Tournaments</h2>
