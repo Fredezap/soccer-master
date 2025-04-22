@@ -1,12 +1,10 @@
 import { Button, Offcanvas } from 'react-bootstrap'
 import { FaBars } from 'react-icons/fa'
 import { useSideMenuStore } from '../../../../store/slices/useSideMenuStore'
-import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
 import TournamentOptionsMain from './TournamentOptionsMain'
 import TournamentList from '../tournament-list/TournamentList'
-import Header from '../../../common/Header'
 import ROUTES from '../../../../store/constants/routes'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { useNavigate } from 'react-router-dom'
 import { useState } from 'react'
 
 function SideMenu() {
