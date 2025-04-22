@@ -1,0 +1,63 @@
+import { useNavigate } from 'react-router-dom'
+import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
+import { useMessageStore } from '../../../../store/slices/useMessageStore'
+import getTournaments from '../../../common/getters/GetTournaments'
+import ROUTES from '../../../../store/constants/routes'
+import formatDate from '../../../common/formatDate'
+import { ListGroup } from 'react-bootstrap'
+import { FaTrophy } from 'react-icons/fa'
+
+const TournamentList = () => {
+  const { tournaments, setCurrentTournament } = useTournamentsDetails()
+  const navigate = useNavigate()
+  const { addMessage } = useMessageStore()
+  const { fetchTournamentDetails } = getTournaments()
+
+  const handleTournamentSelected = async(paramTournament) => {
+    const response = await fetchTournamentDetails({ paramTournament })
+    if (response?.success) navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
+    else addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
+  }
+
+  const handleCreateTournament = () => {
+    setCurrentTournament({})
+    navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)
+  }
+  return (
+    <div className="admin-all-mains bg-lights">
+      <h2>Tournaments</h2>
+      {tournaments.length === 0
+        ? (
+          <div>
+            <p>There are not tournaments created yet</p>
+          </div>
+        )
+        : (
+          <div className="tournaments-list">
+            <ListGroup>
+              {tournaments.map((tournament) => (
+                <ListGroup.Item
+                  action
+                  key={tournament.tournamentId}
+                  onClick={() => handleTournamentSelected(tournament)}
+                >
+                  <div className="icon-container">
+                    <FaTrophy size={24} />
+                  </div>
+                  <div className="text-container">
+                    <h5>{tournament.name}</h5>
+                    <p>{formatDate(tournament.date).slashDate}</p>
+                  </div>
+                </ListGroup.Item>
+              ))}
+            </ListGroup>
+          </div>
+        )}
+      <div onClick={handleCreateTournament} className="create-tournament-link">
+        <p>Create tournament</p>
+      </div>
+    </div>
+  )
+}
+
+export default TournamentList
