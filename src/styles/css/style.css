@@ -3111,6 +3111,61 @@ color: green;
 
 /* End of Mail no tournament Styles */
 
+/* Side Menu Styles */
+.offcanvas-body {
+  padding: 0 !important;
+}
+
+.offcanvas {
+  z-index: 2999 !important;
+}
+
+.offcanvas .admin-all-mains {
+  padding: 0;
+}
+
+.offcanvas .tournament-options {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.offcanvas .tournament-options h4 button {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 20px 0;
+}
+
+.offcanvas .tournament-options p {
+  margin: 5px 0;
+}
+
+.offcanvas .tournament-options h4 {
+  width: 100%;
+  margin: 0;
+}
+
+.btn-centered button{
+  width: 100%;
+  padding: 10px 5px;
+}
+
+.side-menu-btn {
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  z-index: 2000;
+}
+
+.hide-btn {
+  display: none !important;
+}
+/* End of Side Menu Styles */
 
 /* Table Scores Styles */
 .groups-score-data {
