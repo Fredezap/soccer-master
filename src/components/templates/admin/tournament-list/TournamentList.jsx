@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
 import { useMessageStore } from '../../../../store/slices/useMessageStore'
 import getTournaments from '../../../common/getters/GetTournaments'
@@ -12,17 +12,30 @@ const TournamentList = () => {
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
   const { fetchTournamentDetails } = getTournaments()
+  const location = useLocation()
+  const currentPath = location.pathname
 
   const handleTournamentSelected = async(paramTournament) => {
     const response = await fetchTournamentDetails({ paramTournament })
-    if (response?.success) navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
-    else addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
+    if (response?.success) {
+      if (currentPath === ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN) {
+        const currentScroll = window.scrollY
+        if (currentScroll === 0) return
+        window.scrollTo({ top: currentScroll, behavior: 'instant' })
+        setTimeout(() => {
+          window.scrollTo({ top: 0, behavior: 'smooth' })
+        }, 10)
+        return
+      }
+      navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
+    } else addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
   }
 
   const handleCreateTournament = () => {
     setCurrentTournament({})
     navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)
   }
+
   return (
     <div className="admin-all-mains bg-lights">
       <h2>Tournaments</h2>

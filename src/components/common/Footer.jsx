@@ -1,8 +1,18 @@
+import { useLocation } from 'react-router-dom'
 import ROUTES from '../../store/constants/routes'
 
 const Footer = () => {
+  const location = useLocation()
+  const currentPath = location.pathname
+  let backgroundStyle = 'bg-dark'
+
+  const getBackground = () => {
+    if (currentPath === ROUTES.CONTACT || currentPath === ROUTES.ADMIN.EMAIL_SENDER) backgroundStyle = 'bg-light'
+    return `footer-section ${backgroundStyle}`
+  }
+
   return (
-    <footer className="footer-section">
+    <footer className={getBackground()}>
       <div className="container">
         <div style={{ textAlign: 'center' }} className="row">
           <div className="col-lg-12">

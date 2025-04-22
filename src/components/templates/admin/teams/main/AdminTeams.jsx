@@ -11,6 +11,7 @@ import useHandleConfirmTeam from '../hooks/useHandleConfirmTeam.jsx'
 import FormsAndSetTeam from '../common/FormsAndSetTeam.jsx'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore.js'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails.js'
+import SideMenu from '../../side-menu/SideMenu.jsx'
 
 const AdminTeams = () => {
   const { adminTeams } = useHeroDetails()
@@ -58,6 +59,7 @@ const AdminTeams = () => {
 
   return (
     <div>
+      <SideMenu />
       <Hero title={adminTeams.title} />
       <div className="bg-light admin-teams-main">
         <p>SET THE TEAMS HERE</p>

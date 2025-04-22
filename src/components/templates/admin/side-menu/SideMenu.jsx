@@ -4,15 +4,26 @@ import { useSideMenuStore } from '../../../../store/slices/useSideMenuStore'
 import TournamentOptionsMain from './TournamentOptionsMain'
 import TournamentList from '../tournament-list/TournamentList'
 import ROUTES from '../../../../store/constants/routes'
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
 
-function SideMenu() {
+const SideMenu = () => {
   const { setShowTournamentLists, showTournamentList } = useSideMenuStore()
   const [showSideMenu, setShowSideMenu] = useState()
   const handleClose = () => setShowSideMenu(false)
   const handleShow = () => setShowSideMenu(!showSideMenu)
   const navigate = useNavigate()
+
+  const location = useLocation()
+
+  const handleBackToAdmin = () => {
+    if (location.pathname === ROUTES.ADMIN.MAIN) {
+      handleClose(true)
+      return
+    }
+    navigate(ROUTES.ADMIN.MAIN)
+  }
+
   return (
     <>
       <Button
@@ -33,12 +44,12 @@ function SideMenu() {
         <Offcanvas.Header>
           <Button
             variant="outline-success"
-            onClick={() => navigate(ROUTES.ADMIN.MAIN)}
+            onClick={() => handleBackToAdmin(ROUTES.ADMIN.MAIN)}
           >
-    Back to admin
+            Back to admin
           </Button>
           <button className="custom-close-btn" onClick={handleClose}>
-    &times;
+            &times;
           </button>
         </Offcanvas.Header>
 

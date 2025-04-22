@@ -9,6 +9,7 @@ import MatchesMain from '../matches/main/MatchesMain'
 import SetGroupsMain from '../set-groups/SetGroupsMain'
 import { useStagesStore } from '../../../../../store/slices/useStagesStore'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
+import SideMenu from '../../side-menu/SideMenu'
 
 const FixtureMain = () => {
   const { adminFixture } = useHeroDetails()
@@ -33,6 +34,7 @@ const FixtureMain = () => {
 
   return (
     <div>
+      <SideMenu />
       <Hero title={adminFixture.title} />
       <div className="bg-light admin-fixture">
         <div className="admin-settings-info">
