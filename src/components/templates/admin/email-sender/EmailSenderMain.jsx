@@ -7,6 +7,7 @@ import handleSubmitFormAdmin from '../handleSubmitFormAdmin'
 import { useMessageStore } from '../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFormStore'
 import getTournaments from '../../../common/getters/GetTournaments'
+import SideMenu from '../side-menu/SideMenu'
 
 const EmailSenderMain = () => {
   const { adminEmailSender } = useHeroDetails()
@@ -90,6 +91,7 @@ const EmailSenderMain = () => {
 
   return (
     <div>
+      <SideMenu />
       <Hero title={adminEmailSender.title} />
       <div className="site-section bg-dark">
         <div className="container">

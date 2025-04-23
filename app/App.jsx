@@ -126,8 +126,8 @@ function App() {
         }}
       >
         <AppContent />
+        <Footer />
       </Router>
-      <Footer />
     </div>
   )
 }

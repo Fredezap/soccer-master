@@ -7,12 +7,6 @@ const TournamentOptionsMain = () => {
   const { showTournamentOptions, setShowTournamentOptions } = useSideMenuStore()
   const { currentTournament } = useTournamentsDetails()
 
-  console.log('LARGO', Object.keys(currentTournament).length)
-
-  console.log('TORNEO', currentTournament)
-  // todo: chequear las reedirecciones. Me deja de mostrar el header.
-  // todo: Hacer que los otrneos se escondan al elegir uno. Osea sacarlo del zustand
-
   return (
     <div className="tournament-options bg-lights">
       <h4>

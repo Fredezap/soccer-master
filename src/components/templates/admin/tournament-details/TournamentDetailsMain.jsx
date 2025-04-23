@@ -6,6 +6,7 @@ import { IoFootball } from 'react-icons/io5'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../store/constants/routes'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
+import SideMenu from '../side-menu/SideMenu.jsx'
 
 const TournamentDetailsMain = () => {
   const { adminTournamentDetails } = useHeroDetails()
@@ -14,6 +15,7 @@ const TournamentDetailsMain = () => {
 
   return (
     <div>
+      <SideMenu />
       {!currentTournament
         ? (
           <div>

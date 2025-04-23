@@ -10,6 +10,7 @@ import { useEffect, useState } from 'react'
 import { Button } from 'react-bootstrap'
 import handleGetData from '../handleGetData'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
+import SideMenu from '../side-menu/SideMenu'
 
 const AdminVideos = () => {
   const [showVideos, setShowVideos] = useState(false)
@@ -50,9 +51,9 @@ const AdminVideos = () => {
     getVideos()
   }, [])
 
-  // todo: Ver de eliminar imagenes no utilizadas en ambos metodos backend
   return (
     <div>
+      <SideMenu />
       <Hero title={adminVideos.title} />
       <div className="bg-dark admin-teams-main">
         <p>SET THE VIDEOS HERE</p>
