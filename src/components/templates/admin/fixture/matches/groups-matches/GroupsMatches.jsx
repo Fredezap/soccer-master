@@ -80,7 +80,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setFormAction(action)
     setShowSelectGroup(!showSelectGroup)
   }
-
+  console.log('STAGES', stages)
   useEffect(() => {
     checkNoSameTeams({ localTeam, visitorTeam, setCustomError })
   }, [localTeam, visitorTeam])
@@ -114,7 +114,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setShowConfirmMatchModal(true)
   }
 
-  const c = 0
   const handleConfirmScore = async() => {
     const localTeamResult = matchResult.localTeamScore
     const visitorTeamResult = matchResult.visitorTeamScore
@@ -223,7 +222,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
 
   return (
     <div className="groups-matches-main">
-      <hr></hr>
       <h4>Group matches</h4>
       {stages?.filter((stage) => stage.type === 'group')?.length > 0
         ? (
@@ -236,27 +234,20 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                     <h6
                       onClick={() => handleShowGroupMatchesDetail(stageGroups)}
                     >
-                      {stageGroups.name}AA
+                      {stageGroups.name}
                     </h6>
                     {showGroupMatchesDetail === stageGroups.stageId && (
-                      <div>
-                        {selectedGroupStage && (
-                          <div>
-                            <MatchesByDate
-                              stageGroups={stageGroups}
-                              selectedGroupStage={selectedGroupStage}
-                              groupedMatches={groupedMatches}
-                              getStages={getStages}
-                              handleShowModal={handleShowModal}
-                            />
-                            <Button
-                              onClick={() => handleShowSelectGroup('create')}
-                              variant="outline-warning"
-                            >
-                            Add match
-                            </Button>
-                            <div className="select-group-for-match">
-                              {showSelectGroup &&
+
+                      selectedGroupStage && (
+                        <div className="matches-details">
+                          <Button
+                            onClick={() => handleShowSelectGroup('create')}
+                            variant="outline-warning"
+                          >
+                              Add match
+                          </Button>
+                          <div className="select-group-for-match">
+                            {showSelectGroup &&
                               (dbGroups[showGroupMatchesDetail]?.groups
                                 ?.length === 0
                                 ? (
@@ -279,23 +270,41 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                                     visitorTeam={visitorTeam}
                                   />
                                 ))}
-                            </div>
                           </div>
-                        )}
-                      </div>
+                          <MatchesByDate
+                            stageGroups={stageGroups}
+                            selectedGroupStage={selectedGroupStage}
+                            groupedMatches={groupedMatches}
+                            getStages={getStages}
+                            handleShowModal={handleShowModal}
+                            backgroundStyle={'bg-light'}
+                          />
+                        </div>
+                      )
+
                     )}
                   </div>
                 ))}
             </div>
-            <h4 style={{ marginTop: '100px' }}>
+            <h4>
               All groups table scores
             </h4>
-            <h6 className="show-table-scores" onClick={() => setShowScoreTable(!showScoreTable)}>
-              {!showScoreTable ? 'Show scores' : 'Hide scores'}
-            </h6>
-            {showScoreTable && (
-              <TableScores backgroundStyle="bg-light" />
-            )}
+            <div className="matches-info">
+              <div className="main-button" onClick={() => setShowScoreTable(!showScoreTable)}>
+                <h6>
+                Scores
+                </h6>
+              </div>
+              {showScoreTable && (
+                <div className="matches-details">
+                  <div className="group-matches-details">
+                    <div className="date-details">
+                      <TableScores backgroundStyle="bg-light" />
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
           </div>
         )
         : (
@@ -357,6 +366,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           handleConfirmScore={handleConfirmScore}
         />
       )}
+      <hr></hr>
     </div>
   )
 }

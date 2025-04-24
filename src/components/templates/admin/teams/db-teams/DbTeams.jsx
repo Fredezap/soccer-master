@@ -48,8 +48,6 @@ const DbTeams = ({ dbTeams, setShowAddTeam, getTeams }) => {
                   </td>
 
                 </tr>
-                {/* {dbTeam.logoUrl && dbTeam.logoUrl.trim()}
-                {typeof dbTeam.logoUrl} */}
                 {dbTeam.teamId === team.teamId && (
                   dbTeam.logoUrl && dbTeam.logoUrl.trim()
                     ? (

@@ -20,7 +20,7 @@ export const useMessageStore = create((set) => ({
       set(() => ({
         messages: []
       }))
-    }, 27000)
+    }, 5000)
   },
 
   setShowMessager: (state) => {

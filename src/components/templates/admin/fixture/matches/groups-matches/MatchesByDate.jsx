@@ -7,13 +7,13 @@ const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handle
   return (
     <div className="group-matches-details">
       {selectedGroupStage && (
-        <div>
+        <>
           {selectedGroupStage.Matches?.length === 0
             ? <p style={{ textAlign: 'center' }}>No matches set for this group stage yet</p>
             : Object.entries(groupedMatches)
               .sort(([dateA], [dateB]) => new Date(dateA) - new Date(dateB)) // Ordena por fecha
               .map(([date, matches]) => (
-                <div key={date} className={`p-4 rounded ${backgroundStyle}`}>
+                <div key={date} className={`date-details ${backgroundStyle}`}>
                   <div className="col-12 title-section">
                     <h3 className="heading">{date}</h3>
                   </div>
@@ -67,7 +67,7 @@ const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handle
                   </div>
                 </div>
               ))}
-        </div>
+        </>
       )}
     </div>
   )

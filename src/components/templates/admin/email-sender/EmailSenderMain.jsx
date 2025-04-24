@@ -104,9 +104,9 @@ const EmailSenderMain = () => {
           </p>
 
           <div className="d-flex gap-4 mt-4 email-sender-box">
-            <Card className="flex-fill">
+            <Card className="flex-fill custom-card">
               <Card.Body>
-                <Card.Title className="text-dark">Add new Email</Card.Title>
+                <Card.Title className="text-light">Add new Email</Card.Title>
                 <ListGroup>
                   <ListGroup.Item className="add-email-item d-flex align-items-center gap-2">
                     <input
@@ -117,7 +117,7 @@ const EmailSenderMain = () => {
                       onKeyDown={(event) => { if (event.key === 'Enter') { addEmail() } }}
                     />
                     <Button
-                      variant="info"
+                      variant="dark"
                       size="sm"
                       onClick={addEmail}
                     >
@@ -129,9 +129,9 @@ const EmailSenderMain = () => {
               </Card.Body>
             </Card>
 
-            <Card className="flex-fill">
+            <Card className="flex-fill custom-card">
               <Card.Body>
-                <Card.Title className="text-dark">Emails</Card.Title>
+                <Card.Title className="text-light">Emails</Card.Title>
                 <ListGroup>
                   {allEmails.length === 0
                     ? (
@@ -141,7 +141,7 @@ const EmailSenderMain = () => {
                     )
                     : (
                       allEmails.map((email, index) => (
-                        <ListGroup.Item key={email.emailId || index} className="d-flex justify-content-between">
+                        <ListGroup.Item key={email.emailId || index} className="d-flex justify-content-between emails-list">
                           <span>
                             {email.email}
                           </span>

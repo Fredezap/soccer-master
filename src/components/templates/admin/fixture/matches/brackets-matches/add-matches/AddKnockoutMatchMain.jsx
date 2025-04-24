@@ -15,12 +15,12 @@ const AddKnockoutMatchMain = ({
   }
 
   return (
-    <div>
+    <div style={{ marginTop: '20px' }}>
       <Button onClick={handleShowAddMatchForm} variant="outline-warning">
           Add match
       </Button>
-      <div className="select-group-for-match">
-        {showAddMatchForm && (
+      {showAddMatchForm && (
+        <div className="select-group-for-match">
           <AddKnockoutMatchesFormMain
             rounds={rounds}
             getMatches={getMatches}
@@ -28,8 +28,8 @@ const AddKnockoutMatchMain = ({
             dbTeams={dbTeams}
             getKnockoutStages={getKnockoutStages}
           />
-        )}
-      </div>
+        </div>
+      )}
     </div>
   )
 }

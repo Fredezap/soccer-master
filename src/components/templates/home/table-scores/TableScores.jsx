@@ -10,16 +10,31 @@ const TableScores = ({ backgroundStyle }) => {
   const [groupStages, setGroupStages] = useState([])
 
   useEffect(() => {
-    const filteredGroupStages = currentTournament?.Stages?.filter(stage => stage.type === 'group')
-    if (filteredGroupStages) setGroupStages(filteredGroupStages)
+    const filteredGroupStages = currentTournament?.Stages?.filter(
+      stage => stage.type === 'group'
+    )
+
+    if (filteredGroupStages) {
+      const orderedStages = filteredGroupStages.map(stage => ({
+        ...stage,
+        Groups: stage.Groups.map(group => ({
+          ...group,
+          Teams: [...group.Teams].sort((team1, team2) =>
+            team2.TeamGroup.totalTeamPoints - team1.TeamGroup.totalTeamPoints
+          )
+        }))
+      }))
+
+      setGroupStages(orderedStages)
+    }
   }, [currentTournament])
 
   return (
     groupStages.length !== 0 && (
       groupStages.map((stage, index) => (
-        <div style={{ marginBottom: '30px' }}key={stage?.stageId || index} >
-          <div className={`p-4 rounded ${backgroundStyle}`}>
-            <div className="col-12 title-section ">
+        <div style={{ marginBottom: '30px' }} key={stage?.stageId || index} >
+          <div className={`${backgroundStyle}`}>
+            <div className="col-12 title-section">
               <h3 className="heading">{stage?.name}</h3>
             </div>
             <div className="groups-score-data">

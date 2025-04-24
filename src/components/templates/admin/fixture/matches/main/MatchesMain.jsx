@@ -8,10 +8,11 @@ import { useTournamentsDetails } from '../../../../../../store/slices/useTournam
 import ROUTES from '../../../../../../store/constants/routes'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
+import { useDbGroupsStore } from '../../../../../../store/slices/useDbGroupsStore'
 
 const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
-  const [dbGroups, setDbGroups] = useState([])
+
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
   const { setSubmittingForm } = useSubmittingFormStore()
   const [dbMatches, setDbMatches] = useState([])
@@ -19,7 +20,7 @@ const MatchesMain = ({ getStages }) => {
   const { currentTournament } = useTournamentsDetails()
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
-
+  const { dbGroups, setDbGroups } = useDbGroupsStore()
   const getGroups = async() => {
     try {
       const url = '/admin/fixture/groups/get-all-groups-by-tournament'
@@ -106,6 +107,11 @@ const MatchesMain = ({ getStages }) => {
             )
             : (
               <div>
+                <GroupsMatches
+                  getStages={getStages}
+                  dbGroups={dbGroups}
+                  getGroups={getGroups}
+                />
                 <BracketKnokoutMatches
                   getTeams={getTeams}
                   dbTeams={dbTeams}
@@ -113,11 +119,6 @@ const MatchesMain = ({ getStages }) => {
                   getMatches={getMatches}
                   getKnockoutStages={getKnockoutStages}
                   dbKnockoutStages={dbKnockoutStages}
-                />
-                <GroupsMatches
-                  getStages={getStages}
-                  dbGroups={dbGroups}
-                  getGroups={getGroups}
                 />
               </div>
             )
