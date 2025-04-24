@@ -74,7 +74,7 @@ const CreateVideoForm = () => {
             <p className="form-message error-message">{customError}</p>
           )}
           <div className="video-button">
-            <Button disabled={submittingForm} type="submit" variant="primary">Create video</Button>
+            <Button disabled={submittingForm} type="submit" variant="success">Create video</Button>
           </div>
         </Form>
       )}

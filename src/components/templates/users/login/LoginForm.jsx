@@ -9,7 +9,6 @@ import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFo
 import { Button } from 'react-bootstrap'
 import { useMessageStore } from '../../../../store/slices/useMessageStore.js'
 import postService from '../../../../services/postService.js'
-import handleSubmitFormAdmin from '../../admin/handleSubmitFormAdmin.js'
 
 const LoginForm = () => {
   const { data, initialValues, messages } = useLoginFormData()
@@ -20,10 +19,11 @@ const LoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
 
   const handleFormSubmit = async(values) => {
+    setSubmittingForm(true)
     const url = '/auth/login'
     const successResponse = messages.success
     const response = await postService({ url, values, addMessage, successResponse })
-
+    setSubmittingForm(false)
     if (response?.success) {
       const data = response.data
       if (data) {
@@ -54,8 +54,8 @@ const LoginForm = () => {
               <Button type="submit" disabled={submittingForm}>
                 Login
               </Button>
+              {submittingForm && <p className="submitting-message">{messages.submitting}</p>}
               <a href={ROUTES.REGISTER}>Register</a>
-              {submittingForm && <p>{messages.submitting}</p>}
             </Form>
           )}
         </Formik>

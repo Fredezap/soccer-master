@@ -5,8 +5,7 @@ import { Button } from 'react-bootstrap'
 import TournamentDetailsFormData from './TournamentDetailsFormData.js'
 import handleSubmitFormAdmin from '../handleSubmitFormAdmin.js'
 import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFormStore.js'
-import { useEffect, useState } from 'react'
-import handleGetData from '../handleGetData.js'
+import { useState } from 'react'
 import formatDate from '../../../common/formatDate.js'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails.js'
 
@@ -16,14 +15,15 @@ const TournamentDetailsForm = () => {
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [editTournamentDetails, setEditTournamentDetails] = useState(false)
   let httpMethod
-  const { currentTournament, tournaments, updateCurrentTournament } = useTournamentsDetails()
-
+  const { currentTournament, updateTournaments, tournaments, updateCurrentTournament } = useTournamentsDetails()
+  console.log('TOUR:', tournaments)
   const handleSubmitFormCreate = async(values) => {
     const successResponse = 'Tournament details has been set'
     const url = '/admin/tournament-details/create'
     httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
+      updateTournaments(response.data?.tournamentDetails)
       updateCurrentTournament(response.data?.tournamentDetails)
     }
   }
@@ -36,6 +36,7 @@ const TournamentDetailsForm = () => {
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
       updateCurrentTournament(response.data.tournamentDetails)
+      updateTournaments(response.data?.tournamentDetails)
       setEditTournamentDetails(false)
     }
   }

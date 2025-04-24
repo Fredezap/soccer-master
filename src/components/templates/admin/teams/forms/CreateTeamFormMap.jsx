@@ -4,13 +4,18 @@ import { ErrorMessage, Field } from 'formik'
 import { Button } from 'react-bootstrap'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 import { useCustomErrorStore } from '../../../../../store/slices/useCustomErrorStore'
+import TEAM_CONSTANTS from '../../../../../store/constants/teamConstants'
+import { useState } from 'react'
 
 const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values, setErrors }) => {
   const { setTeamName, setNewTeamPlayer } = useTeamStore()
-  const { setCustomError } = useCustomErrorStore()
+  const { setCustomError, customError } = useCustomErrorStore()
+  const [playerError, setPlayerError] = useState('')
+  const { PLAYER_NAME_CAN_NOT_BE_EMPTY } = TEAM_CONSTANTS
 
   const handleTeamChange = ({ field, value }) => {
-    if (errors[field] || value === '') {
+    console.log('en team change', value, field)
+    if (errors[field]) {
       return
     }
     if (field === 'name') {
@@ -19,12 +24,18 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
       values[field] = ''
       setErrors({})
     } else if (field === 'player') {
+      console.log('VALUE', value)
+      if (value === '') console.log('TRUE')
+      if (value === '') {
+        setPlayerError(PLAYER_NAME_CAN_NOT_BE_EMPTY)
+        return
+      }
       setNewTeamPlayer(value)
       values[field] = ''
       setErrors({})
     }
   }
-
+  console.log('CUSTOM: ', customError)
   return (
     <div className="form-columns">
       {formFields.map((data, index) => (
@@ -38,7 +49,15 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
               autoComplete={data.label}
               placeholder={data.placeholder}
               type={data.type}
-              onChange={(e) => setFieldValue(data.id, e.target.value)}
+              onChange={(e) => {
+                const { value } = e.target
+                setFieldValue(data.id, value)
+
+                if (data.id === 'player' && value.trim() !== '') {
+                  setPlayerError('')
+                }
+              }}
+              onBlur={(e) => {}}
               value={values[data.id]}
               onKeyDown={(e) => {
                 if (e.key === 'Enter') {
@@ -46,6 +65,7 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
                 }
               }}
             />
+
             <Button
               variant= {data.id === 'name' ? 'info' : 'success'}
               onClick={() => handleTeamChange({ field: data.id, value: values[data.id] })}
@@ -56,6 +76,11 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
           {errors[data.id] && touched[data.id] && (
             <ErrorMessage className="form-message error-message" component="div" name={data.id} />
           )}
+
+          {data.id === 'player' && playerError && (
+            <div className="form-message error-message">{playerError}</div>
+          )}
+
         </div>
       ))}
     </div>

@@ -9,7 +9,9 @@ const CreateTeamNameForm = () => {
     <Formik
       initialValues={initialValues}
       validationSchema={registerSchema}
+      onSubmit={() => { console.log('ACA ERROR') }}
     >
+
       {({ errors, touched, setFieldValue, values, setErrors }) => (
         <Form className="admin-form">
           <CreateTeamFormMap

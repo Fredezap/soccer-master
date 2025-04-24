@@ -6,12 +6,14 @@ import { MdDeleteForever } from 'react-icons/md'
 import { CiEdit } from 'react-icons/ci'
 import DeleteTeamModal from '../modals/DeleteTeamModal'
 import { useState } from 'react'
+import { useCustomErrorStore } from '../../../../../store/slices/useCustomErrorStore'
 
 const TeamPlayers = ({ dbTeam, getTeams }) => {
   const navigate = useNavigate()
   const { setTeam } = useTeamStore()
   const [showDeleteTeamModal, setShowDeleteTeamModal] = useState(false)
   const [teamId, setTeamId] = useState(null)
+  const { setCustomError } = useCustomErrorStore()
 
   const handleEditTeam = () => {
     setTeam({
@@ -24,6 +26,7 @@ const TeamPlayers = ({ dbTeam, getTeams }) => {
         file: null
       }
     })
+    setCustomError('')
     navigate(ROUTES.ADMIN.TEAMS.UPDATE)
   }
 

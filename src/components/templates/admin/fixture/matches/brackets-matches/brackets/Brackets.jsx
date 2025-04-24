@@ -27,6 +27,7 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
           <div key={seed.id}>
             <div className="match-item">
               <div className="item-teams">
+                <span style={{ fontWeight: 'bold' }}>Match {seed.matchNumber}</span>
                 <p>{seed?.teams[0]?.name}</p>
                 <p>VS</p>
                 <p>{seed?.teams[1]?.name}</p>
@@ -104,7 +105,7 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
                   <div>
                     <Button
                       onClick={() => setShowListMatches(!showListMatches)}
-                      variant="outline-success"
+                      variant="outline-info"
                     >
                       Manage knockout matches
                     </Button>

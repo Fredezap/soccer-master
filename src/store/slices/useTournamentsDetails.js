@@ -10,6 +10,16 @@ export const useTournamentsDetails = create(persist(
       set({ tournaments })
     },
 
+    updateTournaments: (updatedTournament) => {
+      set((state) => ({
+        tournaments: state.tournaments.map((tournament) =>
+          tournament.tournamentId === updatedTournament.tournamentId
+            ? { ...tournament, ...updatedTournament }
+            : tournament
+        )
+      }))
+    },
+
     updateCurrentTournament: (updatedTournament) => {
       set((state) => {
         const currentTournament = state.currentTournament.tournamentId === updatedTournament.tournamentId

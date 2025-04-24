@@ -1,14 +1,14 @@
 const SetMatchResult = ({ matchResult, setMatchResult }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
-    const parsedValue = value === '' ? null : parseInt(value, 10) // Permite vacío como null
-
+    const parsedValue = value === '' ? null : parseInt(value, 10)
+    console.log(name, value)
     setMatchResult({
       ...matchResult,
       [name]: parsedValue
     })
   }
-
+  console.log(matchResult)
   return (
     <div className="form-input-box">
       <div className="grid-colums">
@@ -33,8 +33,8 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
         />
       </div>
 
-      {(matchResult?.localTeamScore && matchResult?.visitorTeamScore) &&
-        (matchResult?.localTeamScore === matchResult?.visitorTeamScore) &&
+      {(matchResult?.localTeamScore != null && matchResult?.visitorTeamScore != null) &&
+(matchResult?.localTeamScore === matchResult?.visitorTeamScore) &&
         (
           <div>
             <div className="grid-colums-lg">

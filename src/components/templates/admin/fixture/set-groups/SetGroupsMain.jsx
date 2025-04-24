@@ -9,10 +9,11 @@ import { useTournamentsDetails } from '../../../../../store/slices/useTournament
 import { useStagesStore } from '../../../../../store/slices/useStagesStore'
 import handleGetData from '../../handleGetData'
 import getTournaments from '../../../../common/getters/GetTournaments'
+import { useDbGroupsStore } from '../../../../../store/slices/useDbGroupsStore'
 
 const SetGroupsMain = () => {
   const [dbTeams, setDbTeams] = useState([])
-  const [dbGroups, setDbGroups] = useState([])
+  const { dbGroups, setDbGroups } = useDbGroupsStore()
   const { stages, setStages } = useStagesStore()
   const [groupStages, setGroupStages] = useState([])
   const [selectedStage, setSelectedStage] = useState(null)
