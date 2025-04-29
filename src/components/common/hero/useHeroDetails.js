@@ -39,8 +39,8 @@ const useHeroDetails = () => {
     title: 'Admin Videos'
   }
 
-  const adminEmailSender = {
-    title: 'Admin email sender'
+  const adminContact = {
+    title: 'Admin contact'
   }
 
   return {
@@ -54,7 +54,7 @@ const useHeroDetails = () => {
     adminTeamsUpdate,
     adminFixture,
     adminVideos,
-    adminEmailSender
+    adminContact
   }
 }
 

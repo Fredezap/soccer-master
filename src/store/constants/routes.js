@@ -20,7 +20,7 @@ const ROUTES = {
     FIXTURE: {
       MAIN: '/admin/fixture'
     },
-    EMAIL_SENDER: '/admin/email-sender'
+    CONTACT: '/admin/contact'
   }
 }
 

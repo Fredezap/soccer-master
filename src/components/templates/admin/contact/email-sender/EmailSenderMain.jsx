@@ -1,17 +1,13 @@
 import { useEffect, useState } from 'react'
 import { Card, Button, ListGroup } from 'react-bootstrap'
-import useHeroDetails from '../../../common/hero/useHeroDetails'
-import Hero from '../../../common/hero/Hero'
-import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
-import handleSubmitFormAdmin from '../handleSubmitFormAdmin'
-import { useMessageStore } from '../../../../store/slices/useMessageStore'
-import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFormStore'
-import getTournaments from '../../../common/getters/GetTournaments'
-import SideMenu from '../side-menu/SideMenu'
+import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
+import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
+import { useMessageStore } from '../../../../../store/slices/useMessageStore'
+import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
+import getTournaments from '../../../../common/getters/GetTournaments'
 
 const EmailSenderMain = () => {
-  const { adminEmailSender } = useHeroDetails()
-  const { currentTournament, setCurrentTournament } = useTournamentsDetails()
+  const { currentTournament } = useTournamentsDetails()
   const [allEmails, setAllEmails] = useState([])
   const [newEmails, setNewEmails] = useState([])
   const [removedEmails, setRemovedEmails] = useState([])
@@ -76,7 +72,7 @@ const EmailSenderMain = () => {
     }
     const values = { newEmails, removedEmails, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Emails has been updated'
-    const url = '/admin/email-sender/update-emails'
+    const url = '/admin/contact/set-emails'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
@@ -91,8 +87,6 @@ const EmailSenderMain = () => {
 
   return (
     <div>
-      <SideMenu />
-      <Hero title={adminEmailSender.title} />
       <div className="site-section bg-dark">
         <div className="container">
           <h1 className="text-2xl font-bold">Email Sender</h1>
