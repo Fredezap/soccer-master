@@ -43,22 +43,32 @@ const ContactForm = () => {
                   />
                 </Form>
               </div>
-              <div className="col-lg-12 ml-auto">
-                <ul className="list-unstyled contact-details">
-                  <li className="mb-2">
-                    <strong className="text-white d-block">Address</strong>
-                  Erlenmattstrasse 110 4058 Basel, Switzerland
-                  </li>
-                  <li className="mb-2">
-                    <strong className="text-white d-block">Email</strong>
-                    <a href="#">stephanie.capomolla@kigaprima.ch</a>
-                  </li>
-                  <li className="mb-2">
-                    <strong className="text-white d-block">Phone</strong>
-                    <a href="#">+41 79 455 50 32</a>
-                  </li>
-                </ul>
-              </div>
+              {(currentTournament?.Contact?.contactAddress ||
+               currentTournament.Contact?.contactEmail ||
+               currentTournament.Contact?.contactPhone) && (
+                <div className="col-lg-12 ml-auto">
+                  <ul className="list-unstyled contact-details">
+                    {currentTournament.Contact?.contactAddress && (
+                      <li className="mb-2">
+                        <strong className="text-white d-block">Address</strong>
+                        <a style={{ color: '#ee1e46' }}>{currentTournament.Contact?.contactAddress}</a>
+                      </li>
+                    )}
+                    {currentTournament.Contact?.contactEmail && (
+                      <li className="mb-2">
+                        <strong className="text-white d-block">Email</strong>
+                        <a style={{ color: '#ee1e46' }}>{currentTournament.Contact?.contactEmail}</a>
+                      </li>
+                    )}
+                    {currentTournament.Contact?.contactPhone && (
+                      <li className="mb-2">
+                        <strong className="text-white d-block">Phone</strong>
+                        <a style={{ color: '#ee1e46' }}>{currentTournament.Contact?.contactPhone}</a>
+                      </li>
+                    )}
+                  </ul>
+                </div>
+              )}
             </div>
           </div>
         </div>

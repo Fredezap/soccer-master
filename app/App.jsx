@@ -35,7 +35,8 @@ import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
 import checkPathsNeedsMessager from '../src/components/common/message-manager/checkPathsNeedsMessager.js'
 import getTournaments from '../src/components/common/getters/GetTournaments.jsx'
 import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.jsx'
-import EmailSenderMain from '../src/components/templates/admin/email-sender/EmailSenderMain.jsx'
+import EmailSenderMain from '../src/components/templates/admin/contact/email-sender/EmailSenderMain.jsx'
+import AdminContact from '../src/components/templates/admin/contact/main/AdminContact.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -66,10 +67,6 @@ function AppContent() {
       }, 10)
     }
   }, [currentPath])
-
-  // TODO: DESPUES. Ver de hacer la barra de navegacion para el admin
-  // todo: Por ultimo las news, el blog
-  // todo: probar todo en todas las paginas nuevamente, porque se cambio la estructura de consulta de db y de front tmb
 
   useEffect(() => {
     fetchAllTournaments()
@@ -102,7 +99,7 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.TEAMS.UPDATE} element={<AdminTeamsUpdate />} />
         <Route path={ROUTES.ADMIN.FIXTURE.MAIN} element={<FixtureMain />} />
         <Route path={ROUTES.ADMIN.VIDEOS} element={<AdminVideos />} />
-        <Route path={ROUTES.ADMIN.EMAIL_SENDER} element={<EmailSenderMain />} />
+        <Route path={ROUTES.ADMIN.CONTACT} element={<AdminContact />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
