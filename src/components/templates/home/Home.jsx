@@ -51,7 +51,7 @@ const Home = () => {
       if (response?.success) {
         setDbTeams(response.data?.tournament?.Teams)
       }
-    } catch (error) { console.error('error getTeams: ', error) }
+    } catch (error) {}
   }
 
   useEffect(() => {

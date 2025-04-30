@@ -19,12 +19,6 @@ const BracketKnokoutMatches = ({
     setRounds(updatedRounds)
   }, [dbMatches, dbKnockoutStages])
 
-  // TODO: agregar en admin para parte contacto, si quieren poner contactos o no (Agregar tabla en back)
-  // TODO: Ver responsive
-  // TODO: Ver seccion de TEAMS que se veia fea.
-  // TODO: Ver resto de secciones y mejorar tarjetas torneos, generar imagen
-  // TODO: Ver lo que escribi en wpp y lo que me mando deivid para ver si faltaba algo.
-  // TODO: Se puede llegar a agregar la diferencia de goles en fase de grupo. Pero seria un laburito de varias horas. VERLO CON DEIV
   return (
     <div className="brackets-component">
       <h2>Tournament Bracket</h2>

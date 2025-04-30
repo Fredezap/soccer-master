@@ -34,15 +34,13 @@ const Teams = () => {
             ? (
               teams.map((team, index) => (
                 <div key={team.teamId || index} className="col-lg-6 mb-4">
-                  <div className="bg-light p-4 rounded">
+                  <div className="bg-light rounded team-info">
                     <div className="widget-body">
                       <div className="widget-vs">
                         <div className="d-flex align-items-center justify-content-around justify-content-between w-100">
-                          <div className="team-1 text-center w-100">
+                          <div className="team-box text-center w-100">
                             <img className="team-logo" src={getLogo(team.teamId)} alt="Image"></img>
-                            <h3>
-                              {team.name ? team.name : `team ${index})`}
-                            </h3>
+                            <h3>{team.name ? team.name : `team ${index})`}</h3>
                             {team.Players?.length !== 0
                               ? (
                                 <ul className="team-list">
@@ -72,10 +70,10 @@ const Teams = () => {
                 <span>No teams founded</span>
               </div>
             )}
-          <Videos />
           {/* <Blog /> */}
         </div>
       </div>
+      <Videos />
     </div>
   )
 }

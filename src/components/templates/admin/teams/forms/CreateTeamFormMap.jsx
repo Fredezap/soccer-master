@@ -14,7 +14,6 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
   const { PLAYER_NAME_CAN_NOT_BE_EMPTY } = TEAM_CONSTANTS
 
   const handleTeamChange = ({ field, value }) => {
-    console.log('en team change', value, field)
     if (errors[field]) {
       return
     }
@@ -24,8 +23,6 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
       values[field] = ''
       setErrors({})
     } else if (field === 'player') {
-      console.log('VALUE', value)
-      if (value === '') console.log('TRUE')
       if (value === '') {
         setPlayerError(PLAYER_NAME_CAN_NOT_BE_EMPTY)
         return
@@ -35,7 +32,7 @@ const CreateTeamFormMap = ({ formFields, errors, touched, setFieldValue, values,
       setErrors({})
     }
   }
-  console.log('CUSTOM: ', customError)
+
   return (
     <div className="form-columns">
       {formFields.map((data, index) => (

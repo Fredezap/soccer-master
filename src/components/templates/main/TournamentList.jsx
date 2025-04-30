@@ -3,7 +3,7 @@ import ROUTES from '../../../store/constants/routes'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
 import formatDate from '../../common/formatDate'
 import { ListGroup } from 'react-bootstrap'
-import { FaTrophy } from 'react-icons/fa'
+import { Trophy } from 'lucide-react'
 import { useMessageStore } from '../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore'
 import getTournaments from '../../common/getters/GetTournaments'
@@ -36,7 +36,7 @@ const TournamentList = () => {
                   onClick={() => handleSelectTournament(tournament)}
                 >
                   <div className="icon-container">
-                    <FaTrophy size={24} />
+                    <Trophy />
                   </div>
                   <div className="text-container">
                     <h5>{tournament.name}</h5>

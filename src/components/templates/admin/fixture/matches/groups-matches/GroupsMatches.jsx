@@ -80,7 +80,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setFormAction(action)
     setShowSelectGroup(!showSelectGroup)
   }
-  console.log('STAGES', stages)
+
   useEffect(() => {
     checkNoSameTeams({ localTeam, visitorTeam, setCustomError })
   }, [localTeam, visitorTeam])

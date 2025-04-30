@@ -14,9 +14,8 @@ const ContactDetailsSetter = () => {
   const { currentTournament } = useTournamentsDetails()
   const { addMessage } = useMessageStore()
   const { fetchTournamentDetails } = getTournaments()
-  console.log(currentTournament)
+
   const setContactDetails = async(values) => {
-    console.log('VALUES RECEIBER:', values)
     values = { values, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Contact details has been updated'
     const url = '/admin/contact/set-contact-details'

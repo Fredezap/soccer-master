@@ -14,9 +14,9 @@ const TournamentDetailsForm = () => {
   const { initialValues, registerSchema, formFields } = TournamentDetailsFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [editTournamentDetails, setEditTournamentDetails] = useState(false)
-  let httpMethod
   const { currentTournament, updateTournaments, tournaments, updateCurrentTournament } = useTournamentsDetails()
-  console.log('TOUR:', tournaments)
+  let httpMethod
+
   const handleSubmitFormCreate = async(values) => {
     const successResponse = 'Tournament details has been set'
     const url = '/admin/tournament-details/create'
