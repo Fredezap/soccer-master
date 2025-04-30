@@ -5,7 +5,6 @@ export const useSideMenuStore = create((set, get) => ({
   showTournamentOptions: false,
 
   setShowTournamentLists: (showTournamentList) => {
-    console.log('LLAMO:', showTournamentList)
     set({ showTournamentList })
   },
 

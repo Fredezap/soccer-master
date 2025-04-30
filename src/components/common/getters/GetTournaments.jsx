@@ -18,9 +18,7 @@ const getTournaments = () => {
         const allTournaments = response.data?.allTournaments
         setTournaments(allTournaments)
       }
-    } catch (error) {
-      console.error(error)
-    }
+    } catch (error) {}
   }
 
   const fetchTournamentDetails = async({ paramTournament } = {}) => {
@@ -45,7 +43,6 @@ const getTournaments = () => {
 
       return { success: false }
     } catch (error) {
-      console.error(error)
       return { success: false }
     }
   }

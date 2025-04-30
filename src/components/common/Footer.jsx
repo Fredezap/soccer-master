@@ -11,6 +11,9 @@ const Footer = () => {
     return `footer-section ${backgroundStyle}`
   }
 
+  // todo: falta ver lo de los puntos de los equipos. Si agregamos la diferencia de goles
+  // todo: ver estos links de contacto, porque deberian poder ser agregados desde admin tambien
+
   return (
     <footer className={getBackground()}>
       <div className="container">

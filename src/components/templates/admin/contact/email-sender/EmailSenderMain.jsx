@@ -154,7 +154,7 @@ const EmailSenderMain = () => {
             <div className="border  p-4 rounded mt-4">
               <div className="d-flex email-sender-box">
                 {newEmails.length > 0 && (
-                  <Card className="flex-fill new-emails-card">
+                  <Card className="flex-fill emails-card new-emails-card">
                     <Card.Body>
                       <Card.Title className="text-dark">New Emails</Card.Title>
                       <ListGroup>
@@ -162,7 +162,6 @@ const EmailSenderMain = () => {
                           <ListGroup.Item key={email.emailId || index} className="d-flex justify-content-between email-card-item">
                             <span>
                               {email.email}
-                              <span style={{ color: 'green' }}>{' (New)'}</span>
                             </span>
                             <Button variant="warning" size="sm" onClick={() => removeNewEmail(email)}>
                         Cancel
@@ -175,7 +174,7 @@ const EmailSenderMain = () => {
                 )}
 
                 {removedEmails.length > 0 && (
-                  <Card className="flex-fill removed-emails-card">
+                  <Card className="flex-fill emails-card removed-emails-card">
                     <Card.Body>
                       <Card.Title className="text-dark">Removed Emails</Card.Title>
                       <ListGroup>

@@ -2,13 +2,12 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     const parsedValue = value === '' ? null : parseInt(value, 10)
-    console.log(name, value)
     setMatchResult({
       ...matchResult,
       [name]: parsedValue
     })
   }
-  console.log(matchResult)
+
   return (
     <div className="form-input-box">
       <div className="grid-colums">
