@@ -1,24 +1,24 @@
 import { ErrorMessage, Field, Form, Formik } from 'formik'
 import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
 import Label from '../../../../common/forms-parts/Label'
-import useContactDetailsFormData from './useContactDetailsFormData'
 import { Button } from 'react-bootstrap'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useMessageStore } from '../../../../../store/slices/useMessageStore'
 import getTournaments from '../../../../common/getters/GetTournaments'
+import useFooterContactFormData from './useFooterContactFormData'
 
-const ContactDetailsSetter = () => {
+const FooterContactSetter = () => {
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
-  const { initialValues, registerSchema, formFields } = useContactDetailsFormData()
+  const { initialValues, registerSchema, formFields } = useFooterContactFormData()
   const { currentTournament } = useTournamentsDetails()
   const { addMessage } = useMessageStore()
   const { fetchTournamentDetails } = getTournaments()
 
   const setContactDetails = async(values) => {
     values = { values, tournamentId: currentTournament.tournamentId }
-    const successResponse = 'Contact details has been updated'
-    const url = '/admin/contact/set-contact-details'
+    const successResponse = 'Footer contact details has been updated'
+    const url = '/admin/contact/set-footer-contact-details'
     const httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
@@ -28,12 +28,16 @@ const ContactDetailsSetter = () => {
 
   return (
     <div>
-      <div className="site-section bg-light">
+      <div className="site-section bg-dark">
         <div className="container">
-          <h1 className="text-2xl font-bold">Contact deatils</h1>
+          <h1 className="text-2xl font-bold">Footer contact deatils</h1>
           <h5 className="text-lg mt-2">
-            Set the tournament contact details
+            Set the web page and social media of the tournament here
           </h5>
+          <p style={{ color: 'orange' }}>
+            Please ensure you enter URLs correctly to avoid errors. For example,
+            typing "www.youtube.com" instead of "https://www.youtube.com/" may cause the link not to work.
+          </p>
           <Formik
             initialValues={initialValues}
             validationSchema={registerSchema}
@@ -55,7 +59,7 @@ const ContactDetailsSetter = () => {
                   </div>
                 ))}
                 <div className="video-button">
-                  <Button disabled={submittingForm} type="submit" variant="success">Set contact details</Button>
+                  <Button disabled={submittingForm} type="submit" variant="success">Set footer contact details</Button>
                 </div>
               </Form>
             )}
@@ -66,11 +70,7 @@ const ContactDetailsSetter = () => {
   )
 }
 
-export default ContactDetailsSetter
+export default FooterContactSetter
 
-// Address
-// Erlenmattstrasse 110 4058 Basel, Switzerland
-// Email
-// stephanie.capomolla@kigaprima.ch
-// Phone
-// +41 79 455 50 32
+// "https://www.futsalolympiquebasel.ch/"
+// "https://www.instagram.com/futsalolympiquebasel_offiziell/?hl=es-la"
