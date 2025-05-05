@@ -1,18 +1,44 @@
 import { useLocation } from 'react-router-dom'
 import ROUTES from '../../store/constants/routes'
+import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails'
 
 const Footer = () => {
+  const { currentTournament } = useTournamentsDetails()
   const location = useLocation()
   const currentPath = location.pathname
   let backgroundStyle = 'bg-dark'
 
-  const getBackground = () => {
-    if (currentPath === ROUTES.CONTACT || currentPath === ROUTES.ADMIN.EMAIL_SENDER) backgroundStyle = 'bg-light'
-    return `footer-section ${backgroundStyle}`
+  const getColStyle = () => {
+    const contact = currentTournament.Contact
+
+    if (contact) {
+      const footerElementsWithData = Object.entries(contact).filter(
+        ([key, value]) => {
+          const validElement = key.startsWith('footerContact') && value != null && value !== ''
+
+          if (validElement) {
+            return { [key]: value }
+          } else {
+            return null
+          }
+        }
+      ).filter(element => element !== null)
+
+      let customStyle = 'col-lg-12'
+      if (footerElementsWithData.length === 1) customStyle = 'col-lg-6'
+      if (footerElementsWithData.length === 2) customStyle = 'col-lg-4'
+
+      return customStyle
+    }
   }
 
-  // todo: falta ver lo de los puntos de los equipos. Si agregamos la diferencia de goles
-  // todo: ver estos links de contacto, porque deberian poder ser agregados desde admin tambien
+  const getBackground = () => {
+    if (currentPath === ROUTES.CONTACT ||
+        currentPath === ROUTES.ADMIN.CONTACT ||
+        currentPath === ROUTES.ADMIN.EMAIL_SENDER
+    ) backgroundStyle = 'bg-light'
+    return `footer-section ${backgroundStyle}`
+  }
 
   return (
     <footer className={getBackground()}>
@@ -22,9 +48,25 @@ const Footer = () => {
             <div className="widget mb-3">
               <h3>Social</h3>
               <ul className="row list-unstyled links">
-                <li className="col-lg-4"><a href={ROUTES.CONTACT}>Contact</a></li>
-                <li className="col-lg-4"><a href="https://www.futsalolympiquebasel.ch/">Web page</a></li>
-                <li className="col-lg-4"><a href="https://www.instagram.com/futsalolympiquebasel_offiziell/?hl=es-la">Instagram</a></li>
+                <li className={getColStyle()}>
+                  <a href={ROUTES.CONTACT}>
+                    Contact
+                  </a>
+                </li>
+                {currentTournament?.Contact?.footerContactWebPage && (
+                  <li className={getColStyle()}>
+                    <a href={currentTournament?.Contact?.footerContactWebPage}>
+                      Web page
+                    </a>
+                  </li>
+                )}
+                {currentTournament?.Contact?.footerContactInstagram && (
+                  <li className={getColStyle()}>
+                    <a href={currentTournament?.Contact?.footerContactInstagram}>
+                      Instagram
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

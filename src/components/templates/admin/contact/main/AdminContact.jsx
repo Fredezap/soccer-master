@@ -4,6 +4,7 @@ import ContactDetailsSetter from '../contact-details/ContactDetailsSetter'
 import SideMenu from '../../side-menu/SideMenu'
 import useHeroDetails from '../../../../common/hero/useHeroDetails'
 import Hero from '../../../../common/hero/Hero'
+import FooterContactSetter from '../footer-contact/FooterContactSetter'
 
 const AdminContact = () => {
   const { adminContact } = useHeroDetails()
@@ -13,6 +14,7 @@ const AdminContact = () => {
       <Hero title={adminContact.title} />
       <EmailSenderMain />
       <ContactDetailsSetter />
+      <FooterContactSetter />
     </div>
   )
 }
