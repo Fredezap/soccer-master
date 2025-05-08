@@ -1,7 +1,6 @@
 import { IoMdCloseCircle } from 'react-icons/io'
 import { useMessageStore } from '../../../store/slices/useMessageStore'
 import { FaCheckCircle } from 'react-icons/fa'
-import checkPathsNeedsMessager from './checkPathsNeedsMessager'
 
 // ATTENTION: If the messages are rendering twice in development, it is
 //            because of <React.StrictMode> which is used to prevent

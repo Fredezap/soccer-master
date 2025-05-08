@@ -22,13 +22,14 @@ const getTournaments = () => {
   }
 
   const fetchTournamentDetails = async({ paramTournament } = {}) => {
+    console.log('PARAM:', paramTournament)
     try {
       const url = '/tournaments/get-details'
       const httpMethod = 'post'
       const chequedTournamentId = paramTournament?.tournamentId || currentTournament?.tournamentId
 
       if (!chequedTournamentId) {
-        addMessage({ type: 'error', message: 'Tournament details not found' })
+        addMessage({ type: 'error', content: 'Tournament details not found' })
         return { success: false }
       }
 

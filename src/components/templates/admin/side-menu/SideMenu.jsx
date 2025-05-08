@@ -43,7 +43,7 @@ const SideMenu = () => {
       >
         <Offcanvas.Header>
           <Button
-            variant="outline-success"
+            className="btn-header-back"
             onClick={() => handleBackToAdmin(ROUTES.ADMIN.MAIN)}
           >
             Back to admin
@@ -56,7 +56,7 @@ const SideMenu = () => {
         <Offcanvas.Body>
           <div className="tournament-options bg-lights">
             <h4>
-              <Button variant="light" onClick={() => setShowTournamentLists(!showTournamentList)}>
+              <Button className="options-btn" onClick={() => setShowTournamentLists(!showTournamentList)}>
                 {showTournamentList ? 'Hide tournaments' : 'Show tournaments'}
               </Button>
             </h4>

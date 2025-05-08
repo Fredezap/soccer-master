@@ -8,7 +8,7 @@ import { ListGroup } from 'react-bootstrap'
 import { FaTrophy } from 'react-icons/fa'
 
 const TournamentList = () => {
-  const { tournaments, setCurrentTournament } = useTournamentsDetails()
+  const { tournaments, setCurrentTournament, setIsCreating } = useTournamentsDetails()
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
   const { fetchTournamentDetails } = getTournaments()
@@ -33,6 +33,8 @@ const TournamentList = () => {
 
   const handleCreateTournament = () => {
     setCurrentTournament({})
+    setIsCreating(true)
+    console.log('aca')
     navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)
   }
 

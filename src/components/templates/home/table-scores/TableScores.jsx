@@ -5,6 +5,18 @@ const BASE_URL = import.meta.env.MODE === 'development'
   ? import.meta.env.VITE_IMG_DEV_BASE_URL
   : import.meta.env.VITE_IMG_PROD_BASE_URL
 
+// todo: sacarle el contorno a la tarjeta del torneo, al hacerle click? o hacerlo mas fino
+// todo: ver de mejorar la visualizacion del scroll del side menu
+// todo: ver un el modal que setea los goles, tambien el scroll
+// todo: cambiar fonodo a panel lateral
+// todo: que no tenga borde el admin login y register al hacer click
+// todo: ver porque muestra un mensaje vacio al actualizar admin main sin que haya un equipo
+// todo: cambiar algunos conolres en show matches
+// todo: cursor pointer en show groups
+// todo: que se actualicen los equipos en matches groups al agregar un team (quiza ya lo esta haciendo, pero al poner atras no lo hace)
+// todo: poner nuevo logo para torneo y las cartas, ver fondo de las mismas
+// todo: feature para que el admin pueda colocar imagen y logo torneo
+
 const TableScores = ({ backgroundStyle }) => {
   const { currentTournament } = useTournamentsDetails()
   const [groupStages, setGroupStages] = useState([])
@@ -14,21 +26,9 @@ const TableScores = ({ backgroundStyle }) => {
       stage => stage.type === 'group'
     )
 
-    if (filteredGroupStages) {
-      const orderedStages = filteredGroupStages.map(stage => ({
-        ...stage,
-        Groups: stage.Groups.map(group => ({
-          ...group,
-          Teams: [...group.Teams].sort((team1, team2) =>
-            team2.TeamGroup.totalTeamPoints - team1.TeamGroup.totalTeamPoints
-          )
-        }))
-      }))
-
-      setGroupStages(orderedStages)
-    }
+    setGroupStages(filteredGroupStages)
   }, [currentTournament])
-
+  console.log('GRUPOS: ', groupStages)
   return (
     groupStages.length !== 0 && (
       groupStages.map((stage, index) => (
@@ -40,7 +40,7 @@ const TableScores = ({ backgroundStyle }) => {
             <div className="groups-score-data">
               {stage?.Groups?.length > 0
                 ? (
-                  [...stage.Groups].reverse().map((group, index) => (
+                  [...stage.Groups].map((group, index) => (
                     <div key={group?.groupId || index} className="bg-light rounded table-container">
                       <div className="group-wrapper">
                         <div className="group-title">{group?.name}</div>
@@ -56,6 +56,9 @@ const TableScores = ({ backgroundStyle }) => {
                                     <th>W</th>
                                     <th>D</th>
                                     <th>L</th>
+                                    <th>GF</th>
+                                    <th>GA</th>
+                                    <th>GD</th>
                                     <th>PTS</th>
                                   </tr>
                                 </thead>
@@ -77,6 +80,9 @@ const TableScores = ({ backgroundStyle }) => {
                                       <td>{team.TeamGroup.WON}</td>
                                       <td>{team.TeamGroup.DRAWN}</td>
                                       <td>{team.TeamGroup.LOST}</td>
+                                      <td>{team.TeamGroup.goalsFor}</td>
+                                      <td>{team.TeamGroup.goalsAgainst}</td>
+                                      <td>{team.TeamGroup.goalDifference}</td>
                                       <td>{team.TeamGroup.totalTeamPoints}</td>
                                     </tr>
                                   ))}

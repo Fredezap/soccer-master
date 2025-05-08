@@ -9,16 +9,22 @@ import formatDate from '../../common/formatDate'
 import { useMessageStore } from '../../../store/slices/useMessageStore'
 import getTournaments from '../../common/getters/GetTournaments'
 import SideMenu from './side-menu/SideMenu'
+import { useEffect } from 'react'
 
 const AdminMain = () => {
   const { adminMain } = useHeroDetails()
   const { tournaments, setCurrentTournament } = useTournamentsDetails()
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
-  const { fetchTournamentDetails } = getTournaments()
+  const { fetchTournamentDetails, fetchAllTournaments } = getTournaments()
+
+  useEffect(() => {
+    fetchAllTournaments()
+  }, [])
 
   const handleTournamentSelected = async(paramTournament) => {
     const response = await fetchTournamentDetails({ paramTournament })
+    console.log('RESOPI:', response)
     if (response?.success) navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
     else addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
   }

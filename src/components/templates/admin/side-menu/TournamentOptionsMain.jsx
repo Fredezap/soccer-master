@@ -10,7 +10,7 @@ const TournamentOptionsMain = () => {
   return (
     <div className="tournament-options bg-lights">
       <h4>
-        <Button variant="light" onClick={() => setShowTournamentOptions(!showTournamentOptions)}>
+        <Button className="options-btn" onClick={() => setShowTournamentOptions(!showTournamentOptions)}>
           {showTournamentOptions ? 'Hide tournament details' : 'See tournament details'}
         </Button>
       </h4>
