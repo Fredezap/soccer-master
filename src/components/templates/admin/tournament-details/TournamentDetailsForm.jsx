@@ -8,23 +8,28 @@ import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFo
 import { useState } from 'react'
 import formatDate from '../../../common/formatDate.js'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails.js'
+import { useNavigate } from 'react-router-dom'
+import ROUTES from '../../../../store/constants/routes.js'
 
 const TournamentDetailsForm = () => {
+  const navigate = useNavigate()
   const { addMessage } = useMessageStore()
   const { initialValues, registerSchema, formFields } = TournamentDetailsFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [editTournamentDetails, setEditTournamentDetails] = useState(false)
-  const { currentTournament, updateTournaments, tournaments, updateCurrentTournament } = useTournamentsDetails()
+  const { currentTournament, updateTournaments, setIsCreating, updateCurrentTournament } = useTournamentsDetails()
   let httpMethod
 
   const handleSubmitFormCreate = async(values) => {
-    const successResponse = 'Tournament details has been set'
+    const successResponse = 'Tournament has been created'
     const url = '/admin/tournament-details/create'
     httpMethod = 'post'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
+      setIsCreating(false)
       updateTournaments(response.data?.tournamentDetails)
       updateCurrentTournament(response.data?.tournamentDetails)
+      navigate(ROUTES.ADMIN.MAIN)
     }
   }
 

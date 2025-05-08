@@ -5,6 +5,7 @@ export const useTournamentsDetails = create(persist(
   (set, get) => ({
     tournaments: [],
     currentTournament: {},
+    isCreating: false,
 
     setTournaments: (tournaments) => {
       set({ tournaments })
@@ -33,7 +34,12 @@ export const useTournamentsDetails = create(persist(
     },
 
     setCurrentTournament: (currentTournament) => {
+      console.log('CURRENT:', currentTournament)
       set({ currentTournament })
+    },
+
+    setIsCreating: (isCreating) => {
+      set({ isCreating })
     }
   }),
   {

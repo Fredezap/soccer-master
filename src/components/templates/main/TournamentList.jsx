@@ -9,7 +9,7 @@ import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormS
 import getTournaments from '../../common/getters/GetTournaments'
 
 const TournamentList = () => {
-  const { tournaments, setCurrentTournament } = useTournamentsDetails()
+  const { tournaments } = useTournamentsDetails()
   const { addMessage } = useMessageStore()
   const { fetchTournamentDetails } = getTournaments()
   const navigate = useNavigate()

@@ -9,6 +9,7 @@ const Footer = () => {
   let backgroundStyle = 'bg-dark'
 
   const getColStyle = () => {
+    let customStyle = 'col-lg-12'
     const contact = currentTournament.Contact
 
     if (contact) {
@@ -24,12 +25,10 @@ const Footer = () => {
         }
       ).filter(element => element !== null)
 
-      let customStyle = 'col-lg-12'
       if (footerElementsWithData.length === 1) customStyle = 'col-lg-6'
       if (footerElementsWithData.length === 2) customStyle = 'col-lg-4'
-
-      return customStyle
     }
+    return customStyle
   }
 
   const getBackground = () => {

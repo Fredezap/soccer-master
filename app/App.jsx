@@ -46,7 +46,7 @@ function AppContent() {
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
 
-  const { currentTournament } = useTournamentsDetails()
+  const { currentTournament, isCreating } = useTournamentsDetails()
   const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
   const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
@@ -70,13 +70,27 @@ function AppContent() {
 
   useEffect(() => {
     fetchAllTournaments()
-    if (currentTournament) fetchTournamentDetails({ paramTournament: currentTournament })
+    if (Object.entries(currentTournament).length > 0) console.log('SI HAY ')
+    if (Object.entries(currentTournament).length > 0) fetchTournamentDetails({ paramTournament: currentTournament })
   }, [])
 
   useEffect(() => {
+    // Si no hay path o path === '/' no ejecutamos nada
     if (!currentPath || currentPath === '/') return
-    if (checkPathsNoNeedTournament(currentPath)) return
-    if (Object.entries(currentTournament).length === 0) navigate(ROUTES.MAIN)
+
+    // Si el path NO necesita toreno o se esta creando no ejecutamos nada
+    if (checkPathsNoNeedTournament(currentPath) || isCreating === true) return
+
+    // Si el path SI necesita toreno y no hay uno seteado,
+    // vemos si es admin o usuario para redirigirlos al main y que eligan un torneo
+    if (Object.entries(currentTournament).length === 0) {
+      if (currentPath.includes('/admin')) {
+        navigate(ROUTES.ADMIN.MAIN)
+        return
+      }
+      navigate(ROUTES.MAIN)
+    }
+
     main(currentTournament)
     setAndOrderMatchesByDate()
     return siteSticky()
