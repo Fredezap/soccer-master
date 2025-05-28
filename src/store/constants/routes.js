@@ -20,7 +20,8 @@ const ROUTES = {
     FIXTURE: {
       MAIN: '/admin/fixture'
     },
-    CONTACT: '/admin/contact'
+    CONTACT: '/admin/contact',
+    MATCHES_RESULT_SETTER: '/admin/matches-result-setter'
   }
 }
 

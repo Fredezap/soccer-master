@@ -2,7 +2,7 @@ import { MdDeleteForever } from 'react-icons/md'
 import DeleteStageModal from '../modals/DeleteStageModal'
 import { useState } from 'react'
 
-const StagesTableInfo = ({ stages, getStages }) => {
+const StagesTableInfo = ({ stages, getStages, getGroups }) => {
   const [showDeleteStageModal, setShowDeleteStageModal] = useState(false)
   const [stageId, setStageId] = useState(null)
 
@@ -50,6 +50,7 @@ const StagesTableInfo = ({ stages, getStages }) => {
         setShowDeleteStageModal={setShowDeleteStageModal}
         stageId={stageId}
         getStages={getStages}
+        getGroups={getGroups}
       />
     </div>
   )

@@ -20,6 +20,18 @@ const handleAddMatchErrors = ({
   const matchAlreadyExist = 'Match with these teams already exists. Do you want to add this match anyway?'
   const invalidDateFormaterror = 'Invalid date format'
   const dateIsPastError = 'Date cannot be in the past'
+  const sameTeamError = 'Same team selected'
+  const noTeamsSelected = 'Please select the teams'
+
+  if (localTeam === null || visitorTeam === null) {
+    setCustomError(noTeamsSelected)
+    return true
+  }
+
+  if (localTeam.teamId === visitorTeam.teamId) {
+    setCustomError(sameTeamError)
+    return true
+  }
 
   if (selectedGroup === null) {
     setCustomError(selectAGroupError)
@@ -64,18 +76,16 @@ const handleAddMatchErrors = ({
     return true
   }
 
-  const checkIfMatchExist = selectedGroupStage?.Matches?.some(match =>
+  const matchingMatches = selectedGroupStage?.Matches?.filter(match =>
     (match.localTeamId === localTeam.teamId && match.visitorTeamId === visitorTeam.teamId) ||
     (match.localTeamId === visitorTeam.teamId && match.visitorTeamId === localTeam.teamId)
   )
 
-  if (checkIfMatchExist) {
+  if ((matchingMatches.length > 0 && formAction === 'create') ||
+  (matchingMatches.length > 1)) {
     setCustomError(matchAlreadyExist)
     return false
   }
-
-  setCustomError(null)
-  return false
 }
 
 export default handleAddMatchErrors

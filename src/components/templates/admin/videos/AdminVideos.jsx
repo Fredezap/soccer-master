@@ -51,6 +51,8 @@ const AdminVideos = () => {
     getVideos()
   }, [])
 
+  // todo: ver poeque a veces no carga los videos
+  console.log('VI', videos)
   return (
     <div>
       <SideMenu />
@@ -59,8 +61,7 @@ const AdminVideos = () => {
         <p>SET THE VIDEOS HERE</p>
         <CreateVideoForm />
       </div>
-
-      {videos && (
+      {videos.length > 0 && (
         <div className="bg-light admin-show-videos">
           <Button variant="secondray" onClick={() => setShowVideos(!showVideos)}>{showVideos ? 'Hide Videos' : 'Show Videos'}</Button>
           {showVideos && (

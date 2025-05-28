@@ -4,7 +4,6 @@ import { useSubmittingFormStore } from '../../../../../../../store/slices/useSub
 import { useEffect, useState } from 'react'
 import TeamsAreKnownForm from '../add-matches/teams-are-known-form/TeamsAreKnownForm'
 import ChooseDateAndLocationForm from '../add-matches/common-forms/ChooseDateAndLocationForm'
-import SetMatchResult from '../add-matches/common-forms/SetMatchResult'
 import useKnockoutMatchErrorManager from '../add-matches/errors/useKnockoutMatchErrorManager'
 import formatDate from '../../../../../../common/formatDate'
 import handleSubmitFormAdmin from '../../../../handleSubmitFormAdmin'
@@ -22,35 +21,27 @@ const EditKnockoutMatchModal = ({
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [customError, setCustomError] = useState(null)
   const [localTeamPlaceholder, setLocalTeamPlaceholder] = useState(null)
+  const [visitorTeamPlaceholder, setVisitorTeamPlaceholder] = useState(null)
   const [selectedStage, setSelectedStage] = useState(null)
   const [localTeam, setLocalTeam] = useState(null)
   const [visitorTeam, setVisitorTeam] = useState(null)
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
-  const [visitorTeamPlaceholder, setVisitorTeamPlaceholder] = useState(null)
-  const [matchResult, setMatchResult] = useState({
-    localTeamScore: null,
-    visitorTeamScore: null,
-    localTeamPenaltyScore: null,
-    visitorTeamPenaltyScore: null
-  })
   const TEAM_STATUS = { UNDEFINED: 'undefined', KNOWN: 'known', UNKNOWN: 'unknown' }
   const [teamStatus, setTeamStatus] = useState(TEAM_STATUS.UNDEFINED)
 
   useEffect(() => {
-    setCustomError(null)
+    setTeamStatus(localTeam !== null || visitorTeam !== null ? TEAM_STATUS.KNOWN : TEAM_STATUS.UNKNOWN)
   }, [localTeam, visitorTeam])
+
+  useEffect(() => {
+    setCustomError(null)
+  }, [localTeam, visitorTeam, locationAndDateformData, selectedStage])
 
   useEffect(() => {
     setTeamStatus(match?.localTeam !== null && match.visitorTeam !== null ? TEAM_STATUS.KNOWN : TEAM_STATUS.UNKNOWN)
     setLocalTeam(match?.localTeam || null)
     setVisitorTeam(match?.visitorTeam || null)
     setLocationAndDateformData({ date: formatDate(match?.date).dashDate || '', time: match?.time || '', location: match?.location || '' })
-    setMatchResult({
-      localTeamScore: match?.localTeamScore,
-      visitorTeamScore: match?.visitorTeamScore,
-      localTeamPenaltyScore: match?.localTeamPenaltyScore,
-      visitorTeamPenaltyScore: match?.visitorTeamPenaltyScore
-    })
     setLocalTeamPlaceholder(match?.localTeamPlaceholder)
     setVisitorTeamPlaceholder(match?.visitorTeamPlaceholder)
     setSelectedStage(match?.stage?.stageId)
@@ -67,8 +58,7 @@ const EditKnockoutMatchModal = ({
       rounds,
       setCustomError,
       localTeamPlaceholder,
-      visitorTeamPlaceholder,
-      action: 'edit'
+      visitorTeamPlaceholder
     })
     if (checkErrors) return
     setCustomError(null)
@@ -80,11 +70,7 @@ const EditKnockoutMatchModal = ({
       time: locationAndDateformData?.time,
       location: locationAndDateformData?.location,
       localTeamId: localTeam?.teamId,
-      visitorTeamId: visitorTeam?.teamId,
-      localTeamScore: matchResult?.localTeamScore,
-      visitorTeamScore: matchResult?.visitorTeamScore,
-      localTeamPenaltyScore: matchResult?.localTeamPenaltyScore,
-      visitorTeamPenaltyScore: matchResult?.visitorTeamPenaltyScore
+      visitorTeamId: visitorTeam?.teamId
     }
 
     let url
@@ -138,12 +124,6 @@ const EditKnockoutMatchModal = ({
             locationAndDateformData={locationAndDateformData}
             setLocationAndDateformData={setLocationAndDateformData}
           />
-          {localTeam !== null && visitorTeam !== null && (
-            <SetMatchResult
-              matchResult={matchResult}
-              setMatchResult={setMatchResult}
-            />
-          )}
           {customError && (
             <p
               style={{ margin: '0', marginBottom: '-20px' }}

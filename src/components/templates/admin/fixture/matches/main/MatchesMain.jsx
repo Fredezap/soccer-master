@@ -12,7 +12,6 @@ import { useDbGroupsStore } from '../../../../../../store/slices/useDbGroupsStor
 
 const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
-
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
   const { setSubmittingForm } = useSubmittingFormStore()
   const [dbMatches, setDbMatches] = useState([])
@@ -21,6 +20,7 @@ const MatchesMain = ({ getStages }) => {
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
   const { dbGroups, setDbGroups } = useDbGroupsStore()
+
   const getGroups = async() => {
     try {
       const url = '/admin/fixture/groups/get-all-groups-by-tournament'
@@ -97,8 +97,8 @@ const MatchesMain = ({ getStages }) => {
                 <p>No teams found</p>
                 <p>Please add teams before adding a match</p>
                 <Button
-                  variant="outline-info"
-                  style={{ color: 'skyblue' }}
+                  variant="outline-warning"
+                  style={{ color: 'orange' }}
                   onClick={() => navigate(ROUTES.ADMIN.TEAMS.MAIN)}
                 >
               Add team

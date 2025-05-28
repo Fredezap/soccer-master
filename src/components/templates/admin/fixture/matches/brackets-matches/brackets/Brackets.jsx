@@ -4,8 +4,7 @@ import { Bracket, Seed, SeedItem, SeedTeam } from 'react-brackets'
 import { Button } from 'react-bootstrap'
 import EditKnockoutMatchModal from '../modals/EditKnockoutMatchModal'
 import DeleteKnockoutMatchModal from '../modals/DeleteKnockoutMatchModal'
-import { CiEdit } from 'react-icons/ci'
-import { MdDeleteForever } from 'react-icons/md'
+import BracketMatchesList from '../bracket-matches-list/BracketMatchesList'
 
 const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
   const [match, setMatch] = useState(null)
@@ -17,30 +16,6 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
     setMatch(match.match)
     if (type === 'edit') setShowModalEdit(true)
     if (type === 'delete') setShowModalDelete(true)
-  }
-
-  const renderMatchesList = (round) => {
-    return (
-      <div className="round" key={round.title}>
-        <h6>{round.title}</h6>
-        {round.seeds.map((seed) => (
-          <div key={seed.id}>
-            <div className="match-item">
-              <div className="item-teams">
-                <span style={{ fontWeight: 'bold' }}>Match {seed.matchNumber}</span>
-                <p>{seed?.teams[0]?.name}</p>
-                <p>VS</p>
-                <p>{seed?.teams[1]?.name}</p>
-              </div>
-              <div className="item-buttons">
-                <CiEdit onClick={() => onSetTeams(seed, 'edit')} className="edit-icon"/>
-                <MdDeleteForever onClick={() => onSetTeams(seed, 'delete')} className="delete-icon" />
-              </div>
-            </div>
-          </div>
-        ))}
-      </div>
-    )
   }
 
   const CustomSeed = ({ seed, breakpoint, roundIndex }) => {
@@ -113,7 +88,7 @@ const Brackets = ({ rounds, dbTeams, getMatches, getKnockoutStages }) => {
                   {showListMatches && (
                     <div className="knockout-matches-list-edit">
                       <h6>Select a match</h6>
-                      {rounds.map(renderMatchesList)}
+                      <BracketMatchesList rounds={rounds} onSetTeams={onSetTeams} isGoalSeter={false} />
                     </div>
                   )}
                 </div>

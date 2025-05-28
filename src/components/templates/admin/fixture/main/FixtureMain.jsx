@@ -10,6 +10,9 @@ import SetGroupsMain from '../set-groups/SetGroupsMain'
 import { useStagesStore } from '../../../../../store/slices/useStagesStore'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 import SideMenu from '../../side-menu/SideMenu'
+import { useDbGroupsStore } from '../../../../../store/slices/useDbGroupsStore'
+import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
+import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
 
 const FixtureMain = () => {
   const { adminFixture } = useHeroDetails()
@@ -19,6 +22,8 @@ const FixtureMain = () => {
   const [showGroups, setShowGroups] = useState(false)
   const { addMessage } = useMessageStore()
   const { currentTournament } = useTournamentsDetails()
+  const { setDbGroups } = useDbGroupsStore()
+  const { setSubmittingForm } = useSubmittingFormStore()
 
   const getStages = async() => {
     const paramValues = { tournamentId: currentTournament?.tournamentId }
@@ -26,6 +31,18 @@ const FixtureMain = () => {
     const response = await handleGetData({ paramValues, url, addMessage })
 
     if (response.success) { setStages(response.data.dbStages) }
+  }
+
+  const getGroups = async() => {
+    try {
+      const url = '/admin/fixture/groups/get-all-groups-by-tournament'
+      const httpMethod = 'post'
+      const values = { tournamentId: currentTournament.tournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      if (response?.success) {
+        setDbGroups(response.data.dbGroups)
+      }
+    } catch (error) {}
   }
 
   useEffect(() => {
@@ -60,7 +77,7 @@ const FixtureMain = () => {
           <Button onClick={() => setShowStages(!showStages)} variant="outline-success">
             {showStages ? 'Hide stages' : 'Show stages'}
           </Button>
-          {showStages && <StagesMain stages={stages} getStages={getStages} />}
+          {showStages && <StagesMain stages={stages} getStages={getStages} getGroups={getGroups}/>}
           <Button onClick={() => setShowGroups(!showGroups)} variant="outline-success">
             {showGroups ? 'Hide groups' : 'Show groups'}
           </Button>

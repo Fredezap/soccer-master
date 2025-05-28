@@ -34,7 +34,6 @@ export const useTournamentsDetails = create(persist(
     },
 
     setCurrentTournament: (currentTournament) => {
-      console.log('CURRENT:', currentTournament)
       set({ currentTournament })
     },
 

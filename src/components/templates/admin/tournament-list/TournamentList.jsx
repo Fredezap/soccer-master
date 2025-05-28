@@ -5,7 +5,12 @@ import getTournaments from '../../../common/getters/GetTournaments'
 import ROUTES from '../../../../store/constants/routes'
 import formatDate from '../../../common/formatDate'
 import { ListGroup } from 'react-bootstrap'
-import { FaTrophy } from 'react-icons/fa'
+import deafultTournamentLogo from '../../../../images/tournamentDefaultLogo_1.png'
+import { useState } from 'react'
+
+const BASE_URL = import.meta.env.MODE === 'development'
+  ? import.meta.env.VITE_IMG_DEV_BASE_URL
+  : import.meta.env.VITE_IMG_PROD_BASE_URL
 
 const TournamentList = () => {
   const { tournaments, setCurrentTournament, setIsCreating } = useTournamentsDetails()
@@ -14,6 +19,8 @@ const TournamentList = () => {
   const { fetchTournamentDetails } = getTournaments()
   const location = useLocation()
   const currentPath = location.pathname
+
+  const [searchTerm, setSearchTerm] = useState('')
 
   const handleTournamentSelected = async(paramTournament) => {
     const response = await fetchTournamentDetails({ paramTournament })
@@ -28,36 +35,57 @@ const TournamentList = () => {
         return
       }
       navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN)
-    } else addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
+    } else {
+      addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
+    }
   }
 
   const handleCreateTournament = () => {
     setCurrentTournament({})
     setIsCreating(true)
-    console.log('aca')
     navigate(ROUTES.ADMIN.TOURNAMENT_DETAILS)
   }
+
+  const getTournamentLogo = (tournament) => {
+    const tournamentLogo = tournament?.tournamentLogo
+      ? `${BASE_URL}${tournament.tournamentLogo}`
+      : deafultTournamentLogo
+    return tournamentLogo
+  }
+
+  const filteredTournaments = tournaments.filter(tournament =>
+    tournament.name.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div className="admin-all-mains bg-lights">
       <h2>Tournaments</h2>
-      {tournaments.length === 0
+      <input
+        type="text"
+        placeholder="Search tournaments..."
+        value={searchTerm}
+        onChange={(e) => setSearchTerm(e.target.value)}
+        className="form-control mb-3 input-white-border"
+      />
+
+      {filteredTournaments.length === 0
         ? (
           <div>
-            <p>There are not tournaments created yet</p>
+            <p>No tournaments found</p>
           </div>
         )
         : (
           <div className="tournaments-list">
             <ListGroup>
-              {tournaments.map((tournament) => (
+              {filteredTournaments.map((tournament) => (
                 <ListGroup.Item
+                  className="tournament-item"
                   action
                   key={tournament.tournamentId}
                   onClick={() => handleTournamentSelected(tournament)}
                 >
                   <div className="icon-container">
-                    <FaTrophy size={24} />
+                    <img className="admin-tournament-logo" src={getTournamentLogo(tournament)} alt="Tournament Logo" />
                   </div>
                   <div className="text-container">
                     <h5>{tournament.name}</h5>

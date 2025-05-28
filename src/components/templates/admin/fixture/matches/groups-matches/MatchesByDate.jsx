@@ -3,7 +3,7 @@ import formatTime from '../../../../../common/formatTime'
 import { CiEdit } from 'react-icons/ci'
 import { IoFootballOutline } from 'react-icons/io5'
 
-const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handleShowModal, backgroundStyle }) => {
+const MatchesByDate = ({ isGoalSeter, stageGroups, selectedGroupStage, groupedMatches, handleShowModal, backgroundStyle }) => {
   return (
     <div className="group-matches-details">
       {selectedGroupStage && (
@@ -52,9 +52,17 @@ const MatchesByDate = ({ stageGroups, selectedGroupStage, groupedMatches, handle
                                   <td><strong className="text-white">{match.location}</strong></td>
                                   <td className="actions-column">
                                     <div className="actions-icons">
-                                      <MdDeleteForever onClick={() => handleShowModal(match, 'delete')} className="delete-icon" />
-                                      <CiEdit onClick={() => handleShowModal(match, 'edit')} className="edit-icon" />
-                                      <IoFootballOutline onClick={() => handleShowModal(match, 'set-score')} style={{ fontSize: '20px' }}/>
+                                      {!isGoalSeter
+                                        ? (
+                                          <div>
+                                            <MdDeleteForever onClick={() => handleShowModal(match, 'delete')} className="delete-icon" />
+                                            <CiEdit onClick={() => handleShowModal(match, 'edit')} className="edit-icon" />
+                                          </div>
+                                        )
+                                        : (
+                                          <IoFootballOutline onClick={() => handleShowModal(match, 'set-score')} style={{ fontSize: '20px' }}/>
+                                        )
+                                      }
                                     </div>
                                   </td>
                                 </tr>

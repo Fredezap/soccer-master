@@ -17,12 +17,14 @@ const RegisterForm = () => {
   const [showConfirmPassword, setShowConfirmPassword] = useState(false)
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
-  const { submittingForm } = useSubmittingFormStore()
+  const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
 
   const handleFormSubmit = async(values) => {
+    setSubmittingForm(true)
     const url = '/auth/register'
     const successResponse = messages.success
     const response = await postService({ url, values, addMessage, successResponse })
+    setSubmittingForm(false)
 
     if (response?.success) {
       navigate(ROUTES.LOGIN)
@@ -51,8 +53,8 @@ const RegisterForm = () => {
               <Button type="submit" disabled={submittingForm}>
               Register
               </Button>
+              {submittingForm && <p className="submitting-message">{messages.submitting}</p>}
               <a href={ROUTES.LOGIN}>Login</a>
-              {submittingForm && <p>{messages.submitting}</p>}
             </Form>
           )}
         </Formik>

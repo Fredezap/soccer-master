@@ -17,8 +17,6 @@ const EditGroupMatchModal = ({
   formAction,
   localTeam,
   visitorTeam,
-  matchResult,
-  setMatchResult,
   match
 }) => {
   return (
