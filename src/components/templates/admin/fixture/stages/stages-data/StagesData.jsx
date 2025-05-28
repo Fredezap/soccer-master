@@ -1,6 +1,6 @@
 import StagesTableInfo from './StagesTableInfo'
 
-const StagesData = ({ stages, getStages }) => {
+const StagesData = ({ stages, getStages, getGroups }) => {
   return (
     <div className="stages-data">
       <h5>Stages</h5>
@@ -10,7 +10,7 @@ const StagesData = ({ stages, getStages }) => {
             <p>No stages have been set yet</p>
           )
           : (
-            <StagesTableInfo stages={stages} getStages={getStages} />
+            <StagesTableInfo stages={stages} getStages={getStages} getGroups={getGroups} />
           )}
       </div>
     </div>

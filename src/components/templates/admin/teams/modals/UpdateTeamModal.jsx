@@ -19,7 +19,7 @@ const UpdateTeamModal = ({ showUpdateTeamModal, setShowUpdateTeamModal }) => {
 
     const cleanedFormValues = {
       ...formValues,
-      logo: { file: file || null },
+      file: { file: file || null },
       logoUrl: team.logo.url || null
     }
 

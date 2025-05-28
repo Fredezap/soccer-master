@@ -17,6 +17,7 @@ const EmailSenderMain = () => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { fetchTournamentDetails } = getTournaments()
+  const [mouseInsideInput, setMouseInsideInput] = useState(false)
 
   useEffect(() => {
     if (currentTournament.Emails) setAllEmails(currentTournament.Emails)
@@ -100,13 +101,15 @@ const EmailSenderMain = () => {
           <div className="d-flex gap-4 mt-4 email-sender-box">
             <Card className="flex-fill custom-card">
               <Card.Body>
-                <Card.Title className="text-light">Add new Email</Card.Title>
+                <Card.Title>Add new Email</Card.Title>
                 <ListGroup>
                   <ListGroup.Item className="add-email-item d-flex align-items-center gap-2">
                     <input
-                      className="input"
+                      className={`input ${mouseInsideInput ? 'inside' : 'outside'}`}
                       placeholder="Write new email here..."
                       value={emailInput}
+                      onMouseEnter={() => setMouseInsideInput(true)}
+                      onMouseLeave={() => setMouseInsideInput(false)}
                       onChange={(e) => setEmailInput(e.target.value)}
                       onKeyDown={(event) => { if (event.key === 'Enter') { addEmail() } }}
                     />

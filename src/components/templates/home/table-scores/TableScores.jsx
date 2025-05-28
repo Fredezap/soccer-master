@@ -5,18 +5,6 @@ const BASE_URL = import.meta.env.MODE === 'development'
   ? import.meta.env.VITE_IMG_DEV_BASE_URL
   : import.meta.env.VITE_IMG_PROD_BASE_URL
 
-// todo: sacarle el contorno a la tarjeta del torneo, al hacerle click? o hacerlo mas fino
-// todo: ver de mejorar la visualizacion del scroll del side menu
-// todo: ver un el modal que setea los goles, tambien el scroll
-// todo: cambiar fonodo a panel lateral
-// todo: que no tenga borde el admin login y register al hacer click
-// todo: ver porque muestra un mensaje vacio al actualizar admin main sin que haya un equipo
-// todo: cambiar algunos conolres en show matches
-// todo: cursor pointer en show groups
-// todo: que se actualicen los equipos en matches groups al agregar un team (quiza ya lo esta haciendo, pero al poner atras no lo hace)
-// todo: poner nuevo logo para torneo y las cartas, ver fondo de las mismas
-// todo: feature para que el admin pueda colocar imagen y logo torneo
-
 const TableScores = ({ backgroundStyle }) => {
   const { currentTournament } = useTournamentsDetails()
   const [groupStages, setGroupStages] = useState([])
@@ -28,7 +16,7 @@ const TableScores = ({ backgroundStyle }) => {
 
     setGroupStages(filteredGroupStages)
   }, [currentTournament])
-  console.log('GRUPOS: ', groupStages)
+
   return (
     groupStages.length !== 0 && (
       groupStages.map((stage, index) => (

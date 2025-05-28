@@ -1,4 +1,4 @@
-const SetGroupMatchResult = ({ matchResult, setMatchResult }) => {
+const SetGroupMatchResult = ({ matchResult, setMatchResult, localTeam, visitorTeam }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     const parsedValue = value === '' ? null : parseInt(value, 10) // Permite vacío como null
@@ -12,7 +12,7 @@ const SetGroupMatchResult = ({ matchResult, setMatchResult }) => {
   return (
     <div className="form-input-box">
       <div className="grid-colums set-score">
-        <label htmlFor="localTeamScore">Local team score:</label>
+        <label htmlFor="localTeamScore">{localTeam.name ? localTeam.name : 'Local team'} score:</label>
         <input
           type="number"
           id="localTeamScore"
@@ -23,7 +23,7 @@ const SetGroupMatchResult = ({ matchResult, setMatchResult }) => {
       </div>
 
       <div className="grid-colums">
-        <label htmlFor="visitorTeamScore">Visitor team score:</label>
+        <label htmlFor="visitorTeamScore">{visitorTeam.name ? visitorTeam.name : 'Visitor team'} score:</label>
         <input
           type="number"
           id="visitorTeamScore"

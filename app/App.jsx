@@ -11,7 +11,6 @@ import main from '../src/js/main/main.js'
 import $ from 'jquery'
 import siteSticky from '../src/js/js-refactorized/siteSticky.js'
 import { useEffect } from 'react'
-import { Fancybox } from '@fancyapps/ui'
 import '../src/styles/fancybox.css'
 import Header from '../src/components/common/Header.jsx'
 import Footer from '../src/components/common/Footer.jsx'
@@ -30,13 +29,12 @@ import TournamentDetailsMain from '../src/components/templates/admin/tournament-
 import { useTournamentsDetails } from '../src/store/slices/useTournamentsDetails.js'
 import { useMessageStore } from '../src/store/slices/useMessageStore.js'
 import orderAllMatchesByDate from '../src/components/templates/matches/orderAllMatchesByDate.jsx'
-import { useOrderedMatches } from '../src/store/slices/useOrderedMatches.js'
 import checkPathsNoNeedTournament from './checkPathsNoNeedTournament.js'
 import checkPathsNeedsMessager from '../src/components/common/message-manager/checkPathsNeedsMessager.js'
 import getTournaments from '../src/components/common/getters/GetTournaments.jsx'
 import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.jsx'
-import EmailSenderMain from '../src/components/templates/admin/contact/email-sender/EmailSenderMain.jsx'
 import AdminContact from '../src/components/templates/admin/contact/main/AdminContact.jsx'
+import MatchesResultSetterMain from '../src/components/templates/admin/fixture/matches/matches-result-setter/MatchesResultSetterMain'
 window.jQuery = $
 window.$ = $
 
@@ -70,7 +68,6 @@ function AppContent() {
 
   useEffect(() => {
     fetchAllTournaments()
-    if (Object.entries(currentTournament).length > 0) console.log('SI HAY ')
     if (Object.entries(currentTournament).length > 0) fetchTournamentDetails({ paramTournament: currentTournament })
   }, [])
 
@@ -116,6 +113,7 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.CONTACT} element={<AdminContact />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
+        <Route path={ROUTES.ADMIN.MATCHES_RESULT_SETTER} element={<MatchesResultSetterMain />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </>

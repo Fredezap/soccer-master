@@ -7,7 +7,9 @@ const SetGroupMatchScoreModal = ({
   matchResult,
   setMatchResult,
   customError,
-  handleConfirmScore
+  handleConfirmScore,
+  localTeam,
+  visitorTeam
 }) => {
   return (
     <Modal
@@ -25,6 +27,8 @@ const SetGroupMatchScoreModal = ({
       <Modal.Body className="modal-succes-body">
         <div className="modal-box">
           <SetGroupMatchResult
+            localTeam={localTeam}
+            visitorTeam={visitorTeam}
             matchResult={matchResult}
             setMatchResult={setMatchResult}
           />

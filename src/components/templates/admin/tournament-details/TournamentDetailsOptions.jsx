@@ -25,6 +25,11 @@ const TournamentDetailsOptions = () => {
         </Button>
       </div>
       <div className="admin-tournament-options">
+        <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.MATCHES_RESULT_SETTER)}>
+          <span className="button-details"><IoFootball />Goals setter</span>
+        </Button>
+      </div>
+      <div className="admin-tournament-options">
         <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.VIDEOS)}>
           <span className="button-details"><IoFootball />Videos</span>
         </Button>

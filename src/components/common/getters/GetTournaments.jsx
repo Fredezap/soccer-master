@@ -22,7 +22,6 @@ const getTournaments = () => {
   }
 
   const fetchTournamentDetails = async({ paramTournament } = {}) => {
-    console.log('PARAM:', paramTournament)
     try {
       const url = '/tournaments/get-details'
       const httpMethod = 'post'

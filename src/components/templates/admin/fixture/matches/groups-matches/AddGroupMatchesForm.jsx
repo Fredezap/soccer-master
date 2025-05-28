@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap'
 import ChooseDateAndLocationForm from '../../../../../templates/admin/fixture/matches/brackets-matches/add-matches/common-forms/ChooseDateAndLocationForm'
 import SelectTeamsForm from './SelectTeamsForm'
-import SetMatchResult from '../brackets-matches/add-matches/common-forms/SetMatchResult'
+import SetMatchResult from '../brackets-matches/add-matches/common-forms/SetKnockoutMatchResult'
 
 const AddGroupMatchesForm = ({
   selectedGroup,

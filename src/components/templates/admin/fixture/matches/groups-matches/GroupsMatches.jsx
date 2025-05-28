@@ -12,11 +12,8 @@ import EditGroupMatchModal from './modals/EditGroupMatchModal.jsx'
 import formatDate from '../../../../../common/formatDate.js'
 import ConfirmMatchModal from './modals/ConfirmMatchModal.jsx'
 import SetGroupMatchScoreModal from './modals/SetGroupMatchScoreModal.jsx'
-import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin.js'
-import { useMessageStore } from '../../../../../../store/slices/useMessageStore.js'
-import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore.js'
-import getTournaments from '../../../../../common/getters/GetTournaments.jsx'
 import TableScores from '../../../../home/table-scores/TableScores'
+import getMatchGroup from './getMatchGroup.js'
 
 const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const { stages } = useStagesStore()
@@ -36,9 +33,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   const [showSetScoreGroupMatchModal, setShowSetScoreGroupMatchModal] = useState(false)
   const [match, setMatch] = useState(null)
   const [formAction, setFormAction] = useState(null)
-  const { addMessage } = useMessageStore()
-  const { setSubmittingForm } = useSubmittingFormStore()
-  const { fetchTournamentDetails } = getTournaments()
   const [matchResult, setMatchResult] = useState({
     localTeamScore: null,
     visitorTeamScore: null,
@@ -83,7 +77,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
 
   useEffect(() => {
     checkNoSameTeams({ localTeam, visitorTeam, setCustomError })
-  }, [localTeam, visitorTeam])
+  }, [localTeam, visitorTeam, locationAndDateformData])
 
   useEffect(() => {
     if (selectedGroupStage) {
@@ -99,6 +93,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
   }, [matchResult])
 
   const handleConfirmGroupMatch = async() => {
+    if (customError !== null) return
     const checkErrors = handleAddMatchErrors({
       setCustomError,
       selectedGroup,
@@ -112,45 +107,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     if (checkErrors) return
 
     setShowConfirmMatchModal(true)
-  }
-
-  const handleConfirmScore = async() => {
-    const localTeamResult = matchResult.localTeamScore
-    const visitorTeamResult = matchResult.visitorTeamScore
-
-    const currentResultsNotValid =
-    (localTeamResult === null || localTeamResult === undefined || localTeamResult === '') !==
-    (visitorTeamResult === null || visitorTeamResult === undefined || visitorTeamResult === '')
-
-    if (currentResultsNotValid) {
-      setCustomError('Missing data: Enter the scores for both teams.')
-      return
-    }
-
-    const values = {
-      localTeamScore: matchResult.localTeamScore,
-      visitorTeamScore: matchResult.visitorTeamScore,
-      matchId: match?.matchId || null,
-      stageId: selectedGroup?.Stage?.stageId,
-      groupId: selectedGroup?.groupId,
-      localTeamId: localTeam?.teamId,
-      visitorTeamId: visitorTeam?.teamId
-    }
-
-    const successResponse = 'Score has been set'
-    const url = '/admin/fixture/matches/edit-group-match-score'
-    const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-    setShowConfirmMatchModal(false)
-
-    if (response?.success) {
-      getGroups()
-      getStages()
-      await fetchTournamentDetails()
-    }
-
-    setCustomError(null)
-    setShowSetScoreGroupMatchModal(false)
   }
 
   const teamChange = ({ event, teamType }) => {
@@ -171,26 +127,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
     setMatch(match)
     if (action === 'delete') setShowDeleteGroupMatchModal(true)
     else {
-      const getMatchGroup = (match) => {
-        if (!match || !match.LocalTeam || !match.VisitorTeam) return null
-
-        const localGroups = match.LocalTeam.Groups || []
-        const visitorGroups = match.VisitorTeam.Groups || []
-
-        // Filtrar grupos que coincidan con el stageId del partido
-        const stageId = match.stageId
-
-        const localStageGroups = localGroups.filter(group => group.stageId === stageId)
-        const visitorStageGroups = visitorGroups.filter(group => group.stageId === stageId)
-
-        // Encontrar un grupo común entre LocalTeam y VisitorTeam
-        const commonGroup = localStageGroups.find(localGroup =>
-          visitorStageGroups.some(visitorGroup => visitorGroup.groupId === localGroup.groupId)
-        )
-
-        return commonGroup || null // Devuelve el grupo común o null si no existe
-      }
-
       const foundedGroup = getMatchGroup(match)
       const groupId = foundedGroup?.groupId
       const group = dbGroups[showGroupMatchesDetail]?.groups?.find(
@@ -203,20 +139,10 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
       setVisitorTeam(match?.VisitorTeam || null)
       const date = formatDate(match?.date).dashDate
       setLocationAndDateformData({ date: date || null, time: match?.time || null, location: match?.location || null })
-      setMatchResult({
-        localTeamScore: match?.localTeamScore,
-        visitorTeamScore: match?.visitorTeamScore,
-        localTeamPenaltyScore: match?.localTeamPenaltyScore,
-        visitorTeamPenaltyScore: match?.visitorTeamPenaltyScore
-      })
     }
     if (action === 'edit') {
       setFormAction(action)
       setShowEditGroupMatchModal(true)
-    }
-
-    if (action === 'set-score') {
-      setShowSetScoreGroupMatchModal(true)
     }
   }
 
@@ -278,6 +204,7 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
                             getStages={getStages}
                             handleShowModal={handleShowModal}
                             backgroundStyle={'bg-light'}
+                            isGoalSeter={false}
                           />
                         </div>
                       )
@@ -354,16 +281,6 @@ const GroupsMatches = ({ dbGroups, getGroups, getStages }) => {
           localTeam={localTeam}
           visitorTeam={visitorTeam}
           match={match}
-        />
-      )}
-      {showSetScoreGroupMatchModal && (
-        <SetGroupMatchScoreModal
-          showSetScoreGroupMatchModal={showSetScoreGroupMatchModal}
-          setShowSetScoreGroupMatchModal={setShowSetScoreGroupMatchModal}
-          matchResult={matchResult}
-          setMatchResult={setMatchResult}
-          customError={customError}
-          handleConfirmScore={handleConfirmScore}
         />
       )}
       <hr></hr>

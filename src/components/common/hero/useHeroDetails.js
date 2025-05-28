@@ -43,6 +43,10 @@ const useHeroDetails = () => {
     title: 'Admin contact'
   }
 
+  const adminResultSetter = {
+    title: 'Admin result setter'
+  }
+
   return {
     players,
     matches,
@@ -54,7 +58,8 @@ const useHeroDetails = () => {
     adminTeamsUpdate,
     adminFixture,
     adminVideos,
-    adminContact
+    adminContact,
+    adminResultSetter
   }
 }
 

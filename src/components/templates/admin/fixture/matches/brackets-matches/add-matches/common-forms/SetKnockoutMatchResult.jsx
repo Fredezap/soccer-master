@@ -1,4 +1,4 @@
-const SetMatchResult = ({ matchResult, setMatchResult }) => {
+const SetKnockoutMatchResult = ({ matchResult, setMatchResult, localTeam, visitorTeam }) => {
   const handleInputChange = (e) => {
     const { name, value } = e.target
     const parsedValue = value === '' ? null : parseInt(value, 10)
@@ -11,7 +11,7 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
   return (
     <div className="form-input-box">
       <div className="grid-colums">
-        <label htmlFor="localTeamScore">Local team score:</label>
+        <label htmlFor="localTeamScore">{localTeam.name ? localTeam.name : 'Local team'} score:</label>
         <input
           type="number"
           id="localTeamScore"
@@ -22,7 +22,7 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
       </div>
 
       <div className="grid-colums">
-        <label htmlFor="visitorTeamScore">Visitor team score:</label>
+        <label htmlFor="visitorTeamScore">{visitorTeam.name ? visitorTeam.name : 'Visitor team'} score:</label>
         <input
           type="number"
           id="visitorTeamScore"
@@ -33,11 +33,11 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
       </div>
 
       {(matchResult?.localTeamScore != null && matchResult?.visitorTeamScore != null) &&
-(matchResult?.localTeamScore === matchResult?.visitorTeamScore) &&
+      (matchResult?.localTeamScore === matchResult?.visitorTeamScore) &&
         (
           <div>
             <div className="grid-colums-lg">
-              <label htmlFor="localTeamPenaltyScore">Local team penalty score:</label>
+              <label htmlFor="localTeamPenaltyScore">{localTeam.name ? localTeam.name : 'Local team'} penalty score:</label>
               <input
                 type="number"
                 id="localTeamPenaltyScore"
@@ -52,7 +52,7 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
             </div>
 
             <div className="grid-colums-lg">
-              <label htmlFor="visitorTeamPenaltyScore">Visitor team penalty score:</label>
+              <label htmlFor="visitorTeamPenaltyScore">{visitorTeam.name ? visitorTeam.name : 'Visitor team'} penalty score:</label>
               <input
                 type="number"
                 id="visitorTeamPenaltyScore"
@@ -71,4 +71,4 @@ const SetMatchResult = ({ matchResult, setMatchResult }) => {
   )
 }
 
-export default SetMatchResult
+export default SetKnockoutMatchResult

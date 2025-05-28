@@ -17,8 +17,9 @@ const CreateTeamModal = ({ showCreateTeamModal, setShowCreateTeamModal, setDbTea
     const cleanedFormValues = {
       ...formValues,
       // Excluimos reader y url para evitar PayloadTooLargeError: request entity too large
-      logo: { file }
+      file: { file }
     }
+
     const values = { ...cleanedFormValues, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Team has been created'
     const url = '/admin/teams/create'

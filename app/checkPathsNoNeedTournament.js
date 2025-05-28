@@ -1,7 +1,6 @@
 import ROUTES from '../src/store/constants/routes'
 
 const checkPathsNoNeedTournament = (currentPath) => {
-  console.log('PATH: ', currentPath)
   if (
     currentPath === ROUTES.ADMIN.MAIN ||
     currentPath === ROUTES.ADMIN.TOURNAMENT_DETAILS ||

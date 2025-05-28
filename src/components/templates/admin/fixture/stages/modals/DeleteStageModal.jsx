@@ -2,8 +2,9 @@ import { Modal, Button } from 'react-bootstrap'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
+import { useDbGroupsStore } from '../../../../../../store/slices/useDbGroupsStore'
 
-const DeleteStageModal = ({ showDeleteStageModal, setShowDeleteStageModal, stageId, getStages }) => {
+const DeleteStageModal = ({ showDeleteStageModal, setShowDeleteStageModal, stageId, getStages, getGroups }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
 
@@ -15,6 +16,7 @@ const DeleteStageModal = ({ showDeleteStageModal, setShowDeleteStageModal, stage
     if (response.success) {
       setShowDeleteStageModal(false)
       getStages()
+      getGroups()
     }
   }
 

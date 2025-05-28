@@ -27,7 +27,7 @@ const CreateVideoForm = () => {
   }
 
   const createVideo = async(values, { resetForm }) => {
-    values = { ...values, tournamentId: currentTournament.tournamentId, logo: file }
+    values = { ...values, tournamentId: currentTournament.tournamentId, file }
 
     if (file === null) {
       setCustomError('Video image is requiered')
