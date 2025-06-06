@@ -51,13 +51,19 @@ const AdminVideos = () => {
     getVideos()
   }, [])
 
-  // todo: ver poeque a veces no carga los videos
-  console.log('VI', videos)
+  const getBg = () => {
+    let Bg = 'bg-dark'
+    if (videos.length === 0) Bg = 'bg-light'
+    return Bg
+  }
+
+  const sectionBg = getBg()
+
   return (
     <div>
       <SideMenu />
       <Hero title={adminVideos.title} />
-      <div className="bg-dark admin-teams-main">
+      <div className={`${sectionBg} admin-teams-main`}>
         <p>SET THE VIDEOS HERE</p>
         <CreateVideoForm />
       </div>

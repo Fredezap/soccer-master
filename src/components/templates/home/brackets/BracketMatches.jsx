@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react'
 import formatBracketData from '../../admin/fixture/matches/brackets-matches/main/formatBracketData.js'
 import transformMatches from '../../admin/fixture/matches/brackets-matches/main/transformMatches.js'
 import BracketsForUsers from './BracketsForUsers.jsx'
+import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails.js'
 
-const BracketMatches = ({ dbMatches, dbKnockoutStages }) => {
+const BracketMatches = ({ sectionBg, dbMatches, dbKnockoutStages }) => {
   const [rounds, setRounds] = useState([])
 
   useEffect(() => {
@@ -18,7 +19,7 @@ const BracketMatches = ({ dbMatches, dbKnockoutStages }) => {
   if (!dbKnockoutStages || Object.keys(dbKnockoutStages).length === 0) return null
 
   return (
-    <div className="brackets-component bg-dark">
+    <div className={`brackets-component ${sectionBg.bracktesBg}`}>
       <h2>Brackets</h2>
       <BracketsForUsers rounds={rounds} />
     </div>

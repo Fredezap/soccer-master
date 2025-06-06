@@ -2094,7 +2094,7 @@ color: green;
   align-items: center;
   justify-content: center;
   width: 100%;
-  margin-bottom: 50px;
+  padding: 50px;
   text-align: center;
 }
 
@@ -2538,6 +2538,80 @@ display: none;
 }
 
 /* End of Admin matches Styles */
+
+/* Carousel Styles */
+/* Posicionar las flechas arriba a la derecha */
+.custom-swiper-nav {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  gap: 8px;
+}
+
+.custom-swiper-nav .swiper-button-prev,
+.custom-swiper-nav .swiper-button-next {
+  position: static;
+  width: 40px;
+  height: 40px;
+  background: #eee;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #000;
+}
+
+.custom-swiper-nav .swiper-button-disabled {
+  opacity: 0.3;
+}
+
+/* Imágenes */
+.video-media {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+  border-radius: 8px;
+  background: #000;
+}
+
+.video-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.video-media:hover img {
+  transform: scale(1.05);
+}
+
+.custom-nav button {
+  font-size: 30px;
+  display: inline-block;
+  width: 40px;
+  height: 40px;
+  position: relative;
+  color: #fff;
+  border-radius: 5px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.custom-nav button > span {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.custom-nav button:hover {
+  background-color: #ee1e46;
+}
+
+/* End of Carousel Styles */
 
 /* Admin Email sender Styles */
 .add-email-item {
@@ -3799,7 +3873,7 @@ display: none;
 
 /* Table Scores Styles */
 .groups-score-data {
-  padding: 10px;
+  padding: 15px;
   display: flex;
   flex-direction: column;
   gap: 30px;
