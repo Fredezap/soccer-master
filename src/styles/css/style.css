@@ -1668,6 +1668,18 @@ color: green;
   box-shadow: none;
   outline: none;
 }
+
+.input-white-border {
+  margin-top: 25px;
+}
+
+.tournament-sercher {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 75%;
+}
 /* End if Tournament list sercher styles */
 
 /* Admin teams Styles */

@@ -8,6 +8,7 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
 
     for (const [key, value] of Object.entries(values)) {
       if (key === 'file') {
+        console.log('ACA 1: ', value)
         // Puede venir como File directamente o como { file: File }
         if (value instanceof File || value instanceof Blob) {
           formData.append(key, value)
@@ -15,6 +16,7 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
           formData.append(key, value.file)
         }
       } else if (key === 'files') {
+        console.log('ACA 2: ', value)
         // Puede ser array de Files o array de objetos { file: File }
         if (Array.isArray(value)) {
           value.forEach(item => {
@@ -26,6 +28,7 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
           })
         }
       } else if (Array.isArray(value)) {
+        console.log('ACA 3: ', value)
         // Array genérico (strings, números, etc)
         formData.append(key, JSON.stringify(value))
       } else if (key !== null && key !== undefined) {
@@ -33,7 +36,6 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
         formData.append(key, value != null ? value.toString() : value)
       }
     }
-
     const { token = undefined, role = undefined } = authorizationValues || {}
     try {
       const response = await apiInstance.post(url, formData, {
