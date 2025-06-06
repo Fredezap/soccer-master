@@ -54,20 +54,21 @@ const TournamentList = () => {
   }
 
   const filteredTournaments = tournaments.filter(tournament =>
-    tournament.name.toLowerCase().includes(searchTerm.toLowerCase())
+    tournament?.name?.toLowerCase().includes(searchTerm.toLowerCase())
   )
 
   return (
     <div className="admin-all-mains bg-lights">
-      <h2>Tournaments</h2>
-      <input
-        type="text"
-        placeholder="Search tournaments..."
-        value={searchTerm}
-        onChange={(e) => setSearchTerm(e.target.value)}
-        className="form-control mb-3 input-white-border"
-      />
-
+      <div className="tournament-sercher">
+        <h2>Tournaments</h2>
+        <input
+          type="text"
+          placeholder="Search tournaments..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className="form-control mb-3 input-white-border"
+        />
+      </div>
       {filteredTournaments.length === 0
         ? (
           <div>

@@ -45,21 +45,23 @@ const TournamentDetailsForm = () => {
 
   // todo: falta hacer andar este endpoint
   const handleSubmitFormCreate = async(values) => {
-  //   values = {
-  //     tournamentId: currentTournament.tournamentId,
-  //     file: uploadedFiles.File // debe ser una instancia de File
-  //   }
+    console.log('VALUES: ', values)
+    values = {
+      ...values,
+      tournamentId: currentTournament.tournamentId,
+      files
+    }
 
-  //   const successResponse = 'Tournament has been created'
-  //   const url = '/admin/tournament-details/create'
-  //   httpMethod = 'postForImg'
-  //   const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
-  //   if (response.success) {
-  //     setIsCreating(false)
-  //     updateTournaments(response.data?.tournamentDetails)
-  //     updateCurrentTournament(response.data?.tournamentDetails)
-  //     navigate(ROUTES.ADMIN.MAIN)
-  //   }
+    const successResponse = 'Tournament has been created'
+    const url = '/admin/tournament-details/create'
+    httpMethod = 'postForImg'
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    if (response.success) {
+      setIsCreating(false)
+      updateTournaments(response.data?.tournamentDetails)
+      updateCurrentTournament(response.data?.tournamentDetails)
+      navigate(ROUTES.ADMIN.MAIN)
+    }
   }
 
   const handleSubmitFormEdit = async(values) => {
