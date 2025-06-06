@@ -14,14 +14,13 @@ import BracketMatches from './brackets/BracketMatches'
 const Home = () => {
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
   const [dbMatches, setDbMatches] = useState([])
-  const [dbTeams, setDbTeams] = useState([])
   const { currentTournament } = useTournamentsDetails()
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
 
   const getKnockoutStages = async() => {
     try {
-      const url = '/admin/fixture/stages/get-all-knockout-stages-by-tournament'
+      const url = '/stages/get-all-knockout-stages-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
       const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage })
@@ -33,7 +32,7 @@ const Home = () => {
 
   const getMatches = async(values) => {
     try {
-      const url = '/admin/fixture/matches/get-all'
+      const url = '/matches/get-all'
       const httpMethod = 'post'
       const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage })
       if (response?.success) {
@@ -42,40 +41,56 @@ const Home = () => {
     } catch (error) {}
   }
 
-  const getTeams = async() => {
-    try {
-      const values = { tournamentId: currentTournament.tournamentId }
-      const url = '/admin/teams/get-by-tournament'
-      const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage })
-      if (response?.success) {
-        setDbTeams(response.data?.tournament?.Teams)
-      }
-    } catch (error) {}
-  }
-
   useEffect(() => {
     const fetchData = async() => {
       await getKnockoutStages()
       await getMatches()
-      await getTeams()
     }
 
     fetchData()
   }, [currentTournament])
+
+  const getSectionBg = () => {
+    let numberOfExistingSections = 1 // Section matches will always exist
+
+    const videosSectionExist = currentTournament?.Videos > 0
+    const bracketsSectionsExist = Object.entries(dbKnockoutStages).length > 0
+
+    if (videosSectionExist || bracketsSectionsExist) numberOfExistingSections = 2
+    if (videosSectionExist && bracketsSectionsExist) numberOfExistingSections = 3
+
+    const lightBg = 'bg-light'
+    const darkBg = 'bg-dark'
+
+    const sectionsBg = {
+      matchesBg: lightBg,
+      videosBg: darkBg,
+      bracketsBg: lightBg
+    }
+
+    if (numberOfExistingSections === 2) {
+      sectionsBg.matchesBg = darkBg
+      sectionsBg.videosBg = lightBg
+      sectionsBg.bracketsBg = lightBg
+    }
+
+    return sectionsBg
+  }
+
+  const sectionBg = getSectionBg()
 
   return (
     <>
       <HeroHome />
       {/* <TeamScore /> */}
       {/* <News /> */}
-      <NextMatchAndTable dbKnockoutStages={dbKnockoutStages}/>
+      <NextMatchAndTable sectionBg={sectionBg} dbKnockoutStages={dbKnockoutStages}/>
       <BracketMatches
-        dbTeams={dbTeams}
+        sectionBg={sectionBg}
         dbMatches={dbMatches}
         dbKnockoutStages={dbKnockoutStages}
       />
-      <Videos />
+      <Videos sectionBg={sectionBg}/>
       {/* <Blog /> */}
     </>
   )

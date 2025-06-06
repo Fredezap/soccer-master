@@ -1,7 +1,9 @@
-import { useState } from 'react'
+import { useRef } from 'react'
 import { MdDeleteForever } from 'react-icons/md'
 
 const VideoImageUploader = ({ setPreview, preview, setFile, HandleImageError }) => {
+  const inputRef = useRef(null)
+
   const handleImageChange = (e) => {
     const file = e.target.files[0]
     if (file) {
@@ -39,6 +41,9 @@ const VideoImageUploader = ({ setPreview, preview, setFile, HandleImageError }) 
   const handleDeleteImage = () => {
     setPreview(null)
     setFile(null)
+    if (inputRef.current) {
+      inputRef.current.value = '' // 🔁 Resetea el input file
+    }
   }
 
   return (
@@ -54,6 +59,7 @@ const VideoImageUploader = ({ setPreview, preview, setFile, HandleImageError }) 
         onDragOver={handleDragOver}
       >
         <input
+          ref={inputRef} // 👈 Referencia al input
           type="file"
           accept="image/*"
           style={{ display: 'none' }}
@@ -64,20 +70,20 @@ const VideoImageUploader = ({ setPreview, preview, setFile, HandleImageError }) 
         <div className="video-image-loaded">
           <label htmlFor="file" className="img-uploader-box">
             {preview
-              ? <img
-                src={preview}
-                alt="Preview"
-                style={{ maxWidth: '100px', maxHeight: '100px' }}
-              />
-
+              ? (
+                <img
+                  src={preview}
+                  alt="Preview"
+                  style={{ maxWidth: '100px', maxHeight: '100px' }}
+                />
+              )
               : 'Upload video image here...'}
-
           </label>
-          {preview &&
-        (<div className="team-logo-form">
-          <MdDeleteForever onClick={handleDeleteImage} className="delete-icon" />
-        </div>
-        )}
+          {preview && (
+            <div className="team-logo-form">
+              <MdDeleteForever onClick={handleDeleteImage} className="delete-icon" />
+            </div>
+          )}
         </div>
       </div>
     </div>

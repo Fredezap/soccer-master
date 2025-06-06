@@ -12,19 +12,19 @@ import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../store/constants/routes.js'
 import deafultTournamentLogo from '../../../../images/tournamentDefaultLogo_1.png'
 import deafultTournamentImg from '../../../../images/bg_3.jpg'
+import DeleteTournamentModal from './modals/DeleteTournamentModal.jsx'
 
 const BASE_URL = import.meta.env.MODE === 'development'
   ? import.meta.env.VITE_IMG_DEV_BASE_URL
   : import.meta.env.VITE_IMG_PROD_BASE_URL
-
-// TODO: generar el endpoint de create, hacer que ande.
-// TODO: Ver si elimino imagen del back (la que no se este usando? ya tenia un metodo parecido, esto al final de todo lo que tengo en el cuaderno)
 
 const TournamentDetailsForm = () => {
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
   const defaultInitialValues = TournamentDetailsFormData().initialValues
   const { registerSchema, formFields } = TournamentDetailsFormData()
+  const [showDeleteTournamentModal, setShowDeleteTournamentModal] = useState(false)
+  const [selectedTournament, setSelectedTournament] = useState()
   const [initialValues, setInitialValues] = useState(defaultInitialValues)
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [editTournamentDetails, setEditTournamentDetails] = useState(false)
@@ -43,9 +43,12 @@ const TournamentDetailsForm = () => {
     }
   }
 
-  // todo: falta hacer andar este endpoint
+  const handleShowDeleteForm = (tournament) => {
+    setShowDeleteTournamentModal(true)
+    setSelectedTournament(tournament)
+  }
+
   const handleSubmitFormCreate = async(values) => {
-    console.log('VALUES: ', values)
     values = {
       ...values,
       tournamentId: currentTournament.tournamentId,
@@ -143,6 +146,9 @@ const TournamentDetailsForm = () => {
             <Button onClick={() => handleShowEditForm()} variant="secondary">
               Edit
             </Button>
+            <Button onClick={() => handleShowDeleteForm(currentTournament)} variant="danger">
+              Delete
+            </Button>
           </div>
         )
         : (
@@ -184,6 +190,13 @@ const TournamentDetailsForm = () => {
             )}
           </Formik>
         )}
+      {showDeleteTournamentModal && (
+        <DeleteTournamentModal
+          showDeleteTournamentModal={showDeleteTournamentModal}
+          setShowDeleteTournamentModal={setShowDeleteTournamentModal}
+          selectedTournament={selectedTournament}
+        />
+      )}
     </div>
   )
 }
