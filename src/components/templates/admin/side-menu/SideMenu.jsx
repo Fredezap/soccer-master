@@ -6,6 +6,7 @@ import TournamentList from '../tournament-list/TournamentList'
 import ROUTES from '../../../../store/constants/routes'
 import { useNavigate, useLocation } from 'react-router-dom'
 import { useState } from 'react'
+import { IoIosLogOut } from 'react-icons/io'
 
 const SideMenu = () => {
   const { setShowTournamentLists, showTournamentList } = useSideMenuStore()
@@ -13,6 +14,11 @@ const SideMenu = () => {
   const handleClose = () => setShowSideMenu(false)
   const handleShow = () => setShowSideMenu(!showSideMenu)
   const navigate = useNavigate()
+
+  const logout = () => {
+    globalThis.localStorage.removeItem('user')
+    navigate?.(ROUTES.LOGIN)
+  }
 
   const location = useLocation()
 
@@ -67,7 +73,14 @@ const SideMenu = () => {
             )}
           </div>
           <TournamentOptionsMain />
+
         </Offcanvas.Body>
+        <div className="logout">
+          <Button onClick={() => logout()}>
+              Logout
+            <IoIosLogOut/>
+          </Button>
+        </div>
       </Offcanvas>
     </>
   )

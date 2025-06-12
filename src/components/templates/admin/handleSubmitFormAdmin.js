@@ -8,14 +8,17 @@ const handleSubmitFormAdmin = async({ values, url, addMessage, successResponse, 
 
   let token = null
   let role = null
+  let userId = null
+
   try {
     const user = JSON.parse(userString)
     token = user.token
     role = user.role
+    userId = user.userId
   } catch (error) {}
 
   let authorizationValues
-  if (token && role) authorizationValues = { token, role }
+  if (token && role && userId) authorizationValues = { token, role, userId }
 
   let response = { success: false }
 

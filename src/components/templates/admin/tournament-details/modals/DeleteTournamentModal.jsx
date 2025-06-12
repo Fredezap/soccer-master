@@ -12,7 +12,7 @@ const DeleteTournamentModal = ({ showDeleteTournamentModal, setShowDeleteTournam
 
   const deleteTournament = async(tournamentId) => {
     const successResponse = 'Tournament has been deleted'
-    const url = '/admin/tournament-details/delete'
+    const url = '/admin/tournaments/delete'
     const httpMethod = 'post'
     const values = { tournamentId }
 

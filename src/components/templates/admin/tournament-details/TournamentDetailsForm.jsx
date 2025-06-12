@@ -56,7 +56,7 @@ const TournamentDetailsForm = () => {
     }
 
     const successResponse = 'Tournament has been created'
-    const url = '/admin/tournament-details/create'
+    const url = '/admin/tournaments/create'
     httpMethod = 'postForImg'
     const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
     if (response.success) {
@@ -69,7 +69,7 @@ const TournamentDetailsForm = () => {
 
   const handleSubmitFormEdit = async(values) => {
     const successResponse = 'Tournament details has been edited'
-    const url = '/admin/tournament-details/update'
+    const url = '/admin/tournaments/update'
     httpMethod = 'postForImg'
 
     values = {

@@ -5,16 +5,19 @@ const handleGetData = async({ paramValues, url, addMessage }) => {
 
   let token = null
   let role = null
+  let userId = null
+
   try {
     const user = JSON.parse(userString)
     token = user.token
     role = user.role
+    userId = user.userId
   } catch (error) {}
 
   let authorizationValues
-  if (token && role) authorizationValues = { token, role }
+  if (token && role && userId) authorizationValues = { token, role, userId }
 
-  const values = { ...paramValues, token, role }
+  const values = { ...paramValues, token, role, userId }
   return await postService({ url, values, addMessage, authorizationValues })
 }
 

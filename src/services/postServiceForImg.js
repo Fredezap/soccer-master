@@ -33,12 +33,13 @@ const postServiceForImg = async({ url, values, addMessage, authorizationValues, 
         formData.append(key, value != null ? value.toString() : value)
       }
     }
-    const { token = undefined, role = undefined } = authorizationValues || {}
+    const { token = undefined, role = undefined, userId = undefined } = authorizationValues || {}
     try {
       const response = await apiInstance.post(url, formData, {
         headers: {
           Authorization: `Bearer ${token}`,
           role,
+          userId,
           'Content-Type': 'multipart/form-data'
         }
       })

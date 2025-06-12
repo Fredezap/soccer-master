@@ -151,8 +151,6 @@ const GroupMatchesResultSetter = () => {
     setSelectedGroupStage(stageGroups)
   }
 
-  // todo: ver responsive de esta nueva seccion y la de knockout, en el result setter
-
   return (
     <div className="matches-main bg-dark">
       {loading
