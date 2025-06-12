@@ -21,6 +21,19 @@ const getTournaments = () => {
     } catch (error) {}
   }
 
+  const fetchAllTournamentsByAdminUser = async() => {
+    const url = '/admin/tournaments/get-all-by-admin-user'
+    const httpMethod = 'post'
+
+    try {
+      const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
+      if (response?.success) {
+        const allUserTournaments = response.data?.allUserTournaments
+        setTournaments(allUserTournaments)
+      }
+    } catch (error) {}
+  }
+
   const fetchTournamentDetails = async({ paramTournament } = {}) => {
     try {
       const url = '/tournaments/get-details'
@@ -47,7 +60,7 @@ const getTournaments = () => {
     }
   }
 
-  return { fetchAllTournaments, fetchTournamentDetails }
+  return { fetchAllTournaments, fetchTournamentDetails, fetchAllTournamentsByAdminUser }
 }
 
 export default getTournaments

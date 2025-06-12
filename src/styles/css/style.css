@@ -2353,7 +2353,7 @@ color: green;
   margin-top: 10px;
   border: solid 1px rgb(175, 114, 0);
   border-radius: 5px;
-  padding: 25px 100px;
+  padding: 25px;
   color: rgb(232, 232, 232);
 }
 
@@ -2496,6 +2496,10 @@ display: none;
   background-color: #2c2b2b3f;
 }
 
+.matches-info .matches-details button {
+  width: 80%;
+}
+
 .matches-details {
   width: 100%;
   margin: 20px 0 0 0;
@@ -2537,7 +2541,42 @@ display: none;
   flex-direction:  row !important;
 }
 
+.kjLZia::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.kjLZia::-webkit-scrollbar-track {
+  background: #555;
+  border-radius: 4px;
+}
+
+.kjLZia::-webkit-scrollbar-thumb {
+  background-color: #b0b0b0;
+  border-radius: 4px;
+  border: 2px solid #989898;
+}
+
+.kjLZia::-webkit-scrollbar-thumb:hover {
+  background-color: #888;
+}
 /* End of Admin matches Styles */
+
+/* Logout Styles */
+.logout {
+  width: 100%;
+  padding: 20px;
+}
+
+.logout button {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+}
+/* End of Logout Styles */
 
 /* Carousel Styles */
 /* Posicionar las flechas arriba a la derecha */
@@ -2612,6 +2651,17 @@ display: none;
 }
 
 /* End of Carousel Styles */
+
+/* Login/Register Styles */
+.login-register {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  padding: 120px 0;
+}
+/* End of Login/Register Styles */
 
 /* Admin Email sender Styles */
 .add-email-item {
@@ -2989,7 +3039,7 @@ display: none;
     flex-direction: column;
   }
   .match-item > div{
-    flex-direction: column;
+    flex-direction: column !important;
     width: 100%;
   }
   .match-item .item-buttons {
@@ -3544,6 +3594,7 @@ display: none;
   display: flex;
   flex-direction: row;
   gap: 20px;
+  padding: 0;
 }
 
 /* Menu toggle (logo) */

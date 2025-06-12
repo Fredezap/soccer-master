@@ -35,7 +35,7 @@ const LoginForm = () => {
   }
 
   return (
-    <div className="admin-all-mains">
+    <div className="login-register">
       <div className="form-main">
         <Formik
           initialValues={initialValues}

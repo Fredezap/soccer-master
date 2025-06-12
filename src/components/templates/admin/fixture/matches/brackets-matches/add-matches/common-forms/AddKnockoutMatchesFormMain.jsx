@@ -24,7 +24,6 @@ const AddKnockoutMatchesFormMain = ({
   const [localTeamPlaceholder, setLocalTeamPlaceholder] = useState('')
   const [visitorTeamPlaceholder, setVisitorTeamPlaceholder] = useState('')
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
-  const [showDeleteKnockoutMatchModal, setShowDeleteKnockoutMatchModal] = useState(false)
   const [showCreateKnockoutMatchModal, setShowCreateKnockoutMatchModal] = useState(false)
 
   const resetFormValues = () => {
@@ -33,6 +32,11 @@ const AddKnockoutMatchesFormMain = ({
     setLocalTeamPlaceholder('')
     setVisitorTeamPlaceholder('')
     setLocationAndDateformData({ date: '', time: '', location: '' })
+  }
+
+  const handleTeamStatus = (status) => {
+    resetFormValues()
+    setTeamStatus(status)
   }
 
   const handleStageChange = (stage) => {
@@ -73,7 +77,7 @@ const AddKnockoutMatchesFormMain = ({
             <SelectAStage handleStageChange={handleStageChange} dbKnockoutStages={dbKnockoutStages} />
             {selectedStage && (
               <div className="knockout-team-status">
-                <TeamStatus setTeamStatus={setTeamStatus} TEAM_STATUS={TEAM_STATUS} />
+                <TeamStatus handleTeamStatus={handleTeamStatus} TEAM_STATUS={TEAM_STATUS} />
                 {teamStatus === TEAM_STATUS.KNOWN && (
                   <TeamsAreKnownForm
                     dbTeams={dbTeams}

@@ -5,6 +5,7 @@ import UpdateTeamModal from '../modals/UpdateTeamModal'
 import useHandleConfirmTeam from '../hooks/useHandleConfirmTeam'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 import FormsAndSetTeam from '../common/FormsAndSetTeam'
+import SideMenu from '../../side-menu/SideMenu'
 
 const AdminTeamsUpdate = () => {
   const { adminTeamsUpdate } = useHeroDetails()
@@ -18,6 +19,7 @@ const AdminTeamsUpdate = () => {
 
   return (
     <div>
+      <SideMenu />
       <Hero title={adminTeamsUpdate.title} />
       {team.teamId !== null
         ? (

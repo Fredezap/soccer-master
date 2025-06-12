@@ -6,12 +6,13 @@ const patchService = async({ url, values, addMessage, authorizationValues, succe
     let error
 
     try {
-      const { token = undefined, role = undefined } = authorizationValues || {}
+      const { token = undefined, role = undefined, userId = undefined } = authorizationValues || {}
       const jsonValues = JSON.stringify(values)
       const response = await apiInstance.patch(url, jsonValues, {
         headers: {
           Authorization: `Bearer ${token}`,
           role,
+          userId,
           'Content-Type': 'application/json'
         }
       })

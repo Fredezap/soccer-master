@@ -47,7 +47,7 @@ function AppContent() {
   const { currentTournament, isCreating } = useTournamentsDetails()
   const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
-  const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
+  const { fetchAllTournaments, fetchTournamentDetails, fetchAllTournamentsByAdminUser } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
   useEffect(() => {
@@ -67,6 +67,11 @@ function AppContent() {
   }, [currentPath])
 
   useEffect(() => {
+    // If path is admin, return, because admin tournaments getter is managed from AdminMain.jsx
+    if (currentPath.includes('/admin')) {
+      return
+    }
+    // Else get all tournaments
     fetchAllTournaments()
     if (Object.entries(currentTournament).length > 0) fetchTournamentDetails({ paramTournament: currentTournament })
   }, [])
@@ -123,20 +128,16 @@ function AppContent() {
 function App() {
   const { currentTournament } = useTournamentsDetails()
   const { showMessager } = useMessageStore()
+  const location = useLocation()
+  const currentPath = location.pathname
+
   return (
     <div className="site-wrap">
-      {showMessager && (<MessageManager />)}
+      {showMessager && <MessageManager />}
       <MobileMenu />
-      {currentTournament && Object.entries(currentTournament).length !== 0 && (<Header />)}
-      <Router
-        future={{
-          v7_startTransition: true,
-          v7_relativeSplatPath: true
-        }}
-      >
-        <AppContent />
-        <Footer />
-      </Router>
+      <Header />
+      <AppContent />
+      <Footer />
     </div>
   )
 }

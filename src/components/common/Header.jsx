@@ -2,11 +2,16 @@ import { useState, useEffect } from 'react'
 import ROUTES from '../../store/constants/routes.js'
 import useCurrentRouteStore from '../../store/slices/useCurrentRouteStore.js'
 import Logo from '../../images/logo.png'
+import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails.js'
+import { useLocation } from 'react-router-dom'
 
 const Header = () => {
   const { current } = useCurrentRouteStore()
   const [menuOpen, setMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
+  const { currentTournament } = useTournamentsDetails()
+  const location = useLocation()
+  const currentPath = location.pathname
 
   const getClass = (route) => (current === route ? 'active' : '')
 
@@ -46,15 +51,25 @@ const Header = () => {
               {isMobile && (
                 <li><a href={ROUTES.MAIN} className="nav-link">Main</a></li>
               )}
-              <li className={getClass(ROUTES.HOME)}><a href={ROUTES.HOME} className="nav-link">Home</a></li>
-              <li className={getClass(ROUTES.MATCHES)}><a href={ROUTES.MATCHES} className="nav-link">Matches</a></li>
-              <li className={getClass(ROUTES.TEAMS)}><a href={ROUTES.TEAMS} className="nav-link">Teams</a></li>
-              <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Contact</a></li>
-              {adminUser && (
-                <li className={getClass(ROUTES.ADMIN.MAIN)}>
-                  <a href={ROUTES.ADMIN.MAIN} className="nav-link">Admin</a>
-                </li>
+              {(currentTournament && Object.entries(currentTournament).length !== 0) && (
+                <>
+                  <li className={getClass(ROUTES.HOME)}><a href={ROUTES.HOME} className="nav-link">Home</a></li>
+                  <li className={getClass(ROUTES.MATCHES)}><a href={ROUTES.MATCHES} className="nav-link">Matches</a></li>
+                  <li className={getClass(ROUTES.TEAMS)}><a href={ROUTES.TEAMS} className="nav-link">Teams</a></li>
+                  <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Contact</a></li>
+                </>
               )}
+              {adminUser
+                ? (
+                  <li className={getClass(ROUTES.ADMIN.MAIN)}>
+                    <a href={ROUTES.ADMIN.MAIN} className="nav-link">Admin</a>
+                  </li>
+                )
+                : (
+                  <li className={getClass(ROUTES.LOGIN)}>
+                    <a href={ROUTES.LOGIN} className="nav-link">Login</a>
+                  </li>
+                )}
             </ul>
           </nav>
         </div>

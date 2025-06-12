@@ -6,12 +6,13 @@ const postService = async({ url, values, authorizationValues, addMessage, succes
     let error
 
     try {
-      const { token = undefined, role = undefined } = authorizationValues || {}
+      const { token = undefined, role = undefined, userId = undefined } = authorizationValues || {}
 
       const response = await apiInstance.post(url, values, {
         headers: {
           Authorization: `Bearer ${token}`,
           role,
+          userId,
           'Content-Type': 'application/json'
         }
       })
