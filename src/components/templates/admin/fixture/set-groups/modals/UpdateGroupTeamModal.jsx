@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 import ROUTES from '../../../../../../store/constants/routes'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const UpdateGroupTeamModal = ({
   showUpdateGroupTeamModal,
@@ -19,6 +20,7 @@ const UpdateGroupTeamModal = ({
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [noneTeamSelectedError, setNoneTeamSelectedError] = useState(false)
+  const { user } = useUserStore()
 
   const handleCheckboxChange = (teamId) => {
     setSelectedTeamIds(prevSelected =>
@@ -40,7 +42,7 @@ const UpdateGroupTeamModal = ({
     const successResponse = 'Group has been updated'
     const url = '/admin/fixture/groups/update'
     const httpMethod = 'patch'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     setShowUpdateGroupTeamModal(false)
 
     if (response?.success) {

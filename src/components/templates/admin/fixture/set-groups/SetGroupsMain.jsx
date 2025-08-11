@@ -10,6 +10,7 @@ import { useStagesStore } from '../../../../../store/slices/useStagesStore'
 import handleGetData from '../../handleGetData'
 import getTournaments from '../../../../common/getters/GetTournaments'
 import { useDbGroupsStore } from '../../../../../store/slices/useDbGroupsStore'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const SetGroupsMain = () => {
   const [dbTeams, setDbTeams] = useState([])
@@ -24,6 +25,7 @@ const SetGroupsMain = () => {
   const [selectedGroup, setSelectedGroup] = useState(null)
   const { currentTournament } = useTournamentsDetails()
   const { fetchTournamentDetails } = getTournaments()
+  const { user } = useUserStore()
 
   const checkAndSetAvailableTeams = (stageId) => {
     const allocatedTeamIds = dbGroups[stageId]?.groups
@@ -43,7 +45,7 @@ const SetGroupsMain = () => {
       const url = '/admin/teams/get-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbTeams(response.data?.tournament?.Teams)
       }
@@ -55,7 +57,7 @@ const SetGroupsMain = () => {
       const url = '/admin/fixture/groups/get-all-groups-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbGroups(response.data.dbGroups)
       }
@@ -66,7 +68,7 @@ const SetGroupsMain = () => {
     try {
       const paramValues = { tournamentId: currentTournament.tournamentId }
       const url = '/admin/fixture/stages/get-all-by-tournament'
-      const response = await handleGetData({ paramValues, url, addMessage })
+      const response = await handleGetData({ paramValues, url, addMessage, user })
       if (response.success) {
         setStages(response.data.dbStages)
       }

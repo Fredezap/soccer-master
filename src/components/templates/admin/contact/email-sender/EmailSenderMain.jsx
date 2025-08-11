@@ -5,6 +5,7 @@ import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useMessageStore } from '../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
 import getTournaments from '../../../../common/getters/GetTournaments'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const EmailSenderMain = () => {
   const { currentTournament } = useTournamentsDetails()
@@ -18,6 +19,7 @@ const EmailSenderMain = () => {
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { fetchTournamentDetails } = getTournaments()
   const [mouseInsideInput, setMouseInsideInput] = useState(false)
+  const { user } = useUserStore()
 
   useEffect(() => {
     if (currentTournament.Emails) setAllEmails(currentTournament.Emails)
@@ -75,7 +77,7 @@ const EmailSenderMain = () => {
     const successResponse = 'Emails has been updated'
     const url = '/admin/contact/set-emails'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       await fetchTournamentDetails()
       setNewEmails([])

@@ -47,6 +47,14 @@ const useHeroDetails = () => {
     title: 'Admin result setter'
   }
 
+  const adminUsersManager = {
+    title: 'Admin users manager'
+  }
+
+  const adminRegister = {
+    title: 'Admin register users'
+  }
+
   return {
     players,
     matches,
@@ -59,7 +67,9 @@ const useHeroDetails = () => {
     adminFixture,
     adminVideos,
     adminContact,
-    adminResultSetter
+    adminResultSetter,
+    adminUsersManager,
+    adminRegister
   }
 }
 

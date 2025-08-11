@@ -13,6 +13,7 @@ import SideMenu from '../../side-menu/SideMenu'
 import { useDbGroupsStore } from '../../../../../store/slices/useDbGroupsStore'
 import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const FixtureMain = () => {
   const { adminFixture } = useHeroDetails()
@@ -24,11 +25,12 @@ const FixtureMain = () => {
   const { currentTournament } = useTournamentsDetails()
   const { setDbGroups } = useDbGroupsStore()
   const { setSubmittingForm } = useSubmittingFormStore()
+  const { user } = useUserStore()
 
   const getStages = async() => {
     const paramValues = { tournamentId: currentTournament?.tournamentId }
     const url = '/admin/fixture/stages/get-all-by-tournament'
-    const response = await handleGetData({ paramValues, url, addMessage })
+    const response = await handleGetData({ paramValues, url, addMessage, user })
 
     if (response.success) { setStages(response.data.dbStages) }
   }
@@ -38,7 +40,7 @@ const FixtureMain = () => {
       const url = '/admin/fixture/groups/get-all-groups-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbGroups(response.data.dbGroups)
       }

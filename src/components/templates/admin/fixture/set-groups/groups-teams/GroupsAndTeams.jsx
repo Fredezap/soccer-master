@@ -1,6 +1,5 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { Button } from 'react-bootstrap'
-import { CiEdit } from 'react-icons/ci'
 import { MdDeleteForever } from 'react-icons/md'
 import DeleteOrEditGroupModal from '../modals/DeleteOrEditGroupModal'
 import DeleteTeamFromGroupWarningModal from '../modals/DeleteTeamFromGroupWarningModal'

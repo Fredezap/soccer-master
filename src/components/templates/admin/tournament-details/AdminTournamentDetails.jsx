@@ -1,3 +1,4 @@
+import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
 import Hero from '../../../common/hero/Hero'
 import useHeroDetails from '../../../common/hero/useHeroDetails'
 import SideMenu from '../side-menu/SideMenu'

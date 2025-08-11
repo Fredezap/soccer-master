@@ -4,12 +4,14 @@ import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittin
 import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const CreateTeamModal = ({ showCreateTeamModal, setShowCreateTeamModal, setDbTeams }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { team, setTeam } = useTeamStore()
   const { currentTournament } = useTournamentsDetails()
+  const { user } = useUserStore()
 
   const createTeam = async(formValues) => {
     const { file = null } = formValues?.logo || { file: null }
@@ -24,7 +26,7 @@ const CreateTeamModal = ({ showCreateTeamModal, setShowCreateTeamModal, setDbTea
     const successResponse = 'Team has been created'
     const url = '/admin/teams/create'
     const httpMethod = 'postForImg'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
 
     if (response.success) {
       setDbTeams(response.data.dbTeams)

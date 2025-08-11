@@ -13,6 +13,7 @@ import ROUTES from '../../../../store/constants/routes.js'
 import deafultTournamentLogo from '../../../../images/tournamentDefaultLogo_1.png'
 import deafultTournamentImg from '../../../../images/bg_3.jpg'
 import DeleteTournamentModal from './modals/DeleteTournamentModal.jsx'
+import { useUserStore } from '../../../../store/slices/useUserStore.js'
 
 const BASE_URL = import.meta.env.MODE === 'development'
   ? import.meta.env.VITE_IMG_DEV_BASE_URL
@@ -21,6 +22,7 @@ const BASE_URL = import.meta.env.MODE === 'development'
 const TournamentDetailsForm = () => {
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
+  const { user } = useUserStore()
   const defaultInitialValues = TournamentDetailsFormData().initialValues
   const { registerSchema, formFields } = TournamentDetailsFormData()
   const [showDeleteTournamentModal, setShowDeleteTournamentModal] = useState(false)
@@ -58,7 +60,7 @@ const TournamentDetailsForm = () => {
     const successResponse = 'Tournament has been created'
     const url = '/admin/tournaments/create'
     httpMethod = 'postForImg'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setIsCreating(false)
       updateTournaments(response.data?.tournamentDetails)
@@ -78,7 +80,7 @@ const TournamentDetailsForm = () => {
       files
     }
 
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       updateCurrentTournament(response.data.tournamentDetails)
       updateTournaments(response.data?.tournamentDetails)

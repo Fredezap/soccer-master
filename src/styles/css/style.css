@@ -1381,6 +1381,20 @@ width: 100%;
 /* End of Admin styles */
 
 /* Loading component */
+
+.loading-box-white {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  gap: 30px;
+}
+
+.loading-box-white p {
+  margin: 0;
+}
+
 .loading-box {
   display: flex;
   flex-direction: row;
@@ -1596,12 +1610,26 @@ color: green;
   width: 100%;
 }
 
-.auth-form button {
-  background-color: wheat !important;
-  color: black;
+.auth-form .auth-btns-box {
+  margin-top: 50px;
+  margin-bottom: 20px;
 }
 
-.auth-form button:hover {
+.auth-form .auth-btn {
+  background-color: wheat !important;
+  color: black;
+  border: 1px solid beige;
+  padding: 7px 15px;
+}
+
+.centered-row {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.auth-form .auth-btn:hover {
   background-color: rgba(245, 222, 179, 0.86) !important;
   color: black !important;
 }
@@ -1612,13 +1640,6 @@ color: green;
 
 .auth-form > div {
   width: 100%;
-}
-
-.auth-form button {
-  background-color: rgb(48, 48, 173);
-  border: 1px solid beige;
-  margin-top: 50px;
-  margin-bottom: 20px;
 }
 
 .auth-form a {
@@ -2703,6 +2724,24 @@ display: none;
   border: 0.5px rgb(108, 20, 20) solid;
 }
 
+
+.admins-card {
+  gap: 10px;
+  color: black;
+}
+
+.removed-admins-card {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #000;
+}
+
+.removed-admins-card .list-group-item {
+  gap: 20px;
+  color: #000;
+}
+
 .custom-card input {
   background-color: rgb(83, 83, 83);
   box-shadow: none;
@@ -3785,6 +3824,13 @@ display: none;
 .btn-centered button{
   width: 100%;
   padding: 10px 5px;
+}
+
+.centered {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 
 .side-menu-btn {

@@ -7,6 +7,7 @@ import formatDate from '../../../common/formatDate'
 import { ListGroup } from 'react-bootstrap'
 import deafultTournamentLogo from '../../../../images/tournamentDefaultLogo_1.png'
 import { useState } from 'react'
+import { useUserStore } from '../../../../store/slices/useUserStore'
 
 const BASE_URL = import.meta.env.MODE === 'development'
   ? import.meta.env.VITE_IMG_DEV_BASE_URL
@@ -19,7 +20,7 @@ const TournamentList = () => {
   const { fetchTournamentDetails } = getTournaments()
   const location = useLocation()
   const currentPath = location.pathname
-
+  const { isSuperAdmin } = useUserStore()
   const [searchTerm, setSearchTerm] = useState('')
 
   const handleTournamentSelected = async(paramTournament) => {
@@ -91,6 +92,12 @@ const TournamentList = () => {
                   <div className="text-container">
                     <h5>{tournament.name}</h5>
                     <p>{formatDate(tournament.date).slashDate}</p>
+                    {isSuperAdmin() && (
+                      <div>
+                        {tournament?.User?.username && (<p>User name: {tournament.User.username}</p>)}
+                        {tournament?.User?.email && (<p>User email: {tournament.User.email}</p>)}
+                      </div>
+                    )}
                   </div>
                 </ListGroup.Item>
               ))}

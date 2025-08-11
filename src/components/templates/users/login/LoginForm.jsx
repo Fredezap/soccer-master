@@ -9,11 +9,13 @@ import { useSubmittingFormStore } from '../../../../store/slices/useSubmittingFo
 import { Button } from 'react-bootstrap'
 import { useMessageStore } from '../../../../store/slices/useMessageStore.js'
 import postService from '../../../../services/postService.js'
+import { useUserStore } from '../../../../store/slices/useUserStore.js'
 
 const LoginForm = () => {
   const { data, initialValues, messages } = useLoginFormData()
   const { registerSchema } = useLoginYupValidations()
   const { addMessage } = useMessageStore()
+  const { setUser } = useUserStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const navigate = useNavigate()
   const [showPassword, setShowPassword] = useState(false)
@@ -25,10 +27,9 @@ const LoginForm = () => {
     const response = await postService({ url, values, addMessage, successResponse })
     setSubmittingForm(false)
     if (response?.success) {
-      const data = response.data
-      if (data) {
-        const user = JSON.stringify(data)
-        globalThis.localStorage.setItem('user', user)
+      const user = response.data
+      if (user) {
+        setUser(user)
         navigate(ROUTES.ADMIN.MAIN)
       }
     }
@@ -51,11 +52,12 @@ const LoginForm = () => {
                 showPassword={showPassword}
                 setShowPassword={setShowPassword}
               />
-              <Button type="submit" disabled={submittingForm}>
-                Login
-              </Button>
+              <div className="auth-btns-box centered-row">
+                <Button className="auth-btn" type="submit" disabled={submittingForm}>
+                  Login
+                </Button>
+              </div>
               {submittingForm && <p className="submitting-message">{messages.submitting}</p>}
-              <a href={ROUTES.REGISTER}>Register</a>
             </Form>
           )}
         </Formik>

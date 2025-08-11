@@ -12,6 +12,7 @@ import getTournaments from '../../../../../../common/getters/GetTournaments'
 import groupMatchesByDate from '../groupMatchesByDate'
 import SetGroupMatchScoreModal from '../modals/SetGroupMatchScoreModal'
 import validateMatchResult from '../../brackets-matches/add-matches/errors/checkResultIsValid'
+import { useUserStore } from '../../../../../../../store/slices/useUserStore'
 
 const GroupMatchesResultSetter = () => {
   const [customError, setCustomError] = useState(null)
@@ -30,6 +31,7 @@ const GroupMatchesResultSetter = () => {
   const { fetchTournamentDetails } = getTournaments()
   const [match, setMatch] = useState(null)
   const [showSetScoreGroupMatchModal, setShowSetScoreGroupMatchModal] = useState(false)
+  const { user } = useUserStore()
   const [matchResult, setMatchResult] = useState({
     localTeamScore: null,
     visitorTeamScore: null,
@@ -40,7 +42,7 @@ const GroupMatchesResultSetter = () => {
   const getStages = async() => {
     const paramValues = { tournamentId: currentTournament?.tournamentId }
     const url = '/admin/fixture/stages/get-all-by-tournament'
-    const response = await handleGetData({ paramValues, url, addMessage })
+    const response = await handleGetData({ paramValues, url, addMessage, user })
 
     if (response.success) { setStages(response.data.dbStages) }
   }
@@ -50,7 +52,7 @@ const GroupMatchesResultSetter = () => {
       const url = '/admin/fixture/groups/get-all-groups-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbGroups(response.data.dbGroups)
       }
@@ -131,7 +133,7 @@ const GroupMatchesResultSetter = () => {
     const successResponse = 'Score has been set'
     const url = '/admin/fixture/matches/edit-group-match-score'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
 
     if (response?.success) {
       fetchData()

@@ -9,6 +9,7 @@ import ROUTES from '../../../../../../store/constants/routes'
 import { useNavigate } from 'react-router-dom'
 import { Button } from 'react-bootstrap'
 import { useDbGroupsStore } from '../../../../../../store/slices/useDbGroupsStore'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const MatchesMain = ({ getStages }) => {
   const { addMessage } = useMessageStore()
@@ -20,13 +21,14 @@ const MatchesMain = ({ getStages }) => {
   const [loading, setloading] = useState(false)
   const navigate = useNavigate()
   const { dbGroups, setDbGroups } = useDbGroupsStore()
+  const { user } = useUserStore()
 
   const getGroups = async() => {
     try {
       const url = '/admin/fixture/groups/get-all-groups-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbGroups(response.data.dbGroups)
       }
@@ -38,8 +40,8 @@ const MatchesMain = ({ getStages }) => {
       const url = '/admin/fixture/stages/get-all-knockout-stages-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-      if (response?.success) {
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
+      if (response?.success && response.data?.dbKnockoutStages) {
         setDbKnockoutStages(response.data.dbKnockoutStages)
       }
     } catch (error) {}
@@ -49,7 +51,7 @@ const MatchesMain = ({ getStages }) => {
     try {
       const url = '/admin/fixture/matches/get-all'
       const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbMatches(response.data.dbMatches)
       }
@@ -62,7 +64,7 @@ const MatchesMain = ({ getStages }) => {
       const values = { tournamentId: currentTournament.tournamentId }
       const url = '/admin/teams/get-by-tournament'
       const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
         setDbTeams(response.data?.tournament?.Teams)
       }

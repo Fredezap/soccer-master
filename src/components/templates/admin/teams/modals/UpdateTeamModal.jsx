@@ -6,11 +6,13 @@ import { useTeamStore } from '../../../../../store/slices/useTeamStore'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../../store/constants/routes'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const UpdateTeamModal = ({ showUpdateTeamModal, setShowUpdateTeamModal }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { team } = useTeamStore()
+  const { user } = useUserStore()
   const navigate = useNavigate()
   const { currentTournament } = useTournamentsDetails()
 
@@ -27,7 +29,7 @@ const UpdateTeamModal = ({ showUpdateTeamModal, setShowUpdateTeamModal }) => {
     const successResponse = 'Team has been updated'
     const url = '/admin/teams/update'
     const httpMethod = 'postForImg'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     setShowUpdateTeamModal(!showUpdateTeamModal)
     if (response.success) navigate(ROUTES.ADMIN.TEAMS.MAIN)
   }

@@ -3,10 +3,12 @@ import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
 import { useState } from 'react'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const SetStagePointsModal = ({ showSetStagePointsModal, setShowSetStagePointsModal, stageId, getData }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
+  const { user } = useUserStore()
   const [pointsPerResult, setPointsPerResult] = useState({
     wonPoints: null,
     drawnPoints: null,
@@ -26,7 +28,7 @@ const SetStagePointsModal = ({ showSetStagePointsModal, setShowSetStagePointsMod
     const successResponse = 'Stage has been edited'
     const url = '/admin/fixture/stages/edit'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setShowSetStagePointsModal(false)
       getData()

@@ -11,6 +11,7 @@ import { Button } from 'react-bootstrap'
 import handleGetData from '../handleGetData'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
 import SideMenu from '../side-menu/SideMenu'
+import { useUserStore } from '../../../../store/slices/useUserStore'
 
 const AdminVideos = () => {
   const [showVideos, setShowVideos] = useState(false)
@@ -19,6 +20,7 @@ const AdminVideos = () => {
   const { addMessage } = useMessageStore()
   const { setSubmittingForm } = useSubmittingFormStore()
   const { currentTournament } = useTournamentsDetails()
+  const { user } = useUserStore()
   const BASE_URL = import.meta.env.MODE === 'development'
     ? import.meta.env.VITE_IMG_DEV_BASE_URL
     : import.meta.env.VITE_IMG_PROD_BASE_URL
@@ -29,7 +31,7 @@ const AdminVideos = () => {
     const successResponse = 'Video has been deleted'
     const url = '/admin/video/delete'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
 
     if (response.success) {
       setVideos(response.data?.dbVideos || null)
@@ -40,7 +42,7 @@ const AdminVideos = () => {
     try {
       const paramValues = { tournamentId: currentTournament.tournamentId }
       const url = '/admin/video/get-all-by-tournament'
-      const response = await handleGetData({ paramValues, url, addMessage })
+      const response = await handleGetData({ paramValues, url, addMessage, user })
       if (response.success) {
         setVideos(response.data?.dbVideos || null)
       }

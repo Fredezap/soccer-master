@@ -1,15 +1,17 @@
 import { useEffect, useState } from 'react'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
-import Blog from '../../common/Blog'
 import Hero from '../../common/hero/Hero'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 import Videos from '../../common/Videos'
 import logoGetter from '../../common/logo-getter/logoGetter'
+import getSectionBg from '../../common/section-styles/getSectionBg'
 
 const Teams = () => {
   const { players } = useHeroDetails()
   const { currentTournament } = useTournamentsDetails()
   const [teams, setTeams] = useState([])
+  const dbKnockoutStages = null
+  const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
 
   useEffect(() => {
     const dbTeams = currentTournament?.Teams
@@ -73,7 +75,7 @@ const Teams = () => {
           {/* <Blog /> */}
         </div>
       </div>
-      <Videos />
+      <Videos sectionBg={sectionBg} />
     </div>
   )
 }

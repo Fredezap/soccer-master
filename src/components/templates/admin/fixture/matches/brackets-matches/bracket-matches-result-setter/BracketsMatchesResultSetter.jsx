@@ -8,6 +8,7 @@ import formatBracketData from '../main/formatBracketData'
 import transformMatches from '../main/transformMatches'
 import SetKnockoutMatchResultModal from '../modals/SetKnockoutMatchResultModal'
 import validateMatchResult from '../add-matches/errors/checkResultIsValid'
+import { useUserStore } from '../../../../../../../store/slices/useUserStore'
 
 const BracketsMatchesResultSetter = () => {
   const [selectedStage, setSelectedStage] = useState(null)
@@ -22,6 +23,7 @@ const BracketsMatchesResultSetter = () => {
   const [rounds, setRounds] = useState([])
   const [dbMatches, setDbMatches] = useState([])
   const [loading, setloading] = useState(false)
+  const { user } = useUserStore()
   const [showSetKnockoutMatchResultModal, setShowSetKnockoutMatchResultModal] = useState(false)
   const [matchResult, setMatchResult] = useState({
     localTeamScore: null,
@@ -74,7 +76,7 @@ const BracketsMatchesResultSetter = () => {
     const url = '/admin/fixture/matches/edit-knockout-match-result'
     const successResponse = 'Match score has been updated'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
 
     if (response?.success) {
       setShowSetKnockoutMatchResultModal(false)
@@ -88,8 +90,8 @@ const BracketsMatchesResultSetter = () => {
       const url = '/admin/fixture/stages/get-all-knockout-stages-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
-      if (response?.success) {
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
+      if (response?.success && response.data?.dbKnockoutStages) {
         setDbKnockoutStages(response.data.dbKnockoutStages)
       }
     } catch (error) {}
@@ -99,7 +101,8 @@ const BracketsMatchesResultSetter = () => {
     try {
       const url = '/admin/fixture/matches/get-all'
       const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
+
       if (response?.success) {
         setDbMatches(response.data.dbMatches)
       }

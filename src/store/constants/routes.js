@@ -7,9 +7,9 @@ const ROUTES = {
   TEAMS: '/teams',
   SINGLE: '/single',
   LOGIN: '/login',
-  REGISTER: '/register',
   ADMIN: {
     MAIN: '/admin',
+    USERS_MANAGMENT: '/admin/users-managment',
     TOURNAMENT_DETAILS_MAIN: '/admin/tournament-details-main',
     TOURNAMENT_DETAILS: '/admin/tournament-details',
     VIDEOS: '/admin/videos',
@@ -21,7 +21,8 @@ const ROUTES = {
       MAIN: '/admin/fixture'
     },
     CONTACT: '/admin/contact',
-    MATCHES_RESULT_SETTER: '/admin/matches-result-setter'
+    MATCHES_RESULT_SETTER: '/admin/matches-result-setter',
+    REGISTER: '/admin/register'
   }
 }
 
