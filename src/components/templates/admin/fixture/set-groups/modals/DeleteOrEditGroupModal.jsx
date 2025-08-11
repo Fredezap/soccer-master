@@ -7,19 +7,21 @@ import { CiEdit } from 'react-icons/ci'
 import { useState } from 'react'
 import DeleteGroupWarning from './DeleteGroupWarning'
 import EditGroupName from './EditGroupName'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const DeleteOrEditGroupModal = ({ showDeleteGroupModal, setShowDeleteGroupModal, groupId, getData }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const [showDeleteGroupWarning, setShowDeleteGroupWarning] = useState(false)
   const [showEditGroupName, setShowEditGroupName] = useState(false)
+  const { user } = useUserStore()
 
   const handleEditGroupName = async({ groupId, name }) => {
     const values = { groupId, name }
     const successResponse = 'Group name has been updated'
     const url = '/admin/fixture/groups/update-group-name'
     const httpMethod = 'patch'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setShowDeleteGroupModal(false)
       getData()
@@ -31,7 +33,7 @@ const DeleteOrEditGroupModal = ({ showDeleteGroupModal, setShowDeleteGroupModal,
     const successResponse = 'Group has been deleted'
     const url = '/admin/fixture/groups/delete'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setShowDeleteGroupModal(false)
       getData()

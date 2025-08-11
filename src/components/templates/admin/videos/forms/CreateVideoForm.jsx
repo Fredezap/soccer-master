@@ -9,6 +9,7 @@ import { useMessageStore } from '../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittingFormStore'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails'
 import { useVideoStore } from '../../../../../store/slices/useVideoStore'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const CreateVideoForm = () => {
   const { initialValues, registerSchema, formFields } = useVideoFormData()
@@ -18,7 +19,9 @@ const CreateVideoForm = () => {
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { currentTournament } = useTournamentsDetails()
   const { setVideos } = useVideoStore()
+  const { user } = useUserStore()
   const [preview, setPreview] = useState(null)
+
   const HandleImageError = () => {
     if (file === null) {
       setCustomError('Video image is requiered')
@@ -37,7 +40,7 @@ const CreateVideoForm = () => {
     const successResponse = 'Video has been created'
     const url = '/admin/video/create'
     const httpMethod = 'postForImg'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
 
     if (response.success) {
       resetForm()

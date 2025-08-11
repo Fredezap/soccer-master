@@ -1,14 +1,12 @@
 import postService from '../../../services/postService'
+import { useUserStore } from '../../../store/slices/useUserStore'
 
-const handleGetData = async({ paramValues, url, addMessage }) => {
-  const userString = globalThis.localStorage.getItem('user')
-
+const handleGetData = async({ paramValues, url, addMessage, user }) => {
   let token = null
   let role = null
   let userId = null
 
   try {
-    const user = JSON.parse(userString)
     token = user.token
     role = user.role
     userId = user.userId

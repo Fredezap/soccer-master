@@ -1,19 +1,21 @@
 import { useMessageStore } from '../../../store/slices/useMessageStore.js'
 import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore.js'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
+import { useUserStore } from '../../../store/slices/useUserStore.js'
 import handleSubmitFormAdmin from '../../templates/admin/handleSubmitFormAdmin.js'
 
 const getTournaments = () => {
   const { currentTournament, setTournaments, setCurrentTournament } = useTournamentsDetails()
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
+  const { user } = useUserStore()
 
   const fetchAllTournaments = async() => {
     const url = '/tournaments/get-all'
     const httpMethod = 'post'
 
     try {
-      const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
+      const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod, user })
       if (response?.success) {
         const allTournaments = response.data?.allTournaments
         setTournaments(allTournaments)
@@ -26,7 +28,7 @@ const getTournaments = () => {
     const httpMethod = 'post'
 
     try {
-      const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod })
+      const response = await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod, user })
       if (response?.success) {
         const allUserTournaments = response.data?.allUserTournaments
         setTournaments(allUserTournaments)
@@ -46,7 +48,7 @@ const getTournaments = () => {
       }
 
       const values = { tournamentId: chequedTournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, addMessage, setSubmittingForm, httpMethod })
+      const response = await handleSubmitFormAdmin({ values, url, addMessage, setSubmittingForm, httpMethod, user })
 
       if (response?.success) {
         const tournamentDetails = response.data?.tournamentDetails

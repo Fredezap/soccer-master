@@ -2,6 +2,7 @@ import { Modal, Button } from 'react-bootstrap'
 import { useMessageStore } from '../../../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../../handleSubmitFormAdmin'
+import { useUserStore } from '../../../../../../../store/slices/useUserStore'
 
 const ConfirmMatchModal = ({
   selectedGroup,
@@ -21,6 +22,8 @@ const ConfirmMatchModal = ({
 }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
+  const { user } = useUserStore()
+
   const handleConfirmMatch = async() => {
     const values = {
       groupId: selectedGroup?.groupId,
@@ -41,7 +44,7 @@ const ConfirmMatchModal = ({
       const successResponse = 'Match has been created'
       const url = '/admin/fixture/matches/create-group-match'
       const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+      const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
       setShowConfirmMatchModal(false)
       if (response?.success) {
         getGroups()
@@ -54,7 +57,7 @@ const ConfirmMatchModal = ({
       const successResponse = 'Match has been edited'
       const url = '/admin/fixture/matches/edit-group-match'
       const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+      const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
       setShowConfirmMatchModal(false)
       setShowEditGroupMatchModal(false)
       if (response?.success) {

@@ -1,8 +1,5 @@
-import TeamScore from '../../common/TeamScore'
-import News from './News'
 import NextMatchAndTable from './table-scores/NextMatchAndTable'
 import Videos from '../../common/Videos'
-import Blog from '../../common/Blog'
 import HeroHome from './HeroHome'
 import { useEffect, useState } from 'react'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
@@ -10,6 +7,8 @@ import handleSubmitFormAdmin from '../admin/handleSubmitFormAdmin'
 import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore'
 import { useMessageStore } from '../../../store/slices/useMessageStore'
 import BracketMatches from './brackets/BracketMatches'
+import { useUserStore } from '../../../store/slices/useUserStore'
+import getSectionBg from '../../common/section-styles/getSectionBg'
 
 const Home = () => {
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
@@ -17,14 +16,15 @@ const Home = () => {
   const { currentTournament } = useTournamentsDetails()
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
+  const { user } = useUserStore()
 
   const getKnockoutStages = async() => {
     try {
       const url = '/stages/get-all-knockout-stages-by-tournament'
       const httpMethod = 'post'
       const values = { tournamentId: currentTournament.tournamentId }
-      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage })
-      if (response?.success) {
+      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage, user })
+      if (response?.success && response.data?.dbKnockoutStages) {
         setDbKnockoutStages(response.data.dbKnockoutStages)
       }
     } catch (error) {}
@@ -34,7 +34,7 @@ const Home = () => {
     try {
       const url = '/matches/get-all'
       const httpMethod = 'post'
-      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage })
+      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage, user })
       if (response?.success) {
         setDbMatches(response.data.dbMatches)
       }
@@ -50,34 +50,7 @@ const Home = () => {
     fetchData()
   }, [currentTournament])
 
-  const getSectionBg = () => {
-    let numberOfExistingSections = 1 // Section matches will always exist
-
-    const videosSectionExist = currentTournament?.Videos > 0
-    const bracketsSectionsExist = Object.entries(dbKnockoutStages).length > 0
-
-    if (videosSectionExist || bracketsSectionsExist) numberOfExistingSections = 2
-    if (videosSectionExist && bracketsSectionsExist) numberOfExistingSections = 3
-
-    const lightBg = 'bg-light'
-    const darkBg = 'bg-dark'
-
-    const sectionsBg = {
-      matchesBg: lightBg,
-      videosBg: darkBg,
-      bracketsBg: lightBg
-    }
-
-    if (numberOfExistingSections === 2) {
-      sectionsBg.matchesBg = darkBg
-      sectionsBg.videosBg = lightBg
-      sectionsBg.bracketsBg = lightBg
-    }
-
-    return sectionsBg
-  }
-
-  const sectionBg = getSectionBg()
+  const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
 
   return (
     <>

@@ -2,6 +2,7 @@ import { Button, Modal } from 'react-bootstrap'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const DeleteTeamFromGroupWarningModal = ({
   showDeleteTeamFromGroupModal,
@@ -12,13 +13,14 @@ const DeleteTeamFromGroupWarningModal = ({
 }) => {
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
+  const { user } = useUserStore()
 
   const handleDeleteTeamFromGroup = async({ teamId, groupId }) => {
     const values = { teamId, groupId }
     const successResponse = 'Team has been deleted from the group'
     const url = '/admin/fixture/groups/delete-team-group'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setShowDeleteTeamFromGroupModal(false)
       getData()

@@ -12,6 +12,7 @@ import FormsAndSetTeam from '../common/FormsAndSetTeam.jsx'
 import { useTeamStore } from '../../../../../store/slices/useTeamStore.js'
 import { useTournamentsDetails } from '../../../../../store/slices/useTournamentsDetails.js'
 import SideMenu from '../../side-menu/SideMenu.jsx'
+import { useUserStore } from '../../../../../store/slices/useUserStore.js'
 
 const AdminTeams = () => {
   const { adminTeams } = useHeroDetails()
@@ -24,6 +25,7 @@ const AdminTeams = () => {
   const { confirmTeam } = useHandleConfirmTeam()
   const { setTeam } = useTeamStore()
   const { currentTournament } = useTournamentsDetails()
+  const { user } = useUserStore()
 
   const handleConfirmTeam = () => {
     confirmTeam(showCreateTeamModal, setShowCreateTeamModal)
@@ -33,7 +35,7 @@ const AdminTeams = () => {
     const values = { tournamentId: currentTournament.tournamentId }
     const url = '/admin/teams/get-by-tournament'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage })
+    const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
     if (response?.success) {
       setDbTeams(response.data?.tournament?.Teams)
     }

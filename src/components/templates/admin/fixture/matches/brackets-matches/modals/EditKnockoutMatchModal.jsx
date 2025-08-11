@@ -7,6 +7,7 @@ import ChooseDateAndLocationForm from '../add-matches/common-forms/ChooseDateAnd
 import useKnockoutMatchErrorManager from '../add-matches/errors/useKnockoutMatchErrorManager'
 import formatDate from '../../../../../../common/formatDate'
 import handleSubmitFormAdmin from '../../../../handleSubmitFormAdmin'
+import { useUserStore } from '../../../../../../../store/slices/useUserStore'
 
 const EditKnockoutMatchModal = ({
   match,
@@ -28,6 +29,7 @@ const EditKnockoutMatchModal = ({
   const [locationAndDateformData, setLocationAndDateformData] = useState({ date: '', time: '', location: '' })
   const TEAM_STATUS = { UNDEFINED: 'undefined', KNOWN: 'known', UNKNOWN: 'unknown' }
   const [teamStatus, setTeamStatus] = useState(TEAM_STATUS.UNDEFINED)
+  const { user } = useUserStore()
 
   useEffect(() => {
     setTeamStatus(localTeam !== null || visitorTeam !== null ? TEAM_STATUS.KNOWN : TEAM_STATUS.UNKNOWN)
@@ -83,7 +85,7 @@ const EditKnockoutMatchModal = ({
 
     const successResponse = 'Match has been updated'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response?.success) {
       setShowModalEdit(false)
       getKnockoutStages()

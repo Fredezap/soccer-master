@@ -35,6 +35,7 @@ import getTournaments from '../src/components/common/getters/GetTournaments.jsx'
 import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.jsx'
 import AdminContact from '../src/components/templates/admin/contact/main/AdminContact.jsx'
 import MatchesResultSetterMain from '../src/components/templates/admin/fixture/matches/matches-result-setter/MatchesResultSetterMain'
+import AdminsManagmentMain from '../src/components/templates/admin/admin-managment/AdminsManagmentMain.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -47,7 +48,7 @@ function AppContent() {
   const { currentTournament, isCreating } = useTournamentsDetails()
   const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
-  const { fetchAllTournaments, fetchTournamentDetails, fetchAllTournamentsByAdminUser } = getTournaments()
+  const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
   useEffect(() => {
@@ -117,8 +118,9 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.VIDEOS} element={<AdminVideos />} />
         <Route path={ROUTES.ADMIN.CONTACT} element={<AdminContact />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
-        <Route path={ROUTES.REGISTER} element={<RegisterForm />} />
+        <Route path={ROUTES.ADMIN.REGISTER} element={<RegisterForm />} />
         <Route path={ROUTES.ADMIN.MATCHES_RESULT_SETTER} element={<MatchesResultSetterMain />} />
+        <Route path={ROUTES.ADMIN.USERS_MANAGMENT} element={<AdminsManagmentMain />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </>
@@ -126,10 +128,7 @@ function AppContent() {
 }
 
 function App() {
-  const { currentTournament } = useTournamentsDetails()
   const { showMessager } = useMessageStore()
-  const location = useLocation()
-  const currentPath = location.pathname
 
   return (
     <div className="site-wrap">

@@ -4,11 +4,13 @@ import { useSubmittingFormStore } from '../../../../../store/slices/useSubmittin
 import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../../store/constants/routes'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const DeleteTournamentModal = ({ showDeleteTournamentModal, setShowDeleteTournamentModal, selectedTournament }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const navigate = useNavigate()
+  const { user } = useUserStore()
 
   const deleteTournament = async(tournamentId) => {
     const successResponse = 'Tournament has been deleted'
@@ -16,7 +18,7 @@ const DeleteTournamentModal = ({ showDeleteTournamentModal, setShowDeleteTournam
     const httpMethod = 'post'
     const values = { tournamentId }
 
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setShowDeleteTournamentModal(false)
       navigate(ROUTES.ADMIN.MAIN)

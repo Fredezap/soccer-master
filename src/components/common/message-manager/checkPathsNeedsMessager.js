@@ -4,7 +4,6 @@ const checkPathsNeedsMessager = (currentPath) => {
   if (
     currentPath.includes('/admin') ||
     currentPath === (ROUTES.LOGIN) ||
-    currentPath === (ROUTES.REGISTER) ||
     currentPath === (ROUTES.CONTACT)
   ) return true
   return false

@@ -7,6 +7,7 @@ import handleSubmitFormAdmin from '../../handleSubmitFormAdmin'
 import { useMessageStore } from '../../../../../store/slices/useMessageStore'
 import getTournaments from '../../../../common/getters/GetTournaments'
 import useFooterContactFormData from './useFooterContactFormData'
+import { useUserStore } from '../../../../../store/slices/useUserStore'
 
 const FooterContactSetter = () => {
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
@@ -14,13 +15,14 @@ const FooterContactSetter = () => {
   const { currentTournament } = useTournamentsDetails()
   const { addMessage } = useMessageStore()
   const { fetchTournamentDetails } = getTournaments()
+  const { user } = useUserStore()
 
   const setContactDetails = async(values) => {
     values = { values, tournamentId: currentTournament.tournamentId }
     const successResponse = 'Footer contact details has been updated'
     const url = '/admin/contact/set-footer-contact-details'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       await fetchTournamentDetails()
     }

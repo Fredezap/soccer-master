@@ -3,19 +3,16 @@ import ROUTES from '../../store/constants/routes.js'
 import useCurrentRouteStore from '../../store/slices/useCurrentRouteStore.js'
 import Logo from '../../images/logo.png'
 import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails.js'
-import { useLocation } from 'react-router-dom'
+import { useUserStore } from '../../store/slices/useUserStore.js'
 
 const Header = () => {
   const { current } = useCurrentRouteStore()
   const [menuOpen, setMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
   const { currentTournament } = useTournamentsDetails()
-  const location = useLocation()
-  const currentPath = location.pathname
+  const { isAdmin, isSuperAdmin } = useUserStore()
 
   const getClass = (route) => (current === route ? 'active' : '')
-
-  const adminUser = globalThis.localStorage.getItem('user')
 
   const toggleMenu = () => setMenuOpen(prev => !prev)
 
@@ -59,7 +56,7 @@ const Header = () => {
                   <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Contact</a></li>
                 </>
               )}
-              {adminUser
+              {isAdmin() || isSuperAdmin()
                 ? (
                   <li className={getClass(ROUTES.ADMIN.MAIN)}>
                     <a href={ROUTES.ADMIN.MAIN} className="nav-link">Admin</a>

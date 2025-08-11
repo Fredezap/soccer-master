@@ -5,18 +5,20 @@ import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin.js'
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore.js'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore.js'
 import { Button } from 'react-bootstrap'
+import { useUserStore } from '../../../../../../store/slices/useUserStore.js'
 
 const CreateGroupForm = ({ getData, stageId }) => {
   const { formFields, registerSchema, initialValues } = createGroupFormData()
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
+  const { user } = useUserStore()
 
   const createGroup = async(values, { resetForm }) => {
     values = { ...values, stageId }
-    const successResponse = 'Team has been created'
+    const successResponse = 'Group has been created'
     const url = '/admin/fixture/groups/create'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       getData()
       resetForm()

@@ -3,16 +3,18 @@ import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 import { useDbGroupsStore } from '../../../../../../store/slices/useDbGroupsStore'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const DeleteStageModal = ({ showDeleteStageModal, setShowDeleteStageModal, stageId, getStages, getGroups }) => {
   const { addMessage } = useMessageStore()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
+  const { user } = useUserStore()
 
   const deleteStage = async(values) => {
     const successResponse = 'Stage has been deleted'
     const url = '/admin/fixture/stages/delete'
     const httpMethod = 'post'
-    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod })
+    const response = await handleSubmitFormAdmin({ values, url, addMessage, successResponse, setSubmittingForm, httpMethod, user })
     if (response.success) {
       setShowDeleteStageModal(false)
       getStages()

@@ -3,10 +3,12 @@ import ROUTES from '../src/store/constants/routes.js'
 import { useSubmittingFormStore } from '../src/store/slices/useSubmittingFormStore.js'
 import { useMessageStore } from '../src/store/slices/useMessageStore.js'
 import { checkCredentials } from '../app/checkCredentials.js'
+import { useUserStore } from '../src/store/slices/useUserStore.js'
 
 export const useCheckPath = ({ currentPath, setCurrent, navigate }) => {
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
+  const { user } = useUserStore()
 
   useEffect(() => {
     const routeValues = []
@@ -29,7 +31,7 @@ export const useCheckPath = ({ currentPath, setCurrent, navigate }) => {
     }
 
     if (currentPath.includes('/admin')) {
-      checkCredentials({ setSubmittingForm, addMessage, setCurrent, navigate })
+      checkCredentials({ setSubmittingForm, addMessage, setCurrent, navigate, user })
     }
 
     setCurrent(currentPath)

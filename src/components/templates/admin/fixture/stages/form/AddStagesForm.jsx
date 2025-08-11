@@ -6,12 +6,14 @@ import { useSubmittingFormStore } from '../../../../../../store/slices/useSubmit
 import { useMessageStore } from '../../../../../../store/slices/useMessageStore'
 import handleSubmitFormAdmin from '../../../handleSubmitFormAdmin'
 import { useTournamentsDetails } from '../../../../../../store/slices/useTournamentsDetails'
+import { useUserStore } from '../../../../../../store/slices/useUserStore'
 
 const AddStagesForm = ({ getStages }) => {
   const { initialValues, registerSchema, formFields } = addStagesFormData()
   const { submittingForm, setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
   const { currentTournament } = useTournamentsDetails()
+  const { user } = useUserStore()
 
   const handleSubmitFormCreate = async(formValues, { resetForm }) => {
     const successResponse = 'Stage has been created successfully'
@@ -24,7 +26,8 @@ const AddStagesForm = ({ getStages }) => {
       addMessage,
       successResponse,
       setSubmittingForm,
-      httpMethod
+      httpMethod,
+      user
     })
     if (response.success) {
       getStages()
