@@ -53,7 +53,7 @@ const TournamentDetailsMain = () => {
               </div>
               <div className="admin-tournament-options">
                 <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.CONTACT)}>
-                  <span className="button-details"><IoFootball />Email sender</span>
+                  <span className="button-details"><IoFootball />Contact</span>
                 </Button>
               </div>
             </div>

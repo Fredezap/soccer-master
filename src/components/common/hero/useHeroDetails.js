@@ -15,6 +15,10 @@ const useHeroDetails = () => {
     title: 'Contact'
   }
 
+  const rules = {
+    title: 'Tournament rules'
+  }
+
   const adminMain = {
     title: 'Admin'
   }
@@ -60,6 +64,7 @@ const useHeroDetails = () => {
     matches,
     blog,
     contact,
+    rules,
     adminMain,
     adminTournamentDetails,
     adminTeams,

@@ -53,6 +53,7 @@ const Header = () => {
                   <li className={getClass(ROUTES.HOME)}><a href={ROUTES.HOME} className="nav-link">Home</a></li>
                   <li className={getClass(ROUTES.MATCHES)}><a href={ROUTES.MATCHES} className="nav-link">Matches</a></li>
                   <li className={getClass(ROUTES.TEAMS)}><a href={ROUTES.TEAMS} className="nav-link">Teams</a></li>
+                  <li className={getClass(ROUTES.RULES)}><a href={ROUTES.RULES} className="nav-link">Rules</a></li>
                   <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Contact</a></li>
                 </>
               )}
