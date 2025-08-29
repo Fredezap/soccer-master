@@ -36,6 +36,7 @@ import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.js
 import AdminContact from '../src/components/templates/admin/contact/main/AdminContact.jsx'
 import MatchesResultSetterMain from '../src/components/templates/admin/fixture/matches/matches-result-setter/MatchesResultSetterMain'
 import AdminsManagmentMain from '../src/components/templates/admin/admin-managment/AdminsManagmentMain.jsx'
+import TournamentRules from '../src/components/templates/rules/TournamentRules.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -109,6 +110,8 @@ function AppContent() {
         <Route path={ROUTES.MATCHES} element={<Matches />} />
         <Route path={ROUTES.TEAMS} element={<Teams />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />
+        <Route path={ROUTES.RULES} element={<TournamentRules />} />
+        <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.ADMIN.MAIN} element={<AdminMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN} element={<TournamentDetailsMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS} element={<AdminTournamentDetails />} />
@@ -117,7 +120,6 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.FIXTURE.MAIN} element={<FixtureMain />} />
         <Route path={ROUTES.ADMIN.VIDEOS} element={<AdminVideos />} />
         <Route path={ROUTES.ADMIN.CONTACT} element={<AdminContact />} />
-        <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.ADMIN.REGISTER} element={<RegisterForm />} />
         <Route path={ROUTES.ADMIN.MATCHES_RESULT_SETTER} element={<MatchesResultSetterMain />} />
         <Route path={ROUTES.ADMIN.USERS_MANAGMENT} element={<AdminsManagmentMain />} />
