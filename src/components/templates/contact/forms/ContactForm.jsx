@@ -50,20 +50,20 @@ const ContactForm = () => {
                   <ul className="list-unstyled contact-details">
                     {currentTournament.Contact?.contactAddress && (
                       <li className="mb-2">
-                        <strong className="text-white d-block">Address</strong>
-                        <a style={{ color: '#ee1e46' }}>{currentTournament.Contact?.contactAddress}</a>
+                        <strong className="text-futsal-for-her d-block">Address</strong>
+                        <a style={{ color: 'rgb(250,104,121)' }}>{currentTournament.Contact?.contactAddress}</a>
                       </li>
                     )}
                     {currentTournament.Contact?.contactEmail && (
                       <li className="mb-2">
-                        <strong className="text-white d-block">Email</strong>
-                        <a style={{ color: '#ee1e46' }}>{currentTournament.Contact?.contactEmail}</a>
+                        <strong className="text-futsal-for-her d-block">Email</strong>
+                        <a style={{ color: 'rgb(250,104,121)' }}>{currentTournament.Contact?.contactEmail}</a>
                       </li>
                     )}
                     {currentTournament.Contact?.contactPhone && (
                       <li className="mb-2">
-                        <strong className="text-white d-block">Phone</strong>
-                        <a style={{ color: '#ee1e46' }}>{currentTournament.Contact?.contactPhone}</a>
+                        <strong className="text-futsal-for-her d-block">Phone</strong>
+                        <a style={{ color: 'rgb(250,104,121)' }}>{currentTournament.Contact?.contactPhone}</a>
                       </li>
                     )}
                   </ul>

@@ -62,7 +62,7 @@ const TableScores = ({ backgroundStyle }) => {
                                         )
                                           }
                                         </div>
-                                        <strong className="text-white team-score-name">{team.name}</strong>
+                                        <strong className="text-futsal-for-her team-score-name">{team.name}</strong>
                                       </td>
                                       <td>{team.TeamGroup.WON + team.TeamGroup.DRAWN + team.TeamGroup.LOST}</td>
                                       <td>{team.TeamGroup.WON}</td>

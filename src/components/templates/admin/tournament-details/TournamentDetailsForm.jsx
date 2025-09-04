@@ -51,6 +51,7 @@ const TournamentDetailsForm = () => {
   }
 
   const handleSubmitFormCreate = async(values) => {
+    console.log('VALUES: ', values)
     values = {
       ...values,
       tournamentId: currentTournament.tournamentId,
@@ -73,7 +74,7 @@ const TournamentDetailsForm = () => {
     const successResponse = 'Tournament details has been edited'
     const url = '/admin/tournaments/update'
     httpMethod = 'postForImg'
-
+    console.log('VALUES: ', values)
     values = {
       ...values,
       tournamentId: currentTournament.tournamentId,

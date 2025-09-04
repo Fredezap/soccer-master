@@ -37,19 +37,19 @@ const MatchesByDate = ({ isGoalSeter, stageGroups, selectedGroupStage, groupedMa
                             <tbody>
                               {matches.map((match, index) => (
                                 <tr className="match-table-row" key={match.matchId || index}>
-                                  <td><strong className="text-white">{index + 1}</strong></td>
+                                  <td><strong className="text-futsal-for-her">{index + 1}</strong></td>
                                   <td>{match.LocalTeam.Groups.find(group => group.stageId === stageGroups.stageId)?.name || 'No Group'}</td>
-                                  <td><strong className="text-white">{formatTime(match.time)}</strong></td>
+                                  <td><strong className="text-futsal-for-her">{formatTime(match.time)}</strong></td>
                                   <td className="team-score-logo">
-                                    <strong className="text-white">{match.LocalTeam.name}</strong>
-                                    <strong className="text-white">{match.localTeamScore !== null ? `(${match.localTeamScore})` : '(-)'}</strong>
+                                    <strong className="text-futsal-for-her">{match.LocalTeam.name}</strong>
+                                    <strong className="text-futsal-for-her">{match.localTeamScore !== null ? `(${match.localTeamScore})` : '(-)'}</strong>
                                   </td>
-                                  <td><strong className="text-white">VS</strong></td>
+                                  <td><strong className="text-futsal-for-her">VS</strong></td>
                                   <td className="team-score-logo">
-                                    <strong className="text-white">{match.VisitorTeam.name}</strong>
-                                    <strong className="text-white">{match.visitorTeamScore !== null ? `(${match.visitorTeamScore})` : '(-)'}</strong>
+                                    <strong className="text-futsal-for-her">{match.VisitorTeam.name}</strong>
+                                    <strong className="text-futsal-for-her">{match.visitorTeamScore !== null ? `(${match.visitorTeamScore})` : '(-)'}</strong>
                                   </td>
-                                  <td><strong className="text-white">{match.location}</strong></td>
+                                  <td><strong className="text-futsal-for-her">{match.location}</strong></td>
                                   <td className="actions-column">
                                     <div className="actions-icons">
                                       {!isGoalSeter

@@ -44,7 +44,7 @@ const DbTeams = ({ dbTeams, setShowAddTeam, getTeams }) => {
                   style={{ cursor: 'pointer' }}
                 >
                   <td>
-                    <strong className="text-white">{dbTeam.name}</strong>
+                    <strong className="text-futsal-for-her">{dbTeam.name}</strong>
                   </td>
 
                 </tr>

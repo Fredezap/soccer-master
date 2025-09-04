@@ -27,13 +27,13 @@ const StagesTableInfo = ({ stages, getStages, getGroups }) => {
             {stages?.map((stage, index) => (
               <tr className="stage-table-row" key={stage.stageId || index}>
                 <td>
-                  <strong className="text-white">{stage.order}</strong>
+                  <strong className="text-futsal-for-her">{stage.order}</strong>
                 </td>
                 <td>
-                  <strong className="text-white">{stage.name}</strong>
+                  <strong className="text-futsal-for-her">{stage.name}</strong>
                 </td>
                 <td>
-                  <strong className="text-white">{stage.type}</strong>
+                  <strong className="text-futsal-for-her">{stage.type}</strong>
                 </td>
                 <td>
                   <div className="delete-icon-stage" onClick={() => handleDeleteStage(stage.stageId)}>
