@@ -70,7 +70,7 @@ const AdminsListEditable = () => {
   }
 
   return (
-    <div className="site-section bg-light text-white py-5">
+    <div className="site-section bg-light text-futsal-for-her py-5">
       <div className="container">
         <h1 className="text-2xl font-bold">Admins</h1>
         <h5 className="text-lg mt-2">Manage the users with admin permits</h5>

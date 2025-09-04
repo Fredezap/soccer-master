@@ -17,7 +17,7 @@ const HeroHome = () => {
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-5 ml-auto">
-            <h1 className="text-white">{currentTournament?.name && currentTournament.name}</h1>
+            <h1 className="text-futsal-for-her">{currentTournament?.name && currentTournament.name}</h1>
             <p>Welcome to the most thrilling football cup event of the year!</p>
             <p className="tournament-time">Tournament starting in:</p>
             <div style={{ margin: '0' }} id="date-countdown">

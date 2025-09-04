@@ -17,7 +17,7 @@ const Hero = ({ title }) => {
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg mx-auto text-center">
-            <h1 className="text-white">{title || null}</h1>
+            <h1 className="text-futsal-for-her">{title || null}</h1>
             <h2 style={{ marginTop: '50px' }}>{currentTournament?.name}</h2>
           </div>
         </div>

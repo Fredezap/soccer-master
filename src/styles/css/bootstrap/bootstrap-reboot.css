@@ -111,7 +111,7 @@ sup {
   top: -.5em; }
 
 a {
-  color: #ee1e46;
+  color: rgb(250,104,121);
   text-decoration: none;
   background-color: transparent;
   -webkit-text-decoration-skip: objects; }

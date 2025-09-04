@@ -63,7 +63,7 @@ $colors: map.merge(
   $colors
 );
 
-$primary:       #ee1e46 !default;
+$primary:       rgb(250,104,121) !default;
 $secondary:     $gray-600 !default;
 $success:       $green !default;
 $info:          $cyan !default;

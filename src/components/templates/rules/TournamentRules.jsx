@@ -14,7 +14,6 @@ const TournamentRules = () => {
         <a
           href="/tournament-rules/Weisungen_Junioren_Swiss_Futsal.pdf"
           download
-          className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 text-white rounded-lg hover:bg-red-700 transition-colors"
         >
           <FaFilePdf className="text-xl" />
             Download rules

@@ -27,18 +27,19 @@ export const TournamentDetailsFormMap = ({ formFields, errors, touched, setFiles
 
         return (
           <div className="form-group" key={index}>
-            <Label>{data.label}</Label>
-
+            <Label>{data.label}AAAAAAAAAAAAAAA</Label>
             {data.type === 'image'
               ? (
                 currentImage && !editMode[data.id]
                   ? (
                     <>
-                      <img
-                        src={`${BASE_URL}${currentImage}`}
-                        alt={data.label}
-                        style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }}
-                      />
+                      <div className="img-section">
+                        <img
+                          src={`${BASE_URL}${currentImage}`}
+                          alt={data.label}
+                          style={{ maxWidth: '100%', height: 'auto', marginBottom: '1rem' }}
+                        />
+                      </div>
                       <div style={{ display: 'flex', gap: '0.5rem' }}>
                         <button
                           type="button"

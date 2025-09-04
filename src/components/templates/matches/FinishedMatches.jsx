@@ -36,7 +36,7 @@ const FinishedMatches = () => {
                               : 'Team 1'}
                         </h3>
                         {' '}
-                        <strong className="text-white">
+                        <strong className="text-futsal-for-her">
                           {match?.localTeamScore !== null && match?.localTeamScore !== undefined
                             ? `(${match?.localTeamScore})`
                             : '(-)'}
@@ -57,7 +57,7 @@ const FinishedMatches = () => {
                               : 'Team 2'}
                         </h3>
                         {' '}
-                        <strong className="text-white">
+                        <strong className="text-futsal-for-her">
                           {match?.visitorTeamScore !== null && match?.visitorTeamScore !== undefined
                             ? `(${match?.visitorTeamScore})`
                             : '(-)'}

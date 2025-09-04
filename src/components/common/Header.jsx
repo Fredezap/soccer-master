@@ -2,8 +2,10 @@ import { useState, useEffect } from 'react'
 import ROUTES from '../../store/constants/routes.js'
 import useCurrentRouteStore from '../../store/slices/useCurrentRouteStore.js'
 import Logo from '../../images/logo.png'
+import olimpicBaselLogo from '../../images/olimpic-basel.png'
 import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails.js'
 import { useUserStore } from '../../store/slices/useUserStore.js'
+import { FaVideo } from 'react-icons/fa'
 
 const Header = () => {
   const { current } = useCurrentRouteStore()
@@ -23,6 +25,8 @@ const Header = () => {
     return () => window.removeEventListener('resize', handleResize)
   }, [])
 
+  const liveStreming = 'https://www.youtube.com/watch?v=TFCoKDU9wNk'
+
   return (
     <header className={`site-navbar ${menuOpen ? 'open' : ''} py-4`} role="banner">
       <div className="container">
@@ -31,13 +35,13 @@ const Header = () => {
           {isMobile
             ? (
               <div className="menu-toggle-logo" onClick={toggleMenu}>
-                <img src={Logo} alt="Logo" className="menu-toggle-button" />
+                <img src={olimpicBaselLogo} alt="Logo" className="menu-toggle-button" />
               </div>
             )
             : (
               <div className="site-logo">
                 <a href={ROUTES.MAIN}>
-                  <img src={Logo} alt="Logo" />
+                  <img src={olimpicBaselLogo} alt="Logo" />
                 </a>
               </div>
             )}
@@ -55,9 +59,17 @@ const Header = () => {
                   <li className={getClass(ROUTES.TEAMS)}><a href={ROUTES.TEAMS} className="nav-link">Teams</a></li>
                   <li className={getClass(ROUTES.RULES)}><a href={ROUTES.RULES} className="nav-link">Rules</a></li>
                   <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Contact</a></li>
+                  <li>
+                    <a href={liveStreming} className="nav-link" target="_blank" rel="noopener noreferrer">
+                      <div className="centered-row">
+                        <FaVideo className="icon-pulse" size={22} />
+                        <span>Live streaming</span>
+                      </div>
+                    </a>
+                  </li>
                 </>
               )}
-              {isAdmin() || isSuperAdmin()
+              {/* {isAdmin() || isSuperAdmin()
                 ? (
                   <li className={getClass(ROUTES.ADMIN.MAIN)}>
                     <a href={ROUTES.ADMIN.MAIN} className="nav-link">Admin</a>
@@ -67,7 +79,7 @@ const Header = () => {
                   <li className={getClass(ROUTES.LOGIN)}>
                     <a href={ROUTES.LOGIN} className="nav-link">Login</a>
                   </li>
-                )}
+                )} */}
             </ul>
           </nav>
         </div>

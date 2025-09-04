@@ -46,7 +46,7 @@ const TournamentList = () => {
           <div className="no-tournament-selected tournaments-list">
             <input
               type="text"
-              placeholder="Search tournaments..."
+              placeholder="Search categories..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="form-control mb-3 input-white-border"
