@@ -1,4 +1,5 @@
 import HeroHomeNoTournament from './HeroHomeNoTournament'
+import ModalMain from './modals/ModalMain'
 import TournamentList from './TournamentList'
 
 const Main = () => {
@@ -16,6 +17,7 @@ const Main = () => {
     <>
       <HeroHomeNoTournament />
       <TournamentList />
+      <ModalMain />
     </>
   )
 }

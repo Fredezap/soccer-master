@@ -6,7 +6,7 @@ const ROUTES = {
   MATCHES: '/matches',
   TEAMS: '/teams',
   SINGLE: '/single',
-  RULES: '/rules',
+  INFO: '/info',
   LIVE: '/live',
   LOGIN: '/login',
   ADMIN: {

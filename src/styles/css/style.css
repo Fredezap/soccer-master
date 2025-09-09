@@ -1200,7 +1200,7 @@ h1, h2, h3, h4, h5,
 .tournament-item:hover { 
   /* background: linear-gradient(to bottom right, #ffe9b4, #fff3e6) !important; */
   background: linear-gradient(to bottom right, rgba(203, 204, 205, 255), rgb(179, 190, 201));
-  transform: scale(0.1);
+  transform: scale(1.05);
   transition: 0.3s;
 }
 
@@ -2878,6 +2878,10 @@ display: none;
   padding: 0 15px;
 }
 
+.matches-section .next-match-box {
+  padding: 0;
+}
+
 .team-info {
   display: flex;
   flex-direction: column;
@@ -3006,7 +3010,7 @@ display: none;
 
 @media (max-width: 992px) {
   .site-navbar {
-    padding: 0 20px 0 50px;
+    padding: 0 20px 0 5px;
   }
   .stages-main {
     flex-direction: column;
@@ -3048,6 +3052,21 @@ display: none;
   }
   .email-sender-box {
     flex-direction: column;
+  }
+  .iframerules {
+  height: 500px !important;
+  }
+}
+
+@media (max-width: 850px) {
+  .menu-toggle-logo {
+    margin-top: 20px;
+  }
+  .menu-toggle-logo a {
+    color: #FFF !important;
+  }
+  header.open .menu-toggle-logo a {
+    color: #756e6e !important;
   }
 }
 
@@ -3114,6 +3133,9 @@ display: none;
     display: flex !important;
     flex-direction: column !important;
     background-color: yellow;
+  }
+   .iframerules {
+  height: 400px !important;
   }
 }
 
@@ -3185,6 +3207,9 @@ display: none;
   .video-item {
     width: 250px;
     height: auto;
+  }
+   .iframerules {
+    height: 300px !important;
   }
 }
 
@@ -3639,6 +3664,22 @@ display: none;
 
 /* End of Mail no tournament Styles */
 
+ .site-navbar .site-navigation .site-menu > li > ul > li > a {
+  padding: 5px 20px;
+  color: #000;
+  font-size: 12px;
+  letter-spacing: .1rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  display: inline-block;
+  text-decoration: none !important;
+}
+        
+.site-navbar .site-navigation .site-menu > li ul > li > a:hover {
+  color: #fff; 
+}
+
+
 /* Main Menu Styles */
 /* Base desktop menu */
 .site-menu {
@@ -3717,9 +3758,7 @@ display: none;
     gap: 10px;
   }
 
-  .site-menu li {
-    margin-bottom: 0.5rem;
-  }
+
 
   .site-menu li a {
     font-size: 1.2rem;
@@ -3730,6 +3769,9 @@ display: none;
 }
 
 /* End of Main Menu Styles */
+
+
+
 
 /* Side Menu Styles */
 .offcanvas .admin-all-mains {
@@ -4070,15 +4112,39 @@ display: none;
   justify-content: center;
   align-items: center;
   min-height: 500px;
+  padding: 50px;
+  gap: 20px;
 }
 
 .rules-main a {
-    display: flex;
+  display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  text-align: center;
   font-size: 25px;
   gap: 10px;
+  padding-top: 20px;
   color: rgb(250,104,121);
 }
+
+.iframerules {
+  height: 600px;
+}
 /* End of Rules Styles */
+
+/* Modal Main Styles */
+.button-modal-main {
+  background-color: #3a3737ff !important;
+  color: rgb(212,242,60) !important;
+  border: 1px solid rgb(212,242,60) !important;
+  transition: all 0.3s ease;
+}
+
+.button-modal-main:hover {
+  background-color: rgb(212,242,60) !important;
+  color: #3a3737ff !important;
+  border: 1px solid #3a3737ff !important;
+}
+
+/* End of Modal Main Styles */

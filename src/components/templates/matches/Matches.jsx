@@ -10,15 +10,16 @@ import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetai
 const Matches = () => {
   const { matches } = useHeroDetails()
   const { currentTournament } = useTournamentsDetails()
-  const dbKnockoutStages = null
+  const videoSectionExist = currentTournament?.Videos?.length > 0
+  const sectionBg = { videosBg: 'bg-light' }
+  const bgColor = videoSectionExist ? 'bg-dark' : 'bg-light'
 
-  const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
   return (
     <>
       <Hero title={matches.title} />
       {/* <TeamScore /> */}
-      <MatchesGrid />
-      <Videos sectionBg={sectionBg} />
+      <MatchesGrid bgColor={bgColor}/>
+      {videoSectionExist && (<Videos sectionBg={sectionBg} />)}
       {/* <Blog /> */}
     </>
   )

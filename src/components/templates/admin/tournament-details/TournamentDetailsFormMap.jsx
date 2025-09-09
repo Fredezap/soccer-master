@@ -27,7 +27,7 @@ export const TournamentDetailsFormMap = ({ formFields, errors, touched, setFiles
 
         return (
           <div className="form-group" key={index}>
-            <Label>{data.label}AAAAAAAAAAAAAAA</Label>
+            <Label>{data.label}</Label>
             {data.type === 'image'
               ? (
                 currentImage && !editMode[data.id]

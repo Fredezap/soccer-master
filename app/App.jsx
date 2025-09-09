@@ -36,7 +36,7 @@ import AdminVideos from '../src/components/templates/admin/videos/AdminVideos.js
 import AdminContact from '../src/components/templates/admin/contact/main/AdminContact.jsx'
 import MatchesResultSetterMain from '../src/components/templates/admin/fixture/matches/matches-result-setter/MatchesResultSetterMain'
 import AdminsManagmentMain from '../src/components/templates/admin/admin-managment/AdminsManagmentMain.jsx'
-import TournamentRules from '../src/components/templates/rules/TournamentRules.jsx'
+import TournamentRules from '../src/components/templates/tournament-info/TournamentInfo.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -110,7 +110,7 @@ function AppContent() {
         <Route path={ROUTES.MATCHES} element={<Matches />} />
         <Route path={ROUTES.TEAMS} element={<Teams />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />
-        <Route path={ROUTES.RULES} element={<TournamentRules />} />
+        <Route path={ROUTES.INFO} element={<TournamentRules />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.ADMIN.MAIN} element={<AdminMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN} element={<TournamentDetailsMain />} />

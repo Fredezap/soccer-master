@@ -37,10 +37,11 @@ const NextMatch = ({ backgroundStyle }) => {
 
   return (
     <div className="row mb-5">
-      <div className="col-lg-12">
+      <div className="col-lg-12 next-match-box">
         <div className={`widget-next-match ${backgroundStyle}`}>
           <div className="widget-title">
-            <h3>Next Match</h3>
+            {/* <h3>Next Match</h3> */}
+            <h3>Nächstes Spiel</h3>
           </div>
           {nextMatch && nextMatch.length !== 0
             ? (
@@ -72,7 +73,8 @@ const NextMatch = ({ backgroundStyle }) => {
             )
             : (
               <div className="no-info-founded">
-                <span>No match found</span>
+                {/* <span>No match found</span> */}
+                <span>Kein Spiel gefunden</span>
               </div>
             )}
         </div>

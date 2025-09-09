@@ -53,7 +53,8 @@ const BracketsForUsers = ({ rounds }) => {
           <div className="brackets-box">
             {rounds.every((round, index) => round.seeds.length === 0)
               ? (
-                <p>No matches set for any knockout stage yet</p>
+                /* <p>No matches set for any knockout stage yet</p> */
+                <p>Für keine K.-o.-Runde wurden bisher Spiele festgelegt</p>
               )
               : (
                 <div className="bracket">

@@ -45,17 +45,24 @@ const Footer = () => {
         <div style={{ textAlign: 'center' }} className="row">
           <div className="col-lg-12">
             <div className="widget mb-3">
-              <h3>Social</h3>
+              {/* <h3>Social</h3> */}
+              <h3>Soziales</h3>
               <ul className="row list-unstyled links">
                 <li className={getColStyle()}>
-                  <a href={ROUTES.CONTACT}>
+                  {/* <a href={ROUTES.CONTACT}>
                     Contact
+                  </a> */}
+                  <a href={ROUTES.CONTACT}>
+                    Kontakt
                   </a>
                 </li>
                 {currentTournament?.Contact?.footerContactWebPage && (
                   <li className={getColStyle()}>
-                    <a href={currentTournament?.Contact?.footerContactWebPage}>
+                    {/* <a href={currentTournament?.Contact?.footerContactWebPage}>
                       Web page
+                    </a> */}
+                    <a href={currentTournament?.Contact?.footerContactWebPage}>
+                      Webseite
                     </a>
                   </li>
                 )}
@@ -70,7 +77,7 @@ const Footer = () => {
             </div>
           </div>
         </div>
-
+        {/*
         <div className="row text-center">
           <div className="col-md-12">
             <div className=" pt-5">
@@ -79,8 +86,19 @@ const Footer = () => {
               </p>
             </div>
           </div>
-
+        </div> */}
+        <div className="row text-center">
+          <div className="col-md-12">
+            <div className=" pt-5">
+              <p>
+              &copy; {new Date().getFullYear()} Alle Rechte vorbehalten | Besuchen Sie unsere Website
+                <i className="icon-heart" aria-hidden="true"></i>
+                <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer"> Futsal Olympique Basel</a>
+              </p>
+            </div>
+          </div>
         </div>
+
       </div>
     </footer>
   )

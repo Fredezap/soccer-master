@@ -8,8 +8,8 @@ const HeroHomeNoTournament = () => {
       <div className="container">
         <div>
           <div className="no-tournament-main">
-            <h1>Welcome to Futsal For Her</h1>
-            <h2>Basel futsal</h2>
+            {/* <h1>Welcome to Futsal For Her</h1>
+            <h2>Basel futsal</h2> */}
           </div>
         </div>
       </div>
