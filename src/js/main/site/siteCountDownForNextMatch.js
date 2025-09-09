@@ -39,7 +39,7 @@ const siteCountDownForNextMatch = (onCountdownFinish) => { // Pasamos un callbac
 
         if (remaining <= 0) {
           $('#match-countdown').hide()
-          $('#match-countdown2').show().html('Countdown finished!')
+          $('#date-countdown2').show().html('Countdown beendet!')
           clearInterval(countdownInterval)
           countdownInterval = null
           // Ejecutamos el callback cuando el contador termine

@@ -14,7 +14,8 @@ const FinishedMatches = () => {
   return (
     <div style={{ marginTop: '60px' }} className="row bg-light p-4 rounded">
       <div className="col-12 title-section">
-        <h2 className="heading">Finished Matches</h2>
+        {/* <h2 className="heading">Finished Matches</h2> */}
+        <h2 className="heading">Abgeschlossene Spiele</h2>
       </div>
       {reversedFinishedMatches !== null && reversedFinishedMatches.length !== 0
         ? (
@@ -75,7 +76,8 @@ const FinishedMatches = () => {
         )
         : (
           <div className="no-info-founded">
-            <span>No matches founded</span>
+            {/* <span>No matches founded</span> */}
+            <span>Keine Spiele gefunden</span>
           </div>
         )}
     </div>

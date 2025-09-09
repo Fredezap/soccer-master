@@ -80,7 +80,8 @@ const TableScores = ({ backgroundStyle }) => {
                           )
                           : (
                             <div className="no-info-founded">
-                              <p>No teams founded</p>
+                              {/* <p>No teams founded</p> */}
+                              <p>Keine Teams gefunden</p>
                             </div>
                           )}
                       </div>
@@ -89,7 +90,8 @@ const TableScores = ({ backgroundStyle }) => {
                 )
                 : (
                   <div className="no-info-founded">
-                    <p>No groups founded</p>
+                    {/* <p>No groups founded</p> */}
+                    <p>Keine Gruppen gefunden</p>
                   </div>
                 )}
             </div>

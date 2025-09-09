@@ -1,62 +1,62 @@
 const useHeroDetails = () => {
   const players = {
-    title: 'Teams'
+    title: 'Teams' // 'Teams'
   }
 
   const matches = {
-    title: 'Matches'
+    title: 'Spiele' // 'Matches'
   }
 
   const blog = {
-    title: 'Blog Posts'
+    title: 'Blogbeiträge' // 'Blog Posts'
   }
 
   const contact = {
-    title: 'Contact'
+    title: 'Kontakt' // 'Contact'
   }
 
-  const rules = {
-    title: 'Tournament rules'
+  const info = {
+    title: 'Turnierregeln und Anmeldung' // 'Tournament rules and inscription'
   }
 
   const adminMain = {
-    title: 'Admin'
+    title: 'Admin' // 'Admin'
   }
 
   const adminTournamentDetails = {
-    title: 'Admin tournament Details'
+    title: 'Admin Turnierdetails' // 'Admin tournament Details'
   }
 
   const adminTeams = {
-    title: 'Admin Teams'
+    title: 'Admin Teams' // 'Admin Teams'
   }
 
   const adminTeamsUpdate = {
-    title: 'Admin Teams update'
+    title: 'Admin Teams aktualisieren' // 'Admin Teams update'
   }
 
   const adminFixture = {
-    title: 'Admin Fixture'
+    title: 'Admin Spielplan' // 'Admin Fixture'
   }
 
   const adminVideos = {
-    title: 'Admin Videos'
+    title: 'Admin Videos' // 'Admin Videos'
   }
 
   const adminContact = {
-    title: 'Admin contact'
+    title: 'Admin Kontakt' // 'Admin contact'
   }
 
   const adminResultSetter = {
-    title: 'Admin result setter'
+    title: 'Admin Ergebnisse festlegen' // 'Admin result setter'
   }
 
   const adminUsersManager = {
-    title: 'Admin users manager'
+    title: 'Admin Benutzerverwaltung' // 'Admin users manager'
   }
 
   const adminRegister = {
-    title: 'Admin register users'
+    title: 'Admin Benutzer registrieren' // 'Admin register users'
   }
 
   return {
@@ -64,7 +64,7 @@ const useHeroDetails = () => {
     matches,
     blog,
     contact,
-    rules,
+    info,
     adminMain,
     adminTournamentDetails,
     adminTeams,

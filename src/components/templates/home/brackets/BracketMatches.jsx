@@ -19,8 +19,9 @@ const BracketMatches = ({ sectionBg, dbMatches, dbKnockoutStages }) => {
   if (!dbKnockoutStages || Object.keys(dbKnockoutStages).length === 0) return null
 
   return (
-    <div className={`brackets-component ${sectionBg.bracktesBg}`}>
-      <h2>Brackets</h2>
+    <div className={`brackets-component ${sectionBg.bracketsBg}`}>
+      {/* <h2>Brackets</h2> */}
+      <h2>Turnierbaum</h2>
       <BracketsForUsers rounds={rounds} />
     </div>
   )

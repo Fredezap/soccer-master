@@ -10,8 +10,7 @@ const Teams = () => {
   const { players } = useHeroDetails()
   const { currentTournament } = useTournamentsDetails()
   const [teams, setTeams] = useState([])
-  const dbKnockoutStages = null
-  const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
+  const sectionBg = { videosBg: 'bg-light' }
 
   useEffect(() => {
     const dbTeams = currentTournament?.Teams
@@ -24,10 +23,12 @@ const Teams = () => {
     return logoGetter(team, isLocalTeam)
   }
 
+  const videoSectionExist = currentTournament?.Videos?.length > 0
+
   return (
     <div>
       <Hero title={players.title} />
-      <div className="teams-main bg-dark">
+      <div className={`teams-main ${videoSectionExist ? 'bg-dark' : 'bg-light'}`}>
         <div style={{ minWidth: '100%' }} className="row bg-light p-4 rounded">
           <div className="col-12 title-section">
             <h2 className="heading">Teams</h2>
@@ -55,9 +56,8 @@ const Teams = () => {
                                 </ul>
                               )
                               : (
-                                <p>
-                                  No players founded
-                                </p>
+                                /* <p>No players founded</p> */
+                                <p>Keine Spieler gefunden</p>
                               )}
                           </div>
                         </div>
@@ -69,13 +69,14 @@ const Teams = () => {
             )
             : (
               <div className="no-info-founded">
-                <span>No teams founded</span>
+                {/* <span>No teams founded</span> */}
+                <span>Keine Teams gefunden</span>
               </div>
             )}
           {/* <Blog /> */}
         </div>
       </div>
-      <Videos sectionBg={sectionBg} />
+      {videoSectionExist && (<Videos sectionBg={sectionBg} />)}
     </div>
   )
 }

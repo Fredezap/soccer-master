@@ -46,7 +46,8 @@ const TournamentList = () => {
           <div className="no-tournament-selected tournaments-list">
             <input
               type="text"
-              placeholder="Search categories..."
+              // placeholder="Search categories..."
+              placeholder="Kategorien durchsuchen..."
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
               className="form-control mb-3 input-white-border"
@@ -54,7 +55,8 @@ const TournamentList = () => {
 
             {filteredTournaments.length === 0
               ? (
-                <p>No tournaments found</p>
+                /* <p>No tournaments found</p> */
+                <p>Keine Turniere gefunden</p>
               )
               : (
                 <ListGroup>
@@ -80,7 +82,8 @@ const TournamentList = () => {
         )
         : (
           <div>
-            <span style={{ fontWeight: 'bold', color: 'whitesmoke' }}>Tournament details will be available soon</span>
+            {/* <span style={{ fontWeight: 'bold', color: 'whitesmoke' }}>Tournament details will be available soon</span> */}
+            <span style={{ fontWeight: 'bold', color: 'whitesmoke' }}>Turnierdetails werden in Kürze verfügbar sein</span>
           </div>
         )}
     </div>

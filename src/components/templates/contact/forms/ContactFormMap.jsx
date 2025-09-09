@@ -37,8 +37,11 @@ const ContactFormMap = ({ formFields, errors, touched, submitting }) => {
       ))}
 
       <div className="form-group">
-        <button disabled={submitting} type="submit" className="btn btn-primary py-3 px-5">
+        {/* <button disabled={submitting} type="submit" className="btn btn-primary py-3 px-5">
           Send Message
+        </button> */}
+        <button disabled={submitting} type="submit" className="btn btn-primary py-3 px-5">
+          Nachricht senden
         </button>
       </div>
     </>

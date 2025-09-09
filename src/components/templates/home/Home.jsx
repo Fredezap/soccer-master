@@ -17,6 +17,7 @@ const Home = () => {
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
   const { user } = useUserStore()
+  const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
 
   const getKnockoutStages = async() => {
     try {
@@ -49,8 +50,6 @@ const Home = () => {
 
     fetchData()
   }, [currentTournament])
-
-  const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
 
   return (
     <>

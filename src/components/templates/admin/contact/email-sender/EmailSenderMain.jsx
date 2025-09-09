@@ -88,8 +88,6 @@ const EmailSenderMain = () => {
     }
   }
 
-  // TODO: QUEDO TODO EN RAMA DEV. Nada se manddo a main
-
   return (
     <div>
       <div className="site-section bg-dark">

@@ -10,23 +10,23 @@ const sendEmailFormData = () => {
 
   const registerSchema = Yup.object().shape({
     userName: Yup.string()
-      .required('Name is required')
-      .min(3, 'Name must be at least 3 characters'),
+      .required('Name ist erforderlich') // 'Name is required'
+      .min(3, 'Name muss mindestens 3 Zeichen lang sein'), // 'Name must be at least 3 characters'
     userEmail: Yup.string()
-      .email('Invalid email')
-      .required('Email is required'),
+      .email('Ungültige E-Mail') // 'Invalid email'
+      .required('E-Mail ist erforderlich'), // 'Email is required'
     emailSubject: Yup.string()
-      .required('Subject is required'),
+      .required('Betreff ist erforderlich'), // 'Subject is required'
     emailContent: Yup.string()
-      .required('Message is required')
-      .max(2000, 'Maximum 1000 characters allowed')
+      .required('Nachricht ist erforderlich') // 'Message is required'
+      .max(2000, 'Maximal 2000 Zeichen erlaubt') // 'Maximum 1000 characters allowed'
   })
 
   const formFields = [
-    { id: 'userName', type: 'text', placeholder: 'Name' },
-    { id: 'userEmail', type: 'text', placeholder: 'Email' },
-    { id: 'emailSubject', type: 'text', placeholder: 'Subject' },
-    { id: 'emailContent', type: 'textarea', placeholder: 'Write something...' }
+    { id: 'userName', type: 'text', placeholder: 'Name' }, // 'Name'
+    { id: 'userEmail', type: 'text', placeholder: 'E-Mail' }, // 'Email'
+    { id: 'emailSubject', type: 'text', placeholder: 'Betreff' }, // 'Subject'
+    { id: 'emailContent', type: 'textarea', placeholder: 'Schreibe etwas...' } // 'Write something...'
   ]
 
   return { initialValues, registerSchema, formFields }

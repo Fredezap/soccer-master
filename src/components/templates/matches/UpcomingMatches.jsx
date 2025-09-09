@@ -12,7 +12,8 @@ const UpcomingMatches = () => {
   return (
     <div style={{ marginTop: '60px' }} className="row bg-light p-4 rounded">
       <div className="col-12 title-section">
-        <h2 className="heading">Upcoming Matches</h2>
+        {/* <h2 className="heading">Upcoming Matches</h2> */}
+        <h2 className="heading">Bevorstehende Spiele</h2>
       </div>
       {upcomingMatches !== null && upcomingMatches.length !== 0
         ? (
@@ -49,7 +50,8 @@ const UpcomingMatches = () => {
         )
         : (
           <div className="no-info-founded">
-            <span>No matches founded</span>
+            {/* <span>No matches founded</span> */}
+            <span>Keine Spiele gefunden</span>
           </div>
         )}
     </div>
