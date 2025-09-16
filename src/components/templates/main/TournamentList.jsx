@@ -53,31 +53,35 @@ const TournamentList = () => {
               className="form-control mb-3 input-white-border"
             />
 
-            {filteredTournaments.length === 0
-              ? (
-                /* <p>No tournaments found</p> */
-                <p>Keine Turniere gefunden</p>
-              )
-              : (
-                <ListGroup>
-                  {filteredTournaments.map((tournament) => (
-                    <ListGroup.Item
-                      className="tournament-item"
-                      action
-                      key={tournament.tournamentId}
-                      onClick={() => handleSelectTournament(tournament)}
-                    >
-                      <div className="icon-container">
-                        <img className="admin-tournament-logo" src={getTournamentLogo(tournament)} alt="Tournament Logo" />
-                      </div>
-                      <div className="text-container">
-                        <h5>{tournament.name}</h5>
-                        <p style={{ margin: '0' }}>{formatDate(tournament.date).slashDate}</p>
-                      </div>
-                    </ListGroup.Item>
-                  ))}
-                </ListGroup>
-              )}
+            <div className="flex-row-tournament-list">
+              {filteredTournaments.map((tournament) => (
+                <div
+                  key={tournament.tournamentId}
+                  className="col-12 col-sm-6 col-md-4 col-lg-3"
+                  style={{ height: '250px' }}
+                >
+                  <div
+                    className="tournament-card h-100 w-100"
+                    onClick={() => handleSelectTournament(tournament)}
+                  >
+                    <div className="icon-container">
+                      <img
+                        className="admin-tournament-logo"
+                        src={getTournamentLogo(tournament)}
+                        alt="Tournament Logo"
+                      />
+                    </div>
+                    <div className="text-container">
+                      <h5>{tournament.name}</h5>
+                      <p style={{ margin: '0' }}>
+                        {formatDate(tournament.date).slashDate}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
           </div>
         )
         : (

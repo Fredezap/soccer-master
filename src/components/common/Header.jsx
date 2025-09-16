@@ -33,6 +33,9 @@ const Header = () => {
     }
   }
 
+  // todo: ver responsive pdf
+  // todo: hacer lista torneo en un grid o algo asi (col-3 bootstrap)
+
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 850)
     handleResize()
@@ -68,10 +71,20 @@ const Header = () => {
           >
             {isMobile
               ? (
-                <a className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>OLYMPIQUE BASEL</a>
+                <a className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
+                  <span className="for-her">
+                    FOR
+                    HER
+                  </span>
+                </a>
               )
               : (
-                <a href={ROUTES.MAIN} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>OLYMPIQUE BASEL</a>
+                <a href={ROUTES.MAIN} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
+                  <span className="for-her">
+                    FOR
+                    HER
+                  </span>
+                </a>
               )}
           </div>
 
@@ -111,7 +124,7 @@ const Header = () => {
                       >
                         {tournaments.map(tournament => (
                           <li
-                            key={tournament.id}
+                            key={tournament.tournamentId}
                             onClick={() => {
                               handleSelectTournament(tournament)
                               setShowTournaments(false)
