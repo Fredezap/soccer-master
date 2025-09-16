@@ -13,7 +13,7 @@ const HeroHome = () => {
     : deafultTournamentImage
 
   return (
-    <div className="hero overlay" style={{ backgroundImage: `url(${tournamentImage})` }}>
+    <div className="hero custom-hero-overlay" style={{ backgroundImage: `url(${tournamentImage})` }}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg-5 ml-auto">
