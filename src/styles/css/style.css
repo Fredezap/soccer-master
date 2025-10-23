@@ -3231,11 +3231,33 @@ display: none;
    .iframerules {
   height: 400px !important;
   }
+  .containerStyle {
+    text-align: left;
+  }
+  .containerStyle h2 {
+  font-size: 70px;
+  }
+  .containerStyle h5 {
+    font-size: 30px;
+  }
 }
 
 @media (max-width: 575px) {
   .flex-row-tournament-list { 
     padding: 50px;
+  }
+}
+
+@media (max-width: 450px) {
+    .containerStyle {
+      overflow-wrap: break-word; /* moderno, más estándar */
+    text-align: left;
+  }
+  .containerStyle h2 {
+  font-size: 50px;
+  }
+  .containerStyle h5 {
+    font-size: 20px;
   }
 }
 
