@@ -6,14 +6,19 @@ const RulesPdf = () => {
       {/* PDF embebido en iframe */}
       <div className="infos-img-container rules">
         <img
-          src="/tournament-rules/Weisungen_Junioren_Swiss_Futsal.jpg"
+          src="/tournament-rules/Reglement_page-1.jpg"
+          alt="Tournament Rules"
+          className="info-img"
+        />
+        <img
+          src="/tournament-rules/Reglement_page-2.jpg"
           alt="Tournament Rules"
           className="info-img"
         />
       </div>
       {/* Botón para descargar el PDF */}
       <a
-        href="/tournament-rules/Weisungen_Junioren_Swiss_Futsal.pdf"
+        href="/tournament-rules/Reglement.pdf"
         download
       >
         <FaFilePdf className="text-xl" />

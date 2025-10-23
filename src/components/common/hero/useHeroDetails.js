@@ -16,7 +16,7 @@ const useHeroDetails = () => {
   }
 
   const info = {
-    title: 'Turnierregeln und Anmeldung' // 'Tournament rules and inscription'
+    title: 'Infos und Turnierregeln' // 'Tournament rules and infos'
   }
 
   const adminMain = {
