@@ -24,7 +24,7 @@ const TournamentList = () => {
     if (response?.success) navigate(ROUTES.HOME)
     else {
       addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
-      navigate(ROUTES.MAIN)
+      navigate(ROUTES.HOME)
     }
   }
 

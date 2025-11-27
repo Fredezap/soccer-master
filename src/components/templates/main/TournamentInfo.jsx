@@ -1,19 +1,28 @@
 const TournamentInfo = () => {
   return (
-    <div className="containerStyle">
+    <div className="tournament-info-container">
       <div>
-        <h2 className="titleStyle">JUNIOR'S CUP 2025 FUTSAL FOR HER</h2>
+        <div className="main-titles-container">
+          <h1 className="title">FUTSAL FOR HER</h1>
+          <h2 className="subtitle">JUNIOR'S CUP 2025</h2>
+        </div>
         <p>
-        Am <strong>13. Dezember 2025</strong> findet unter dem Motto <strong>«Futsal for HER»</strong> die erste Austragung des Junior’s Cup statt; eines Futsal-Turniers für Juniorinnen. Es wird in den Kategorien <strong>FF-17 (vormittags)</strong> und <strong>FF-21 (nachmittags)</strong> gespielt. <strong>Futsal Olympique Basel</strong>, ein Verein, der sich seit 17 Jahren im Futsal engagiert und einziger Futsalverein der Region NWS, ist Organisator des Turniers.
+            Am 13. Dezember 2025 findet unter dem Motto «Futsal for HER» die erste Austragung
+            des Junior’s Cup statt; eines Futsal-Turniers für Juniorinnen. Es wird in den Kategorien
+            FF-17 (vormittags) und FF-21 (nachmittags) gespielt. Futsal Olympique Basel, ein
+            Verein, der sich seit 17 Jahren im Futsal engagiert und einziger Futsalverein der Region
+            NWS, ist Organisator des Turniers.
         </p>
-
         <p>
-        Die dynamische Hallenfussballvariante gewinnt in der Schweiz zunehmend an Attraktivität. Das Spiel <strong>5-gegen-5 auf kleinem Feld</strong> führt zu vielen Ballkontakten und erfordert ein flexibles Positionsspiel, was taktische sowie technische Fertigkeiten fördert, die den Spielerinnen auch im Rasenfussball zugutekommen.
+        Die dynamische Hallenfussballvariante gewinnt in der Schweiz zunehmend an
+        Attraktivität. Das Spiel 5-gegen-5 auf kleinem Feld führt zu vielen Ballkontakten und
+        erfordert ein flexibles Positionsspiel, was taktische sowie technische Fertigkeiten
+        fördert, die den Spielerinnen auch im Rasenfussball zugutekommen.
         </p>
       </div>
       <div>
-        <h5>ALLGEMEINE INFOS</h5>
-        <ul className="listStyle">
+        <h2>ALLGEMEINE INFOS</h2>
+        <ul className="list-info">
           <li>Gespielt wird nach offiziellen Futsal-Light-Regeln</li>
           <li>Pro Kategorie planen wir mit 4 Teams</li>
           <li>Teams aus dem Rasenfussball sind explizit willkommen</li>
