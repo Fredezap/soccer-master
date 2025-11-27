@@ -18,7 +18,8 @@ const formatDate = (fechaISO) => {
 
   return {
     slashDate: `${day}/${month}/${year}`,
-    dashDate: `${year}-${month}-${day}`
+    dashDate: `${year}-${month}-${day}`,
+    dotDate: `${year}.${month}.${day}`
   }
 }
 

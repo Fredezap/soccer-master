@@ -41,11 +41,20 @@ window.jQuery = $
 window.$ = $
 
 function AppContent() {
+  if ('serviceWorker' in navigator) {
+    navigator.serviceWorker.getRegistrations().then(regs => {
+      regs.forEach(reg => {
+        reg.unregister().then(() => {
+          console.log('Service worker removed')
+        })
+      })
+    })
+  }
+
   const location = useLocation()
   const currentPath = location.pathname
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
-
   const { currentTournament, isCreating } = useTournamentsDetails()
   const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
@@ -86,13 +95,15 @@ function AppContent() {
     if (checkPathsNoNeedTournament(currentPath) || isCreating === true) return
 
     // Si el path SI necesita toreno y no hay uno seteado,
-    // vemos si es admin o usuario para redirigirlos al main y que eligan un torneo
+    // vemos si es admin o usuario para redirigirlos al home y que eligan un torneo
     if (Object.entries(currentTournament).length === 0) {
       if (currentPath.includes('/admin')) {
         navigate(ROUTES.ADMIN.MAIN)
         return
       }
-      navigate(ROUTES.MAIN)
+
+      // navigate(ROUTES.MAIN)
+      navigate(ROUTES.HOME)
     }
 
     main(currentTournament)
@@ -105,7 +116,7 @@ function AppContent() {
       <Routes>
         <Route path={ROUTES.BLOG} element={<BlogPage />} />
         <Route path={ROUTES.CONTACT} element={<Contact />} />
-        <Route path={ROUTES.MAIN} element={<Main />} />
+        {/* <Route path={ROUTES.MAIN} element={<Main />} /> */}
         <Route path={ROUTES.HOME} element={<Home />} />
         <Route path={ROUTES.MATCHES} element={<Matches />} />
         <Route path={ROUTES.TEAMS} element={<Teams />} />

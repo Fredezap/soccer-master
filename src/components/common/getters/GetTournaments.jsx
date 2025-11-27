@@ -19,6 +19,7 @@ const getTournaments = () => {
       if (response?.success) {
         const allTournaments = response.data?.allTournaments
         setTournaments(allTournaments)
+        console.log(allTournaments)
       }
     } catch (error) {}
   }

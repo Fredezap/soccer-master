@@ -9,6 +9,12 @@ import { useMessageStore } from '../../../store/slices/useMessageStore'
 import BracketMatches from './brackets/BracketMatches'
 import { useUserStore } from '../../../store/slices/useUserStore'
 import getSectionBg from '../../common/section-styles/getSectionBg'
+import TournamentInfo from '../main/TournamentInfo'
+import CountDownSection from './count-down/CountDownSection'
+import SponsorsSection from './sponsors/SponsorsSection'
+import CategoriesSection from './caregories/CategoriesSection'
+import getTournaments from '../../common/getters/GetTournaments'
+import InterviewWithStephanie from './interview/InterviewWithStephanie'
 
 const Home = () => {
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
@@ -18,6 +24,7 @@ const Home = () => {
   const { addMessage } = useMessageStore()
   const { user } = useUserStore()
   const sectionBg = getSectionBg(currentTournament, dbKnockoutStages)
+  const { fetchAllTournaments } = getTournaments()
 
   const getKnockoutStages = async() => {
     try {
@@ -44,24 +51,29 @@ const Home = () => {
 
   useEffect(() => {
     const fetchData = async() => {
-      await getKnockoutStages()
-      await getMatches()
+      console.log('EN FETCH ALL TOURNAMENTS')
+      await fetchAllTournaments()
     }
 
     fetchData()
-  }, [currentTournament])
+  }, [])
 
   return (
     <>
       <HeroHome />
+      <CountDownSection />
+      <TournamentInfo />
+      <SponsorsSection />
+      <CategoriesSection />
+      <InterviewWithStephanie />
       {/* <TeamScore /> */}
       {/* <News /> */}
-      <NextMatchAndTable sectionBg={sectionBg} dbKnockoutStages={dbKnockoutStages}/>
-      <BracketMatches
+      {/* <NextMatchAndTable sectionBg={sectionBg} dbKnockoutStages={dbKnockoutStages}/> */}
+      {/* <BracketMatches
         sectionBg={sectionBg}
         dbMatches={dbMatches}
         dbKnockoutStages={dbKnockoutStages}
-      />
+      /> */}
       <Videos sectionBg={sectionBg}/>
       {/* <Blog /> */}
     </>

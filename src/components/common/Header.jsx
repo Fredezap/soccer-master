@@ -29,7 +29,7 @@ const Header = () => {
     if (response?.success) navigate(ROUTES.HOME)
     else {
       addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
-      navigate(ROUTES.MAIN)
+      navigate(ROUTES.HOME)
     }
   }
 
@@ -71,19 +71,17 @@ const Header = () => {
           >
             {isMobile
               ? (
-                <a className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
-                  <span className="for-her">
-                    FOR
-                    HER
-                  </span>
+                <a href={ROUTES.HOME} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
+                  <h4 className="for-her">
+                    FUTSAL FOR HER
+                  </h4>
                 </a>
               )
               : (
-                <a href={ROUTES.MAIN} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
-                  <span className="for-her">
-                    FOR
-                    HER
-                  </span>
+                <a href={ROUTES.HOME} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
+                  <h4 className="for-her">
+                    FUTSAL FOR HER
+                  </h4>
                 </a>
               )}
           </div>
@@ -91,7 +89,7 @@ const Header = () => {
           {/* Menú */}
           <nav className={`site-navigation ${menuOpen ? 'open' : ''} mt-md-0`} role="navigation">
             <ul className="site-menu main-menu js-clone-nav">
-              {isMobile && <li><a href={ROUTES.MAIN} className="nav-link">Main</a></li>}
+              {/* {isMobile && <li><a href={ROUTES.MAIN} className="nav-link">Main</a></li>} */}
 
               {currentTournament && Object.entries(currentTournament).length !== 0 && (
                 <>
@@ -99,13 +97,14 @@ const Header = () => {
                   <li
                     ref={menuRef}
                     className={getClass(ROUTES.HOME)}
-                    onClick={() => setShowTournaments(prev => !prev)}
+                    onClick={() => navigate(ROUTES.HOME)}
+                    // onClick={() => setShowTournaments(prev => !prev)}
                     style={{ cursor: 'pointer', position: isMobile ? 'relative' : 'static', width: '100%' }}
                   >
                     <a className="nav-link">Startseite</a>
 
                     {/* Submenú */}
-                    {showTournaments && (
+                    {/* {showTournaments && (
                       <ul
                         style={{
                           position: isMobile ? 'relative' : 'absolute',
@@ -139,7 +138,7 @@ const Header = () => {
                           </li>
                         ))}
                       </ul>
-                    )}
+                    )} */}
                   </li>
 
                   <li className={getClass(ROUTES.MATCHES)}><a href={ROUTES.MATCHES} className="nav-link">Spiele</a></li>
