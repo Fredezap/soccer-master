@@ -1,36 +1,48 @@
 import $ from 'jquery'
 import '../../js-refactorized/jquery.countdown.min'
 
-const siteCountDownForTournament = function(time) {
-  // TODO: check time format received.
-  // TODO: then change endDate for time
+let countdownInterval = null
 
-  window.jQuery(function() {
-    const endDate = new Date('2024-10-19T00:00:00')
+const siteCountDownForTournament = function(currentTournament) {
+  if (countdownInterval) {
+    clearInterval(countdownInterval)
+    countdownInterval = null
+  }
 
-    setInterval(function() {
-      const now = new Date()
-      const remaining = endDate - now
+  $('#date-countdown').show().find('.label').text('--')
+  $('#date-countdown2').hide().html('')
 
-      if (remaining <= 0) {
-        $('#date-countdown').html('')
-        clearInterval(this)
-        return
-      }
+  if (!currentTournament?.date) {
+    $('#date-countdown').hide()
+    $('#date-countdown2').show().html('No upcoming tournament!')
+    return
+  }
 
-      const seconds = Math.floor((remaining / 1000) % 60)
-      const minutes = Math.floor((remaining / (1000 * 60)) % 60)
-      const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24)
-      const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
+  const endDate = new Date(currentTournament.date)
 
-      // Update the inner values of each element
-      $('#countdown-weeks').text(Math.floor(days / 7))
-      $('#countdown-days').text(days % 7)
-      $('#countdown-hours').text(hours)
-      $('#countdown-minutes').text(minutes)
-      $('#countdown-seconds').text(seconds)
-    }, 1000)
-  })
+  countdownInterval = setInterval(function() {
+    const now = new Date()
+    const remaining = endDate - now
+
+    if (remaining <= 0) {
+      $('#date-countdown').hide()
+      $('#date-countdown2').show().html('Countdown beendet!')
+      clearInterval(countdownInterval)
+      countdownInterval = null
+      return
+    }
+
+    const seconds = Math.floor((remaining / 1000) % 60)
+    const minutes = Math.floor((remaining / (1000 * 60)) % 60)
+    const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24)
+    const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
+
+    $('#countdown-weeks').text(Math.floor(days / 7))
+    $('#countdown-days').text(days % 7)
+    $('#countdown-hours').text(hours)
+    $('#countdown-minutes').text(minutes)
+    $('#countdown-seconds').text(seconds)
+  }, 1000)
 }
 
 export default siteCountDownForTournament

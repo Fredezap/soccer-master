@@ -1,36 +1,69 @@
 import $ from 'jquery'
 import '../../js-refactorized/jquery.countdown.min'
+import { useNextMatchRemainingTime } from '../../../store/slices/useNextMatchRemainingTime'
 
-const siteCountDownForNextMatch = function(time) {
-  // TODO: check time format received.
-  // TODO: then change endDate for time
+let countdownInterval = null
+const siteCountDownForNextMatch = (onCountdownFinish) => { // Pasamos un callback
+  const { remaining, setRemainingTime } = useNextMatchRemainingTime()
+  const countdown = (nextMatch) => {
+    if (countdownInterval) {
+      clearInterval(countdownInterval)
+      countdownInterval = null
+    }
 
-  window.jQuery(function() {
-    const endDate = new Date('2024-10-19T00:00:00')
+    $('#match-countdown').show().find('.label').text('--')
+    $('#match-countdown2').hide().html('')
 
-    setInterval(function() {
+    if (!nextMatch?.date) {
+      $('#match-countdown').hide()
+      $('#match-countdown2').show().html('')
+      return
+    }
+
+    const datePart = nextMatch.date.split('T')[0]
+    const [day, month, year] = datePart.split('/').map(Number)
+    const formattedDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`
+
+    const fullDateTimeString = `${formattedDate}T${nextMatch.time}`
+    const fullDateTime = new Date(fullDateTimeString)
+    const matchTime = fullDateTime.getTime()
+
+    if (matchTime) {
       const now = new Date()
-      const remaining = endDate - now
+      const remaining = matchTime - now
+      if (remaining >= 0) setRemainingTime(true)
 
-      if (remaining <= 0) {
-        $('#date-countdown2').html('Countdown finished!')
-        clearInterval(this)
-        return
-      }
+      countdownInterval = setInterval(function() {
+        const now = new Date()
+        const remaining = matchTime - now
 
-      const seconds = Math.floor((remaining / 1000) % 60)
-      const minutes = Math.floor((remaining / (1000 * 60)) % 60)
-      const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24)
-      const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
+        if (remaining <= 0) {
+          $('#match-countdown').hide()
+          $('#date-countdown2').show().html('Countdown beendet!')
+          clearInterval(countdownInterval)
+          countdownInterval = null
+          // Ejecutamos el callback cuando el contador termine
+          if (onCountdownFinish) {
+            onCountdownFinish(false) // Pasamos el false al callback
+          }
+          return
+        }
 
-      // Update the inner values of each element
-      $('#countdown-weeks').text(Math.floor(days / 7))
-      $('#countdown-days').text(days % 7)
-      $('#countdown-hours').text(hours)
-      $('#countdown-minutes').text(minutes)
-      $('#countdown-seconds').text(seconds)
-    }, 1000) // Update every second
-  })
+        const seconds = Math.floor((remaining / 1000) % 60)
+        const minutes = Math.floor((remaining / (1000 * 60)) % 60)
+        const hours = Math.floor((remaining / (1000 * 60 * 60)) % 24)
+        const days = Math.floor(remaining / (1000 * 60 * 60 * 24))
+
+        $('#match-countdown-weeks').text(Math.floor(days / 7))
+        $('#match-countdown-days').text(days % 7)
+        $('#match-countdown-hours').text(hours)
+        $('#match-countdown-minutes').text(minutes)
+        $('#match-countdown-seconds').text(seconds)
+      }, 1000)
+    }
+  }
+
+  return { countdown }
 }
 
 export default siteCountDownForNextMatch

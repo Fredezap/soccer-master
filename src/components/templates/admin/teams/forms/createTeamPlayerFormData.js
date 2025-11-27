@@ -1,0 +1,23 @@
+import * as Yup from 'yup'
+import TEAM_CONSTANTS from '../../../../../store/constants/teamConstants'
+
+const createTeamPlayerFormData = () => {
+  const { MIN_NAME_LENGTH, MAX_NAME_LENGTH } = TEAM_CONSTANTS
+  const initialValues = {
+    player: ''
+  }
+
+  const registerSchema = Yup.object().shape({
+    player: Yup.string()
+      .min(MIN_NAME_LENGTH, `Player name must be at least ${MIN_NAME_LENGTH} characters long`)
+      .max(MAX_NAME_LENGTH, `Player name must be at most ${MAX_NAME_LENGTH} characters long`)
+  })
+
+  const formFields = [
+    { id: 'player', type: 'text', label: 'Player', placeholder: 'Add a player to the team...' }
+  ]
+
+  return { initialValues, registerSchema, formFields }
+}
+
+export default createTeamPlayerFormData

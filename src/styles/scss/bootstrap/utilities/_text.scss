@@ -3,6 +3,7 @@
 //
 // Text
 //
+@use 'sass:map';
 
 .text-monospace { font-family: $font-family-monospace; }
 
@@ -14,7 +15,7 @@
 
 // Responsive alignment
 
-@each $breakpoint in map-keys($grid-breakpoints) {
+@each $breakpoint in map.keys($grid-breakpoints) {
   @include media-breakpoint-up($breakpoint) {
     $infix: breakpoint-infix($breakpoint, $grid-breakpoints);
 

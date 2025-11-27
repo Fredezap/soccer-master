@@ -1,13 +1,12 @@
 import Hero from '../../common/hero/Hero'
 import useHeroDetails from '../../common/hero/useHeroDetails'
-import MobileMenu from '../../common/mobile-menu/MobileMenu'
-import ContactForm from './ContactForm'
+import ContactForm from './forms/ContactForm'
 
 const Contact = () => {
   const { contact } = useHeroDetails()
   return (
     <>
-      <Hero title={contact.title} content={contact.content} />
+      <Hero title={contact.title} />
       <ContactForm />
     </>
   )

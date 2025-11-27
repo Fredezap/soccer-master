@@ -30,8 +30,8 @@ const Single = () => {
                   <li><a href="contact.html" className="nav-link">Contact</a></li>
                 </ul>
               </nav>
-              <a href="#" className="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-white">
-                <span className="icon-menu h3 text-white"></span>
+              <a href="#" className="d-inline-block d-lg-none site-menu-toggle js-menu-toggle text-black float-right text-futsal-for-her">
+                <span className="icon-menu h3 text-futsal-for-her"></span>
               </a>
             </div>
           </div>
@@ -43,7 +43,7 @@ const Single = () => {
         <div className="container">
           <div className="row align-items-center">
             <div className="col-lg-9 mx-auto text-center">
-              <h1 className="text-white">Romolu to stay at Real Nadrid?</h1>
+              <h1 className="text-futsal-for-her">Romolu to stay at Real Nadrid?</h1>
               <p><span>May 20, 2020</span> <span className="mx-3">&bullet;</span> <span>by Admin</span></p>
             </div>
           </div>
@@ -70,7 +70,7 @@ const Single = () => {
 
               {/* Comments */}
               <div className="pt-5">
-                <h3 className="mb-5 text-white">6 Comments</h3>
+                <h3 className="mb-5 text-futsal-for-her">6 Comments</h3>
                 <ul className="comment-list">
                   <li className="comment">
                     <div className="vcard bio">
@@ -107,7 +107,7 @@ const Single = () => {
                       <textarea name="message" id="message" cols="30" rows="10" className="form-control"></textarea>
                     </div>
                     <div className="form-group">
-                      <input type="submit" value="Post Comment" className="btn btn-primary py-3 px-4 text-white" />
+                      <input type="submit" value="Post Comment" className="btn btn-primary py-3 px-4 text-futsal-for-her" />
                     </div>
                   </form>
                 </div>

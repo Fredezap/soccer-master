@@ -1,16 +1,9 @@
-// Importar primero las funciones
-@import "bootstrap/_functions.scss";
+@import 'bootstrap/shered';
+@import 'bootstrap/functions';
+@import 'bootstrap/variables';
+@import 'bootstrap/mixins';
+@import 'bootstrap/utilities';
 
-// Luego las variables (que dependen de las funciones)
-@import "bootstrap/_variables.scss";
-
-// Luego los mixins
-@import "bootstrap/_mixins.scss";
-
-// Luego las utilities
-@import "bootstrap/utilities.scss";
-
-// Importar estilos base del sitio
 @import './style.scss';
 @import "_site-base.scss";
 @import "_site-navbar.scss";

@@ -1,11 +1,13 @@
+@use "sass:math";
+
 .jumbotron {
-  padding: $jumbotron-padding ($jumbotron-padding / 2);
+  padding: $jumbotron-padding math.div($jumbotron-padding, 2);
   margin-bottom: $jumbotron-padding;
   background-color: $jumbotron-bg;
   @include border-radius($border-radius-lg);
 
   @include media-breakpoint-up(sm) {
-    padding: ($jumbotron-padding * 2) $jumbotron-padding;
+    padding: math.div($jumbotron-padding, 2) math.div($jumbotron-padding, 1);
   }
 }
 

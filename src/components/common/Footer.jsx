@@ -1,59 +1,83 @@
+import { useLocation } from 'react-router-dom'
+import ROUTES from '../../store/constants/routes'
+import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails'
+
 const Footer = () => {
+  const { currentTournament } = useTournamentsDetails()
+  const location = useLocation()
+  const currentPath = location.pathname
+  let backgroundStyle = 'bg-dark'
+
+  const getColStyle = () => {
+    let customStyle = 'col-lg-12'
+    const contact = currentTournament.Contact
+
+    if (contact) {
+      const footerElementsWithData = Object.entries(contact).filter(
+        ([key, value]) => {
+          const validElement = key.startsWith('footerContact') && value != null && value !== ''
+
+          if (validElement) {
+            return { [key]: value }
+          } else {
+            return null
+          }
+        }
+      ).filter(element => element !== null)
+
+      if (footerElementsWithData.length === 1) customStyle = 'col-lg-6'
+      if (footerElementsWithData.length === 2) customStyle = 'col-lg-4'
+    }
+    return customStyle
+  }
+
+  const getBackground = () => {
+    if (currentPath === ROUTES.CONTACT ||
+        currentPath === ROUTES.ADMIN.CONTACT ||
+        currentPath === ROUTES.ADMIN.EMAIL_SENDER
+    ) backgroundStyle = 'bg-light'
+    return `footer-section ${backgroundStyle}`
+  }
+
   return (
-    <footer className="footer-section">
+    <footer className={getBackground()}>
       <div className="container">
-        <div className="row">
-          <div className="col-lg-3">
+        <div style={{ textAlign: 'center' }} className="row">
+          <div className="col-lg-12">
             <div className="widget mb-3">
-              <h3>News</h3>
-              <ul className="list-unstyled links">
-                <li><a href="#">All</a></li>
-                <li><a href="#">Club News</a></li>
-                <li><a href="#">Media Center</a></li>
-                <li><a href="#">Video</a></li>
-                <li><a href="#">RSS</a></li>
+              {/* <h3>Social</h3> */}
+              <h3>Soziales</h3>
+              <ul className="row list-unstyled links">
+                <li className={getColStyle()}>
+                  {/* <a href={ROUTES.CONTACT}>
+                    Contact
+                  </a> */}
+                  <a href={ROUTES.CONTACT}>
+                    Kontakt
+                  </a>
+                </li>
+                {currentTournament?.Contact?.footerContactWebPage && (
+                  <li className={getColStyle()}>
+                    {/* <a href={currentTournament?.Contact?.footerContactWebPage}>
+                      Web page
+                    </a> */}
+                    <a href={currentTournament?.Contact?.footerContactWebPage}>
+                      Webseite
+                    </a>
+                  </li>
+                )}
+                {currentTournament?.Contact?.footerContactInstagram && (
+                  <li className={getColStyle()}>
+                    <a href={currentTournament?.Contact?.footerContactInstagram}>
+                      Instagram
+                    </a>
+                  </li>
+                )}
               </ul>
             </div>
           </div>
-          <div className="col-lg-3">
-            <div className="widget mb-3">
-              <h3>Tickets</h3>
-              <ul className="list-unstyled links">
-                <li><a href="#">Online Ticket</a></li>
-                <li><a href="#">Payment and Prices</a></li>
-                <li><a href="#">Contact &amp; Booking</a></li>
-                <li><a href="#">Tickets</a></li>
-                <li><a href="#">Coupon</a></li>
-              </ul>
-            </div>
-          </div>
-          <div className="col-lg-3">
-            <div className="widget mb-3">
-              <h3>Matches</h3>
-              <ul className="list-unstyled links">
-                <li><a href="#">Standings</a></li>
-                <li><a href="#">World Cup</a></li>
-                <li><a href="#">La Lega</a></li>
-                <li><a href="#">Hyper Cup</a></li>
-                <li><a href="#">World League</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div className="col-lg-3">
-            <div className="widget mb-3">
-              <h3>Social</h3>
-              <ul className="list-unstyled links">
-                <li><a href="#">Twitter</a></li>
-                <li><a href="#">Facebook</a></li>
-                <li><a href="#">Instagram</a></li>
-                <li><a href="#">Youtube</a></li>
-              </ul>
-            </div>
-          </div>
-
         </div>
-
+        {/*
         <div className="row text-center">
           <div className="col-md-12">
             <div className=" pt-5">
@@ -62,8 +86,19 @@ const Footer = () => {
               </p>
             </div>
           </div>
-
+        </div> */}
+        <div className="row text-center">
+          <div className="col-md-12">
+            <div className=" pt-5">
+              <p>
+              &copy; {new Date().getFullYear()} Alle Rechte vorbehalten | Besuchen Sie unsere Website
+                <i className="icon-heart" aria-hidden="true"></i>
+                <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer"> Futsal Olympique Basel</a>
+              </p>
+            </div>
+          </div>
         </div>
+
       </div>
     </footer>
   )
