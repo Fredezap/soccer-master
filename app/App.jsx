@@ -37,6 +37,7 @@ import AdminContact from '../src/components/templates/admin/contact/main/AdminCo
 import MatchesResultSetterMain from '../src/components/templates/admin/fixture/matches/matches-result-setter/MatchesResultSetterMain'
 import AdminsManagmentMain from '../src/components/templates/admin/admin-managment/AdminsManagmentMain.jsx'
 import TournamentRules from '../src/components/templates/tournament-info/TournamentInfo.jsx'
+import InterviewWithStephanie from '../src/components/templates/home/interview/InterviewWithStephanie.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -116,8 +117,8 @@ function AppContent() {
       <Routes>
         <Route path={ROUTES.BLOG} element={<BlogPage />} />
         <Route path={ROUTES.CONTACT} element={<Contact />} />
-        {/* <Route path={ROUTES.MAIN} element={<Main />} /> */}
         <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.INTERVIEW} element={<InterviewWithStephanie />} />
         <Route path={ROUTES.MATCHES} element={<Matches />} />
         <Route path={ROUTES.TEAMS} element={<Teams />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />

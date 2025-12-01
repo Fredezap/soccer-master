@@ -3,6 +3,7 @@ const ROUTES = {
   CONTACT: '/contact',
   // MAIN: '/',
   HOME: '/',
+  INTERVIEW: '/interview',
   MATCHES: '/matches',
   TEAMS: '/teams',
   SINGLE: '/single',

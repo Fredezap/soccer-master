@@ -14,7 +14,7 @@ import CountDownSection from './count-down/CountDownSection'
 import SponsorsSection from './sponsors/SponsorsSection'
 import CategoriesSection from './caregories/CategoriesSection'
 import getTournaments from '../../common/getters/GetTournaments'
-import InterviewWithStephanie from './interview/InterviewWithStephanie'
+import InterviewWithStephanieSection from './interview/InterviewWithStephanieSection'
 
 const Home = () => {
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
@@ -66,7 +66,7 @@ const Home = () => {
       <TournamentInfo />
       <SponsorsSection />
       <CategoriesSection />
-      <InterviewWithStephanie />
+      <InterviewWithStephanieSection />
     </>
   )
 }
