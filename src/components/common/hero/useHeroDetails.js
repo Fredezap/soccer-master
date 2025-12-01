@@ -1,65 +1,70 @@
 const useHeroDetails = () => {
+  const interview = {
+    title: 'INTERVIEW' // 'Interview'
+  }
+
   const players = {
-    title: 'Teams' // 'Teams'
+    title: 'TEAMS' // 'Teams'
   }
 
   const matches = {
-    title: 'Spiele' // 'Matches'
+    title: 'SPIELE' // 'Matches'
   }
 
   const blog = {
-    title: 'Blogbeiträge' // 'Blog Posts'
+    title: 'BLOGBEITRÄGE' // 'Blog Posts'
   }
 
   const contact = {
-    title: 'Kontakt' // 'Contact'
+    title: 'KONTAKT' // 'Contact'
   }
 
   const info = {
-    title: 'Infos und Turnierregeln' // 'Tournament rules and infos'
+    title: 'INFOS UND TURNIERREGELN' // 'Tournament rules and infos'
   }
 
   const adminMain = {
-    title: 'Admin' // 'Admin'
+    title: 'ADMIN' // 'Admin'
   }
 
   const adminTournamentDetails = {
-    title: 'Admin Turnierdetails' // 'Admin tournament Details'
+    title: 'ADMIN TURNIERDETAILS' // 'Admin tournament Details'
   }
 
   const adminTeams = {
-    title: 'Admin Teams' // 'Admin Teams'
+    title: 'ADMIN TEAMS' // 'Admin Teams'
   }
 
   const adminTeamsUpdate = {
-    title: 'Admin Teams aktualisieren' // 'Admin Teams update'
+    title: 'ADMIN TEAMS AKTUALISIEREN' // 'Admin Teams update'
   }
 
   const adminFixture = {
-    title: 'Admin Spielplan' // 'Admin Fixture'
+    title: 'ADMIN SPIELPLAN' // 'Admin Fixture'
   }
 
   const adminVideos = {
-    title: 'Admin Videos' // 'Admin Videos'
+    title: 'ADMIN VIDEOS' // 'Admin Videos'
   }
 
   const adminContact = {
-    title: 'Admin Kontakt' // 'Admin contact'
+    title: 'ADMIN KONTAKT' // 'Admin contact'
   }
 
   const adminResultSetter = {
-    title: 'Admin Ergebnisse festlegen' // 'Admin result setter'
+    title: 'ADMIN ERGEBNISSE FESTLEGEN' // 'Admin result setter'
   }
 
   const adminUsersManager = {
-    title: 'Admin Benutzerverwaltung' // 'Admin users manager'
+    title: 'ADMIN BENUTZERVERWALTUNG' // 'Admin users manager'
   }
 
   const adminRegister = {
-    title: 'Admin Benutzer registrieren' // 'Admin register users'
+    title: 'ADMIN BENUTZER REGISTRIEREN' // 'Admin register users'
   }
 
   return {
+    interview,
     players,
     matches,
     blog,
