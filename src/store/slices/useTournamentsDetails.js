@@ -8,12 +8,10 @@ export const useTournamentsDetails = create(persist(
     isCreating: false,
 
     setTournaments: (tournaments) => {
-      console.log('entro en set tournamenTS', tournaments)
       set({ tournaments })
     },
 
     updateTournaments: (updatedTournament) => {
-      console.log('entro en update')
       set((state) => ({
         tournaments: state.tournaments.map((tournament) =>
           tournament.tournamentId === updatedTournament.tournamentId
@@ -24,7 +22,6 @@ export const useTournamentsDetails = create(persist(
     },
 
     updateCurrentTournament: (updatedTournament) => {
-      console.log('entro en update current')
       set((state) => {
         const currentTournament = state.currentTournament.tournamentId === updatedTournament.tournamentId
           ? { ...state.currentTournament, ...updatedTournament }
@@ -37,7 +34,6 @@ export const useTournamentsDetails = create(persist(
     },
 
     setCurrentTournament: (currentTournament) => {
-      console.log('entro en set current')
       set({ currentTournament })
     },
 

@@ -1,4 +1,4 @@
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import ROUTES from '../../store/constants/routes'
 import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails'
 
@@ -6,7 +6,8 @@ const Footer = () => {
   const { currentTournament } = useTournamentsDetails()
   const location = useLocation()
   const currentPath = location.pathname
-  let backgroundStyle = 'bg-dark'
+  const backgroundStyle = 'bg-dark'
+  const navigate = useNavigate()
 
   const getColStyle = () => {
     let customStyle = 'col-lg-12'
@@ -31,74 +32,43 @@ const Footer = () => {
     return customStyle
   }
 
-  const getBackground = () => {
-    if (currentPath === ROUTES.CONTACT ||
-        currentPath === ROUTES.ADMIN.CONTACT ||
-        currentPath === ROUTES.ADMIN.EMAIL_SENDER
-    ) backgroundStyle = 'bg-light'
-    return `footer-section ${backgroundStyle}`
-  }
-
   return (
-    <footer className={getBackground()}>
-      <div className="container">
-        <div style={{ textAlign: 'center' }} className="row">
-          <div className="col-lg-12">
-            <div className="widget mb-3">
-              {/* <h3>Social</h3> */}
-              <h3>Soziales</h3>
-              <ul className="row list-unstyled links">
-                <li className={getColStyle()}>
-                  {/* <a href={ROUTES.CONTACT}>
-                    Contact
-                  </a> */}
-                  <a href={ROUTES.CONTACT}>
-                    Kontakt
-                  </a>
-                </li>
-                {currentTournament?.Contact?.footerContactWebPage && (
-                  <li className={getColStyle()}>
-                    {/* <a href={currentTournament?.Contact?.footerContactWebPage}>
-                      Web page
-                    </a> */}
-                    <a href={currentTournament?.Contact?.footerContactWebPage}>
-                      Webseite
-                    </a>
-                  </li>
-                )}
-                {currentTournament?.Contact?.footerContactInstagram && (
-                  <li className={getColStyle()}>
-                    <a href={currentTournament?.Contact?.footerContactInstagram}>
-                      Instagram
-                    </a>
-                  </li>
-                )}
-              </ul>
-            </div>
-          </div>
-        </div>
-        {/*
-        <div className="row text-center">
-          <div className="col-md-12">
-            <div className=" pt-5">
-              <p>
-                &copy; {new Date().getFullYear()} All rights reserved | This template is made with <i className="icon-heart" aria-hidden="true"></i> by <a href="https://colorlib.com" target="_blank" rel="noopener noreferrer">Colorlib</a>
-              </p>
-            </div>
-          </div>
-        </div> */}
-        <div className="row text-center">
-          <div className="col-md-12">
-            <div className=" pt-5">
-              <p>
-              &copy; {new Date().getFullYear()} Alle Rechte vorbehalten | Besuchen Sie unsere Website
-                <i className="icon-heart" aria-hidden="true"></i>
-                <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer"> Futsal Olympique Basel</a>
-              </p>
-            </div>
-          </div>
-        </div>
+    <footer className="centered-row custom-footer">
+      <div className="footer-logo">
+        <img src="/src/images/FFH_Hero_Footer_Black_Title.png" alt="Logo Footer" />
+      </div>
+      <div className="centered footer-buttons">
+        <button>SCHREIB UNS EINE EMAIL</button>
+        <button onClick={() => navigate(ROUTES.CONTACT)}>KONTAKTFORMULAR</button>
+      </div>
+      <div className="centered social-media-container">
+        <div className="centered-row social-icons-container">
+          {/* Instagram */}
+          <a href="https://www.instagram.com/futsalolympiquebasel_offiziell/" target="_blank" rel="noopener noreferrer">
+            <img src="/src/images/Social_Icons/Icon_Instagram.svg" alt="Instagram" />
+          </a>
 
+          {/* Facebook */}
+          <a href="https://www.facebook.com/profile.php?id=100087476346470" target="_blank" rel="noopener noreferrer">
+            <img src="/src/images/Social_Icons/Icon_Facebook.svg" alt="Facebook" />
+          </a>
+
+          {/* Webseite */}
+          <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer">
+            <img src="/src/images/Social_Icons/Icon_Webseite.svg" alt="Webseite" />
+          </a>
+        </div>
+        <div>
+          <p>Impressum</p>
+          <p>Datenschutz</p>
+        </div>
+        <div>
+          <p>© 2025 Alle Rechte vorbehalten</p>
+          <p>Besuchen Sie unsere <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer">
+            Website Futsal Olympique Basel
+          </a>
+          </p>
+        </div>
       </div>
     </footer>
   )

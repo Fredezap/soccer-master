@@ -89,7 +89,7 @@ function AppContent() {
 
   useEffect(() => {
     // Si no hay path o path === '/' no ejecutamos nada
-    if (!currentPath || currentPath === '/') return
+    if (!currentPath) return
 
     // Si el path NO necesita toreno o se esta creando no ejecutamos nada
     if (checkPathsNoNeedTournament(currentPath) || isCreating === true) return

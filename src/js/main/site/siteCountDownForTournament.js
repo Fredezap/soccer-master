@@ -26,7 +26,7 @@ const siteCountDownForTournament = function(currentTournament) {
 
     if (remaining <= 0) {
       $('#date-countdown').hide()
-      $('#date-countdown2').show().html('Countdown beendet!')
+      $('#date-countdown2').show().html('COUNTDOWN BEENDET!')
       clearInterval(countdownInterval)
       countdownInterval = null
       return
