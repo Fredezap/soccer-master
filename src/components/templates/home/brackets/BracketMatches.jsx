@@ -16,12 +16,12 @@ const BracketMatches = ({ sectionBg, dbMatches, dbKnockoutStages }) => {
     setRounds(updatedRounds)
   }, [JSON.stringify(dbMatches), JSON.stringify(dbKnockoutStages)])
 
-  if (!dbKnockoutStages || Object.keys(dbKnockoutStages).length === 0) return null
+  // if (!dbKnockoutStages || Object.keys(dbKnockoutStages).length === 0) return null
 
   return (
     <div className={`brackets-component ${sectionBg.bracketsBg}`}>
-      {/* <h2>Brackets</h2> */}
-      <h2>Turnierbaum</h2>
+      <hr></hr>
+      <h2>TURNIERBAUM</h2>
       <BracketsForUsers rounds={rounds} />
     </div>
   )

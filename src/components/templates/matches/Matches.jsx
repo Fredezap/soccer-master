@@ -1,26 +1,65 @@
-import Blog from '../../common/Blog'
 import Hero from '../../common/hero/Hero'
-import TeamScore from '../../common/TeamScore'
-import Videos from '../../common/Videos'
 import MatchesGrid from './MatchesGrid'
 import useHeroDetails from '../../common/hero/useHeroDetails'
-import getSectionBg from '../../common/section-styles/getSectionBg'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
+import { useEffect, useState } from 'react'
+import { useUserStore } from '../../../store/slices/useUserStore'
+import { useMessageStore } from '../../../store/slices/useMessageStore'
+import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore'
+import handleSubmitFormAdmin from '../admin/handleSubmitFormAdmin'
+import BracketMatches from '../../templates/home/brackets/BracketMatches'
 
 const Matches = () => {
   const { matches } = useHeroDetails()
   const { currentTournament } = useTournamentsDetails()
-  const videoSectionExist = currentTournament?.Videos?.length > 0
-  const sectionBg = { videosBg: 'bg-light' }
-  const bgColor = videoSectionExist ? 'bg-dark' : 'bg-light'
+  const sectionBg = { bracketsBg: 'bg-dark' }
+  const bgColor = 'bg-dark'
+  const [dbKnockoutStages, setDbKnockoutStages] = useState([])
+  const [dbMatches, setDbMatches] = useState([])
+  const { setSubmittingForm } = useSubmittingFormStore()
+  const { addMessage } = useMessageStore()
+  const { user } = useUserStore()
 
+  const getKnockoutStages = async() => {
+    try {
+      const url = '/stages/get-all-knockout-stages-by-tournament'
+      const httpMethod = 'post'
+      const values = { tournamentId: currentTournament.tournamentId }
+      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage, user })
+      if (response?.success && response.data?.dbKnockoutStages) {
+        setDbKnockoutStages(response.data.dbKnockoutStages)
+      }
+    } catch (error) {}
+  }
+
+  const getMatches = async(values) => {
+    try {
+      const url = '/matches/get-all'
+      const httpMethod = 'post'
+      const response = await handleSubmitFormAdmin({ values, url, httpMethod, setSubmittingForm, addMessage, user })
+      if (response?.success) {
+        setDbMatches(response.data.dbMatches)
+      }
+    } catch (error) {}
+  }
+
+  useEffect(() => {
+    const getData = async() => {
+      await getMatches()
+      await getKnockoutStages()
+    }
+
+    getData()
+  }, [])
   return (
     <>
       <Hero title={matches.title} />
-      {/* <TeamScore /> */}
       <MatchesGrid bgColor={bgColor}/>
-      {videoSectionExist && (<Videos sectionBg={sectionBg} />)}
-      {/* <Blog /> */}
+      <BracketMatches
+        sectionBg={sectionBg}
+        dbMatches={dbMatches}
+        dbKnockoutStages={dbKnockoutStages}
+      />
     </>
   )
 }

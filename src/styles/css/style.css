@@ -2174,6 +2174,7 @@ color: green;
   width: 100%;
   padding: 50px;
   text-align: center;
+  background-color: #22262e !important
 }
 
 .bracket {
