@@ -1,6 +1,6 @@
 import Hero from '../../../common/hero/Hero'
 import useHeroDetails from '../../../common/hero/useHeroDetails'
-
+import interviewImg from '@/images/interview/Stephi.jpg'
 const InterviewWithStephanie = () => {
   const { interview } = useHeroDetails()
 
@@ -16,7 +16,7 @@ const InterviewWithStephanie = () => {
           Futsal for Her-Junior’s Cup federführend. Hier erzählt sie von ihrer Faszination für den Futsal.
         </p>
         <div className="text-section-with-img">
-          <img className="img-left" src="/src/images/interview/Stephi.jpg" alt="Interview" />
+          <img className="img-left" src={interviewImg} alt="Interview" />
           <h5>
             Erinnerst du dich noch, wann du zum ersten Mal mit Futsal in Berührung gekommen bist?
           </h5>
