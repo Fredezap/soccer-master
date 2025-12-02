@@ -14,12 +14,12 @@ import CountDownSection from './count-down/CountDownSection'
 import SponsorsSection from './sponsors/SponsorsSection'
 import CategoriesSection from './caregories/CategoriesSection'
 import getTournaments from '../../common/getters/GetTournaments'
-import InterviewWithStephanie from './interview/InterviewWithStephanie'
+import InterviewWithStephanieSection from './interview/InterviewWithStephanieSection'
 
 const Home = () => {
   const [dbKnockoutStages, setDbKnockoutStages] = useState([])
   const [dbMatches, setDbMatches] = useState([])
-  const { currentTournament } = useTournamentsDetails()
+  const { currentTournament, tournaments, setCurrentTournament } = useTournamentsDetails()
   const { setSubmittingForm } = useSubmittingFormStore()
   const { addMessage } = useMessageStore()
   const { user } = useUserStore()
@@ -50,12 +50,13 @@ const Home = () => {
   }
 
   useEffect(() => {
-    const fetchData = async() => {
-      console.log('EN FETCH ALL TOURNAMENTS')
-      await fetchAllTournaments()
-    }
+    // if currentTournament is not set, and we habe all tournamentes, we set one to show timeCountDown (section 2)
+    const isObjectEmpty = currentTournament && Object.keys(currentTournament).length === 0
+    const tournamentsHasItems = tournaments?.length > 0
 
-    fetchData()
+    if (isObjectEmpty && tournamentsHasItems) {
+      setCurrentTournament(tournaments[0])
+    }
   }, [])
 
   return (
@@ -65,17 +66,7 @@ const Home = () => {
       <TournamentInfo />
       <SponsorsSection />
       <CategoriesSection />
-      <InterviewWithStephanie />
-      {/* <TeamScore /> */}
-      {/* <News /> */}
-      {/* <NextMatchAndTable sectionBg={sectionBg} dbKnockoutStages={dbKnockoutStages}/> */}
-      {/* <BracketMatches
-        sectionBg={sectionBg}
-        dbMatches={dbMatches}
-        dbKnockoutStages={dbKnockoutStages}
-      /> */}
-      <Videos sectionBg={sectionBg}/>
-      {/* <Blog /> */}
+      <InterviewWithStephanieSection />
     </>
   )
 }

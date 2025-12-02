@@ -5,7 +5,7 @@ const ContactFormMap = ({ formFields, errors, touched, submitting }) => {
   return (
     <>
       {formFields.map((data, index) => (
-        <div className="form-group" key={index}>
+        <div className="form-group custom-input" key={index}>
           {data.type === 'textarea'
             ? (
               <Field
@@ -40,7 +40,7 @@ const ContactFormMap = ({ formFields, errors, touched, submitting }) => {
         {/* <button disabled={submitting} type="submit" className="btn btn-primary py-3 px-5">
           Send Message
         </button> */}
-        <button disabled={submitting} type="submit" className="btn btn-primary py-3 px-5">
+        <button disabled={submitting} type="submit" className="btn btn-primary custom-button">
           Nachricht senden
         </button>
       </div>

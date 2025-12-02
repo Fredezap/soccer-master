@@ -37,6 +37,7 @@ import AdminContact from '../src/components/templates/admin/contact/main/AdminCo
 import MatchesResultSetterMain from '../src/components/templates/admin/fixture/matches/matches-result-setter/MatchesResultSetterMain'
 import AdminsManagmentMain from '../src/components/templates/admin/admin-managment/AdminsManagmentMain.jsx'
 import TournamentRules from '../src/components/templates/tournament-info/TournamentInfo.jsx'
+import InterviewWithStephanie from '../src/components/templates/home/interview/InterviewWithStephanie.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -61,6 +62,7 @@ function AppContent() {
   const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
+  console.log(currentTournament)
   useEffect(() => {
     // Check if show messages (just if path is Admin)
     const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)
@@ -89,7 +91,7 @@ function AppContent() {
 
   useEffect(() => {
     // Si no hay path o path === '/' no ejecutamos nada
-    if (!currentPath || currentPath === '/') return
+    if (!currentPath) return
 
     // Si el path NO necesita toreno o se esta creando no ejecutamos nada
     if (checkPathsNoNeedTournament(currentPath) || isCreating === true) return
@@ -116,8 +118,8 @@ function AppContent() {
       <Routes>
         <Route path={ROUTES.BLOG} element={<BlogPage />} />
         <Route path={ROUTES.CONTACT} element={<Contact />} />
-        {/* <Route path={ROUTES.MAIN} element={<Main />} /> */}
         <Route path={ROUTES.HOME} element={<Home />} />
+        <Route path={ROUTES.INTERVIEW} element={<InterviewWithStephanie />} />
         <Route path={ROUTES.MATCHES} element={<Matches />} />
         <Route path={ROUTES.TEAMS} element={<Teams />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />

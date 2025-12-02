@@ -71,7 +71,7 @@ const Header = () => {
           >
             {isMobile
               ? (
-                <a href={ROUTES.HOME} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
+                <a className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
                   <h4 className="for-her">
                     FUTSAL FOR HER
                   </h4>

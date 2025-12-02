@@ -2995,13 +2995,11 @@ display: none;
   display: flex;
   flex-direction: column;
   gap: 50px;
-  max-width: 70%;
-  margin: 20px auto;
-  padding: 40px;
-  text-align: justify;
+  padding: 100px 180px;
   font-weight: 500;
   color: rgb(255, 255, 255);
   font-size: 20px;
+  line-height: 1.25;
 }
 
 .tournament-info-container h1, h2 {
@@ -3011,10 +3009,6 @@ display: none;
 
 .tournament-info-container h2 {
   font-size: 50px;
-}
-
-.tournament-info-container .main-titles-container {
-  margin: 80px 0 20px 0;
 }
 
 .tournament-info-container .title {
@@ -3147,6 +3141,46 @@ display: none;
   .iframerules {
   height: 500px !important;
   }
+  .tournament-info-container {
+  padding: 100px;
+  }
+  .sponsors-section {
+  padding: 50px !important;
+  }
+  .sponsors-section .grid-top {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .sponsors-section .grid-top > :nth-child(3) {
+    grid-column: 1 / span 2;
+  }
+  .countdown-section {
+    padding: 20px 100px !important;
+  }
+  .categories-section {
+    min-height: 500px;
+    background-color: #c7c8c9;
+    padding: 50px 100px !important;
+  }
+  .categories-section .categories-list { 
+    padding: 30px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    align-items: flex-start;
+    gap: 50px;
+  }
+  .interview-section {
+    gap: 50px !important;
+    padding: 50px 70px !important;
+  }
+  .intervew-main {
+    padding: 100px !important;
+  }
+  .rules-main {
+    padding: 100px !important;
+  }
 }
 
 @media (max-width: 850px) {
@@ -3159,9 +3193,50 @@ display: none;
   header.open .menu-toggle-logo a {
     color: #756e6e !important;
   }
-  .hero-custom-img{
+  .hero-custom-img {
     background-image: url("../../images/FFH_Hero_Mobile.jpg") !important;
+  }
+  .interview-section {
+  flex-direction: column !important;
+  gap: 50px !important;
+  padding: 50px !important;
+  }
+  .img-left {
+    height: 300px !important;
+  }
+  .contact-section {
+    padding: 50px 100px !important;
+  }
 }
+
+@media (max-width: 750px) {
+  .sponsors-section .grid-top {
+    grid-template-columns: 1fr
+  }
+  .sponsors-section .grid-top > :nth-child(3) {
+    grid-column: 1;
+  }
+  .sponsors-section .grid-top > :nth-child(2) {
+    margin-top: -40px;
+  }
+  .sponsors-section .grid-bottom {
+    gap: 60px;
+    grid-template-columns: 1fr
+  }
+  .custom-footer {
+    flex-direction: column !important;  
+  }
+  .custom-footer .social-media-container {
+    align-items: center !important;
+    text-align: center !important;
+  }
+  .categories-section .categories-list{
+    flex-direction: column !important;
+  }
+  .categories-section .categories-cards {
+    width: 100% !important;
+    max-width: 100% !important;
+  }
 }
 
 @media (max-width: 600px) {
@@ -3240,11 +3315,49 @@ display: none;
   .containerStyle h5 {
     font-size: 30px;
   }
+  .countdown-section {
+    display: flex;
+    padding: 20px 50px !important;
+  }
+  .inner-container {
+    width: 100% !important;
+    display: flex;
+    justify-content: center;
+  }
+  .inner-container  h4 {
+    font-size: 20px;
+  }
+  #date-countdown {
+    gap: 0 !important;
+  }
+  #countdown-weeks,
+  #countdown-days,
+  #countdown-hours,
+  #countdown-minutes,
+  #countdown-seconds {
+    font-size: 50px !important;
+  }
 }
 
 @media (max-width: 575px) {
   .flex-row-tournament-list { 
     padding: 50px;
+  }
+  .tournament-info-container {
+    padding: 50px;
+  }
+  .categories-section {
+    padding: 50px !important;
+  }
+  .intervew-main, .rules-main {
+    padding: 50px !important;
+  }
+  .intervew-main, .rules-main a {
+    text-align: left !important;
+    gap: 50px !important;
+  }
+    .contact-section {
+    padding: 50px !important;
   }
 }
 
@@ -3258,6 +3371,11 @@ display: none;
   }
   .containerStyle h5 {
     font-size: 20px;
+  }
+  .img-left {
+    height: auto !important;
+    max-width: 100%;
+    padding-bottom: 20px;
   }
 }
 
@@ -4195,25 +4313,62 @@ display: none;
   display: none;
 }
 
-/* Home section */
-.countdown-section {
+/* Footer section */
+.custom-footer {
+  background-color: #d4f23c;
+  min-height: 300px;
+  padding: 30px 50px;
+  gap: 40px;
+  justify-content: space-around;
+}
+
+.custom-footer .footer-logo img{
   height: 200px;
-  background-color: #fa6879;
-  padding: 20px;
+  width: auto;
 }
 
-.countdown-section .inner-container {
-  width: 60%;
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+.custom-footer .footer-buttons {
+  gap: 20px;
 }
 
-.countdown-section .inner-container
- h4, span {
+.custom-footer .footer-buttons button {
+  gap: 20px;
+  background-color: transparent;
+  border: solid 2px #2e2e30;
   font-family: "Inter", sans-serif;
-  color: white;
-  font-weight: 500;
+  font-weight: 700;
+  font-size: 12px;
+  width: 100%;
+  cursor: pointer;
+  padding: 12px 30px;
+  outline: none;
+}
+
+.custom-footer .footer-buttons button:hover {
+  background-color: #cae542e8;
+  transition: 250ms ease;
+}
+
+.custom-footer .social-media-container {
+  gap: 20px;
+  align-items: flex-start;
+  font-family: "Inter", sans-serif;
+  font-weight: 700;
+  font-size: 12px;
+  color: #2e2e30;
+}
+
+.custom-footer .social-media-container p {
+  margin: 0;
+}
+
+.custom-footer .social-media-container p a {
+  color: #fa6879;
+  font-weight: 700;
+}
+
+.custom-footer .social-icons-container img {
+  height: 30px;
 }
 
 /* COLORS NEW DESIGN
@@ -4223,13 +4378,35 @@ Salmón: #fa6879
 Verde neón: #d4f23c
 Blanco: #FFFFFF */
 
+/* End of Footer section */
+/* Home section */
+.countdown-section {
+  min-height: 200px;
+  background-color: #fa6879;
+  padding: 20px 180px;
+}
+
+.countdown-section .inner-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.countdown-section .inner-container
+ h4, span {
+  font-family: "Inter", sans-serif;
+  color: white;
+  font-weight: 500;
+}
+
 .sponsors-section {
-  height: 500px;
+  min-height: 500px;
   background-color: #d4f23c;
-  padding: 50px 0;
+  padding: 50px 120px;
 }
 
 .sponsors-section h1 {
+  text-align: center;
+  margin-bottom: 50px;
   color:  #2e2e30;
 }
 
@@ -4266,9 +4443,9 @@ Blanco: #FFFFFF */
 }
 
 .categories-section {
-  height: 500px;
+  min-height: 500px;
   background-color: #c7c8c9;
-  padding: 50px 0;
+  padding: 50px 150px;
 }
 
 .categories-section h1 {
@@ -4276,13 +4453,12 @@ color: #2e2e30;
 }
 
 .categories-section .categories-list { 
-  padding: 30px;
+  padding: 30px 0 0 0;
   display: flex;
   flex-direction: row;
-  flex-wrap: wrap;        /* 👈 esto permite que bajen */
   justify-content: center;
   width: 100%;
-  align-items: flex-start; /* mejor que center si las cards tienen distintas alturas */
+  align-items: flex-start;
   gap: 50px;
 }
 
@@ -4295,6 +4471,8 @@ color: #2e2e30;
   text-align: center;
   cursor: pointer;
   transition: transform 0.2s ease;
+  flex: 1 1 50%; 
+  max-width: 50%; 
 }
 
 .categories-section .categories-cards:hover {
@@ -4315,9 +4493,10 @@ color: #2e2e30;
 }
 
 .interview-section {
+  min-height: 500px;
   gap: 100px;
   background: #2e2e30;
-  padding: 80px;
+  padding: 70px 150px;
 }
 
 .interview-section .text-info {
@@ -4348,9 +4527,28 @@ color: #2e2e30;
   font-size: 10px;
   padding: 12px 70px;
   cursor: pointer;
+  outline: none;
 }
 
 /* End of Home section */
+
+/* Interview section */
+.intervew-main {
+  padding: 100px 200px;
+}
+
+.intervew-main p {
+  font-weight: 500;
+  color: white;
+}
+
+.img-left {
+  float: left;
+  height: 500px;     /* alto fijo */
+  margin-right: 20px; /* espacio entre imagen y texto */
+}
+
+/* End of Interview section */
 
 
 /* Botones más agradables */
@@ -4468,6 +4666,21 @@ color: #2e2e30;
   word-break: break-word;
 }
 
+.contact-form .custom-button {
+  font-weight: 700;
+  border-radius: 0;
+  padding: 8px 20px;
+}
+
+.contact-section {
+  padding: 50px 200px;
+}
+
+.contact-title h1 {
+  font-size: 80px;
+  padding-bottom: 25px;
+  color: rgb(250,104,121);
+}
 /* End of Contact Styles */
 
 
@@ -4478,8 +4691,39 @@ color: #2e2e30;
   justify-content: center;
   align-items: center;
   min-height: 500px;
-  padding: 50px;
+  padding: 100px 200px;
   gap: 20px;
+}
+
+.rules-main .rules h1{
+  color: rgb(250,104,121);
+  margin-bottom: 30px
+}
+
+.rules-main .text-xl {
+  font-weight: 600;
+}
+
+.rules-main .rules p {
+  color: white;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.rules-main .rules .custom-subtitle {
+  margin-bottom: 20px;
+}
+
+.rules-main .rules .bold-p {
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.rules-main .rules h6 {
+  color: white;
+  margin-bottom: 0;
+  font-weight: 700;
 }
 
 .rules-main a {
