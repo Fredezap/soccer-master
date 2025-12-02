@@ -2181,6 +2181,10 @@ color: green;
   max-width: 85%;
 }
 
+.bracket-user .kjLZia > div {
+  min-height: 100px !important;
+}
+
 .brackets-component .group-box {
   margin-top: 100px;
 }
