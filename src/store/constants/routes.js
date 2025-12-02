@@ -1,10 +1,10 @@
 const ROUTES = {
   // BLOG: '/blog',
-  CONTACT: '/contact',
+  CONTACT: '/kontakt',
   // MAIN: '/',
   HOME: '/',
   INTERVIEW: '/interview',
-  MATCHES: '/matches',
+  MATCHES: '/spiele',
   TEAMS: '/teams',
   SINGLE: '/single',
   INFO: '/info',

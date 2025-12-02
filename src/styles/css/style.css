@@ -4546,6 +4546,21 @@ color: #2e2e30;
   word-break: break-word;
 }
 
+.contact-form .custom-button {
+  font-weight: 700;
+  border-radius: 0;
+  padding: 8px 20px;
+}
+
+.contact-section {
+  padding: 50px 200px !important;
+}
+
+.contact-title h1 {
+  font-size: 80px;
+  padding-bottom: 25px;
+  color: rgb(250,104,121);
+}
 /* End of Contact Styles */
 
 
@@ -4556,8 +4571,39 @@ color: #2e2e30;
   justify-content: center;
   align-items: center;
   min-height: 500px;
-  padding: 50px;
+  padding: 100px 200px;
   gap: 20px;
+}
+
+.rules-main .rules h1{
+  color: rgb(250,104,121);
+  margin-bottom: 30px
+}
+
+.rules-main .text-xl {
+  font-weight: 600;
+}
+
+.rules-main .rules p {
+  color: white;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.rules-main .rules .custom-subtitle {
+  margin-bottom: 20px;
+}
+
+.rules-main .rules .bold-p {
+  font-weight: 600;
+  font-style: italic;
+  margin-bottom: 0;
+}
+
+.rules-main .rules h6 {
+  color: white;
+  margin-bottom: 0;
+  font-weight: 700;
 }
 
 .rules-main a {

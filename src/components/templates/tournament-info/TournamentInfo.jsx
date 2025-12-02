@@ -1,7 +1,6 @@
 import Hero from '../../common/hero/Hero'
 import useHeroDetails from '../../common/hero/useHeroDetails'
-import InscriptionPdf from './InscriptionPdf'
-import RulesPdf from './RulesPdf'
+import RulesMainComponent from './RulesMainComponent'
 
 const TournamentInfo = () => {
   const { info } = useHeroDetails()
@@ -9,17 +8,7 @@ const TournamentInfo = () => {
   return (
     <div>
       <Hero title={info.title} />
-      <RulesPdf />
-      <hr
-        style={{
-          border: 'none',
-          height: '1px',
-          backgroundColor: '#fff',
-          width: '95%', // ancho de la línea
-          margin: '20px auto' // auto en los lados centra horizontalmente
-        }}
-      />
-      <InscriptionPdf />
+      <RulesMainComponent />
     </div>
   )
 }

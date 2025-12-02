@@ -2,15 +2,19 @@ import * as Yup from 'yup'
 
 const sendEmailFormData = () => {
   const initialValues = {
-    userName: '',
+    userVorname: '',
+    userNachname: '',
     userEmail: '',
     emailSubject: '',
     emailContent: ''
   }
 
   const registerSchema = Yup.object().shape({
-    userName: Yup.string()
-      .required('Name ist erforderlich') // 'Name is required'
+    userVorname: Yup.string()
+      .required('Vorname ist erforderlich') // 'Name is required'
+      .min(3, 'Name muss mindestens 3 Zeichen lang sein'), // 'Name must be at least 3 characters'
+    userNachname: Yup.string()
+      .required('Nachname ist erforderlich') // 'Name is required'
       .min(3, 'Name muss mindestens 3 Zeichen lang sein'), // 'Name must be at least 3 characters'
     userEmail: Yup.string()
       .email('Ungültige E-Mail') // 'Invalid email'
@@ -23,10 +27,11 @@ const sendEmailFormData = () => {
   })
 
   const formFields = [
-    { id: 'userName', type: 'text', placeholder: 'Name' }, // 'Name'
+    { id: 'userVorname', type: 'text', placeholder: 'Vorname' }, // 'Name'
+    { id: 'userNachname', type: 'text', placeholder: 'Nachname' }, // 'Name'
     { id: 'userEmail', type: 'text', placeholder: 'E-Mail' }, // 'Email'
     { id: 'emailSubject', type: 'text', placeholder: 'Betreff' }, // 'Subject'
-    { id: 'emailContent', type: 'textarea', placeholder: 'Schreibe etwas...' } // 'Write something...'
+    { id: 'emailContent', type: 'textarea', placeholder: 'Beschreibe dein Anliegen...' } // 'Write something...'
   ]
 
   return { initialValues, registerSchema, formFields }

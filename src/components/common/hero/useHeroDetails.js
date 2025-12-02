@@ -20,7 +20,7 @@ const useHeroDetails = () => {
   }
 
   const info = {
-    title: 'INFOS UND TURNIERREGELN' // 'Tournament rules and infos'
+    title: 'TURNIERREGELN' // 'Tournament rules'
   }
 
   const adminMain = {

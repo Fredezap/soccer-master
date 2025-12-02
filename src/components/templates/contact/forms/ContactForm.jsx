@@ -1,5 +1,5 @@
 import { Formik, Form } from 'formik'
-import CreateTeamFormMap from './ContactFormMap.jsx'
+import ContactFormMap from './ContactFormMap.jsx'
 import contactFormData from './contactFormData.js'
 import postServiceForUser from '../../../../services/postServiceForUser.js'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails.js'
@@ -30,12 +30,17 @@ const ContactForm = () => {
       onSubmit={handleSubmit}
     >
       {({ errors, touched, setFieldValue, values, setErrors }) => (
-        <div className="bg-dark site-section">
-          <div className="container">
-            <div className="row">
-              <div className="col-lg-7">
+        <div className="bg-dark site-section contact-section" id="contact-section">
+          <div className="contact-title">
+            <h1>
+            NOCH FRAGEN?
+            </h1>
+          </div>
+          <div className="contact-form">
+            <div>
+              <div>
                 <Form>
-                  <CreateTeamFormMap
+                  <ContactFormMap
                     formFields={formFields}
                     errors={errors}
                     touched={touched}
