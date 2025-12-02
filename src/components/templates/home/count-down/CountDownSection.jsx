@@ -10,7 +10,7 @@ const CountDownSection = () => {
   }
 
   return (
-    <div className="centered countdown-section">
+    <div className="countdown-section">
       <div className="inner-container">
         <h4>Das Turnier beginnt in:</h4>
         <div style={{ margin: '0' }} id="date-countdown">

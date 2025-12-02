@@ -62,6 +62,7 @@ function AppContent() {
   const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
+  console.log(currentTournament)
   useEffect(() => {
     // Check if show messages (just if path is Admin)
     const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)

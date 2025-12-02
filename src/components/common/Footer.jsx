@@ -32,13 +32,19 @@ const Footer = () => {
     return customStyle
   }
 
+  let emails = 'futsalforher@gmail.com'
+  const emailsExist = currentTournament?.Emails && currentTournament.Emails.length > 0
+  if (emailsExist) emails = currentTournament.Emails.map(email => email.email).join(',')
+
   return (
     <footer className="centered-row custom-footer">
       <div className="footer-logo">
         <img src="/src/images/FFH_Hero_Footer_Black_Title.png" alt="Logo Footer" />
       </div>
       <div className="centered footer-buttons">
-        <button>SCHREIB UNS EINE EMAIL</button>
+        <a href={`mailto:${emails}`}>
+          <button>SCHREIB UNS EINE EMAIL</button>
+        </a>
         <button onClick={() => navigate(ROUTES.CONTACT)}>KONTAKTFORMULAR</button>
       </div>
       <div className="centered social-media-container">
@@ -47,12 +53,10 @@ const Footer = () => {
           <a href="https://www.instagram.com/futsalolympiquebasel_offiziell/" target="_blank" rel="noopener noreferrer">
             <img src="/src/images/Social_Icons/Icon_Instagram.svg" alt="Instagram" />
           </a>
-
           {/* Facebook */}
           <a href="https://www.facebook.com/profile.php?id=100087476346470" target="_blank" rel="noopener noreferrer">
             <img src="/src/images/Social_Icons/Icon_Facebook.svg" alt="Facebook" />
           </a>
-
           {/* Webseite */}
           <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer">
             <img src="/src/images/Social_Icons/Icon_Webseite.svg" alt="Webseite" />
