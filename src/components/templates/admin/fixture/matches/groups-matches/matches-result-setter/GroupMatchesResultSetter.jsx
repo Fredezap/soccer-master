@@ -44,7 +44,10 @@ const GroupMatchesResultSetter = () => {
     const url = '/admin/fixture/stages/get-all-by-tournament'
     const response = await handleGetData({ paramValues, url, addMessage, user })
 
-    if (response.success) { setStages(response.data.dbStages) }
+    if (response.success) {
+      console.log('DBstages', response.data.dbStages)
+      setStages(response.data.dbStages)
+    }
   }
 
   const getGroups = async() => {
@@ -54,6 +57,7 @@ const GroupMatchesResultSetter = () => {
       const values = { tournamentId: currentTournament.tournamentId }
       const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
+        console.log('DBgroups', response.data.dbGroups)
         setDbGroups(response.data.dbGroups)
       }
     } catch (error) {}

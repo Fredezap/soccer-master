@@ -2,12 +2,13 @@ import Hero from '../../common/hero/Hero'
 import MatchesGrid from './MatchesGrid'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useUserStore } from '../../../store/slices/useUserStore'
 import { useMessageStore } from '../../../store/slices/useMessageStore'
 import { useSubmittingFormStore } from '../../../store/slices/useSubmittingFormStore'
 import handleSubmitFormAdmin from '../admin/handleSubmitFormAdmin'
 import BracketMatches from '../../templates/home/brackets/BracketMatches'
+import TableScores from '../home/table-scores/TableScores'
 
 const Matches = () => {
   const { matches } = useHeroDetails()
@@ -51,10 +52,21 @@ const Matches = () => {
 
     getData()
   }, [])
+
+  const heroRef = useRef(null)
+
+  useEffect(() => {
+    if (heroRef.current) {
+      const heroHeight = heroRef.current.offsetHeight
+      window.scrollTo({ top: heroHeight, behavior: 'smooth' })
+    }
+  }, [currentTournament])
+
   return (
     <>
-      <Hero title={matches.title} />
+      <Hero title={matches.title} ref={heroRef}/>
       <MatchesGrid bgColor={bgColor}/>
+      <TableScores backgroundStyle={bgColor} />
       <BracketMatches
         sectionBg={sectionBg}
         dbMatches={dbMatches}

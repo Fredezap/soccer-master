@@ -63,7 +63,7 @@ const AdminTeams = () => {
     <div>
       <SideMenu />
       <Hero title={adminTeams.title} />
-      <div className="bg-light admin-teams-main">
+      <div className="bg-dark admin-teams-main">
         <p>SET THE TEAMS HERE</p>
         <div className="show-buttons">
           <Button onClick={() => setShowDbTeams(!showDbTeams)} variant="outline-info">{showDbTeams ? 'Hide teams' : 'show teams'}</Button>

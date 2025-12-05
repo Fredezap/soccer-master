@@ -3,7 +3,7 @@ import ROUTES from '../../store/constants/routes.js'
 import useCurrentRouteStore from '../../store/slices/useCurrentRouteStore.js'
 import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails.js'
 import { useUserStore } from '../../store/slices/useUserStore.js'
-import { FaVideo } from 'react-icons/fa'
+import { FaVideo, FaChevronDown } from 'react-icons/fa'
 import { useNavigate } from 'react-router-dom'
 import { useMessageStore } from '../../store/slices/useMessageStore.js'
 import getTournaments from './getters/GetTournaments.jsx'
@@ -12,7 +12,9 @@ const Header = () => {
   const { current } = useCurrentRouteStore()
   const [menuOpen, setMenuOpen] = useState(false)
   const [isMobile, setIsMobile] = useState(false)
-  const [showTournaments, setShowTournaments] = useState(false)
+  const [showTeamsSubmenu, setShowTeamsSubmenu] = useState(false)
+  const [showMatchesSubmenu, setShowMatchesSubmenu] = useState(false)
+  const [showInfoSubmenu, setShowInfoSubmenu] = useState(false)
 
   const { currentTournament, tournaments } = useTournamentsDetails()
   const { isAdmin, isSuperAdmin } = useUserStore()
@@ -21,20 +23,24 @@ const Header = () => {
   const { fetchTournamentDetails } = getTournaments()
   const liveStreming = null
 
-  const getClass = (route) => (current === route ? 'active' : '')
+  const getClass = (route) => current === route ? 'active' : ''
   const toggleMenu = () => setMenuOpen(prev => !prev)
 
-  const handleSelectTournament = async(paramTournament) => {
+  const handleSelectTournament = async(paramTournament, route) => {
     const response = await fetchTournamentDetails({ paramTournament })
-    if (response?.success) navigate(ROUTES.HOME)
+    if (response?.success) navigate(route)
     else {
       addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
       navigate(ROUTES.HOME)
     }
   }
 
-  // todo: ver responsive pdf
-  // todo: hacer lista torneo en un grid o algo asi (col-3 bootstrap)
+  // Toggle submenus y cerrar los demás
+  const toggleSubmenu = (type) => {
+    setShowTeamsSubmenu(type === 'teams' ? !showTeamsSubmenu : false)
+    setShowMatchesSubmenu(type === 'matches' ? !showMatchesSubmenu : false)
+    setShowInfoSubmenu(type === 'info' ? !showInfoSubmenu : false)
+  }
 
   useEffect(() => {
     const handleResize = () => setIsMobile(window.innerWidth <= 850)
@@ -44,20 +50,17 @@ const Header = () => {
   }, [])
 
   const menuRef = useRef(null)
-  // Detectar click fuera
   useEffect(() => {
     const handleClickOutside = (event) => {
-      // si el menú está abierto y clickeás fuera → cerrar
-      if (showTournaments && menuRef.current && !menuRef.current.contains(event.target)) {
-        setShowTournaments(false)
+      if (menuRef.current && !menuRef.current.contains(event.target)) {
+        setShowTeamsSubmenu(false)
+        setShowMatchesSubmenu(false)
+        setShowInfoSubmenu(false)
       }
     }
-
     document.addEventListener('mousedown', handleClickOutside)
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside)
-    }
-  }, [showTournaments])
+    return () => document.removeEventListener('mousedown', handleClickOutside)
+  }, [])
 
   return (
     <header className={`site-navbar ${menuOpen ? 'open' : ''} py-4`} role="banner">
@@ -72,96 +75,92 @@ const Header = () => {
             {isMobile
               ? (
                 <a className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
-                  <h4 className="for-her">
-                    FUTSAL FOR HER
-                  </h4>
+                  <h4 className="for-her">FUTSAL FOR HER</h4>
                 </a>
               )
               : (
                 <a href={ROUTES.HOME} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
-                  <h4 className="for-her">
-                    FUTSAL FOR HER
-                  </h4>
+                  <h4 className="for-her">FUTSAL FOR HER</h4>
                 </a>
               )}
           </div>
 
           {/* Menú */}
           <nav className={`site-navigation ${menuOpen ? 'open' : ''} mt-md-0`} role="navigation">
-            <ul className="site-menu main-menu js-clone-nav">
-              {/* {isMobile && <li><a href={ROUTES.MAIN} className="nav-link">Main</a></li>} */}
+            <ul className="site-menu main-menu js-clone-nav" ref={menuRef}>
+              <>
+                <li className={getClass(ROUTES.HOME)} onClick={() => navigate(ROUTES.HOME)} style={{ cursor: 'pointer', width: '100%' }}>
+                  <a className="nav-link">STARTSEITE</a>
+                </li>
 
-              {currentTournament && Object.entries(currentTournament).length !== 0 && (
-                <>
-                  {/* Startseite */}
-                  <li
-                    ref={menuRef}
-                    className={getClass(ROUTES.HOME)}
-                    onClick={() => navigate(ROUTES.HOME)}
-                    // onClick={() => setShowTournaments(prev => !prev)}
-                    style={{ cursor: 'pointer', position: isMobile ? 'relative' : 'static', width: '100%' }}
-                  >
-                    <a className="nav-link">Startseite</a>
-
-                    {/* Submenú */}
-                    {/* {showTournaments && (
-                      <ul
-                        style={{
-                          position: isMobile ? 'relative' : 'absolute',
-                          top: isMobile ? 'auto' : '80%',
-                          left: 'auto',
-                          width: isMobile ? '100%' : 'max-content',
-                          margin: 0,
-                          padding: '0.5rem',
-                          listStyle: 'none',
-                          backgroundColor: isMobile ? 'rgba(255, 255, 255, 0.1)' : 'rgba(255,255,255,0.3)',
-                          backdropFilter: isMobile ? 'none' : 'blur(8px)',
-                          zIndex: isMobile ? 'auto' : 9999,
-                          borderRadius: isMobile ? '0' : '6px',
-                          boxShadow: isMobile ? 'none' : '0 2px 8px rgba(0,0,0,0.15)'
-                        }}
-                      >
-                        {tournaments.map(tournament => (
-                          <li
-                            key={tournament.tournamentId}
-                            onClick={() => {
-                              handleSelectTournament(tournament)
-                              setShowTournaments(false)
-                            }}
-                            style={{
-                              padding: '0.3rem 0',
-                              cursor: 'pointer',
-                              whiteSpace: 'nowrap'
-                            }}
-                          >
-                            <a>{tournament.name}</a>
-                          </li>
-                        ))}
-                      </ul>
-                    )} */}
-                  </li>
-
-                  <li className={getClass(ROUTES.MATCHES)}><a href={ROUTES.MATCHES} className="nav-link">Spiele</a></li>
-                  <li className={getClass(ROUTES.TEAMS)}><a href={ROUTES.TEAMS} className="nav-link">Teams</a></li>
-                  <li className={getClass(ROUTES.INFO)}><a href={ROUTES.INFO} className="nav-link">Infos</a></li>
-                  <li className={getClass(ROUTES.CONTACT)}><a href={ROUTES.CONTACT} className="nav-link">Kontakt</a></li>
-
-                  {liveStreming && (
-                    <li>
-                      <a href={liveStreming} className="nav-link" target="_blank" rel="noopener noreferrer">
-                        <div className="centered-row">
-                          <FaVideo className="icon-pulse" size={22} />
-                          <span>Live-Streaming</span>
-                        </div>
-                      </a>
-                    </li>
+                {/* SPIELE */}
+                <li className={getClass(ROUTES.MATCHES)} style={{ position: 'relative', cursor: 'pointer' }}>
+                  <div onClick={() => toggleSubmenu('matches')} className="nav-link d-flex align-items-center">
+                      SPIELE <FaChevronDown style={{ marginLeft: '5px' }} />
+                  </div>
+                  {showMatchesSubmenu && (
+                    <ul className="submenu" style={isMobile ? submenuMobileStyle : submenuStyle}>
+                      {tournaments.map(t => (
+                        <li key={t.tournamentId} onClick={() => handleSelectTournament(t, ROUTES.MATCHES)} style={submenuItemStyle}>
+                          <a className="nav-link">{t.name}</a>
+                        </li>
+                      ))}
+                    </ul>
                   )}
-                </>
-              )}
+                </li>
+
+                {/* TEAMS */}
+                <li className={getClass(ROUTES.TEAMS)} style={{ position: 'relative', cursor: 'pointer' }}>
+                  <div onClick={() => toggleSubmenu('teams')} className="nav-link d-flex align-items-center">
+                      TEAMS <FaChevronDown style={{ marginLeft: '5px' }} />
+                  </div>
+                  {showTeamsSubmenu && (
+                    <ul className="submenu" style={isMobile ? submenuMobileStyle : submenuStyle}>
+                      {tournaments.map(t => (
+                        <li key={t.tournamentId} onClick={() => handleSelectTournament(t, ROUTES.TEAMS)} style={submenuItemStyle}>
+                          <a className="nav-link">{t.name}</a>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </li>
+
+                {/* INFOS */}
+                <li className={getClass(ROUTES.INFO)} style={{ position: 'relative', cursor: 'pointer' }}>
+                  <div onClick={() => toggleSubmenu('info')} className="nav-link d-flex align-items-center">
+                      Infos <FaChevronDown style={{ marginLeft: '5px' }} />
+                  </div>
+                  {showInfoSubmenu && (
+                    <ul className="submenu" style={isMobile ? submenuMobileStyle : submenuStyle}>
+                      <li onClick={() => navigate(ROUTES.INTERVIEW)} className={getClass(ROUTES.INTERVIEW)} style={submenuItemStyle}>
+                        <a className="nav-link">INTERVIEW</a>
+                      </li>
+                      <li onClick={() => navigate(ROUTES.INFO)} className={getClass(ROUTES.INFO)} style={submenuItemStyle}>
+                        <a className="nav-link">REGLAMENT</a>
+                      </li>
+                    </ul>
+                  )}
+                </li>
+
+                <li style={{ cursor: 'pointer', width: '100%' }} onClick={() => navigate(ROUTES.CONTACT)} className={getClass(ROUTES.CONTACT)}>
+                  <a className="nav-link">KONTAKT</a>
+                </li>
+
+                {liveStreming && (
+                  <li>
+                    <a href={liveStreming} className="nav-link" target="_blank" rel="noopener noreferrer">
+                      <div className="centered-row">
+                        <FaVideo className="icon-pulse" size={22} />
+                        <span>Live-Streaming</span>
+                      </div>
+                    </a>
+                  </li>
+                )}
+              </>
 
               {(isAdmin() || isSuperAdmin()) && (
-                <li className={getClass(ROUTES.ADMIN.MAIN)}>
-                  <a href={ROUTES.ADMIN.MAIN} className="nav-link">Admin</a>
+                <li style={{ cursor: 'pointer', width: '100%' }} className={getClass(ROUTES.ADMIN.MAIN)}>
+                  <a onClick={() => navigate(ROUTES.ADMIN.MAIN)} className="nav-link">Admin</a>
                 </li>
               )}
             </ul>
@@ -170,6 +169,40 @@ const Header = () => {
       </div>
     </header>
   )
+}
+
+// Estilos del submenu desktop
+// Estilos del submenu desktop con blur
+const submenuStyle = {
+  position: 'absolute',
+  top: '120%',
+  left: 0,
+  minWidth: '150px',
+  width: 'auto',
+  listStyle: 'none',
+  padding: '0.5rem 0',
+  margin: 0,
+  borderRadius: '6px',
+  boxShadow: '0 2px 8px rgba(0, 0, 0, 0.15)',
+  zIndex: 9999
+}
+
+// Estilos del submenu mobile con blur
+const submenuMobileStyle = {
+  display: 'block',
+  position: 'relative',
+  width: '100%',
+  listStyle: 'none',
+  padding: '0',
+  margin: '0',
+  borderRadius: '0',
+  boxShadow: 'none'
+}
+
+const submenuItemStyle = {
+  padding: '0.5rem 1rem',
+  cursor: 'pointer',
+  whiteSpace: 'nowrap'
 }
 
 export default Header

@@ -1,10 +1,9 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
 import Hero from '../../common/hero/Hero'
 import useHeroDetails from '../../common/hero/useHeroDetails'
 import Videos from '../../common/Videos'
 import logoGetter from '../../common/logo-getter/logoGetter'
-import getSectionBg from '../../common/section-styles/getSectionBg'
 
 const Teams = () => {
   const { players } = useHeroDetails()
@@ -25,10 +24,19 @@ const Teams = () => {
 
   const videoSectionExist = currentTournament?.Videos?.length > 0
 
+  const heroRef = useRef(null)
+
+  useEffect(() => {
+    if (heroRef.current) {
+      const heroHeight = heroRef.current.offsetHeight
+      window.scrollTo({ top: heroHeight, behavior: 'smooth' })
+    }
+  }, [currentTournament])
+
   return (
     <div>
-      <Hero title={players.title} />
-      <div className={`teams-main ${videoSectionExist ? 'bg-dark' : 'bg-light'}`}>
+      <Hero title={players.title} ref={heroRef}/>
+      <div className={'teams-main bg-dark'}>
         <div style={{ minWidth: '100%' }} className="row bg-light p-4 rounded">
           <div className="col-12 title-section">
             <h2 className="heading">Teams</h2>
