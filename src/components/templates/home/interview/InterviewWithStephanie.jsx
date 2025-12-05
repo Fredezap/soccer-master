@@ -1,12 +1,20 @@
+import { useEffect, useRef } from 'react'
 import Hero from '../../../common/hero/Hero'
 import useHeroDetails from '../../../common/hero/useHeroDetails'
 import interviewImg from '@/images/interview/Stephi.jpg'
 const InterviewWithStephanie = () => {
   const { interview } = useHeroDetails()
+  const heroRef = useRef(null)
 
+  useEffect(() => {
+    if (heroRef.current) {
+      const heroHeight = heroRef.current.offsetHeight
+      window.scrollTo({ top: heroHeight, behavior: 'smooth' })
+    }
+  }, [])
   return (
     <>
-      <Hero title={interview.title} />
+      <Hero title={interview.title} ref={heroRef}/>
       <div className="intervew-main">
         <p>
           Stephanie Kübler ist nicht nur Spielerin von Futsal Olympique Basel, sondern auch Mitglied des

@@ -1,20 +1,11 @@
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
-import deafultTournamentImage from '../../../../src/images/FFH_Hero_Desktop.jpg'
+import { forwardRef } from 'react'
 
-const BASE_URL = import.meta.env.MODE === 'development'
-  ? import.meta.env.VITE_IMG_DEV_BASE_URL
-  : import.meta.env.VITE_IMG_PROD_BASE_URL
-
-const Hero = ({ title }) => {
+const Hero = forwardRef(({ title }, ref) => {
   const { currentTournament } = useTournamentsDetails()
 
-  const tournamentImage = currentTournament?.mainBgImg
-    ? `${BASE_URL}${currentTournament.mainBgImg}`
-    : deafultTournamentImage
-
   return (
-    // <div className="hero custom-hero-overlay" style={{ backgroundImage: `url(${tournamentImage})` }}> // to get back to the firs idea
-    <div className="hero custom-hero-overlay hero-custom-img">
+    <div className="hero custom-hero-overlay hero-custom-img" ref={ref}>
       <div className="container">
         <div className="row align-items-center">
           <div className="col-lg mx-auto text-center">
@@ -25,6 +16,6 @@ const Hero = ({ title }) => {
       </div>
     </div>
   )
-}
+})
 
 export default Hero
