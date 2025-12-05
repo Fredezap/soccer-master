@@ -1,13 +1,13 @@
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../store/constants/routes'
-
+import InterviewWithStephanieImg from '@/images/interview/Stephi.jpg'
 const InterviewWithStephanieSection = () => {
   const navigate = useNavigate()
 
   return (
     <div className="centered-row interview-section">
       <div>
-        <img src="/src/images/interview/Stephi.jpg" alt="Interview" />
+        <img src={InterviewWithStephanieImg} alt="Interview" />
       </div>
       <div className="centered text-info">
         <h1>

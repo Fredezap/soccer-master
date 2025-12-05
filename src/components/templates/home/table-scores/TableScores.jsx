@@ -20,12 +20,12 @@ const TableScores = ({ backgroundStyle }) => {
   return (
     groupStages.length !== 0 && (
       groupStages.map((stage, index) => (
-        <div style={{ marginBottom: '30px' }} key={stage?.stageId || index} >
-          <div className={`${backgroundStyle}`}>
+        <div className={`${backgroundStyle} table-scores-users`} key={stage?.stageId || index} >
+          <div className="container">
             <div className="col-12 title-section">
               <h3 className="heading">{stage?.name}</h3>
             </div>
-            <div className="groups-score-data">
+            <div className="table-results">
               {stage?.Groups?.length > 0
                 ? (
                   [...stage.Groups].map((group, index) => (
@@ -39,7 +39,16 @@ const TableScores = ({ backgroundStyle }) => {
                                 <thead>
                                   <tr>
                                     <th>P</th>
-                                    <th>Team</th>
+
+                                    <th className="team-score-logo">
+                                      <span style={{ width: '40px' }}>
+
+                                      </span>
+                                      <strong>
+                                    Team
+                                      </strong>
+
+                                    </th>
                                     <th>GP</th>
                                     <th>W</th>
                                     <th>D</th>
@@ -62,7 +71,7 @@ const TableScores = ({ backgroundStyle }) => {
                                         )
                                           }
                                         </div>
-                                        <strong className="text-futsal-for-her team-score-name">{team.name}</strong>
+                                        <strong className="text-team-names team-score-name">{team.name}</strong>
                                       </td>
                                       <td>{team.TeamGroup.WON + team.TeamGroup.DRAWN + team.TeamGroup.LOST}</td>
                                       <td>{team.TeamGroup.WON}</td>

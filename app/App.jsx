@@ -56,13 +56,12 @@ function AppContent() {
   const currentPath = location.pathname
   const navigate = useNavigate()
   const { setCurrent } = useCurrentRouteStore()
-  const { currentTournament, isCreating } = useTournamentsDetails()
+  const { currentTournament, isCreating, tournaments } = useTournamentsDetails()
   const { setAndOrderMatchesByDate } = orderAllMatchesByDate()
   const { setShowMessager } = useMessageStore()
   const { fetchAllTournaments, fetchTournamentDetails } = getTournaments()
   useCheckPath({ currentPath, setCurrent, navigate })
 
-  console.log(currentTournament)
   useEffect(() => {
     // Check if show messages (just if path is Admin)
     const checkIfNeedsMessager = checkPathsNeedsMessager(currentPath)
@@ -85,9 +84,36 @@ function AppContent() {
       return
     }
     // Else get all tournaments
-    fetchAllTournaments()
-    if (Object.entries(currentTournament).length > 0) fetchTournamentDetails({ paramTournament: currentTournament })
+    const getTournaments = async() => {
+      await fetchAllTournaments()
+    }
+
+    const getTournamentDetail = async(currentTournament) => {
+      await fetchTournamentDetails({ paramTournament: currentTournament })
+    }
+
+    getTournaments()
+
+    if (Object.entries(currentTournament).length > 0) getTournamentDetail(currentTournament)
   }, [])
+
+  useEffect(() => {
+    // If path is admin, return, because admin tournaments getter is managed from AdminMain.jsx
+    if (currentPath.includes('/admin')) {
+      return
+    }
+
+    // if there is no currentTournament, it set the first element in "tournaments".
+    const getTournamentDetail = async(currentTournament) => {
+      await fetchTournamentDetails({ paramTournament: currentTournament })
+    }
+
+    if (Object.entries(tournaments).length > 0 &&
+    tournaments[0].tournamentId &&
+    (!currentTournament || !currentTournament.tournamentId)) {
+      getTournamentDetail(tournaments[0])
+    }
+  }, [tournaments])
 
   useEffect(() => {
     // Si no hay path o path === '/' no ejecutamos nada

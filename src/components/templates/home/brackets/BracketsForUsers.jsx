@@ -57,7 +57,7 @@ const BracketsForUsers = ({ rounds }) => {
                 <p>Für keine K.-o.-Runde wurden bisher Spiele festgelegt</p>
               )
               : (
-                <div className="bracket">
+                <div className="bracket bracket-user">
                   <Bracket
                     rounds={rounds}
                     renderSeedComponent={(seed) => <CustomSeed seed={seed} breakpoint={992} />}
