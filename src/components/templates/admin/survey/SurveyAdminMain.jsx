@@ -30,23 +30,23 @@ const SurveyAdminMain = () => {
   // ---------------------- ------------------------------------
   // Fetch votes + players
   // ----------------------------------------------------------
+
+  const loadVotes = async() => {
+    const res = await handleSubmitFormAdmin({
+      values: { tournamentId },
+      url: '/survey/get-votes',
+      httpMethod: 'post',
+      addMessage,
+      setSubmittingForm,
+      user
+    })
+
+    if (res?.success) {
+      setVotes(res.data.votes)
+    }
+  }
   useEffect(() => {
     if (!tournamentId) return
-
-    const loadVotes = async() => {
-      const res = await handleSubmitFormAdmin({
-        values: { tournamentId },
-        url: '/survey/get-votes',
-        httpMethod: 'post',
-        addMessage,
-        setSubmittingForm,
-        user
-      })
-
-      if (res?.success) {
-        setVotes(res.data.votes)
-      }
-    }
 
     loadVotes()
     setPlayers(GetTournamentPlayers(currentTournament))
@@ -96,7 +96,7 @@ const SurveyAdminMain = () => {
         user
       })
 
-      await fetchTournamentDetails(tournamentId)
+      await fetchTournamentDetails(currentTournament)
     } catch (err) {}
 
     setLoading(false)
@@ -127,6 +127,8 @@ const SurveyAdminMain = () => {
       })
 
       if (response?.success) {
+        setShowDeleteModal(false)
+        await loadVotes()
         await fetchTournamentDetails(currentTournament)
       }
     } catch (error) {}
