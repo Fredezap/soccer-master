@@ -3530,6 +3530,12 @@ display: none;
     .contact-section {
     padding: 50px !important;
   }
+  .survey-buttons {
+    margin: 50px 0;
+  }
+  .survey-buttons button {
+    width: 90%;
+  }
 }
 
 @media (max-width: 450px) {

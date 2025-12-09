@@ -11,7 +11,6 @@ const postServiceForUser = async({ url, values, addMessage, successResponse }) =
           'Content-Type': 'application/json'
         }
       })
-      console.log('RES: ', response)
       if (response.status >= 200 && response.status <= 300) {
         return { success: true, data: response?.data ? response.data : null }
       } else {

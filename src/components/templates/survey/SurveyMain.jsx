@@ -39,7 +39,6 @@ export const SurveyMain = () => {
     const url = '/survey/get-votes'
     const httpMethod = 'post'
     const values = { tournamentId }
-    console.log('values', values)
     try {
       await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod, user })
     } catch (error) {}
@@ -49,10 +48,8 @@ export const SurveyMain = () => {
     const url = '/survey/create'
     const values = { playerId: selectedPlayer.playerId, tournamentId }
 
-    console.log('RESSLAKSDLKASLD: ', values)
     try {
       const response = await postServiceForUser({ url, values, addMessage })
-      console.log('response: ', response)
       if (!response?.success) {
         setHasVoted(true)
         const msg = response?.error?.[0]?.msg

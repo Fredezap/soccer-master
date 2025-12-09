@@ -16,7 +16,7 @@ const SurveyAdminMain = () => {
   const { user } = useCustomErrorStore()
   const { adminSurvey } = useHeroDetails()
   const { fetchTournamentDetails } = getTournaments()
-
+  const [showDeleteModal, setShowDeleteModal] = useState(false)
   const [showMVPModal, setShowMVPModal] = useState(false)
 
   const tournamentId = currentTournament?.tournamentId
@@ -26,8 +26,7 @@ const SurveyAdminMain = () => {
   const [votes, setVotes] = useState([])
   const [players, setPlayers] = useState([])
   const [modal, setModal] = useState({ show: false, type: null })
-  // console.log('VOTES: ', votes)
-  // console.log('currentTournament: ', currentTournament)
+
   // ---------------------- ------------------------------------
   // Fetch votes + players
   // ----------------------------------------------------------
@@ -74,7 +73,6 @@ const SurveyAdminMain = () => {
   // Update backend
   // ----------------------------------------------------------
   const updateSurvey = async(changes) => {
-    console.log('CHANGES: ', changes)
     if (!tournamentId) return
 
     setLoading(true)
@@ -98,10 +96,40 @@ const SurveyAdminMain = () => {
         user
       })
 
-      fetchTournamentDetails(tournamentId)
-    } catch (err) {
-      console.error(err)
-    }
+      await fetchTournamentDetails(tournamentId)
+    } catch (err) {}
+
+    setLoading(false)
+  }
+
+  // ----------------------------------------------------------
+  // DELETE VOTES
+  // ----------------------------------------------------------
+  const deleteVotes = async() => {
+    if (!tournamentId) return
+
+    setLoading(true)
+
+    try {
+      const url = '/survey/delete-all-survey-votes'
+      const httpMethod = 'patch'
+
+      const successResponse = 'All votes has been deleted'
+
+      const response = await handleSubmitFormAdmin({
+        url,
+        values: { tournamentId },
+        addMessage,
+        successResponse,
+        setSubmittingForm,
+        httpMethod,
+        user
+      })
+
+      if (response?.success) {
+        await fetchTournamentDetails(currentTournament)
+      }
+    } catch (error) {}
 
     setLoading(false)
   }
@@ -133,11 +161,9 @@ const SurveyAdminMain = () => {
       })
 
       if (response?.success) {
-        fetchTournamentDetails(currentTournament)
+        await fetchTournamentDetails(currentTournament)
       }
-    } catch (error) {
-      console.error('Error updating MVP visibility:', error)
-    }
+    } catch (error) {}
 
     setLoading(false)
   }
@@ -239,7 +265,6 @@ const SurveyAdminMain = () => {
   }
 
   const confirmDisable = () => {
-    console.log('LLAMO')
     updateSurvey({
       votingIsAvaliable: false,
       playerId: winnerForAssignment?.playerId || null
@@ -304,6 +329,16 @@ const SurveyAdminMain = () => {
             >
               {survey?.showMVP ? 'Stop showing MVP to users' : 'Show MVP to users'}
             </button>
+
+            <button
+              style={{ backgroundColor: 'red', borderColor: 'red' }}
+              className="btn btn-primary"
+              onClick={() => setShowDeleteModal(true)}
+              disabled={loading}
+            >
+              Delete all votes
+            </button>
+
           </div>
         </div>
 
@@ -420,6 +455,49 @@ const SurveyAdminMain = () => {
                   className="btn btn-primary"
                   onClick={confirmMVPVisibility}
                   disabled={okDisabled}
+                >
+                  Confirm
+                </button>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      )}
+
+      {showDeleteModal && (
+        <div className="modal fade show" style={{ display: 'block', backgroundColor: 'rgba(0,0,0,0.2)' }}>
+
+          <div className="modal-dialog">
+            <div className="modal-content" style={{ backgroundColor: 'rgba(49, 49, 48, 1)' }}>
+
+              <div className="modal-header">
+                <h5 className="modal-title">Delete votes</h5>
+
+                <button
+                  className="btn-close"
+                  onClick={() => setShowDeleteModal(false)}
+                />
+              </div>
+
+              <div className="modal-body">
+                <p>{sortedVotes.length === 0 ? 'No votes to delete' : 'Are you sure you want to delete all votes?'}</p>
+              </div>
+
+              <div className="modal-footer">
+
+                <button
+                  className="btn btn-secondary"
+                  onClick={() => setShowDeleteModal(false)}
+                >
+                  Cancel
+                </button>
+
+                <button
+                  className="btn btn-primary"
+                  onClick={() => deleteVotes()}
+                  disabled={sortedVotes.length === 0}
                 >
                   Confirm
                 </button>
