@@ -45,7 +45,6 @@ const GroupMatchesResultSetter = () => {
     const response = await handleGetData({ paramValues, url, addMessage, user })
 
     if (response.success) {
-      console.log('DBstages', response.data.dbStages)
       setStages(response.data.dbStages)
     }
   }
@@ -57,7 +56,6 @@ const GroupMatchesResultSetter = () => {
       const values = { tournamentId: currentTournament.tournamentId }
       const response = await handleSubmitFormAdmin({ values, url, setSubmittingForm, httpMethod, addMessage, user })
       if (response?.success) {
-        console.log('DBgroups', response.data.dbGroups)
         setDbGroups(response.data.dbGroups)
       }
     } catch (error) {}

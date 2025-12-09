@@ -6,6 +6,7 @@ const ROUTES = {
   INTERVIEW: '/interview',
   MATCHES: '/spiele',
   TEAMS: '/teams',
+  SURVEY: '/umfrage',
   SINGLE: '/single',
   INFO: '/info',
   LIVE: '/live',
@@ -16,6 +17,7 @@ const ROUTES = {
     TOURNAMENT_DETAILS_MAIN: '/admin/tournament-details-main',
     TOURNAMENT_DETAILS: '/admin/tournament-details',
     VIDEOS: '/admin/videos',
+    SURVEY: '/admin/survey',
     TEAMS: {
       MAIN: '/admin/teams',
       UPDATE: '/admin/teams/update'

@@ -38,6 +38,8 @@ import MatchesResultSetterMain from '../src/components/templates/admin/fixture/m
 import AdminsManagmentMain from '../src/components/templates/admin/admin-managment/AdminsManagmentMain.jsx'
 import TournamentRules from '../src/components/templates/tournament-info/TournamentInfo.jsx'
 import InterviewWithStephanie from '../src/components/templates/home/interview/InterviewWithStephanie.jsx'
+import { SurveyMain } from '../src/components/templates/survey/SurveyMain.jsx'
+import SurveyAdminMain from '../src/components/templates/admin/survey/SurveyAdminMain.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -148,6 +150,7 @@ function AppContent() {
         <Route path={ROUTES.INTERVIEW} element={<InterviewWithStephanie />} />
         <Route path={ROUTES.MATCHES} element={<Matches />} />
         <Route path={ROUTES.TEAMS} element={<Teams />} />
+        <Route path={ROUTES.SURVEY} element={<SurveyMain />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />
         <Route path={ROUTES.INFO} element={<TournamentRules />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
@@ -162,6 +165,7 @@ function AppContent() {
         <Route path={ROUTES.ADMIN.REGISTER} element={<RegisterForm />} />
         <Route path={ROUTES.ADMIN.MATCHES_RESULT_SETTER} element={<MatchesResultSetterMain />} />
         <Route path={ROUTES.ADMIN.USERS_MANAGMENT} element={<AdminsManagmentMain />} />
+        <Route path={ROUTES.ADMIN.SURVEY} element={<SurveyAdminMain />} />
         <Route path="*" element={<Navigate to={ROUTES.HOME} />} />
       </Routes>
     </>

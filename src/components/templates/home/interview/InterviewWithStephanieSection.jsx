@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom'
 import ROUTES from '../../../../store/constants/routes'
 import InterviewWithStephanieImg from '@/images/interview/Stephi.jpg'
+
 const InterviewWithStephanieSection = () => {
   const navigate = useNavigate()
 

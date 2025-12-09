@@ -9,8 +9,8 @@ const TournamentInfo = () => {
         <p>
             Am 13. Dezember 2025 findet unter dem Motto «Futsal for HER» die erste Austragung
             des Junior’s Cup statt; eines Futsal-Turniers für Juniorinnen. Es wird in den Kategorien
-            FF-17 (vormittags) und FF-21 (nachmittags) gespielt. Futsal Olympique Basel, ein
-            Verein, der sich seit 17 Jahren im Futsal engagiert und einziger Futsalverein der Region
+            FF-17 (vormittags) und FF-21 (nachmittags) gespielt. <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer">
+            Futsal Olympique Basel</a> ein Verein, der sich seit 17 Jahren im Futsal engagiert und einziger Futsalverein der Region
             NWS, ist Organisator des Turniers.
         </p>
         <p>

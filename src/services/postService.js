@@ -16,6 +16,7 @@ const postService = async({ url, values, authorizationValues, addMessage, succes
           'Content-Type': 'application/json'
         }
       })
+
       if (response.status >= 200 && response.status <= 300) {
         return { success: true, data: response?.data ? response.data : null }
       } else {
@@ -29,6 +30,7 @@ const postService = async({ url, values, authorizationValues, addMessage, succes
   }
 
   const postResponse = await makeAnHttpsPost(url, values)
+
   if (postResponse.success) {
     if (successResponse) {
       addMessage(({ type: 'success', content: successResponse }))
