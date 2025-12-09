@@ -21,6 +21,7 @@ const SurveyAdminMain = () => {
 
   const tournamentId = currentTournament?.tournamentId
   const survey = currentTournament?.MVPSurvey || null
+  const mvpSurveyId = survey?.mvpSurveyId || null
 
   const [loading, setLoading] = useState(false)
   const [votes, setVotes] = useState([])
@@ -76,28 +77,45 @@ const SurveyAdminMain = () => {
     if (!tournamentId) return
 
     setLoading(true)
+    if (!survey) {
+      try {
+        const successResponse = 'Voting has started and is now visible to users.'
+        await handleSubmitFormAdmin({
+          successResponse,
+          url: '/survey/create-mvp-survey',
+          httpMethod: 'post',
+          values: { tournamentId },
+          addMessage,
+          setSubmittingForm,
+          user
+        })
+        await fetchTournamentDetails(currentTournament)
+      } catch (err) {}
+    }
 
-    try {
-      const successResponse = changes.votingIsAvaliable
-        ? 'Voting has started and is now visible to users.'
-        : 'Voting has finished and is now NOT visible to users.'
-      const MVPSurvey = {
-        mvpSurveyId: 2,
-        tournamentId: 2,
-        ...changes
-      }
-      await handleSubmitFormAdmin({
-        successResponse,
-        url: '/survey/update-survey-availability',
-        httpMethod: 'patch',
-        values: { MVPSurvey },
-        addMessage,
-        setSubmittingForm,
-        user
-      })
+    if (mvpSurveyId && tournamentId) {
+      try {
+        const successResponse = changes.votingIsAvaliable
+          ? 'Voting has started and is now visible to users.'
+          : 'Voting has finished and is now NOT visible to users.'
+        const MVPSurvey = {
+          mvpSurveyId,
+          tournamentId,
+          ...changes
+        }
+        await handleSubmitFormAdmin({
+          successResponse,
+          url: '/survey/update-survey-availability',
+          httpMethod: 'patch',
+          values: { MVPSurvey },
+          addMessage,
+          setSubmittingForm,
+          user
+        })
 
-      await fetchTournamentDetails(currentTournament)
-    } catch (err) {}
+        await fetchTournamentDetails(currentTournament)
+      } catch (err) {}
+    }
 
     setLoading(false)
   }
