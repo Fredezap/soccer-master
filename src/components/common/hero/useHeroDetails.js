@@ -7,6 +7,10 @@ const useHeroDetails = () => {
     title: 'TEAMS' // 'Teams'
   }
 
+  const survey = {
+    title: 'ABSTIMMEN' // 'SURVEY'
+  }
+
   const matches = {
     title: 'SPIELE' // 'Matches'
   }
@@ -63,9 +67,14 @@ const useHeroDetails = () => {
     title: 'ADMIN BENUTZER REGISTRIEREN' // 'Admin register users'
   }
 
+  const adminSurvey = {
+    title: 'ADMIN SURVEY' // 'Admin survey'
+  }
+
   return {
     interview,
     players,
+    survey,
     matches,
     blog,
     contact,
@@ -79,7 +88,8 @@ const useHeroDetails = () => {
     adminContact,
     adminResultSetter,
     adminUsersManager,
-    adminRegister
+    adminRegister,
+    adminSurvey
   }
 }
 

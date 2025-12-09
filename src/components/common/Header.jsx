@@ -16,7 +16,7 @@ const Header = () => {
   const [showMatchesSubmenu, setShowMatchesSubmenu] = useState(false)
   const [showInfoSubmenu, setShowInfoSubmenu] = useState(false)
 
-  const { currentTournament, tournaments } = useTournamentsDetails()
+  const { tournaments } = useTournamentsDetails()
   const { isAdmin, isSuperAdmin } = useUserStore()
   const navigate = useNavigate()
   const { addMessage } = useMessageStore()
@@ -26,12 +26,17 @@ const Header = () => {
   const getClass = (route) => current === route ? 'active' : ''
   const toggleMenu = () => setMenuOpen(prev => !prev)
 
+  const navigateAndCloseHeader = (route) => {
+    setMenuOpen(false)
+    navigate(route)
+  }
+
   const handleSelectTournament = async(paramTournament, route) => {
     const response = await fetchTournamentDetails({ paramTournament })
-    if (response?.success) navigate(route)
+    if (response?.success) navigateAndCloseHeader(route)
     else {
       addMessage({ type: 'error', content: 'An error ocurred finding the tournament that you have selected' })
-      navigate(ROUTES.HOME)
+      navigateAndCloseHeader(ROUTES.HOME)
     }
   }
 
@@ -56,6 +61,7 @@ const Header = () => {
         setShowTeamsSubmenu(false)
         setShowMatchesSubmenu(false)
         setShowInfoSubmenu(false)
+        setMenuOpen(false) // 👈 CIERRA EL MENÚ PRINCIPAL
       }
     }
     document.addEventListener('mousedown', handleClickOutside)
@@ -79,7 +85,7 @@ const Header = () => {
                 </a>
               )
               : (
-                <a href={ROUTES.HOME} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
+                <a onClick={() => navigate(ROUTES.HOME)} className="menu-toggle-button" style={{ fontFamily: 'Fjalla One, sans-serif' }}>
                   <h4 className="for-her">FUTSAL FOR HER</h4>
                 </a>
               )}
@@ -89,7 +95,7 @@ const Header = () => {
           <nav className={`site-navigation ${menuOpen ? 'open' : ''} mt-md-0`} role="navigation">
             <ul className="site-menu main-menu js-clone-nav" ref={menuRef}>
               <>
-                <li className={getClass(ROUTES.HOME)} onClick={() => navigate(ROUTES.HOME)} style={{ cursor: 'pointer', width: '100%' }}>
+                <li className={getClass(ROUTES.HOME)} onClick={() => navigateAndCloseHeader(ROUTES.HOME)} style={{ cursor: 'pointer', width: '100%' }}>
                   <a className="nav-link">STARTSEITE</a>
                 </li>
 
@@ -132,17 +138,17 @@ const Header = () => {
                   </div>
                   {showInfoSubmenu && (
                     <ul className="submenu" style={isMobile ? submenuMobileStyle : submenuStyle}>
-                      <li onClick={() => navigate(ROUTES.INTERVIEW)} className={getClass(ROUTES.INTERVIEW)} style={submenuItemStyle}>
+                      <li onClick={() => navigateAndCloseHeader(ROUTES.INTERVIEW)} className={getClass(ROUTES.INTERVIEW)} style={submenuItemStyle}>
                         <a className="nav-link">INTERVIEW</a>
                       </li>
-                      <li onClick={() => navigate(ROUTES.INFO)} className={getClass(ROUTES.INFO)} style={submenuItemStyle}>
-                        <a className="nav-link">REGLAMENT</a>
+                      <li onClick={() => navigateAndCloseHeader(ROUTES.INFO)} className={getClass(ROUTES.INFO)} style={submenuItemStyle}>
+                        <a className="nav-link">REGLEMENT</a>
                       </li>
                     </ul>
                   )}
                 </li>
 
-                <li style={{ cursor: 'pointer', width: '100%' }} onClick={() => navigate(ROUTES.CONTACT)} className={getClass(ROUTES.CONTACT)}>
+                <li style={{ cursor: 'pointer', width: '100%' }} onClick={() => navigateAndCloseHeader(ROUTES.CONTACT)} className={getClass(ROUTES.CONTACT)}>
                   <a className="nav-link">KONTAKT</a>
                 </li>
 
@@ -160,7 +166,7 @@ const Header = () => {
 
               {(isAdmin() || isSuperAdmin()) && (
                 <li style={{ cursor: 'pointer', width: '100%' }} className={getClass(ROUTES.ADMIN.MAIN)}>
-                  <a onClick={() => navigate(ROUTES.ADMIN.MAIN)} className="nav-link">Admin</a>
+                  <a onClick={() => navigateAndCloseHeader(ROUTES.ADMIN.MAIN)} className="nav-link">Admin</a>
                 </li>
               )}
             </ul>

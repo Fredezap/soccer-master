@@ -2907,7 +2907,109 @@ display: none;
 }
 /* End of Admin Email sender Styles */
 
+/* Survey Styles */
+.sd-error__item span{
+  color: red !important;
+}
+
+.survey-voting-box {
+  padding: 50px;
+}
+
+.sv-scroll__scrollbar {
+  display: none;
+}
+
+.sd-btn {
+  margin-top: 5px;
+  background-color: #fa6879;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 0px;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+}
+
+.survey-buttons {
+  margin: 50px;
+  gap: 20px;
+}
+
+.survey-buttons button {
+  width: 50%;
+}
+
+.sv-action__content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.sd-btn:hover {
+  background-color: #fa6879e8;
+  transform: translateY(-1px);
+}
+
+.countdown-section .inner-container h4, span {
+  margin-left: 2px;
+}
+/* End of Survey Styles */
+
 /* User Teams Styles */
+.mvp-box {
+  padding: 40px;
+  border: solid 1px white;
+  margin-bottom: 50px;
+}
+
+.mvp-title {
+  text-align: center;
+  margin-bottom: 15px;
+  font-size: 1.8rem;
+}
+
+.mvp-team-logo {
+  width: 70px;
+  height: 70px;
+  object-fit: contain;
+}
+
+.mvp-name {
+  font-size: 1.6rem;
+  margin-bottom: 5px;
+  font-weight: bold;
+}
+
+.mvp-info p {
+  margin: 0;
+}
+
+.mvp-info {
+  gap: 5px;
+}
+
+.mvp-team {
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
+
+.player-item-custom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  color: white;
+  font-size: 1.2rem;
+}
+
+.mvp-icon {
+  font-size: 1.4rem;
+  color: gold;
+  margin-left: 10px;
+}
+
 .teams-main {
   display: flex;
   flex-direction: column;
@@ -2915,6 +3017,26 @@ display: none;
   align-items: center;
   min-height: 500px;
   padding: 50px;
+}
+
+.teams-main .survey-box {
+  gap: 15px;
+
+}
+
+.mvp-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 25px;
+}
+
+.mvp-content {
+  color: white;
+}
+
+.teams-main .custom-button {
+  margin-bottom: 50px;
 }
 
 .teams .team-list {
@@ -3113,9 +3235,24 @@ display: none;
   .match-box {
     min-height: 430px;
   }
+  .hero-new {
+      padding: 120px 0 20px 50px !important
+  }
+  .hero-new h1 {
+    font-size: 40px !important;
+  }
 }
 
 @media (max-width: 992px) {
+  .hero-new {
+      padding: 130px 0 0 40px !important
+  }
+  .hero-new h1 {
+    font-size: 35px !important;
+  }
+    .hero-new h2 {
+    font-size: 25px !important;
+  }
   .site-navbar {
     padding: 0 20px 0 5px;
   }
@@ -3206,6 +3343,15 @@ display: none;
 }
 
 @media (max-width: 850px) {
+  .hero-new {
+    padding: 20px !important
+  }
+  .hero-new h1 {
+    font-size: 35px !important;
+  }
+  .hero-new h2 {
+    font-size: 25px !important;
+  }
   .menu-toggle-logo {
     margin-top: 20px;
   }
@@ -3918,6 +4064,20 @@ display: none;
 
 .hero-custom-img {
   background-image: url("../../images/FFH_Hero_Desktop.jpg");
+}
+
+.hero-new {
+  padding: 100px 0 20px 50px;
+  color: #fa6879 !important; 
+}
+
+.hero-new h1 {
+  margin: 0;
+  font-size: 40px;
+}
+
+.hero-new h1, h2 {
+    color: #fa6879;
 }
 
 /* @media ((min-width: 0px) and (max-width: 600px)) {

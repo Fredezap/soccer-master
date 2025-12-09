@@ -56,6 +56,11 @@ const TournamentDetailsMain = () => {
                   <span className="button-details"><IoFootball />Contact</span>
                 </Button>
               </div>
+              <div className="admin-tournament-options">
+                <Button variant="outline-success" onClick={() => navigate(ROUTES.ADMIN.SURVEY)}>
+                  <span className="button-details"><IoFootball />Survey</span>
+                </Button>
+              </div>
             </div>
           </div>
         )}
