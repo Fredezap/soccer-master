@@ -3313,6 +3313,13 @@ display: none;
   .sponsors-section .grid-top > :nth-child(3) {
     grid-column: 1 / span 2;
   }
+    .sponsors-section .grid-bottom {
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+  }
+  .sponsors-section .grid-bottom > :nth-child(3) {
+    grid-column: 1 / span 2;
+  }
   .countdown-section {
     padding: 20px 100px !important;
   }
@@ -3407,6 +3414,12 @@ display: none;
   }
   .team-score-logo {
     gap: 10px;
+  }
+  .sponsors {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+  .sponsors-section {
+    padding: 70px !important;
   }
 }
 
@@ -3535,6 +3548,9 @@ display: none;
   }
   .survey-buttons button {
     width: 90%;
+  }
+  .sponsors {
+    grid-template-columns: 1fr !important;
   }
 }
 
@@ -4598,35 +4614,18 @@ Blanco: #FFFFFF */
 }
 
 .sponsors-section .sponsors {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  gap: 60px;
-}
-
-.grid-top {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 150px;
   place-items: center;
+  height: 100%;
+  gap: 80px;
 }
 
-.grid-bottom {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 75px;
-  place-items: center;
-}
-
-.grid-bottom img{
-  height: 80px !important;
-}
-
-.sponsors-section img {
+.sponsors img {
+  width: 100%;
+  max-width: 300px;
+  object-fit: contain;
   height: 100px;
-  width: auto;
 }
 
 .categories-section {
