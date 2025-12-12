@@ -144,6 +144,12 @@ const Header = () => {
                       <li onClick={() => navigateAndCloseHeader(ROUTES.INFO)} className={getClass(ROUTES.INFO)} style={submenuItemStyle}>
                         <a className="nav-link">REGLEMENT</a>
                       </li>
+                      <li onClick={() => navigateAndCloseHeader(ROUTES.OLYMPIQUE)} className={getClass(ROUTES.OLYMPIQUE)} style={submenuItemStyle}>
+                        <a className="nav-link">OLYMPIQUE</a>
+                      </li>
+                      <li onClick={() => navigateAndCloseHeader(ROUTES.CHALLENGES)} className={getClass(ROUTES.CHALLENGES)} style={submenuItemStyle}>
+                        <a className="nav-link">CHALLENGES & MORE</a>
+                      </li>
                     </ul>
                   )}
                 </li>

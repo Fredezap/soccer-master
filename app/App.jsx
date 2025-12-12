@@ -40,6 +40,8 @@ import TournamentRules from '../src/components/templates/tournament-info/Tournam
 import InterviewWithStephanie from '../src/components/templates/home/interview/InterviewWithStephanie.jsx'
 import { SurveyMain } from '../src/components/templates/survey/SurveyMain.jsx'
 import SurveyAdminMain from '../src/components/templates/admin/survey/SurveyAdminMain.jsx'
+import ChallengesAndMore from '../src/components/templates/tournament-info/ChallengesAndMore.jsx'
+import OlympiqueInfo from '../src/components/templates/tournament-info/ OlympiqueInfo.jsx'
 window.jQuery = $
 window.$ = $
 
@@ -153,6 +155,8 @@ function AppContent() {
         <Route path={ROUTES.SURVEY} element={<SurveyMain />} />
         <Route path={ROUTES.SINGLE} element={<Single />} />
         <Route path={ROUTES.INFO} element={<TournamentRules />} />
+        <Route path={ROUTES.OLYMPIQUE} element={<OlympiqueInfo />} />
+        <Route path={ROUTES.CHALLENGES} element={<ChallengesAndMore />} />
         <Route path={ROUTES.LOGIN} element={<LoginForm />} />
         <Route path={ROUTES.ADMIN.MAIN} element={<AdminMain />} />
         <Route path={ROUTES.ADMIN.TOURNAMENT_DETAILS_MAIN} element={<TournamentDetailsMain />} />

@@ -125,9 +125,6 @@ const Rules = () => {
             <li>
               Nach Erreichen des 3. kumulierten Fouls wird das Team hierüber informiert, dass das nächste Foul mit einem 10-Meter Strafstoss bestraft wird.
             </li>
-            <li>
-              Die Fairplay-Rangliste beinhaltet die Anzahl der Fouls und Anzahl der erhaltenen gelbe und rote Karten pro Team.
-            </li>
           </ul>
         </p>
       </div>
@@ -150,31 +147,10 @@ const Rules = () => {
           Abhängig von Anzahl gemeldeter Teams. Ein Turnierplan mit allen relevanten
           Informationen wird nach Anmeldeschluss an alle gemeldeten Teams versendet.
         </p>
-      </div>
-      <div>
-        <h6>10. Fairplay *</h6>
         <p>
-          <ul style={{ listStyle: 'none', padding: 0 }}>
-            <li>
-              Gewinnerin der Fairplay-Auszeichnung ist das Team, die am wenigsten Strafpunkte erhalten hat.
-            </li>
-            <li>
-              1 Foul = 1 Strafpunkt / 1 Gelbe Karte = 1 Strafpunkt / 1 Rote Karte = 5 Strafpunkte
-            </li>
-            <li>
-              Für den Fall eines Punktegleichstandes zwischen zwei oder mehreren Teams, kommen die nachstehenden
-              Regeln in dieser Reihenfolge zur Anwendung:
-            </li>
-            <li>
-              1. Anzahl rote Karten (Es gewinnt das Team, das am wenigsten hat)
-            </li>
-            <li>
-              2. Anzahl gelbe Karten (Es gewinnt das Team, das am wenigsten hat)
-            </li>
-            <li>
-              3. Anzahl Fouls (Es gewinnt das Team, das am wenigsten gefoult hat)
-            </li>
-          </ul>
+          Bei Punktgleichstand in der Gruppenphase entscheidet zuerst das Torverhältnis, dann der direkte Vergleich.
+          Bei weiterem Gleichstand erfolgt ein Penalty-Shootout. In der K.O.
+          Phase wird bei Gleichstand direkt ein Entscheid durch Penalty-Shootout herbeigeführt.
         </p>
       </div>
     </div>
