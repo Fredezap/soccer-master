@@ -1,41 +1,16 @@
 import { useLocation, useNavigate } from 'react-router-dom'
 import ROUTES from '../../store/constants/routes'
 import { useTournamentsDetails } from '../../store/slices/useTournamentsDetails'
-import websiteIcon from '@/images/Social_Icons/Icon_Webseite.svg'
+import websiteIcon from '@/images/Social_Icons/Icon_Webseite_olympique.png'
 import instagramIcon from '@/images/Social_Icons/Icon_Instagram.svg'
 import facebookIcon from '@/images/Social_Icons/Icon_Facebook.svg'
+import fvnwsIcon from '@/images/Social_Icons/fvnws.png'
 import footerImg from '@/images/FFH_Hero_Footer_Black_Title.png'
 
 const Footer = () => {
   const { currentTournament } = useTournamentsDetails()
   const location = useLocation()
-  const currentPath = location.pathname
-  const backgroundStyle = 'bg-dark'
   const navigate = useNavigate()
-
-  const getColStyle = () => {
-    let customStyle = 'col-lg-12'
-    const contact = currentTournament.Contact
-
-    if (contact) {
-      const footerElementsWithData = Object.entries(contact).filter(
-        ([key, value]) => {
-          const validElement = key.startsWith('footerContact') && value != null && value !== ''
-
-          if (validElement) {
-            return { [key]: value }
-          } else {
-            return null
-          }
-        }
-      ).filter(element => element !== null)
-
-      if (footerElementsWithData.length === 1) customStyle = 'col-lg-6'
-      if (footerElementsWithData.length === 2) customStyle = 'col-lg-4'
-    }
-    return customStyle
-  }
-
   let emails = 'futsalforher@gmail.com'
   const emailsExist = currentTournament?.Emails && currentTournament.Emails.length > 0
   if (emailsExist) emails = currentTournament.Emails.map(email => email.email).join(',')
@@ -64,6 +39,9 @@ const Footer = () => {
           {/* Webseite */}
           <a href="https://www.futsalolympiquebasel.ch/" target="_blank" rel="noopener noreferrer">
             <img src={websiteIcon} alt="Webseite" />
+          </a>
+          <a href="https://matchcenter.fvnws.ch/default.aspx?v=876752&oid=8&lng=1" target="_blank" rel="noopener noreferrer">
+            <img src={fvnwsIcon} alt="Webseite" />
           </a>
         </div>
         <div>

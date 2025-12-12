@@ -3,6 +3,14 @@ const useHeroDetails = () => {
     title: 'INTERVIEW' // 'Interview'
   }
 
+  const olympique = {
+    title: 'OLYMPIQUE' // 'olympique'
+  }
+
+  const challenges = {
+    title: 'CHALLENGES & MORE' // 'challenges'
+  }
+
   const players = {
     title: 'TEAMS' // 'Teams'
   }
@@ -73,6 +81,8 @@ const useHeroDetails = () => {
 
   return {
     interview,
+    olympique,
+    challenges,
     players,
     survey,
     matches,

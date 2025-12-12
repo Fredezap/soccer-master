@@ -3170,6 +3170,67 @@ display: none;
   list-style-type:disc;
 }
 
+.infos-main {
+  padding: 120px;
+}
+
+.challenge-info {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.challenge-info h2 {
+  margin-bottom: 50px;
+  word-break: break-all;
+}
+
+.section-title {
+  margin: 20px 0 10px;
+}
+
+.section-subtitle {
+  text-align: left;
+  margin: 70px 0 30px 0;
+}
+
+.section-block {
+  margin-bottom: 30px;
+  list-style-type: none;
+  padding: 0;
+}
+
+.section-block strong {
+  color: white;
+}
+
+.important-players-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 30px;
+  margin-top: 20px;
+  padding: 0;
+  list-style: none;
+}
+
+.important-player {
+  display: flex;
+  align-items: flex-start;
+  gap: 15px;
+}
+
+.important-player img {
+  width: 140px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.important-player-text {
+  flex: 1;
+}
+
+
 /* End of Tournament info Styles */
 
 @media (max-width: 1500px) {
@@ -3551,6 +3612,27 @@ display: none;
   }
   .sponsors {
     grid-template-columns: 1fr !important;
+  }
+  .important-player {
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+  .important-players-list {
+    grid-template-columns: 1fr; /* una columna */
+  }
+  .important-player img {
+    width: 160px;
+  }
+  .important-players-main {
+    padding: 50px;
+  }
+  .infos-main {
+    padding: 50px;
+  }
+  .section-subtitle {
+    text-align: center;
   }
 }
 
@@ -4572,7 +4654,9 @@ display: none;
 
 .custom-footer .social-icons-container img {
   height: 30px;
+  background-color: #d4f23c;
 }
+
 
 /* COLORS NEW DESIGN
 Gris oscuro: #2e2e30
@@ -4714,6 +4798,18 @@ color: #2e2e30;
   padding: 12px 70px;
   cursor: pointer;
   outline: none;
+}
+
+.link-to-challenges {
+  color: #fa6879 !important; 
+  cursor: pointer;
+  margin-top: 20px;
+  transition: color 0.3s, transform 0.3s;
+}
+
+.link-to-challenges:hover {
+  color: #ff566a !important; 
+  transform: scale(1.02);
 }
 
 /* End of Home section */

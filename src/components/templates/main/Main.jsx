@@ -1,6 +1,6 @@
 import HeroHomeNoTournament from './HeroHomeNoTournament'
 // import ModalMain from './modals/ModalMain'
-import TournamentInfo from './TournamentInfo'
+import TournamentInfo from '../home/torunament-info-home/TournamentInfo'
 import TournamentList from './TournamentList'
 
 const Main = () => {

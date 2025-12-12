@@ -1,6 +1,6 @@
 import { useEffect, useRef } from 'react'
 import { useTournamentsDetails } from '../../../store/slices/useTournamentsDetails'
-import TournamentInfo from '../main/TournamentInfo'
+import TournamentInfo from './torunament-info-home/TournamentInfo'
 import CountDownSection from './count-down/CountDownSection'
 import SponsorsSection from './sponsors/SponsorsSection'
 import CategoriesSection from './caregories/CategoriesSection'

@@ -9,6 +9,8 @@ const ROUTES = {
   SURVEY: '/umfrage',
   SINGLE: '/single',
   INFO: '/info',
+  OLYMPIQUE: '/olympique',
+  CHALLENGES: '/challenges',
   LIVE: '/live',
   LOGIN: '/login',
   ADMIN: {
