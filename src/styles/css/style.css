@@ -3204,6 +3204,10 @@ display: none;
   color: white;
 }
 
+.section-block li {
+  margin-bottom: 10px;
+}
+
 .important-players-list {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
