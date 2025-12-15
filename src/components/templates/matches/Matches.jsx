@@ -60,7 +60,7 @@ const Matches = () => {
       const heroHeight = heroRef.current.offsetHeight
       window.scrollTo({ top: heroHeight, behavior: 'smooth' })
     }
-  }, [currentTournament])
+  }, [])
 
   return (
     <>

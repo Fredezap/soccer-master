@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react'
 import { useTournamentsDetails } from '../../../../store/slices/useTournamentsDetails'
+import sortTeamsByStandings from './sortTeamsByStandings'
 
 const BASE_URL = import.meta.env.MODE === 'development'
   ? import.meta.env.VITE_IMG_DEV_BASE_URL
@@ -10,9 +11,15 @@ const TableScores = ({ backgroundStyle }) => {
   const [groupStages, setGroupStages] = useState([])
 
   useEffect(() => {
-    const filteredGroupStages = currentTournament?.Stages?.filter(
-      stage => stage.type === 'group'
-    )
+    const filteredGroupStages = currentTournament?.Stages
+      ?.filter(stage => stage.type === 'group')
+      ?.map(stage => ({
+        ...stage,
+        Groups: stage.Groups?.map(group => ({
+          ...group,
+          Teams: sortTeamsByStandings(group.Teams)
+        }))
+      })) || []
 
     setGroupStages(filteredGroupStages)
   }, [currentTournament])
@@ -20,18 +27,26 @@ const TableScores = ({ backgroundStyle }) => {
   return (
     groupStages.length !== 0 && (
       groupStages.map((stage, index) => (
-        <div className={`${backgroundStyle} table-scores-users`} key={stage?.stageId || index} >
+        <div
+          className={`${backgroundStyle} table-scores-users`}
+          key={stage?.stageId || index}
+        >
           <div className="container">
             <div className="col-12 title-section">
               <h3 className="heading">{stage?.name}</h3>
             </div>
+
             <div className="table-results">
               {stage?.Groups?.length > 0
                 ? (
                   [...stage.Groups].map((group, index) => (
-                    <div key={group?.groupId || index} className="bg-light rounded table-container">
+                    <div
+                      key={group?.groupId || index}
+                      className="bg-light rounded table-container"
+                    >
                       <div className="group-wrapper">
                         <div className="group-title">{group?.name}</div>
+
                         {group.Teams.length > 0
                           ? (
                             <div className="table-responsive">
@@ -39,15 +54,9 @@ const TableScores = ({ backgroundStyle }) => {
                                 <thead>
                                   <tr>
                                     <th>P</th>
-
                                     <th className="team-score-logo">
-                                      <span style={{ width: '40px' }}>
-
-                                      </span>
-                                      <strong>
-                                    Team
-                                      </strong>
-
+                                      <span style={{ width: '40px' }} />
+                                      <strong>Team</strong>
                                     </th>
                                     <th>GP</th>
                                     <th>W</th>
@@ -59,21 +68,31 @@ const TableScores = ({ backgroundStyle }) => {
                                     <th>PTS</th>
                                   </tr>
                                 </thead>
+
                                 <tbody>
                                   {group.Teams.map((team, index) => (
                                     <tr key={team?.teamId || index}>
                                       <td>{index + 1}</td>
+
                                       <td className="team-score-logo">
                                         <div>
-                                          {BASE_URL && team?.logoUrl &&
-                                        (
-                                          <img src={`${BASE_URL}${team.logoUrl?.trim()}?t=${Date.now()}`} alt="Team 1"></img>
-                                        )
-                                          }
+                                          {BASE_URL && team?.logoUrl && (
+                                            <img
+                                              src={`${BASE_URL}${team.logoUrl.trim()}?t=${Date.now()}`}
+                                              alt={team.name}
+                                            />
+                                          )}
                                         </div>
-                                        <strong className="text-team-names team-score-name">{team.name}</strong>
+                                        <strong className="text-team-names team-score-name">
+                                          {team.name}
+                                        </strong>
                                       </td>
-                                      <td>{team.TeamGroup.WON + team.TeamGroup.DRAWN + team.TeamGroup.LOST}</td>
+
+                                      <td>
+                                        {team.TeamGroup.WON +
+                                      team.TeamGroup.DRAWN +
+                                      team.TeamGroup.LOST}
+                                      </td>
                                       <td>{team.TeamGroup.WON}</td>
                                       <td>{team.TeamGroup.DRAWN}</td>
                                       <td>{team.TeamGroup.LOST}</td>
@@ -89,7 +108,6 @@ const TableScores = ({ backgroundStyle }) => {
                           )
                           : (
                             <div className="no-info-founded">
-                              {/* <p>No teams founded</p> */}
                               <p>Keine Teams gefunden</p>
                             </div>
                           )}
@@ -99,7 +117,6 @@ const TableScores = ({ backgroundStyle }) => {
                 )
                 : (
                   <div className="no-info-founded">
-                    {/* <p>No groups founded</p> */}
                     <p>Keine Gruppen gefunden</p>
                   </div>
                 )}
