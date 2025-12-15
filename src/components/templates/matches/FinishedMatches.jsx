@@ -8,7 +8,6 @@ const FinishedMatches = () => {
   const getLogo = (team, isLocalTeam) => {
     return logoGetter(team, isLocalTeam)
   }
-
   const reversedFinishedMatches = [...finishedMatches].reverse()
 
   return (
@@ -48,11 +47,11 @@ const FinishedMatches = () => {
                       </div>
                       <div className="text-center match-data">
                         <div className="img-box">
-                          <img src={getLogo(match?.visitorTeam, false)} alt="Image"></img>
+                          <img src={getLogo(match?.VisitorTeam, false)} alt="Image"></img>
                         </div>
                         <h3>
-                          {match?.visitorTeam?.name
-                            ? match?.visitorTeam?.name
+                          {match?.VisitorTeam?.name
+                            ? match?.VisitorTeam?.name
                             : match?.visitorTeamPlaceholder
                               ? match.visitorTeamPlaceholder
                               : 'Team 2'}

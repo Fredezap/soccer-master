@@ -15,13 +15,11 @@ export const SurveyMain = () => {
   const heroRef = useRef(null)
   const { currentTournament } = useTournamentsDetails()
   const [hasVoted, setHasVoted] = useState(false)
-  const { messages } = useMessageStore()
   const tournamentId = currentTournament?.tournamentId || null
   const [error, setError] = useState('')
   const MVPSurvey = currentTournament?.MVPSurvey || null
-  const showVoting = (MVPSurvey.votingIsAvaliable && !MVPSurvey.showMVP) || false
+  const showVoting = (MVPSurvey?.votingIsAvaliable && !MVPSurvey?.showMVP) || false
 
-  const voteAlredyExistMessage =
   useEffect(() => {
     if (heroRef.current) {
       const heroHeight = heroRef.current.offsetHeight
@@ -40,7 +38,7 @@ export const SurveyMain = () => {
     const httpMethod = 'post'
     const values = { tournamentId }
     try {
-      await handleSubmitFormAdmin({ url, addMessage, setSubmittingForm, httpMethod, user })
+      await handleSubmitFormAdmin({ values, url, addMessage, setSubmittingForm, httpMethod, user })
     } catch (error) {}
   }
 
